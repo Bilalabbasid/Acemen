@@ -7,10 +7,6 @@ import {
   Cpu,
   Briefcase,
   Plane,
-  Building2,
-  HeartPulse,
-  GraduationCap,
-  Landmark,
 } from "lucide-react";
 
 const industries = [
@@ -18,10 +14,6 @@ const industries = [
   { icon: <Cpu className="w-6 h-6" />, label: "Technology & AI", color: "#06b6d4" },
   { icon: <Briefcase className="w-6 h-6" />, label: "Business Services", color: "#a855f7" },
   { icon: <Plane className="w-6 h-6" />, label: "Travel & Tourism", color: "#f59e0b" },
-  { icon: <Building2 className="w-6 h-6" />, label: "Real Estate", color: "#e11d48" },
-  { icon: <HeartPulse className="w-6 h-6" />, label: "Health & Wellness", color: "#10b981" },
-  { icon: <GraduationCap className="w-6 h-6" />, label: "Education", color: "#6366f1" },
-  { icon: <Landmark className="w-6 h-6" />, label: "Financial Services", color: "#c9a84c" },
 ];
 
 export default function IndustryGrid() {
