@@ -35,7 +35,7 @@ export default function CTASection({
         <div className="absolute inset-0 rounded-3xl border border-gold-500/10" />
 
         <div className="relative z-10 py-16 sm:py-24 text-center max-w-3xl mx-auto px-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 text-balance">
+          <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl text-white mb-5 text-balance">
             {title}
           </h2>
           <p className="text-lg text-gray-300 mb-8 leading-relaxed">

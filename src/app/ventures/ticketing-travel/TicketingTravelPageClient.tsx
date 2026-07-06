@@ -5,40 +5,40 @@ import {
   Plane,
   Hotel,
   MapPin,
-  Clock,
+  Crown,
   Shield,
-  HeadphonesIcon,
-  Calendar,
+  Gem,
+  Sparkles,
 } from "lucide-react";
 import VentureDetailLayout from "@/components/VentureDetailLayout";
 
 const categories = [
-  { name: "Event Ticketing", desc: "Concerts, sports, theatre, and festivals — all in one seamless platform", icon: <Ticket className="w-6 h-6" /> },
-  { name: "Flight Booking", desc: "Domestic and international flights with competitive pricing and flexibility", icon: <Plane className="w-6 h-6" /> },
-  { name: "Hotels & Stays", desc: "Hand-picked accommodations from boutique hotels to luxury resorts", icon: <Hotel className="w-6 h-6" /> },
-  { name: "Curated Experiences", desc: "Unique travel packages and guided experiences around the world", icon: <MapPin className="w-6 h-6" /> },
+  { name: "First-Tier Event Access", desc: "Guaranteed entry to sold-out arenas, VIP hospitality, and exclusive global spectacles", icon: <Ticket className="w-6 h-6" /> },
+  { name: "Private Aviation & Charters", desc: "Curated private jet and first-class commercial itineraries with zero friction", icon: <Plane className="w-6 h-6" /> },
+  { name: "Elite Accommodations", desc: "Hand-selected presidential suites, private villas, and members-only luxury retreats", icon: <Hotel className="w-6 h-6" /> },
+  { name: "Bespoke Expedition Curation", desc: "Tailormade journeys designed by elite travel architects for the most discerning globetrotters", icon: <MapPin className="w-6 h-6" /> },
 ];
 
 const features = [
   {
-    icon: <Clock className="w-6 h-6" />,
-    title: "Instant Booking",
-    desc: "Real-time availability and instant confirmations for hassle-free planning.",
+    icon: <Crown className="w-6 h-6" />,
+    title: "First-Tier Global Access",
+    desc: "Unlock sold-out arenas, exclusive VIP enclosures, and private global spectacles inaccessible to the general public.",
+  },
+  {
+    icon: <Sparkles className="w-6 h-6" />,
+    title: "Bespoke Itinerary Curation",
+    desc: "Every journey is architecturally designed by elite travel specialists — from private aviation to members-only retreats.",
   },
   {
     icon: <Shield className="w-6 h-6" />,
-    title: "Secure Transactions",
-    desc: "Protected payments and comprehensive booking guarantees for peace of mind.",
+    title: "High-Security Booking Protocol",
+    desc: "Fortress-grade encrypted transactions, biometric verification, and absolute privacy for high-net-worth clientele.",
   },
   {
-    icon: <HeadphonesIcon className="w-6 h-6" />,
-    title: "24/7 Support",
-    desc: "Round-the-clock customer service for any booking changes or assistance.",
-  },
-  {
-    icon: <Calendar className="w-6 h-6" />,
-    title: "Flexible Options",
-    desc: "Free cancellation policies and flexible rescheduling on most bookings.",
+    icon: <Gem className="w-6 h-6" />,
+    title: "24/7 Elite Lifestyle Management",
+    desc: "A dedicated personal concierge available around the clock for last-minute alterations, upgrades, and exclusive requests.",
   },
 ];
 
@@ -46,24 +46,24 @@ export default function TicketingTravelPageClient() {
   return (
     <VentureDetailLayout
       ventureNumber="04"
-      title="Ticketing & Travel"
-      subtitle="Your Gateway to Experiences"
-      heroDescription="A comprehensive platform for event ticketing and travel booking — from concerts and sports to flights, hotels, and curated travel experiences worldwide."
-      accentColor="#f59e0b"
+      title="Ascend"
+      subtitle="Global Concierge & Mobility Logistics"
+      heroDescription="An ultra-premium ecosystem granting unfettered access to global events and bespoke travel. We curate highly sought-after, sold-out access alongside elite, tailormade itinerary design for high-net-worth individuals and corporate institutions."
+      accentColor="#6f8778"
       heroIcon={<Ticket className="w-6 h-6" />}
       heroImage="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80"
       categories={categories}
-      categoriesTitle="Our Services"
-      categoriesSubtitle="Everything you need for events and travel, all in one place."
-      categoriesLabel="What We Offer"
+      categoriesTitle="The Ascend Portfolio"
+      categoriesSubtitle="An ultra-premium ecosystem of access, curated for the world's most discerning."
+      categoriesLabel="Our Domain"
       features={features}
-      featuresTitle="Why Book With Us"
-      featuresLabel="The Acemen Advantage"
-      testimonialQuote="Booking our family holiday was incredibly easy. The curated experience option made it special, and the customer service was outstanding throughout."
-      testimonialAuthor="Mark & Jane P., Travellers"
-      ctaTitle="Start Your Journey"
-      ctaDescription="Book your next event, flight, or travel experience with confidence and ease."
-      ctaPrimaryLabel="Book Now"
+      featuresTitle="The Ascend Advantage"
+      featuresLabel="The Ascend Distinction"
+      testimonialQuote="Ascend secured us front-row access to a sold-out Monaco Grand Prix weekend — private yacht transfer, penthouse suite, and a concierge who anticipated every need before we voiced it. Simply extraordinary."
+      testimonialAuthor="Alistair & Penelope C., Private Clients"
+      ctaTitle="Embark on Your Next Expedition"
+      ctaDescription="Grant yourself unfettered access to the world's most coveted events and bespoke travel experiences, curated exclusively for you."
+      ctaPrimaryLabel="Engage Your Concierge"
     />
   );
 }

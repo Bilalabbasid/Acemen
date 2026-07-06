@@ -4,7 +4,7 @@ import VenturesPageClient from "./VenturesPageClient";
 export const metadata: Metadata = {
   title: "Our Ventures",
   description:
-    "Explore Acemen Ventures' portfolio: E-Commerce, IT Solutions, Shoes Business, and Ticketing & Travel — four distinct businesses under one group.",
+    "A curated collective of premier enterprises — Premium Leather Goods, Acre & Sole Haute Footwear, Enterprise IT & Intelligence, and Ascend Concierge Ticketing — united by master-tier craftsmanship and uncompromising quality.",
 };
 
 export default function VenturesPage() {

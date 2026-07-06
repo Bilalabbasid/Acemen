@@ -31,14 +31,16 @@ module.exports = {
           800: '#5c4917',
           900: '#2e240b',
         },
+        // Muted luxury accents — desaturated metallics & earth tones (no bright primaries)
         venture: {
-          ecommerce: '#3b82f6',
-          it: '#06b6d4',
-          shoes: '#a855f7',
-          travel: '#f59e0b',
+          ecommerce: '#b08d57', // antique brass
+          it: '#7d8ca3',        // brushed pewter
+          shoes: '#9c6b45',     // cognac leather
+          travel: '#6f8778',    // muted verdigris
         },
       },
       fontFamily: {
+        display: ['var(--font-display)', 'Cormorant Garamond', 'Playfair Display', 'serif'],
         heading: ['var(--font-heading)', 'Outfit', 'sans-serif'],
         body: ['var(--font-body)', 'Inter', 'sans-serif'],
       },

@@ -18,67 +18,67 @@ import GradientOrb from "@/components/GradientOrb";
 
 const ventures = [
   {
-    title: "E-Commerce",
-    tagline: "Online Retail & D2C Products",
+    title: "Acemen Emporium",
+    tagline: "Curated Digital Commerce",
     description:
-      "Our direct-to-consumer online retail business offers curated products across multiple categories with seamless shopping experiences, fast fulfilment, and global delivery capabilities.",
+      "Our direct-to-consumer commerce house, pairing an impeccably curated marketplace with the technology and logistics to serve a discerning global clientele — where premium goods meet a purchase experience engineered to the same standard as the products themselves.",
     href: "/ventures/e-commerce",
-    accentColor: "#3b82f6",
+    accentColor: "#b08d57",
     icon: <ShoppingBag className="w-7 h-7" />,
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
     features: [
-      "Curated product selection",
-      "Seamless checkout experience",
-      "Global shipping & logistics",
-      "Customer-first returns policy",
+      "Editorially Curated Marketplace",
+      "White-Glove Global Fulfilment",
+      "Frictionless, Secure Checkout",
+      "Dedicated Client Concierge",
     ],
   },
   {
-    title: "IT Solutions",
-    tagline: "Software, AI & Consulting",
+    title: "Acemen Digital",
+    tagline: "Enterprise Architecture & AI Intelligence",
     description:
-      "Full-stack software development, web and mobile app creation, AI & automation solutions, and strategic IT consulting — empowering businesses with technology that drives results.",
+      "We engineer bespoke digital infrastructure and enterprise-grade software ecosystems for industry leaders. From proprietary artificial intelligence to high-scalability application development, we transform complex technological challenges into fluid competitive advantages.",
     href: "/ventures/it-solutions",
-    accentColor: "#06b6d4",
+    accentColor: "#7d8ca3",
     icon: <Code2 className="w-7 h-7" />,
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
     features: [
-      "Custom software development",
-      "AI & automation solutions",
-      "Web & mobile app development",
-      "Strategic IT consulting",
+      "Elite Full-Stack & Architecture Engineering",
+      "Next-Generation AI & Hyper-Automation Systems",
+      "Tailored Digital Ecosystems & Mobile Masterpieces",
+      "High-Level Visionary Technology Consulting",
     ],
   },
   {
-    title: "Shoes Business",
-    tagline: "Modern Footwear Brand",
+    title: "Acre & Hide",
+    tagline: "Sartorial Leather & Footwear",
     description:
-      "A contemporary footwear brand that blends style, comfort, and craftsmanship. Designed for everyday excellence — from casual wear to performance-driven designs.",
+      "A maison devoted to the art of fine leatherwork — hand-lasted footwear, structured bags, sculpted jackets, wallets, and belts, each crafted from the world's most exceptional full-grain hides for those who refuse to compromise between presence and comfort.",
     href: "/ventures/shoes",
-    accentColor: "#a855f7",
+    accentColor: "#9c6b45",
     icon: <Footprints className="w-7 h-7" />,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80",
     features: [
-      "Premium craftsmanship",
-      "Comfort-first design",
-      "Sustainable materials",
-      "Versatile collections",
+      "Master-Artisan Handcraftsmanship",
+      "Full-Grain, Heritage-Grade Hides",
+      "Footwear, Bags, Outerwear & Small Goods",
+      "Lifetime Restoration Guarantee",
     ],
   },
   {
-    title: "Ticketing & Travel",
-    tagline: "Events & Travel Services",
+    title: "Ascend",
+    tagline: "Global Concierge & Mobility Logistics",
     description:
-      "A comprehensive platform for event ticketing and travel booking — from concerts and sports to flights, hotels, and curated travel experiences worldwide.",
+      "An ultra-premium ecosystem granting unfettered access to global events and bespoke travel. We curate highly sought-after, sold-out access alongside elite, tailormade itinerary design for high-net-worth individuals and corporate institutions.",
     href: "/ventures/ticketing-travel",
-    accentColor: "#f59e0b",
+    accentColor: "#6f8778",
     icon: <Ticket className="w-7 h-7" />,
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109bb05?w=800&q=80",
     features: [
-      "Event ticketing platform",
-      "Travel booking & planning",
-      "Curated experiences",
-      "24/7 customer support",
+      "First-Tier Access to Global Events & Arenas",
+      "Bespoke Luxury Itinerary & Expedition Curation",
+      "Seamless, High-Security Booking Interface",
+      "Dedicated 24/7 Elite Lifestyle Management",
     ],
   },
 ];
@@ -86,23 +86,23 @@ const ventures = [
 const advantages = [
   {
     icon: <Globe className="w-5 h-5" />,
-    title: "Diversified Portfolio",
-    desc: "Four independent ventures across high-growth sectors provide stability and cross-pollination of ideas.",
+    title: "Prestige Diversification",
+    desc: "Four independent pillars insulated across high-value sectors, guaranteeing absolute financial resilience and cross-industry synergy.",
   },
   {
     icon: <Zap className="w-5 h-5" />,
-    title: "Shared Infrastructure",
-    desc: "Centralised resources, technology, and expertise benefit every venture under our umbrella.",
+    title: "Elite Centralized Infrastructure",
+    desc: "Every venture is backed by proprietary technologies and institutional resources, driving unprecedented operational efficiency.",
   },
   {
     icon: <Users className="w-5 h-5" />,
-    title: "Expert Leadership",
-    desc: "Each venture is led by specialists who bring deep domain knowledge and operational excellence.",
+    title: "Visionary Directorship",
+    desc: "Managed exclusively by elite domain specialists who bring deep-sector authority, precision execution, and market leadership.",
   },
   {
     icon: <TrendingUp className="w-5 h-5" />,
-    title: "Scalable Model",
-    desc: "Our ventures are built to scale — from local markets to global operations with sustainable growth.",
+    title: "Global Scalability Asset",
+    desc: "Designed with a limitless operational blueprint, seamlessly expanding from local exclusivity to dominant global enterprises.",
   },
 ];
 
@@ -118,14 +118,15 @@ export default function VenturesPageClient() {
         <div className="container-page text-center relative z-10">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/[0.08] mb-6">
-              <span className="text-gold-400 font-medium text-sm tracking-wide">Our Portfolio</span>
+              <span className="text-gold-400 font-medium text-sm tracking-wide">The Portfolio</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 text-balance">
-              Our Ventures
+            <h1 className="display-heading text-[2.6rem] sm:text-6xl lg:text-7xl text-white mb-6 text-balance leading-[1.05]">
+              Four Houses, One Standard
             </h1>
             <p className="text-lg sm:text-xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed">
-              Four distinct businesses, each built to lead in its market — united under
-              one vision of quality, innovation, and growth.
+              A private collective of category-defining houses — each a leader in its
+              domain, bound by a single, uncompromising pursuit of the absolute standard
+              in craftsmanship, technology, and access.
             </p>
           </ScrollReveal>
         </div>
@@ -178,7 +179,7 @@ export default function VenturesPageClient() {
                           {venture.tagline}
                         </span>
                       </div>
-                      <h2 className="text-2xl sm:text-3xl font-bold text-navy-800 mb-4">
+                      <h2 className="display-heading text-3xl sm:text-4xl text-navy-800 mb-4">
                         {venture.title}
                       </h2>
                       <p className="text-gray-500 leading-relaxed mb-6 text-[15px]">
@@ -218,10 +219,11 @@ export default function VenturesPageClient() {
           <ScrollReveal>
             <div className="text-center mb-14">
               <span className="section-label">The Acemen Advantage</span>
-              <h2 className="section-heading mb-4">Stronger Together</h2>
+              <h2 className="section-heading mb-4">The Prestige Ecosystem</h2>
               <p className="section-subheading mx-auto">
-                Each venture stands strong on its own — together, they form an ecosystem
-                that drives innovation and growth.
+                While each enterprise operates at the pinnacle of its respective industry,
+                they converge to form an elite, self-sustaining ecosystem of innovation,
+                security, and prestige.
               </p>
             </div>
           </ScrollReveal>
@@ -244,10 +246,10 @@ export default function VenturesPageClient() {
       {/* CTA */}
       <section className="container-page pb-20 sm:pb-28">
         <CTASection
-          title="Interested in Our Ventures?"
-          description="Learn more about how each venture can serve you — or explore partnership opportunities."
+          title="Engage with Acemen Ventures"
+          description="Discover how our portfolio can elevate your lifestyle or enterprise. We welcome inquiries regarding private acquisitions, strategic partnerships, and elite client placement."
           primaryHref="/contact"
-          primaryLabel="Get In Touch"
+          primaryLabel="Initiate Private Consultation"
         />
       </section>
     </>

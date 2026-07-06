@@ -5,21 +5,21 @@ import ScrollReveal from "./ScrollReveal";
 
 const testimonials = [
   {
-    quote: "Acemen Ventures has been an exceptional partner. Their strategic vision and commitment to quality have truly set them apart in the industry.",
+    quote: "A rare institutional partner. Their strategic discretion and pursuit of the absolute standard set them apart from any holding group we have worked alongside.",
     name: "James Richardson",
     title: "Managing Director",
     company: "NorthStar Capital",
     rating: 5,
   },
   {
-    quote: "Working with the Acemen IT Solutions team transformed our digital infrastructure. Professional, innovative, and always ahead of the curve.",
+    quote: "Acemen Digital did not simply build software — they architected our entire digital future. Proprietary, precise, and permanently ahead of the market.",
     name: "Sarah Mitchell",
     title: "Chief Technology Officer",
     company: "GlobalTrade Ltd",
     rating: 5,
   },
   {
-    quote: "Their e-commerce platform delivers an outstanding experience. The attention to detail and customer-first approach is truly remarkable.",
+    quote: "From the curation to the concierge follow-up, every touchpoint is intentional. This is how premium commerce and craftsmanship should feel.",
     name: "David Chen",
     title: "Head of Operations",
     company: "ApexGroup",

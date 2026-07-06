@@ -104,7 +104,7 @@ export default function VentureCard({
 
         {/* Bottom section: Info and CTA */}
         <div>
-          <h3 className="text-2xl sm:text-3xl font-heading font-black text-white mb-3 tracking-wide leading-tight group-hover:text-gold-400 transition-colors duration-300">
+          <h3 className="display-heading text-3xl sm:text-4xl text-white mb-3 leading-[1.08] group-hover:text-gold-400 transition-colors duration-300">
             {title}
           </h3>
           <p className="text-gray-300/80 text-sm leading-relaxed mb-6 font-medium line-clamp-3">

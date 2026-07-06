@@ -29,38 +29,38 @@ import GradientOrb from "@/components/GradientOrb";
 
 const ventures = [
   {
-    title: "E-Commerce",
+    title: "Curated Digital Commerce",
     description:
-      "Our direct-to-consumer online retail business offering curated products with seamless shopping experiences and global delivery.",
+      "Acemen Emporium — our direct-to-consumer commerce house, pairing an impeccably curated marketplace with white-glove fulfilment for a discerning global clientele.",
     href: "/ventures/e-commerce",
-    accentColor: "#3b82f6",
+    accentColor: "#b08d57",
     icon: <ShoppingBag className="w-6 h-6" />,
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
   },
   {
-    title: "IT Solutions",
+    title: "Enterprise Architecture & AI",
     description:
-      "Full-stack software development, web & mobile apps, AI automation, and strategic IT consulting for businesses of all sizes.",
+      "Acemen Digital — we engineer proprietary AI, cloud frameworks, and enterprise-grade software ecosystems that keep industry leaders permanently ahead of the market.",
     href: "/ventures/it-solutions",
-    accentColor: "#06b6d4",
+    accentColor: "#7d8ca3",
     icon: <Code2 className="w-6 h-6" />,
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
   },
   {
-    title: "Shoes Business",
+    title: "Sartorial Leather & Footwear",
     description:
-      "A modern footwear brand combining style, comfort, and craftsmanship — designed for everyday excellence.",
+      "Acre & Hide — a maison of fine leather goods. Handcrafted footwear, bags, jackets, wallets, and belts, sculpted from the world's most exceptional hides.",
     href: "/ventures/shoes",
-    accentColor: "#a855f7",
+    accentColor: "#9c6b45",
     icon: <Footprints className="w-6 h-6" />,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80",
   },
   {
-    title: "Ticketing & Travel",
+    title: "Global Concierge & Mobility",
     description:
-      "Event ticketing platform plus comprehensive travel booking and planning — your gateway to experiences worldwide.",
+      "Ascend — a private concierge for the world's most coveted events and bespoke travel, delivering first-tier access and seamless mobility logistics.",
     href: "/ventures/ticketing-travel",
-    accentColor: "#f59e0b",
+    accentColor: "#6f8778",
     icon: <Ticket className="w-6 h-6" />,
     image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
   },
@@ -68,34 +68,34 @@ const ventures = [
 
 const whyChooseUs = [
   {
-    icon: <Award className="w-6 h-6 text-gold-500" />,
-    title: "Proven Track Record",
-    desc: "Consistent growth across all ventures, driven by experienced leadership and data-informed decision-making.",
+    icon: <Award className="w-6 h-6 text-gold-400" />,
+    title: "Generational Track Record",
+    desc: "Sustained, compounding growth across every vertical — governed by seasoned leadership and disciplined, data-informed judgement.",
   },
   {
-    icon: <Shield className="w-6 h-6 text-cyan-400" />,
-    title: "Trust & Transparency",
-    desc: "We operate with absolute integrity, building lasting relationships with partners, clients, and stakeholders.",
+    icon: <Shield className="w-6 h-6 text-gold-400" />,
+    title: "Sovereign Reliability",
+    desc: "We operate with absolute institutional integrity, cultivating enduring alliances with partners, principals, and stakeholders.",
   },
   {
-    icon: <Zap className="w-6 h-6 text-yellow-400" />,
-    title: "Innovation-Led",
-    desc: "Leveraging cutting-edge technology, AI, and automation to stay ahead and deliver unmatched value.",
+    icon: <Zap className="w-6 h-6 text-gold-400" />,
+    title: "Vanguard Innovation",
+    desc: "Proprietary AI, cloud, and automation frameworks ensure our assets permanently outpace market shifts.",
   },
   {
-    icon: <Globe className="w-6 h-6 text-emerald-400" />,
+    icon: <Globe className="w-6 h-6 text-gold-400" />,
     title: "Global Reach",
-    desc: "Operating across international markets with local expertise, serving customers in 15+ countries.",
+    desc: "We operate across international markets with native fluency, serving principals and clients in 15+ countries.",
   },
   {
-    icon: <Heart className="w-6 h-6 text-rose-400" />,
-    title: "Customer Obsession",
-    desc: "Every product and service is designed with the customer at the centre, exceeding expectations at every touchpoint.",
+    icon: <Heart className="w-6 h-6 text-gold-400" />,
+    title: "Uncompromising Craft",
+    desc: "Every product and service is engineered around the client — exceeding expectation at every considered touchpoint.",
   },
   {
-    icon: <TrendingUp className="w-6 h-6 text-purple-400" />,
-    title: "Scalable Model",
-    desc: "Our ventures are built to scale — from local operations to global enterprises with sustainable growth.",
+    icon: <TrendingUp className="w-6 h-6 text-gold-400" />,
+    title: "Generational Scalability",
+    desc: "Our ventures are architected to scale — from local exclusivity to dominant global operations, sustainably.",
   },
 ];
 
@@ -148,7 +148,7 @@ export default function HomePage() {
             >
               <div className="w-2 h-2 rounded-full bg-gold-400 animate-pulse" />
               <span className="text-gold-300 font-bold text-xs tracking-[0.25em] uppercase">
-                UK Holding Company — Multi-Sector Ventures
+                A Private UK Holding House — Est. London
               </span>
             </motion.div>
 
@@ -156,10 +156,10 @@ export default function HomePage() {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black tracking-tight leading-[0.95] mb-8 text-balance"
+              className="display-heading text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.05] sm:leading-[1.02] mb-8 text-balance"
             >
-              Architecting<br />
-              <span className="gradient-gold-text">Exceptional</span> Brands
+              Architecting the Future of<br className="hidden sm:block" />{" "}
+              Commerce, <span className="gradient-gold-text">Luxury</span>, and Technology
             </motion.h1>
 
             <motion.p
@@ -168,8 +168,9 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-gray-300/80 text-base sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed font-medium"
             >
-              A premium, UK-registered holding group scaling world-class businesses across
-              e-commerce, IT solutions, fashion & lifestyle, and global travel services.
+              Acemen Ventures is a premier sovereign holding group. We acquire, build, and
+              scale world-class enterprises across high-growth digital ecosystems, artisanal
+              luxury retail, and elite global infrastructure.
             </motion.p>
 
             <motion.div
@@ -179,11 +180,11 @@ export default function HomePage() {
               className="flex flex-col sm:flex-row items-center justify-center gap-5"
             >
               <Link href="/ventures" className="btn-gold text-xs sm:text-sm !py-4.5 !px-9 tracking-wider uppercase font-black group">
-                Discover Our Portfolio
+                Explore the Portfolio
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1 inline" />
               </Link>
               <Link href="/about" className="btn-outline text-xs sm:text-sm !py-4.5 !px-9 tracking-wider uppercase font-bold border-white/20 hover:border-white/40">
-                Our Heritage
+                The Institution
               </Link>
             </motion.div>
           </div>
@@ -236,8 +237,8 @@ export default function HomePage() {
 
                 {/* Floating metrics badge */}
                 <div className="absolute bottom-6 left-6 glass rounded-2xl p-5 shadow-2xl border border-white/10">
-                  <p className="text-3xl font-heading font-black text-white leading-none">EST. UK</p>
-                  <p className="text-[10px] font-bold tracking-widest text-gold-400 uppercase mt-2">Registered Company</p>
+                  <p className="text-3xl font-display font-semibold text-white leading-none">London</p>
+                  <p className="text-[10px] font-bold tracking-widest text-gold-400 uppercase mt-2">Global Headquarters</p>
                 </div>
               </ScrollReveal>
             </div>
@@ -245,32 +246,33 @@ export default function HomePage() {
             {/* Text side */}
             <div className="lg:col-span-6">
               <ScrollReveal direction="right">
-                <span className="section-label">Our Philosophy</span>
-                <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-8">
-                  Pioneering Excellence<br />
-                  Across <span className="gradient-gold-text">Diverse</span> Markets
+                <span className="section-label">The Manifesto</span>
+                <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-8">
+                  The Pursuit of<br />
+                  <span className="gradient-gold-text">Absolute</span> Standard
                 </h2>
                 <div className="space-y-6 text-gray-300/80 text-[15px] sm:text-base leading-relaxed font-medium">
                   <p>
-                    Acemen Ventures acts as a cornerstone for innovation, funding,
-                    and operational brilliance. We analyze global market shifts,
-                    establishing high-growth ventures that bring real, scalable value
-                    to consumers worldwide.
+                    We believe true value is created at the intersection of heritage
+                    craftsmanship and modern digital intelligence. Whether engineering
+                    enterprise software platforms or sculpting fine leather goods, our
+                    businesses operate under a singular ethos: uncompromising execution
+                    and generational scalability.
                   </p>
                   <p>
-                    By blending centralized guidance, sophisticated technical infrastructure,
-                    and cross-sector expertise, we enable our brand portfolio to operate
-                    with exceptional agility while remaining anchored to a trusted heritage.
+                    By blending centralised capital, sophisticated technical infrastructure,
+                    and elite operational leadership, we transition emerging concepts into
+                    dominant global operations — each anchored to a heritage of trust.
                   </p>
                 </div>
 
                 <div className="mt-10 flex flex-wrap gap-5 items-center">
                   <Link href="/about" className="btn-primary group !py-4 !px-8">
-                    Discover Our Story
+                    The Institution
                     <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                   <Link href="/ventures" className="text-gold-400 hover:text-gold-300 font-bold text-sm tracking-wider uppercase flex items-center gap-1.5 transition-colors duration-300">
-                    View Portfolio <ArrowRight className="w-4 h-4" />
+                    Explore the Portfolio <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </ScrollReveal>
@@ -285,13 +287,13 @@ export default function HomePage() {
         <div className="container-page relative z-10">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <span className="section-label">Strategic Holdings</span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-4">
-                Our Ventures
+              <span className="section-label">The Portfolio</span>
+              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+                Four Houses, One Standard
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Four industry-leading businesses operates under one unified standard of
-                uncompromised premium quality.
+                Four category-defining enterprises, each governed by a single, uncompromising
+                pursuit of the absolute standard.
               </p>
             </div>
           </ScrollReveal>
@@ -324,12 +326,12 @@ export default function HomePage() {
         <div className="container-page relative z-10">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <span className="section-label">Unrivalled Advantage</span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-4">
-                Engineered for Performance
+              <span className="section-label">The Acemen Advantage</span>
+              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+                Engineered for Prestige
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Why forward-thinking enterprises, teams, and partners choose to build
+                Why principals, institutions, and enterprise partners choose to build
                 alongside Acemen Ventures.
               </p>
             </div>
@@ -365,13 +367,13 @@ export default function HomePage() {
         <div className="container-page">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <span className="section-label">Sectors We Impact</span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-4">
-                Markets We Shape
+              <span className="section-label">Spheres of Influence</span>
+              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+                The Markets We Shape
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Expanding our presence in high-potential industries, bringing innovation
-                and quality wherever we build.
+                Deepening our authority across high-value sectors, bringing craftsmanship
+                and intelligence wherever we build.
               </p>
             </div>
           </ScrollReveal>
@@ -385,13 +387,13 @@ export default function HomePage() {
         <div className="container-page relative z-10">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <span className="section-label">Strategic Blueprint</span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-4">
-                From Vision to Industry Leader
+              <span className="section-label">The Blueprint</span>
+              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+                From Vision to Market Authority
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Our systematic methodology of finding, incubating, and scaling
-                enterprises into global standards.
+                Our disciplined methodology for identifying, incubating, and scaling
+                enterprises into global standard-bearers.
               </p>
             </div>
           </ScrollReveal>
@@ -405,12 +407,12 @@ export default function HomePage() {
         <div className="container-page relative z-10">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <span className="section-label">Global Trust</span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-4">
-                Trusted by Partners
+              <span className="section-label">In Confidence</span>
+              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+                Trusted by the Discerning
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Collaborative insights from co-investors, business leads, and customers.
+                Reflections from co-investors, enterprise principals, and private clients.
               </p>
             </div>
           </ScrollReveal>
@@ -421,12 +423,12 @@ export default function HomePage() {
       {/* ==================== CTA ==================== */}
       <section className="container-page pb-24 sm:pb-32">
         <CTASection
-          title="Ready to Build the Future?"
-          description="Join hands with Acemen Ventures to invest, scale, or collaborate. Let's design exceptional success together."
+          title="Initiate an Alliance"
+          description="Whether you seek to co-invest, scale a venture, or access our houses, our London office is ready to facilitate your inquiry with absolute discretion."
           primaryHref="/contact"
-          primaryLabel="Connect with Us"
+          primaryLabel="Transmit Secure Inquiry"
           secondaryHref="/ventures"
-          secondaryLabel="Explore Ventures Portfolio"
+          secondaryLabel="Explore the Portfolio"
         />
       </section>
     </div>

@@ -4,16 +4,16 @@ import Link from "next/link";
 import { MapPin, Mail, Phone, ArrowUpRight } from "lucide-react";
 
 const ventures = [
-  { href: "/ventures/e-commerce", label: "E-Commerce" },
-  { href: "/ventures/it-solutions", label: "IT Solutions" },
-  { href: "/ventures/shoes", label: "Shoes Business" },
-  { href: "/ventures/ticketing-travel", label: "Ticketing & Travel" },
+  { href: "/ventures/e-commerce", label: "Curated Digital Commerce" },
+  { href: "/ventures/it-solutions", label: "Enterprise Architecture & AI" },
+  { href: "/ventures/shoes", label: "Sartorial Leather & Footwear" },
+  { href: "/ventures/ticketing-travel", label: "Global Concierge & Mobility" },
 ];
 
 const quickLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/ventures", label: "Our Ventures" },
+  { href: "/about", label: "The Institution" },
+  { href: "/ventures", label: "The Portfolio" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -82,9 +82,11 @@ export default function Footer() {
             </span>
           </Link>
           <p className="text-gray-400 text-base leading-relaxed max-w-lg">
-            A UK-registered holding company building and operating exceptional
-            businesses across commerce, technology, retail, and travel — delivering
-            quality, innovation, and value worldwide.
+            Acemen Ventures is a private, multi-sector holding company incorporated in
+            the United Kingdom. Operating at the vanguard of commercial technology,
+            elite lifestyle logistics, and fine luxury manufacturing, the firm
+            orchestrates global operations dedicated to absolute capital efficiency and
+            market-leading prestige.
           </p>
         </div>
       </div>
@@ -179,10 +181,11 @@ export default function Footer() {
           {/* Newsletter */}
           <div>
             <h4 className="text-white font-heading font-semibold text-sm tracking-wider uppercase mb-5">
-              Stay Updated
+              The Dispatch
             </h4>
             <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-              Subscribe for the latest updates, insights, and news from Acemen Ventures.
+              Considered dispatches on our houses, acquisitions, and market perspective —
+              delivered in confidence.
             </p>
             <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
               <input

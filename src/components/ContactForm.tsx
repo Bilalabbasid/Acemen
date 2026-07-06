@@ -15,17 +15,17 @@ export default function ContactForm() {
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.name.trim()) newErrors.name = "Full name is required";
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email";
     }
-    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
+    if (!formData.subject.trim()) newErrors.subject = "Organisation is required";
     if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
+      newErrors.message = "Please describe the nature of your inquiry";
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Message must be at least 10 characters";
+      newErrors.message = "Please provide at least 10 characters";
     }
     return newErrors;
   };
@@ -85,15 +85,16 @@ export default function ContactForm() {
             <div className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="w-10 h-10 text-green-500" />
             </div>
-            <h3 className="text-2xl font-bold text-navy-800 mb-3">Message Sent!</h3>
+            <h3 className="display-heading text-3xl text-navy-800 mb-3">Inquiry Received</h3>
             <p className="text-gray-500 mb-8 max-w-sm mx-auto">
-              Thank you for reaching out. We&apos;ll get back to you within 24 hours.
+              Thank you. Your inquiry has been transmitted to our private office — we
+              will respond, in confidence, within one business day.
             </p>
             <button
               onClick={() => setStatus("idle")}
               className="btn-primary"
             >
-              Send another message
+              Submit another inquiry
             </button>
           </div>
         ) : (
@@ -108,7 +109,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Full Name <span className="text-gold-500">*</span>
+                  Full Name &amp; Title <span className="text-gold-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -119,7 +120,7 @@ export default function ContactForm() {
                   className={`${inputClasses} ${
                     errors.name ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
                   }`}
-                  placeholder="John Smith"
+                  placeholder="Alexandra Reed, Managing Partner"
                 />
                 {errors.name && (
                   <p className="mt-1.5 text-xs text-red-500">{errors.name}</p>
@@ -138,7 +139,7 @@ export default function ContactForm() {
                   className={`${inputClasses} ${
                     errors.email ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
                   }`}
-                  placeholder="john@example.com"
+                  placeholder="you@institution.com"
                 />
                 {errors.email && (
                   <p className="mt-1.5 text-xs text-red-500">{errors.email}</p>
@@ -148,7 +149,7 @@ export default function ContactForm() {
 
             <div className="mb-5">
               <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 mb-2">
-                Subject <span className="text-gold-500">*</span>
+                Organisation / Institutional Affiliation <span className="text-gold-500">*</span>
               </label>
               <input
                 type="text"
@@ -159,7 +160,7 @@ export default function ContactForm() {
                 className={`${inputClasses} ${
                   errors.subject ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
                 }`}
-                placeholder="How can we help?"
+                placeholder="Company or institutional affiliation"
               />
               {errors.subject && (
                 <p className="mt-1.5 text-xs text-red-500">{errors.subject}</p>
@@ -168,7 +169,8 @@ export default function ContactForm() {
 
             <div className="mb-8">
               <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-2">
-                Message <span className="text-gold-500">*</span>
+                Nature of Inquiry <span className="text-gold-500">*</span>
+                <span className="text-gray-400 font-normal"> — Investment, Enterprise IT, Luxury Retail, or Concierge</span>
               </label>
               <textarea
                 id="contact-message"
@@ -179,7 +181,7 @@ export default function ContactForm() {
                 className={`${inputClasses} resize-none ${
                   errors.message ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
                 }`}
-                placeholder="Tell us about your project or inquiry..."
+                placeholder="Please describe the nature of your inquiry and how our office may assist you."
               />
               {errors.message && (
                 <p className="mt-1.5 text-xs text-red-500">{errors.message}</p>
@@ -194,12 +196,12 @@ export default function ContactForm() {
               {status === "submitting" ? (
                 <>
                   <span className="w-4 h-4 border-2 border-navy-900/30 border-t-navy-900 rounded-full animate-spin" />
-                  Sending...
+                  Transmitting...
                 </>
               ) : (
                 <>
                   <Send className="w-4 h-4" />
-                  Send Message
+                  Transmit Secure Inquiry
                 </>
               )}
             </button>

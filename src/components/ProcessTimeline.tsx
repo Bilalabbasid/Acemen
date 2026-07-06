@@ -7,33 +7,33 @@ import { Lightbulb, Compass, Rocket, TrendingUp, CheckCircle2 } from "lucide-rea
 const steps = [
   {
     icon: <Lightbulb className="w-6 h-6" />,
-    title: "Identify Opportunities",
-    description: "We research markets, analyse trends, and identify high-potential sectors where we can create meaningful impact and sustainable value.",
-    accent: "#3b82f6",
+    title: "Identify & Qualify",
+    description: "We study global market shifts and identify high-value sectors where heritage craftsmanship and digital intelligence can converge to create lasting authority.",
+    accent: "#b08d57",
   },
   {
     icon: <Compass className="w-6 h-6" />,
-    title: "Strategic Planning",
-    description: "Detailed business plans, market entry strategies, and operational frameworks are developed by our experienced leadership team.",
-    accent: "#06b6d4",
+    title: "Architect the Blueprint",
+    description: "Detailed acquisition theses, market-entry strategies, and operational frameworks are developed by our elite directorship.",
+    accent: "#7d8ca3",
   },
   {
     icon: <Rocket className="w-6 h-6" />,
-    title: "Build & Launch",
-    description: "We assemble expert teams, build infrastructure, and launch ventures with a focus on quality, speed, and customer experience.",
-    accent: "#a855f7",
+    title: "Build & Empower",
+    description: "We assemble domain specialists, deploy centralised infrastructure, and launch each house with an uncompromising focus on execution.",
+    accent: "#9c6b45",
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    title: "Scale & Optimise",
-    description: "Through data-driven insights, technology, and continuous improvement, we scale operations across domestic and international markets.",
-    accent: "#f59e0b",
+    title: "Scale & Refine",
+    description: "Through proprietary intelligence and continuous refinement, we scale operations from local exclusivity to dominant global reach.",
+    accent: "#6f8778",
   },
   {
     icon: <CheckCircle2 className="w-6 h-6" />,
     title: "Sustain & Lead",
-    description: "We nurture our ventures into market leaders, building lasting brands that deliver consistent value to customers and stakeholders.",
-    accent: "#10b981",
+    description: "We steward each house into a category standard-bearer — a lasting brand that compounds value for principals and clients alike.",
+    accent: "#c9a84c",
   },
 ];
 

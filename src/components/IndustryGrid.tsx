@@ -3,17 +3,17 @@
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import {
-  ShoppingCart,
+  ShoppingBag,
   Cpu,
-  Briefcase,
+  Gem,
   Plane,
 } from "lucide-react";
 
 const industries = [
-  { icon: <ShoppingCart className="w-6 h-6" />, label: "Retail & Commerce", color: "#3b82f6" },
-  { icon: <Cpu className="w-6 h-6" />, label: "Technology & AI", color: "#06b6d4" },
-  { icon: <Briefcase className="w-6 h-6" />, label: "Business Services", color: "#a855f7" },
-  { icon: <Plane className="w-6 h-6" />, label: "Travel & Tourism", color: "#f59e0b" },
+  { icon: <ShoppingBag className="w-6 h-6" />, label: "Curated Commerce", color: "#b08d57" },
+  { icon: <Cpu className="w-6 h-6" />, label: "Enterprise & AI", color: "#7d8ca3" },
+  { icon: <Gem className="w-6 h-6" />, label: "Fine Leather Goods", color: "#9c6b45" },
+  { icon: <Plane className="w-6 h-6" />, label: "Concierge & Mobility", color: "#6f8778" },
 ];
 
 export default function IndustryGrid() {

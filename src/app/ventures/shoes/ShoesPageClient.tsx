@@ -2,43 +2,43 @@
 
 import {
   Footprints,
-  Palette,
-  Leaf,
+  Briefcase,
+  Gem,
   Crown,
-  Heart,
-  Star,
-  Sparkles,
-  Shield,
+  Scissors,
+  Award,
+  ShieldCheck,
+  Layers,
 } from "lucide-react";
 import VentureDetailLayout from "@/components/VentureDetailLayout";
 
 const categories = [
-  { name: "Casual Collection", desc: "Everyday comfort meets contemporary street style and versatility", icon: <Star className="w-6 h-6" /> },
-  { name: "Premium Line", desc: "Handcrafted luxury footwear using finest materials and artisanal methods", icon: <Crown className="w-6 h-6" /> },
-  { name: "Performance", desc: "Athletic and sport-focused designs engineered for peak performance", icon: <Sparkles className="w-6 h-6" /> },
-  { name: "Sustainable Range", desc: "Eco-conscious footwear made from recycled and organic materials", icon: <Leaf className="w-6 h-6" /> },
+  { name: "Footwear Atelier", desc: "Hand-lasted oxfords, derbies, and loafers uniting Italian artistry with all-day orthotic comfort", icon: <Footprints className="w-6 h-6" /> },
+  { name: "Fine Bags & Holdalls", desc: "Structured totes, briefcases, and weekenders cut from full-grain heritage hides", icon: <Briefcase className="w-6 h-6" /> },
+  { name: "Leather Outerwear", desc: "Investment-grade jackets, hand-stitched and sculpted to develop a lifelong patina", icon: <Crown className="w-6 h-6" /> },
+  { name: "Wallets & Small Goods", desc: "Bifolds, cardholders, and belts with personalised monogramming and edge-painted finishing", icon: <Gem className="w-6 h-6" /> },
 ];
 
 const features = [
   {
-    icon: <Heart className="w-6 h-6" />,
-    title: "Comfort-First Design",
-    desc: "Every pair is engineered with ergonomic insoles and premium cushioning systems.",
+    icon: <Scissors className="w-6 h-6" />,
+    title: "Master-Artisan Handcraftsmanship",
+    desc: "Every piece is cut, stitched, and finished by generational leather artisans using techniques refined over centuries.",
   },
   {
-    icon: <Palette className="w-6 h-6" />,
-    title: "Timeless Aesthetics",
-    desc: "Clean, modern designs that transcend seasonal trends for lasting style.",
+    icon: <Award className="w-6 h-6" />,
+    title: "Heritage-Grade Full-Grain Hides",
+    desc: "We source exclusively full-grain and top-grain leathers from ethical, premier tanneries across Italy and France.",
   },
   {
-    icon: <Leaf className="w-6 h-6" />,
-    title: "Sustainable Materials",
-    desc: "Responsibly sourced materials and eco-friendly production processes.",
+    icon: <Layers className="w-6 h-6" />,
+    title: "Limited-Run Atelier Production",
+    desc: "Each collection is released in numbered micro-batches — ensuring exclusivity and uncompromising quality control.",
   },
   {
-    icon: <Shield className="w-6 h-6" />,
-    title: "Built to Last",
-    desc: "Premium craftsmanship and rigorous quality testing for exceptional durability.",
+    icon: <ShieldCheck className="w-6 h-6" />,
+    title: "Lifetime Restoration Guarantee",
+    desc: "An uncompromising promise — every piece is backed by our lifetime craftsmanship warranty and restoration service.",
   },
 ];
 
@@ -46,24 +46,24 @@ export default function ShoesPageClient() {
   return (
     <VentureDetailLayout
       ventureNumber="03"
-      title="Shoes Business"
-      subtitle="Style Meets Substance"
-      heroDescription="A contemporary footwear brand that blends style, comfort, and craftsmanship. Designed for everyday excellence — from casual wear to performance-driven designs."
-      accentColor="#a855f7"
+      title="Acre & Hide"
+      subtitle="Sartorial Leather & Footwear"
+      heroDescription="A maison devoted to the art of fine leatherwork. From hand-lasted footwear to structured bags, sculpted jackets, wallets, and belts — every piece is crafted from the world's most exceptional hides, for those who refuse to compromise between presence and comfort."
+      accentColor="#9c6b45"
       heroIcon={<Footprints className="w-6 h-6" />}
-      heroImage="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80"
+      heroImage="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"
       categories={categories}
-      categoriesTitle="Our Collections"
-      categoriesSubtitle="Curated footwear lines for every occasion, lifestyle, and preference."
-      categoriesLabel="What We Create"
+      categoriesTitle="The Maison Collections"
+      categoriesSubtitle="A complete house of leather — footwear, bags, outerwear, and fine small goods, crafted for the uncompromising."
+      categoriesLabel="Our Craft"
       features={features}
-      featuresTitle="Our Promise"
-      featuresLabel="Why Our Shoes Stand Out"
-      testimonialQuote="These are hands down the most comfortable shoes I've ever owned. The quality is exceptional, and they look even better in person. Absolutely worth it."
-      testimonialAuthor="Emma L., Loyal Customer"
-      ctaTitle="Step Into Excellence"
-      ctaDescription="Discover our latest collections — where premium craftsmanship meets everyday comfort."
-      ctaPrimaryLabel="Explore Collections"
+      featuresTitle="The Acre & Hide Distinction"
+      featuresLabel="The Artisan Pledge"
+      testimonialQuote="I have collected from the finest houses across Milan and Paris. Acre & Hide rivals them all — the leather, the hand-stitching, the patina that deepens with every year. From the boots to the weekender bag, this is heirloom-level craftsmanship."
+      testimonialAuthor="Victoria K., Private Collector"
+      ctaTitle="Commission a Masterpiece"
+      ctaDescription="Discover our limited-run leather collections — footwear, bags, outerwear, and small goods, delivered with white-glove service to your door."
+      ctaPrimaryLabel="Enter the Atelier"
     />
   );
 }

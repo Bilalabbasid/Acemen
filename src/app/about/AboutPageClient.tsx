@@ -7,7 +7,7 @@ import {
   Heart,
   Sparkles,
   Shield,
-  TrendingUp,
+  Zap,
   Globe,
   Users,
   Award,
@@ -21,61 +21,61 @@ import GradientOrb from "@/components/GradientOrb";
 
 const values = [
   {
+    icon: <Zap className="w-6 h-6 text-gold-400" />,
+    title: "Vanguard Innovation",
+    desc: "We deploy proprietary AI and cloud frameworks to ensure our technology and retail assets permanently outpace market shifts.",
+  },
+  {
     icon: <Sparkles className="w-6 h-6 text-gold-400" />,
-    title: "Quality First",
-    desc: "We never compromise on excellence. Every product, service, and interaction reflects the highest standards of quality.",
+    title: "Artisanal Integrity",
+    desc: "We preserve pure, old-world craftsmanship in our physical goods, using materials reserved only for the world's luxury tiers.",
   },
   {
-    icon: <TrendingUp className="w-6 h-6 text-cyan-400" />,
-    title: "Innovation & Tech",
-    desc: "We leverage cutting-edge technology and creative thinking to stay ahead of the curve and deliver unmatched value.",
+    icon: <Shield className="w-6 h-6 text-gold-400" />,
+    title: "Sovereign Reliability",
+    desc: "Our infrastructures in commerce and mobility are built on high-fidelity frameworks, trusted by enterprise clients worldwide.",
   },
   {
-    icon: <Heart className="w-6 h-6 text-rose-400" />,
-    title: "Customer Obsession",
-    desc: "Our customers are at the heart of everything we build. We listen, learn, and deliver beyond expectations.",
+    icon: <Heart className="w-6 h-6 text-gold-400" />,
+    title: "Uncompromising Execution",
+    desc: "From strategy to delivery, every touchpoint upholds a single, exacting standard of professionalism and operational rigour.",
   },
   {
-    icon: <Shield className="w-6 h-6 text-yellow-400" />,
-    title: "Integrity & Trust",
-    desc: "We operate with transparency, honesty, and reliability — earning trust through every action we take.",
+    icon: <Globe className="w-6 h-6 text-gold-400" />,
+    title: "Generational Scalability",
+    desc: "We architect for the long horizon — building houses designed to compound in value across generations, not quarters.",
   },
   {
-    icon: <Globe className="w-6 h-6 text-emerald-400" />,
-    title: "Long-Term Growth",
-    desc: "We prioritise sustainable, long-term growth over short-term wins, building businesses that last.",
-  },
-  {
-    icon: <Award className="w-6 h-6 text-purple-400" />,
-    title: "Excellence in Execution",
-    desc: "From strategy to delivery, we maintain the highest standards of professionalism and operational rigour.",
+    icon: <Award className="w-6 h-6 text-gold-400" />,
+    title: "Absolute Standard",
+    desc: "Excellence is not an aspiration but a threshold. Nothing leaves our houses until it is beyond reproach.",
   },
 ];
 
 const goals = [
-  "Grow each venture into a market leader in its category",
-  "Expand operations across UK, Europe, and global markets",
-  "Leverage technology and automation across all ventures",
-  "Build lasting partnerships and customer relationships",
-  "Foster a culture of innovation, diversity, and excellence",
-  "Deliver consistent value to stakeholders and communities",
+  "Establish each house as the definitive authority in its category",
+  "Extend operations across the UK, Europe, and global markets",
+  "Deploy proprietary AI and automation across every vertical",
+  "Cultivate enduring alliances with partners and principals",
+  "Preserve old-world craftsmanship at modern, global scale",
+  "Deliver compounding value to stakeholders and communities",
 ];
 
 const whyUs = [
   {
     icon: <Award className="w-6 h-6 text-gold-400" />,
-    title: "Proven Expertise",
-    desc: "Our leadership team brings decades of combined experience across commerce, technology, retail, and travel sectors.",
+    title: "Institutional Expertise",
+    desc: "Our leadership brings decades of combined authority across commerce, technology, luxury manufacturing, and global mobility.",
   },
   {
-    icon: <Users className="w-6 h-6 text-cyan-400" />,
-    title: "Collaborative Approach",
-    desc: "We work closely with partners, investors, and teams to align goals and drive collective success.",
+    icon: <Users className="w-6 h-6 text-gold-400" />,
+    title: "Centralised Strength",
+    desc: "Shared capital, machine intelligence, and elite operational leadership empower every house to perform beyond its size.",
   },
   {
-    icon: <Clock className="w-6 h-6 text-emerald-400" />,
-    title: "Agile & Adaptable",
-    desc: "Our lean structure allows us to move fast, adapt to market changes, and seize opportunities quickly.",
+    icon: <Clock className="w-6 h-6 text-gold-400" />,
+    title: "Decisive & Adaptable",
+    desc: "A lean architecture lets us move with conviction — adapting to market shifts and seizing opportunity with precision.",
   },
 ];
 
@@ -98,14 +98,15 @@ export default function AboutPageClient() {
         <div className="container-page text-center relative z-10">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10 mb-6">
-              <span className="text-gold-400 font-bold text-xs tracking-wider uppercase">Our Heritage</span>
+              <span className="text-gold-400 font-bold text-xs tracking-wider uppercase">The Institution</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-heading font-black tracking-tight leading-none mb-6">
-              Who We Are
+            <h1 className="display-heading text-[2.6rem] sm:text-6xl md:text-7xl leading-[1.05] sm:leading-[1.02] mb-6">
+              An Institutional Blueprint<br className="hidden sm:block" /> for Global Excellence
             </h1>
             <p className="text-lg sm:text-xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed font-medium">
-              Acemen Ventures is a UK-registered holding company that builds, operates,
-              and scales exceptional businesses across commerce, technology, retail, and travel.
+              Headquartered in London, Acemen Ventures operates as a vanguard investment
+              house — architecting, insulating, and empowering a portfolio of world-class
+              enterprises across commerce, technology, luxury, and global mobility.
             </p>
           </ScrollReveal>
         </div>
@@ -118,28 +119,28 @@ export default function AboutPageClient() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
             <div className="lg:col-span-6">
               <ScrollReveal>
-                <span className="section-label">Our Story</span>
-                <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight mb-8">
-                  Built for <span className="gradient-gold-text">Growth</span>
+                <span className="section-label">The Corporate Mission</span>
+                <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-8">
+                  A Vanguard<br /><span className="gradient-gold-text">Investment</span> House
                 </h2>
                 <div className="space-y-6 text-gray-300/80 leading-relaxed font-medium text-[15px] sm:text-base">
                   <p>
-                    Founded in the United Kingdom, Acemen Ventures was created with a
-                    clear purpose: to build and operate businesses that make a real
-                    difference. Our model is simple — we identify opportunities across
-                    diverse sectors, invest in exceptional teams, and provide the
-                    structure and support needed to scale.
+                    Headquartered in London, Acemen Ventures operates as a vanguard
+                    investment house. Our architecture is designed to insulate and
+                    empower high-performing business verticals — blending centralised
+                    capital resources, cutting-edge machine intelligence, and elite
+                    operational leadership.
                   </p>
                   <p>
-                    From e-commerce to software development, footwear to travel
-                    services — each venture under our umbrella operates with autonomy
-                    while benefiting from shared resources, strategic guidance, and a
-                    unified vision.
+                    From curated digital commerce to enterprise AI, fine leather goods
+                    to global concierge and mobility — each house operates with full
+                    autonomy while drawing on shared resources, strategic guidance, and
+                    a unified pursuit of the absolute standard.
                   </p>
                   <p>
-                    We believe that great businesses are built on trust, innovation,
-                    and an unwavering commitment to quality. That philosophy guides
-                    every decision we make.
+                    We transition emerging market concepts into dominant global
+                    operations. It is a philosophy of uncompromising execution and
+                    generational scalability that governs every decision we make.
                   </p>
                 </div>
               </ScrollReveal>
@@ -176,9 +177,9 @@ export default function AboutPageClient() {
                 </div>
                 <h3 className="text-2xl font-heading font-bold text-white mb-4">Our Mission</h3>
                 <p className="text-gray-300/80 leading-relaxed text-sm font-medium">
-                  To build and operate exceptional businesses across multiple sectors —
-                  delivering quality, innovation, and value to customers worldwide under
-                  one trusted group.
+                  To acquire, build, and scale world-class enterprises across high-growth
+                  ecosystems — delivering absolute capital efficiency and market-leading
+                  prestige under one trusted house.
                 </p>
               </motion.div>
             </ScrollReveal>
@@ -186,16 +187,16 @@ export default function AboutPageClient() {
             <ScrollReveal delay={100} direction="scale">
               <motion.div
                 whileHover={{ y: -6 }}
-                className="glass rounded-3xl p-8 border border-white/10 hover:border-cyan-500/30 transition-all duration-300 h-full group"
+                className="glass rounded-3xl p-8 border border-white/10 hover:border-gold-500/30 transition-all duration-300 h-full group"
               >
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-cyan-500/15 group-hover:border-cyan-500/20 border border-white/5 transition-all duration-500">
-                  <Eye className="w-6 h-6 text-cyan-400" />
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-gold-500/15 group-hover:border-gold-500/20 border border-white/5 transition-all duration-500">
+                  <Eye className="w-6 h-6 text-gold-400" />
                 </div>
                 <h3 className="text-2xl font-heading font-bold text-white mb-4">Our Vision</h3>
                 <p className="text-gray-300/80 leading-relaxed text-sm font-medium">
-                  To become a globally recognised ventures group, scaling diverse
-                  businesses that lead in their markets and set new standards for
-                  quality and innovation.
+                  To stand as a globally recognised holding house — scaling category-defining
+                  enterprises that lead their markets and define the standard for
+                  craftsmanship, technology, and access.
                 </p>
               </motion.div>
             </ScrollReveal>
@@ -203,10 +204,10 @@ export default function AboutPageClient() {
             <ScrollReveal delay={200} direction="scale">
               <motion.div
                 whileHover={{ y: -6 }}
-                className="glass rounded-3xl p-8 border border-white/10 hover:border-emerald-500/30 transition-all duration-300 h-full group"
+                className="glass rounded-3xl p-8 border border-white/10 hover:border-gold-500/30 transition-all duration-300 h-full group"
               >
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-emerald-500/15 group-hover:border-emerald-500/20 border border-white/5 transition-all duration-500">
-                  <Globe className="w-6 h-6 text-emerald-400" />
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-gold-500/15 group-hover:border-gold-500/20 border border-white/5 transition-all duration-500">
+                  <Globe className="w-6 h-6 text-gold-400" />
                 </div>
                 <h3 className="text-2xl font-heading font-bold text-white mb-4">Our Goals</h3>
                 <ul className="text-gray-300/80 space-y-3 text-sm font-medium">
@@ -233,12 +234,12 @@ export default function AboutPageClient() {
           <ScrollReveal>
             <div className="text-center mb-20">
               <span className="section-label">What We Stand For</span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-4">
-                Core Values
+              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+                The Core Pillars
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                The principles that guide every decision and shape our culture across
-                all ventures.
+                The principles that govern every decision and shape the culture across
+                each of our houses.
               </p>
             </div>
           </ScrollReveal>
@@ -268,11 +269,11 @@ export default function AboutPageClient() {
           <ScrollReveal>
             <div className="text-center mb-20">
               <span className="section-label">The Difference</span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-4">
-                Why Choose Acemen
+              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+                Why Acemen
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                What sets us apart as a premium holdings and ventures group.
+                What distinguishes us as a private, multi-sector holding house.
               </p>
             </div>
           </ScrollReveal>
@@ -300,11 +301,11 @@ export default function AboutPageClient() {
           <ScrollReveal>
             <div className="text-center mb-20">
               <span className="section-label">Our People</span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-black tracking-tight leading-tight mb-4">
-                Leadership Team
+              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+                Directorship
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                The experienced leaders driving Acemen Ventures forward.
+                The principals who steward Acemen Ventures and its houses.
               </p>
             </div>
           </ScrollReveal>
@@ -340,15 +341,15 @@ export default function AboutPageClient() {
           <GradientOrb color="gold" size="lg" className="-top-20 -right-20 opacity-40" />
 
           <div className="relative z-10 py-16 sm:py-24 text-center max-w-2xl mx-auto px-6">
-            <h2 className="text-3xl sm:text-5xl font-heading font-black text-white mb-5">
-              Build the Future With Us
+            <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl text-white mb-5">
+              Initiate an Alliance
             </h2>
             <p className="text-gray-300/80 mb-8 leading-relaxed font-medium">
-              Whether you&apos;re looking to collaborate, invest, or learn more about our
-              ventures — we&apos;d love to talk.
+              Whether you seek to co-invest, explore private portfolio placements, or
+              access our houses — our London office is ready to facilitate your inquiry.
             </p>
             <Link href="/contact" className="btn-gold group !py-4 !px-8 text-xs tracking-wider uppercase font-black">
-              Get In Touch
+              Transmit Secure Inquiry
               <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1 inline" />
             </Link>
           </div>

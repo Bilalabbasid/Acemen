@@ -24,15 +24,31 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    overflow-x: hidden;
   }
 
   body {
     @apply font-body text-gray-800 bg-white antialiased;
     overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Responsive media safety — never let an asset force horizontal scroll */
+  img, svg, video, canvas {
+    max-width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-bold tracking-tight;
+  }
+
+  /* Serif display treatment for flagship headlines */
+  .display-heading {
+    @apply font-display font-semibold tracking-tight;
+    letter-spacing: -0.01em;
+  }
+  .display-italic {
+    @apply font-display italic font-medium;
   }
 
   /* Premium selection */
@@ -109,7 +125,8 @@
 
   /* ─── Typography ─── */
   .section-heading {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight;
+    @apply font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-semibold leading-[1.05];
+    letter-spacing: -0.01em;
     color: #0a1628;
   }
 
@@ -119,8 +136,15 @@
   }
 
   .section-label {
-    @apply font-semibold text-sm tracking-[0.2em] uppercase mb-4 inline-block;
-    color: #c9a84c;
+    @apply font-semibold text-xs tracking-[0.32em] uppercase mb-4 inline-flex items-center gap-2.5;
+    color: #b8922e;
+  }
+  /* Decorative rules flanking eyebrow labels */
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    @apply w-6 h-px inline-block;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
   }
 
   /* ─── Glassmorphism ─── */
@@ -239,7 +263,7 @@
   }
 
   .gradient-section-light {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #faf8f3 55%, #f4efe6 100%);
   }
 
   .gradient-section-warm {

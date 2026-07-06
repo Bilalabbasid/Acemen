@@ -8,15 +8,15 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
+  { href: "/about", label: "The Institution" },
   {
     href: "/ventures",
-    label: "Our Ventures",
+    label: "The Portfolio",
     children: [
-      { href: "/ventures/e-commerce", label: "E-Commerce" },
-      { href: "/ventures/it-solutions", label: "IT Solutions" },
-      { href: "/ventures/shoes", label: "Shoes Business" },
-      { href: "/ventures/ticketing-travel", label: "Ticketing & Travel" },
+      { href: "/ventures/e-commerce", label: "Curated Commerce" },
+      { href: "/ventures/it-solutions", label: "Enterprise & AI" },
+      { href: "/ventures/shoes", label: "Leather & Footwear" },
+      { href: "/ventures/ticketing-travel", label: "Concierge & Mobility" },
     ],
   },
   { href: "/contact", label: "Contact" },
@@ -179,7 +179,7 @@ export default function Header() {
                 href="/contact"
                 className="ml-4 btn-gold text-xs !py-2.5 !px-5 tracking-wider uppercase flex items-center gap-1.5 font-bold shadow-[0_4px_15px_rgba(201,168,76,0.3)] hover:shadow-[0_4px_25px_rgba(201,168,76,0.5)] transition-all duration-300 group"
               >
-                Let&apos;s Connect
+                Enquire
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -269,7 +269,7 @@ export default function Header() {
                   onClick={() => setIsMobileOpen(false)}
                   className="block text-center btn-gold text-sm !py-4 font-black tracking-widest uppercase shadow-[0_4px_15px_rgba(201,168,76,0.3)]"
                 >
-                  Get In Touch
+                  Initiate an Alliance
                 </Link>
               </motion.div>
             </div>

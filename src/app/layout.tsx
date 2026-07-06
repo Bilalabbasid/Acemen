@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Outfit, Inter, Cormorant_Garamond } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
+
+// Elegant high-contrast serif for display headlines (luxury flagship voice)
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -21,21 +30,23 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://acemenventures.com"),
   title: {
-    default: "Acemen Ventures | UK Holding Company — Building Exceptional Businesses",
+    default: "Acemen Ventures | A Private Multi-Sector Holding House",
     template: "%s | Acemen Ventures",
   },
   description:
-    "Acemen Ventures is a UK-registered holding company building and scaling businesses across e-commerce, IT solutions, footwear, and ticketing & travel.",
+    "Acemen Ventures is a private, UK-incorporated holding house architecting world-class enterprises across curated digital commerce, enterprise technology & AI, fine leather goods, and global concierge & mobility.",
   keywords: [
     "Acemen Ventures",
     "holding company",
+    "private holding house",
     "UK ventures",
-    "e-commerce",
-    "IT solutions",
-    "software development",
-    "footwear brand",
-    "ticketing",
-    "travel services",
+    "curated commerce",
+    "enterprise architecture",
+    "AI intelligence",
+    "fine leather goods",
+    "luxury leather",
+    "global concierge",
+    "mobility logistics",
   ],
   authors: [{ name: "Acemen Ventures" }],
   creator: "Acemen Ventures",
@@ -44,9 +55,9 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: "https://acemenventures.com",
     siteName: "Acemen Ventures",
-    title: "Acemen Ventures | Building Exceptional Businesses",
+    title: "Acemen Ventures | A Private Multi-Sector Holding House",
     description:
-      "A UK holding company operating across e-commerce, IT solutions, footwear, and ticketing & travel.",
+      "Architecting the future of commerce, luxury, and technology — a private UK holding house scaling world-class enterprises.",
     images: [
       {
         url: "/images/og-image.jpg",
@@ -58,9 +69,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Acemen Ventures | Building Exceptional Businesses",
+    title: "Acemen Ventures | A Private Multi-Sector Holding House",
     description:
-      "A UK holding company operating across e-commerce, IT solutions, footwear, and ticketing & travel.",
+      "Architecting the future of commerce, luxury, and technology — a private UK holding house scaling world-class enterprises.",
     images: ["/images/og-image.jpg"],
   },
   robots: {
@@ -75,7 +86,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${outfit.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>

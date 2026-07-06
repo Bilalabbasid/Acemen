@@ -74,7 +74,7 @@ export default function VentureDetailLayout({
                   Venture {ventureNumber} — {title}
                 </span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 text-balance">
+              <h1 className="display-heading text-[2.6rem] sm:text-6xl lg:text-7xl text-white mb-6 text-balance leading-[1.05]">
                 {subtitle}
               </h1>
               <p className="text-lg text-gray-300/90 leading-relaxed mb-8 max-w-lg">
@@ -82,11 +82,11 @@ export default function VentureDetailLayout({
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/contact" className="btn-gold group">
-                  Get Started
+                  Request Private Access
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
                 <Link href="/ventures" className="btn-outline">
-                  All Ventures
+                  The Portfolio
                 </Link>
               </div>
             </ScrollReveal>
@@ -185,7 +185,7 @@ export default function VentureDetailLayout({
                   <Star key={i} className="w-5 h-5 fill-gold-500 text-gold-500" />
                 ))}
               </div>
-              <blockquote className="text-xl sm:text-2xl font-medium text-navy-800 mb-6 leading-relaxed">
+              <blockquote className="font-display text-2xl sm:text-3xl italic font-medium text-navy-800 mb-6 leading-snug">
                 &ldquo;{testimonialQuote}&rdquo;
               </blockquote>
               <div className="gold-line-wide mx-auto mb-4" />

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ITSolutionsPageClient from "./ITSolutionsPageClient";
 
 export const metadata: Metadata = {
-  title: "IT Solutions",
+  title: "Acemen Digital — Enterprise Architecture & AI Intelligence",
   description:
-    "Acemen IT Solutions — custom software development, web & mobile apps, AI & automation, and strategic IT consulting services.",
+    "Acemen Digital — proprietary AI, cloud frameworks, and enterprise-grade software ecosystems engineered to keep industry leaders permanently ahead of the market.",
 };
 
 export default function ITSolutionsPage() {

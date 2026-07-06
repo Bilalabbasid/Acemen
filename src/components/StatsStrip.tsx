@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 
 export default function StatsStrip() {
   const stats = [
-    { value: 4, label: "Active Ventures", suffix: "", prefix: "" },
-    { value: 50, label: "Team Members", suffix: "+", prefix: "" },
+    { value: 4, label: "Houses in Portfolio", suffix: "", prefix: "" },
+    { value: 50, label: "Specialists & Artisans", suffix: "+", prefix: "" },
     { value: 15, label: "Countries Served", suffix: "+", prefix: "" },
-    { value: 100, label: "Client Satisfaction", suffix: "%", prefix: "" },
+    { value: 100, label: "Client Discretion", suffix: "%", prefix: "" },
   ];
 
   return (

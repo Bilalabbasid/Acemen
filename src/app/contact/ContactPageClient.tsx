@@ -71,14 +71,15 @@ export default function ContactPageClient() {
         <div className="container-page text-center relative z-10">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/[0.08] mb-6">
-              <span className="text-gold-400 font-medium text-sm tracking-wide">Get In Touch</span>
+              <span className="text-gold-400 font-medium text-sm tracking-wide">Private Intake</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 text-balance">
-              Contact Us
+            <h1 className="display-heading text-[2.6rem] sm:text-6xl lg:text-7xl text-white mb-6 text-balance leading-[1.05]">
+              Initiate an Alliance
             </h1>
             <p className="text-lg sm:text-xl text-gray-300/90 max-w-2xl mx-auto leading-relaxed">
-              Have a question, project idea, or partnership opportunity? We&apos;d love
-              to hear from you.
+              Whether you seek to acquire our enterprise services, explore private
+              portfolio placements, or request allocation for our luxury goods, our
+              office is ready to facilitate your inquiry.
             </p>
           </ScrollReveal>
         </div>
@@ -92,12 +93,12 @@ export default function ContactPageClient() {
             {/* Left: Contact Info */}
             <div className="lg:col-span-1">
               <ScrollReveal>
-                <h2 className="text-2xl font-bold text-navy-800 mb-3">
-                  Reach Out to Us
+                <h2 className="display-heading text-3xl sm:text-4xl text-navy-800 mb-3">
+                  The Private Office
                 </h2>
                 <p className="text-gray-500 mb-8 leading-relaxed text-[15px]">
-                  Our team is ready to assist you. Fill out the form or use any of
-                  the contact methods below.
+                  Submit your inquiry through the secure form, or reach our London office
+                  directly through any of the channels below.
                 </p>
 
                 <div className="space-y-5">
