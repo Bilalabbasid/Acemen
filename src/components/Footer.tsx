@@ -150,7 +150,7 @@ export default function Footer() {
                   <MapPin className="w-3.5 h-3.5 text-gold-400" />
                 </div>
                 <span className="text-gray-400 leading-relaxed">
-                  71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom
+                  551 Staines Road, Hounslow, Middlesex, London TW4 5DL, United Kingdom
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -169,10 +169,10 @@ export default function Footer() {
                   <Phone className="w-3.5 h-3.5 text-gold-400" />
                 </div>
                 <a
-                  href="tel:+440000000000"
+                  href="tel:+447587386522"
                   className="text-gray-400 hover:text-gold-400 transition-colors"
                 >
-                  +44 (0) 0000 000000
+                  +44 7587 386522
                 </a>
               </li>
             </ul>

@@ -19,9 +19,9 @@ const contactInfo = [
     icon: <MapPin className="w-5 h-5" />,
     title: "Our Office",
     lines: [
-      "71-75 Shelton Street",
-      "Covent Garden",
-      "London, WC2H 9JQ",
+      "551 Staines Road",
+      "Hounslow, Middlesex",
+      "London TW4 5DL",
       "United Kingdom",
     ],
     action: null,
@@ -38,10 +38,10 @@ const contactInfo = [
   {
     icon: <Phone className="w-5 h-5" />,
     title: "Call Us",
-    lines: ["+44 (0) 0000 000000"],
+    lines: ["+44 7587 386522"],
     action: {
       label: "Call now →",
-      href: "tel:+440000000000",
+      href: "tel:+447587386522",
     },
   },
   {
@@ -177,7 +177,7 @@ export default function ContactPageClient() {
                   </div>
                   <div>
                     <p className="text-white font-semibold text-sm">London, United Kingdom</p>
-                    <p className="text-gray-300 text-xs">71-75 Shelton Street, Covent Garden</p>
+                    <p className="text-gray-300 text-xs">551 Staines Road, Hounslow, Middlesex</p>
                   </div>
                 </div>
               </div>
