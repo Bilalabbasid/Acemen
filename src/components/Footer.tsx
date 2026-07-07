@@ -73,9 +73,11 @@ export default function Footer() {
       <div className="relative z-10 container-page pt-16 lg:pt-20 pb-12">
         <div className="max-w-2xl">
           <Link href="/" className="flex items-center gap-3 mb-6 group">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/10 flex items-center justify-center font-heading font-bold text-sm text-gold-400 border border-gold-500/10 group-hover:border-gold-500/30 transition-colors">
-              AV
-            </div>
+            <img
+              src="/images/logo.png"
+              alt="Acemen Ventures"
+              className="h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(201,168,76,0.3)]"
+            />
             <span className="font-heading font-bold text-xl tracking-wider text-white">
               ACEMEN{" "}
               <span className="text-gold-400">VENTURES</span>
@@ -191,6 +193,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Your email"
+                aria-label="Email address for newsletter"
                 className="flex-1 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder-gray-500 text-sm focus:outline-none focus:border-gold-500/30 focus:bg-white/[0.06] transition-all duration-300"
               />
               <button

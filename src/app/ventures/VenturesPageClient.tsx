@@ -73,7 +73,7 @@ const ventures = [
     href: "/ventures/ticketing-travel",
     accentColor: "#6f8778",
     icon: <Ticket className="w-7 h-7" />,
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109bb05?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
     features: [
       "First-Tier Access to Global Events & Arenas",
       "Bespoke Luxury Itinerary & Expedition Curation",

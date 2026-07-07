@@ -81,11 +81,11 @@ export default function Header() {
               className="flex items-center gap-3 group"
               aria-label="Acemen Ventures Home"
             >
-              <div
-                className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-600 to-gold-400 text-navy-950 flex items-center justify-center font-heading font-black text-base shadow-[0_0_15px_rgba(201,168,76,0.3)] group-hover:scale-105 transition-transform duration-300"
-              >
-                AV
-              </div>
+              <img
+                src="/images/logo.png"
+                alt="Acemen Ventures"
+                className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(201,168,76,0.3)]"
+              />
               <div className="flex flex-col">
                 <span className="font-heading font-black text-sm tracking-[0.2em] text-white leading-none">
                   ACEMEN

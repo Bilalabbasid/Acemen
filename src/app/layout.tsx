@@ -50,6 +50,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Acemen Ventures" }],
   creator: "Acemen Ventures",
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/favicon.png", type: "image/png" },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
@@ -60,7 +68,7 @@ export const metadata: Metadata = {
       "Architecting the future of commerce, luxury, and technology — a private UK holding house scaling world-class enterprises.",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/logo.png",
         width: 1200,
         height: 630,
         alt: "Acemen Ventures",
@@ -72,7 +80,7 @@ export const metadata: Metadata = {
     title: "Acemen Ventures | A Private Multi-Sector Holding House",
     description:
       "Architecting the future of commerce, luxury, and technology — a private UK holding house scaling world-class enterprises.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
   robots: {
     index: true,
