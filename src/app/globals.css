@@ -22,13 +22,12 @@
   }
 
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 5rem;
     overflow-x: hidden;
   }
 
   body {
-    @apply font-body text-gray-800 bg-white antialiased;
+    @apply font-body text-white bg-navy-950 antialiased;
     overflow-x: hidden;
     max-width: 100vw;
   }

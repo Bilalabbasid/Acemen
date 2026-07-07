@@ -2,7 +2,6 @@ interface GradientOrbProps {
   color?: "gold" | "navy" | "emerald" | "blue";
   size?: "sm" | "md" | "lg" | "xl";
   className?: string;
-  animate?: boolean;
 }
 
 const colorMap = {
@@ -23,14 +22,14 @@ export default function GradientOrb({
   color = "gold",
   size = "md",
   className = "",
-  animate = true,
 }: GradientOrbProps) {
   return (
     <div
-      className={`absolute rounded-full blur-3xl pointer-events-none ${sizeMap[size]} ${
-        animate ? "animate-pulse-glow" : ""
-      } ${className}`}
-      style={{ backgroundColor: colorMap[color] }}
+      className={`absolute rounded-full blur-3xl pointer-events-none ${sizeMap[size]} ${className}`}
+      style={{
+        backgroundColor: colorMap[color],
+        willChange: "auto",
+      }}
       aria-hidden="true"
     />
   );

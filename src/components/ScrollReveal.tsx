@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, ReactNode } from "react";
-import { motion, useInView, useAnimation, Variant } from "framer-motion";
+import { useRef, ReactNode } from "react";
+import { motion, useInView, Variant } from "framer-motion";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -14,24 +14,24 @@ interface ScrollRevealProps {
 
 const variants: Record<string, { hidden: Variant; visible: Variant }> = {
   up: {
-    hidden: { opacity: 0, y: 40, filter: "blur(4px)" },
-    visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
   },
   left: {
-    hidden: { opacity: 0, x: -50, filter: "blur(4px)" },
-    visible: { opacity: 1, x: 0, filter: "blur(0px)" },
+    hidden: { opacity: 0, x: -40 },
+    visible: { opacity: 1, x: 0 },
   },
   right: {
-    hidden: { opacity: 0, x: 50, filter: "blur(4px)" },
-    visible: { opacity: 1, x: 0, filter: "blur(0px)" },
+    hidden: { opacity: 0, x: 40 },
+    visible: { opacity: 1, x: 0 },
   },
   scale: {
-    hidden: { opacity: 0, scale: 0.88, filter: "blur(6px)" },
-    visible: { opacity: 1, scale: 1, filter: "blur(0px)" },
+    hidden: { opacity: 0, scale: 0.92 },
+    visible: { opacity: 1, scale: 1 },
   },
   blur: {
-    hidden: { opacity: 0, filter: "blur(12px)", y: 10 },
-    visible: { opacity: 1, filter: "blur(0px)", y: 0 },
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
   },
   none: {
     hidden: { opacity: 0 },
@@ -45,17 +45,10 @@ export default function ScrollReveal({
   delay = 0,
   direction = "up",
   once = true,
-  duration = 0.7,
+  duration = 0.5,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once, margin: "-60px 0px" });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
+  const isInView = useInView(ref, { once, margin: "-40px 0px" });
 
   const v = variants[direction] || variants.up;
 
@@ -63,8 +56,9 @@ export default function ScrollReveal({
     <motion.div
       ref={ref}
       className={className}
+      style={{ willChange: "opacity, transform" }}
       initial="hidden"
-      animate={controls}
+      animate={isInView ? "visible" : "hidden"}
       variants={{
         hidden: v.hidden,
         visible: v.visible,
