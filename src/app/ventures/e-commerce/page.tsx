@@ -7,6 +7,9 @@ const venture = getVentureBySlug("e-commerce");
 export const metadata: Metadata = {
   title: venture?.metadata.title,
   description: venture?.metadata.description,
+  alternates: {
+    canonical: "/ventures/e-commerce",
+  },
 };
 
 export default function ECommercePage() {

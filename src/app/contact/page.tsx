@@ -4,7 +4,10 @@ import ContactPageClient from "./ContactPageClient";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Acemen Ventures — reach out via our contact form, email, phone, or visit our UK office.",
+    "Contact Acemen Ventures for private enquiries across the venture portfolio.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {

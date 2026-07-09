@@ -1,213 +1,280 @@
 "use client";
 
-import { useState } from "react";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, Send } from "lucide-react";
+import { useRef, useState } from "react";
+import { contactDetails, inquiryTypes } from "@/data/contact";
+
+interface FormData {
+  name: string;
+  email: string;
+  organisation: string;
+  phone: string;
+  inquiryType: string;
+  message: string;
+  consent: boolean;
+  website: string;
+}
+
+type Errors = Partial<Record<keyof FormData, string>>;
+
+const initialFormData: FormData = {
+  name: "",
+  email: "",
+  organisation: "",
+  phone: "",
+  inquiryType: inquiryTypes[0],
+  message: "",
+  consent: false,
+  website: "",
+};
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [errors, setErrors] = useState<Errors>({});
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const firstInvalidRef = useRef<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null>(null);
 
   const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = "Full name is required";
+    const nextErrors: Errors = {};
+
+    if (!formData.name.trim()) nextErrors.name = "Enter your name.";
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      nextErrors.email = "Enter your email address.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+      nextErrors.email = "Enter a valid email address.";
     }
-    if (!formData.subject.trim()) newErrors.subject = "Organisation is required";
+    if (!formData.inquiryType.trim()) nextErrors.inquiryType = "Choose an inquiry type.";
     if (!formData.message.trim()) {
-      newErrors.message = "Please describe the nature of your inquiry";
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Please provide at least 10 characters";
+      nextErrors.message = "Enter a short message.";
+    } else if (formData.message.trim().length < 20) {
+      nextErrors.message = "Please provide at least 20 characters.";
     }
-    return newErrors;
+    if (!formData.consent) {
+      nextErrors.consent = "Confirm that you agree to be contacted about this inquiry.";
+    }
+    if (formData.website) {
+      nextErrors.website = "Unable to submit this inquiry.";
+    }
+
+    return nextErrors;
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  const updateField = <K extends keyof FormData>(field: K, value: FormData[K]) => {
+    setFormData((current) => ({ ...current, [field]: value }));
+    setErrors((current) => {
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+  };
+
+  const assignInvalidRef = (
+    field: keyof FormData,
+    node: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => {
-        const next = { ...prev };
-        delete next[name];
-        return next;
-      });
+    if (node && errors[field] && !firstInvalidRef.current) {
+      firstInvalidRef.current = node;
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    firstInvalidRef.current = null;
     const validationErrors = validate();
+    setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+      requestAnimationFrame(() => firstInvalidRef.current?.focus());
       return;
     }
 
     setStatus("submitting");
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      formData.organisation ? `Organisation: ${formData.organisation}` : "",
+      formData.phone ? `Phone: ${formData.phone}` : "",
+      `Inquiry type: ${formData.inquiryType}`,
+      "",
+      formData.message,
+    ]
+      .filter(Boolean)
+      .join("\n");
 
-    try {
-      const mailtoLink = `mailto:hello@acemenventures.com?subject=${encodeURIComponent(
-        formData.subject
-      )}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
-      )}`;
+    window.location.href = `mailto:${contactDetails.email}?subject=${encodeURIComponent(
+      `Website inquiry - ${formData.inquiryType}`
+    )}&body=${encodeURIComponent(body)}`;
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      window.location.href = mailtoLink;
-
-      setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch {
-      setStatus("error");
-    }
+    setStatus("success");
+    setFormData(initialFormData);
   };
 
   const inputClasses =
-    "w-full px-5 py-3.5 rounded-xl bg-white border border-gray-200 text-gray-800 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:border-gold-500/50 focus:ring-4 focus:ring-gold-500/10 hover:border-gray-300 text-sm";
+    "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-navy-950 shadow-sm transition focus:border-gold-500 focus:outline-none focus:ring-4 focus:ring-gold-500/10";
 
   return (
-    <div className="relative">
-      {/* Decorative gradient */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-gold-500/10 via-navy-600/5 to-gold-500/10 rounded-[20px] blur-sm" aria-hidden="true" />
+    <form onSubmit={handleSubmit} noValidate className="rounded-3xl bg-white p-6 shadow-premium sm:p-8">
+      <div className="mb-6 rounded-2xl border border-gold-500/20 bg-gold-50 p-4 text-sm leading-6 text-navy-900">
+        This form opens your email app with a prepared message. A production email service
+        is not configured in this repository yet.
+      </div>
 
-      <div className="relative bg-white rounded-2xl shadow-premium-lg border border-gray-100/80 p-7 sm:p-10">
-        {status === "success" ? (
-          <div className="text-center py-16">
-            <div className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-green-500" />
-            </div>
-            <h3 className="display-heading text-3xl text-navy-800 mb-3">Inquiry Received</h3>
-            <p className="text-gray-500 mb-8 max-w-sm mx-auto">
-              Thank you. Your inquiry has been transmitted to our private office — we
-              will respond, in confidence, within one business day.
-            </p>
-            <button
-              onClick={() => setStatus("idle")}
-              className="btn-primary"
-            >
-              Submit another inquiry
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} noValidate>
-            {status === "error" && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 text-sm">
-                <AlertCircle className="w-5 h-5 shrink-0" />
-                Something went wrong. Please try again or email us directly.
-              </div>
-            )}
+      {status === "success" && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="mb-6 flex gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800"
+        >
+          <CheckCircle2 className="h-5 w-5 shrink-0" aria-hidden="true" />
+          Your email app should now be open with the prepared inquiry.
+        </div>
+      )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-              <div>
-                <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Full Name &amp; Title <span className="text-gold-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="contact-name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={`${inputClasses} ${
-                    errors.name ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
-                  }`}
-                  placeholder="Alexandra Reed, Managing Partner"
-                />
-                {errors.name && (
-                  <p className="mt-1.5 text-xs text-red-500">{errors.name}</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address <span className="text-gold-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="contact-email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`${inputClasses} ${
-                    errors.email ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
-                  }`}
-                  placeholder="you@institution.com"
-                />
-                {errors.email && (
-                  <p className="mt-1.5 text-xs text-red-500">{errors.email}</p>
-                )}
-              </div>
-            </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field label="Full name" error={errors.name} required htmlFor="name">
+          <input
+            id="name"
+            value={formData.name}
+            onChange={(event) => updateField("name", event.target.value)}
+            ref={(node) => assignInvalidRef("name", node)}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "name-error" : undefined}
+            className={inputClasses}
+            autoComplete="name"
+          />
+        </Field>
 
-            <div className="mb-5">
-              <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 mb-2">
-                Organisation / Institutional Affiliation <span className="text-gold-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="contact-subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className={`${inputClasses} ${
-                  errors.subject ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
-                }`}
-                placeholder="Company or institutional affiliation"
-              />
-              {errors.subject && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.subject}</p>
-              )}
-            </div>
+        <Field label="Email address" error={errors.email} required htmlFor="email">
+          <input
+            id="email"
+            type="email"
+            value={formData.email}
+            onChange={(event) => updateField("email", event.target.value)}
+            ref={(node) => assignInvalidRef("email", node)}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "email-error" : undefined}
+            className={inputClasses}
+            autoComplete="email"
+          />
+        </Field>
 
-            <div className="mb-8">
-              <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-2">
-                Nature of Inquiry <span className="text-gold-500">*</span>
-                <span className="text-gray-400 font-normal"> — Investment, Enterprise IT, Luxury Retail, or Concierge</span>
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-                className={`${inputClasses} resize-none ${
-                  errors.message ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
-                }`}
-                placeholder="Please describe the nature of your inquiry and how our office may assist you."
-              />
-              {errors.message && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.message}</p>
-              )}
-            </div>
+        <Field label="Organisation" htmlFor="organisation">
+          <input
+            id="organisation"
+            value={formData.organisation}
+            onChange={(event) => updateField("organisation", event.target.value)}
+            className={inputClasses}
+            autoComplete="organization"
+          />
+        </Field>
 
-            <button
-              type="submit"
-              disabled={status === "submitting"}
-              className="btn-gold w-full sm:w-auto gap-2 disabled:opacity-60 disabled:cursor-not-allowed group"
-            >
-              {status === "submitting" ? (
-                <>
-                  <span className="w-4 h-4 border-2 border-navy-900/30 border-t-navy-900 rounded-full animate-spin" />
-                  Transmitting...
-                </>
-              ) : (
-                <>
-                  <Send className="w-4 h-4" />
-                  Transmit Secure Inquiry
-                </>
-              )}
-            </button>
-          </form>
+        <Field label="Phone" htmlFor="phone">
+          <input
+            id="phone"
+            type="tel"
+            value={formData.phone}
+            onChange={(event) => updateField("phone", event.target.value)}
+            className={inputClasses}
+            autoComplete="tel"
+          />
+        </Field>
+      </div>
+
+      <div className="mt-5">
+        <Field label="Inquiry type" error={errors.inquiryType} required htmlFor="inquiryType">
+          <select
+            id="inquiryType"
+            value={formData.inquiryType}
+            onChange={(event) => updateField("inquiryType", event.target.value)}
+            ref={(node) => assignInvalidRef("inquiryType", node)}
+            aria-invalid={!!errors.inquiryType}
+            aria-describedby={errors.inquiryType ? "inquiryType-error" : undefined}
+            className={inputClasses}
+          >
+            {inquiryTypes.map((type) => (
+              <option key={type}>{type}</option>
+            ))}
+          </select>
+        </Field>
+      </div>
+
+      <div className="mt-5">
+        <Field label="Message" error={errors.message} required htmlFor="message">
+          <textarea
+            id="message"
+            rows={6}
+            value={formData.message}
+            onChange={(event) => updateField("message", event.target.value)}
+            ref={(node) => assignInvalidRef("message", node)}
+            aria-invalid={!!errors.message}
+            aria-describedby={errors.message ? "message-error" : undefined}
+            className={`${inputClasses} resize-y`}
+            placeholder="Briefly describe the opportunity or enquiry."
+          />
+        </Field>
+      </div>
+
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.website}
+          onChange={(event) => updateField("website", event.target.value)}
+        />
+      </div>
+
+      <div className="mt-6">
+        <label className="flex items-start gap-3 text-sm leading-6 text-slate-600">
+          <input
+            type="checkbox"
+            checked={formData.consent}
+            onChange={(event) => updateField("consent", event.target.checked)}
+            ref={(node) => assignInvalidRef("consent", node)}
+            aria-invalid={!!errors.consent}
+            aria-describedby={errors.consent ? "consent-error" : undefined}
+            className="mt-1 h-4 w-4 rounded border-slate-300 text-gold-600 focus:ring-gold-500"
+          />
+          <span>I agree to be contacted about this inquiry.</span>
+        </label>
+        {errors.consent && (
+          <p id="consent-error" role="alert" className="mt-2 flex gap-2 text-sm text-red-600">
+            <AlertCircle className="h-4 w-4" aria-hidden="true" />
+            {errors.consent}
+          </p>
         )}
       </div>
+
+      <button type="submit" disabled={status === "submitting"} className="btn-dark mt-8 w-full sm:w-auto">
+        <Send className="mr-2 h-4 w-4" aria-hidden="true" />
+        {status === "submitting" ? "Preparing..." : "Send Inquiry"}
+      </button>
+    </form>
+  );
+}
+
+interface FieldProps {
+  label: string;
+  htmlFor: string;
+  children: React.ReactNode;
+  error?: string;
+  required?: boolean;
+}
+
+function Field({ label, htmlFor, children, error, required = false }: FieldProps) {
+  return (
+    <div>
+      <label htmlFor={htmlFor} className="mb-2 block text-sm font-semibold text-navy-950">
+        {label} {required && <span className="text-gold-600">*</span>}
+      </label>
+      {children}
+      {error && (
+        <p id={`${htmlFor}-error`} role="alert" className="mt-2 flex gap-2 text-sm text-red-600">
+          <AlertCircle className="h-4 w-4" aria-hidden="true" />
+          {error}
+        </p>
+      )}
     </div>
   );
 }

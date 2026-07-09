@@ -7,6 +7,9 @@ const venture = getVentureBySlug("ticketing-travel");
 export const metadata: Metadata = {
   title: venture?.metadata.title,
   description: venture?.metadata.description,
+  alternates: {
+    canonical: "/ventures/ticketing-travel",
+  },
 };
 
 export default function TicketingTravelPage() {

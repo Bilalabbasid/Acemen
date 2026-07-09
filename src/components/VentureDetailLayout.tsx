@@ -1,9 +1,11 @@
-import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
-import ScrollReveal from "./ScrollReveal";
-import CTASection from "./CTASection";
-import GradientOrb from "./GradientOrb";
-import VentureIcon from "./VentureIcon";
+import Image from "next/image";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
+import LuxuryCard from "@/components/ui/LuxuryCard";
+import MotionSection from "@/components/ui/MotionSection";
+import SectionHeader from "@/components/ui/SectionHeader";
+import VentureIcon from "@/components/VentureIcon";
 import type { VentureDetail } from "@/data/ventures";
 
 interface VentureDetailProps {
@@ -13,144 +15,165 @@ interface VentureDetailProps {
 export default function VentureDetailLayout({ venture }: VentureDetailProps) {
   return (
     <>
-      <section className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 overflow-hidden gradient-hero">
-        <div className="absolute inset-0 dot-pattern opacity-20" aria-hidden="true" />
-        <GradientOrb color="gold" size="md" className="-top-32 -right-32 opacity-40" />
-
-        <div className="container-page relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <ScrollReveal>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/[0.08] mb-6">
-                <span className="font-medium text-sm tracking-wide" style={{ color: venture.accentColor }}>
-                  Venture {venture.ventureNumber} - {venture.title}
-                </span>
-              </div>
-              <h1 className="display-heading text-[2.6rem] sm:text-6xl lg:text-7xl text-white mb-6 text-balance leading-[1.05]">
-                {venture.subtitle}
+      <section className="relative isolate overflow-hidden gradient-hero pt-32 pb-20 sm:pt-40 sm:pb-24">
+        <div className="absolute inset-0 dot-pattern opacity-30" aria-hidden="true" />
+        <Container className="relative z-10">
+          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <MotionSection>
+              <p className="section-label">Venture {venture.ventureNumber}</p>
+              <h1 className="display-heading mt-5 text-5xl text-white sm:text-6xl lg:text-7xl">
+                {venture.title}
               </h1>
-              <p className="text-lg text-gray-300/90 leading-relaxed mb-8 max-w-lg">
-                {venture.heroDescription}
+              <p className="mt-4 text-lg font-semibold text-gold-300">{venture.tagline}</p>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+                {venture.description}
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/contact" className="btn-gold group">
-                  Request Private Access
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-                <Link href="/ventures" className="btn-outline">
-                  The Portfolio
-                </Link>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button href="/contact" variant="gold">
+                  {venture.ctaPrimaryLabel}
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                </Button>
+                <Button href="/ventures" variant="outline">
+                  Back to Portfolio
+                </Button>
               </div>
-            </ScrollReveal>
+            </MotionSection>
 
-            <ScrollReveal direction="right">
-              <div className="relative rounded-2xl overflow-hidden shadow-premium-xl">
-                <img
-                  src={venture.image}
-                  alt={venture.title}
-                  className="w-full aspect-[4/3] object-cover"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(135deg, ${venture.accentColor}20 0%, transparent 60%)`,
-                  }}
-                />
+            <MotionSection delay={0.08}>
+              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-3 shadow-premium-lg">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                  <Image
+                    src={venture.image}
+                    alt={venture.imageAlt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 46vw, 100vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-transparent to-transparent" />
+                  <div
+                    className="absolute bottom-5 left-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/20 bg-navy-950/65 text-white backdrop-blur-md"
+                    aria-hidden="true"
+                  >
+                    <VentureIcon name={venture.icon} />
+                  </div>
+                </div>
               </div>
-            </ScrollReveal>
+            </MotionSection>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="py-20 sm:py-28 gradient-section-light relative overflow-hidden">
-        <div className="absolute inset-0 dot-pattern-light opacity-30" aria-hidden="true" />
-        <div className="container-page relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-14">
-              <span className="section-label">{venture.categoriesLabel}</span>
-              <h2 className="section-heading mb-4">{venture.categoriesTitle}</h2>
-              <p className="section-subheading mx-auto">{venture.categoriesSubtitle}</p>
-            </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {venture.categories.map((category, i) => (
-              <ScrollReveal key={category.name} delay={i * 100}>
-                <div className="card-premium p-6 text-center h-full group">
+      <section className="section-space gradient-section-light">
+        <Container>
+          <SectionHeader
+            eyebrow={venture.categoriesLabel}
+            title={venture.categoriesTitle}
+            description={venture.categoriesSubtitle}
+          />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {venture.categories.map((category, index) => (
+              <MotionSection key={category.name} delay={index * 0.05}>
+                <LuxuryCard light className="h-full p-6">
                   <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-500 group-hover:shadow-lg"
+                    className="flex h-12 w-12 items-center justify-center rounded-2xl"
                     style={{
-                      backgroundColor: `${venture.accentColor}10`,
+                      backgroundColor: `${venture.accentColor}18`,
                       color: venture.accentColor,
                     }}
+                    aria-hidden="true"
                   >
                     <VentureIcon name={category.icon} />
                   </div>
-                  <h3 className="font-bold text-navy-800 mb-2">{category.name}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{category.desc}</p>
-                </div>
-              </ScrollReveal>
+                  <h2 className="mt-5 font-heading text-xl font-bold text-navy-950">{category.name}</h2>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{category.desc}</p>
+                </LuxuryCard>
+              </MotionSection>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="container-page">
-          <ScrollReveal>
-            <div className="text-center mb-14">
-              <span className="section-label">{venture.differentiatorsLabel}</span>
-              <h2 className="section-heading mb-4">{venture.differentiatorsTitle}</h2>
+      <section className="section-space bg-navy-950">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+            <SectionHeader
+              eyebrow={venture.differentiatorsLabel}
+              title={venture.differentiatorsTitle}
+              description="The strongest venture pages explain what matters without relying on unverifiable proof claims."
+              align="left"
+              inverse
+            />
+            <div className="grid gap-4 sm:grid-cols-2">
+              {venture.differentiators.map((item, index) => (
+                <MotionSection key={item.title} delay={index * 0.05}>
+                  <LuxuryCard className="h-full p-6">
+                    <div className="flex gap-4">
+                      <div
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10"
+                        style={{ color: venture.accentColor }}
+                        aria-hidden="true"
+                      >
+                        <VentureIcon name={item.icon} />
+                      </div>
+                      <div>
+                        <h2 className="font-heading text-xl font-bold text-white">{item.title}</h2>
+                        <p className="mt-2 text-sm leading-7 text-slate-400">{item.desc}</p>
+                      </div>
+                    </div>
+                  </LuxuryCard>
+                </MotionSection>
+              ))}
             </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {venture.differentiators.map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 100}>
-                <div className="text-center group">
-                  <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-all duration-500 group-hover:shadow-lg"
-                    style={{
-                      backgroundColor: `${venture.accentColor}10`,
-                      color: venture.accentColor,
-                    }}
-                  >
-                    <VentureIcon name={item.icon} />
-                  </div>
-                  <h3 className="font-bold text-navy-800 mb-2">{item.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="py-20 sm:py-28 gradient-section-light relative overflow-hidden">
-        <div className="absolute inset-0 dot-pattern-light opacity-30" aria-hidden="true" />
-        <div className="container-page max-w-3xl mx-auto text-center relative z-10">
-          <ScrollReveal>
-            <div className="card-premium p-10 sm:p-14">
-              <div className="flex justify-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-gold-500 text-gold-500" />
+      <section className="section-space gradient-section-light">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <SectionHeader
+              eyebrow="Pathway"
+              title={venture.pathwayTitle}
+              description="A simple route from first conversation to next step keeps the experience understandable."
+              align="left"
+            />
+            <LuxuryCard light className="p-6 sm:p-8">
+              <ol className="grid gap-4 sm:grid-cols-5">
+                {venture.pathway.map((step, index) => (
+                  <li key={step} className="relative">
+                    <div className="flex items-center gap-3 sm:block">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy-950 text-sm font-bold text-gold-300">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p className="font-heading text-sm font-bold text-navy-950 sm:mt-4">{step}</p>
+                    </div>
+                  </li>
                 ))}
-              </div>
-              <blockquote className="font-display text-2xl sm:text-3xl italic font-medium text-navy-800 mb-6 leading-snug">
-                &ldquo;{venture.testimonialQuote}&rdquo;
-              </blockquote>
-              <div className="gold-line-wide mx-auto mb-4" />
-              <p className="text-gray-400 text-sm">- {venture.testimonialAuthor}</p>
-            </div>
-          </ScrollReveal>
-        </div>
+              </ol>
+            </LuxuryCard>
+          </div>
+        </Container>
       </section>
 
-      <section className="container-page pb-20 sm:pb-28">
-        <CTASection
-          title={venture.ctaTitle}
-          description={venture.ctaDescription}
-          primaryHref="/contact"
-          primaryLabel={venture.ctaPrimaryLabel}
-          variant="navy"
-        />
+      <section className="section-space bg-navy-950">
+        <Container>
+          <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-8 text-center shadow-premium sm:p-12">
+            <CheckCircle2 className="mx-auto h-9 w-9 text-gold-300" aria-hidden="true" />
+            <h2 className="display-heading mx-auto mt-5 max-w-3xl text-4xl text-white sm:text-5xl">
+              {venture.ctaTitle}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300">
+              {venture.ctaDescription}
+            </p>
+            <div className="mt-8">
+              <Button href="/contact" variant="gold">
+                {venture.ctaPrimaryLabel}
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              </Button>
+            </div>
+          </div>
+        </Container>
       </section>
     </>
   );

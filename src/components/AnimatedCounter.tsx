@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 
 interface AnimatedCounterProps {
   target: number;
@@ -13,13 +14,19 @@ export default function AnimatedCounter({
   target,
   suffix = "",
   prefix = "",
-  duration = 2000,
+  duration = 1200,
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
+  const [count, setCount] = useState(shouldReduceMotion ? target : 0);
   const ref = useRef<HTMLSpanElement>(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      setCount(target);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -30,7 +37,6 @@ export default function AnimatedCounter({
             const animate = (currentTime: number) => {
               const elapsed = currentTime - startTime;
               const progress = Math.min(elapsed / duration, 1);
-              // Ease-out cubic
               const easedProgress = 1 - Math.pow(1 - progress, 3);
               setCount(Math.round(easedProgress * target));
 
@@ -46,17 +52,19 @@ export default function AnimatedCounter({
       { threshold: 0.3 }
     );
 
-    const el = ref.current;
-    if (el) observer.observe(el);
+    const element = ref.current;
+    if (element) observer.observe(element);
 
     return () => {
-      if (el) observer.unobserve(el);
+      if (element) observer.unobserve(element);
     };
-  }, [target, duration]);
+  }, [target, duration, shouldReduceMotion]);
 
   return (
     <span ref={ref} className="tabular-nums">
-      {prefix}{count}{suffix}
+      {prefix}
+      {count}
+      {suffix}
     </span>
   );
 }

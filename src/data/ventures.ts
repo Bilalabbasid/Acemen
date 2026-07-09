@@ -25,7 +25,7 @@ export type VentureIcon =
   | "hotel"
   | "mapPin";
 
-export interface VentureListItem {
+export interface VentureDetail {
   slug: string;
   ventureNumber: string;
   title: string;
@@ -36,29 +36,25 @@ export interface VentureListItem {
   accentColor: string;
   icon: VentureIcon;
   image: string;
+  imageAlt: string;
   features: string[];
-}
-
-export interface VentureDetail extends VentureListItem {
-  subtitle: string;
-  heroDescription: string;
+  categoriesLabel: string;
   categoriesTitle: string;
   categoriesSubtitle: string;
-  categoriesLabel: string;
   categories: Array<{
     name: string;
     desc: string;
     icon: VentureIcon;
   }>;
-  differentiatorsTitle: string;
   differentiatorsLabel: string;
+  differentiatorsTitle: string;
   differentiators: Array<{
     title: string;
     desc: string;
     icon: VentureIcon;
   }>;
-  testimonialQuote: string;
-  testimonialAuthor: string;
+  pathwayTitle: string;
+  pathway: string[];
   ctaTitle: string;
   ctaDescription: string;
   ctaPrimaryLabel: string;
@@ -75,104 +71,98 @@ export const ventures: VentureDetail[] = [
     title: "Acemen Emporium",
     tagline: "Curated Digital Commerce",
     summary:
-      "Acemen Emporium - our direct-to-consumer commerce house, pairing an impeccably curated marketplace with white-glove fulfilment for a discerning global clientele.",
+      "A commerce venture focused on curated digital retail experiences and considered fulfilment.",
     description:
-      "Our direct-to-consumer commerce house, pairing an impeccably curated marketplace with the technology and logistics to serve a discerning global clientele - where premium goods meet a purchase experience engineered to the same standard as the products themselves.",
+      "Acemen Emporium is positioned around curated digital commerce, bringing together product selection, storefront experience, fulfilment, and client care.",
     href: "/ventures/e-commerce",
     accentColor: "#b08d57",
     icon: "shoppingBag",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
+    imageAlt: "Premium retail packaging and digital commerce workspace",
     features: [
-      "Editorially Curated Marketplace",
-      "White-Glove Global Fulfilment",
-      "Frictionless, Secure Checkout",
-      "Dedicated Client Concierge",
+      "Curated marketplace experience",
+      "House label storefronts",
+      "Fulfilment-led operations",
+      "Client service pathway",
     ],
-    subtitle: "Curated Digital Commerce",
-    heroDescription:
-      "Our direct-to-consumer commerce house, pairing an impeccably curated marketplace with the technology and logistics to serve a discerning global clientele. Where premium goods meet a purchase experience engineered to the same standard as the products themselves.",
-    categoriesTitle: "The Commerce Portfolio",
+    categoriesLabel: "What it does",
+    categoriesTitle: "A Considered Commerce House",
     categoriesSubtitle:
-      "A curated retail ecosystem, engineered for the discerning modern buyer.",
-    categoriesLabel: "Our Domain",
+      "The venture is shaped around selection, presentation, fulfilment, and client support.",
     categories: [
-      { name: "Curated Marketplace", desc: "An impeccably edited assortment of premium lifestyle goods, vetted for provenance and quality", icon: "layers" },
-      { name: "House Label Storefronts", desc: "Direct-to-consumer flagships for our own maisons, engineered for a flawless purchase journey", icon: "badgeCheck" },
-      { name: "Global Fulfilment", desc: "Insured, temperature-considered, hand-packaged delivery to more than fifteen countries", icon: "globe" },
-      { name: "Client Concierge", desc: "A dedicated personal shopping desk with white-glove aftercare and priority resolution", icon: "headphones" },
+      { name: "Curated Marketplace", desc: "An edited retail experience designed around product quality and clarity.", icon: "layers" },
+      { name: "House Storefronts", desc: "Direct-to-consumer storefronts for owned or managed product lines.", icon: "badgeCheck" },
+      { name: "Fulfilment Operations", desc: "Operational focus on packaging, delivery coordination, and post-purchase care.", icon: "truck" },
+      { name: "Client Support", desc: "A clear enquiry pathway for product, order, and service conversations.", icon: "headphones" },
     ],
-    differentiatorsTitle: "The Emporium Standard",
-    differentiatorsLabel: "The Emporium Difference",
+    differentiatorsLabel: "Why it matters",
+    differentiatorsTitle: "Commerce With a Higher Standard",
     differentiators: [
-      { icon: "sparkles", title: "Editorially Curated", desc: "Every product is selected by our buying house for craftsmanship, provenance, and enduring value - never volume." },
-      { icon: "shoppingBag", title: "Frictionless Commerce", desc: "A conversion-engineered storefront with one-touch checkout, saved profiles, and intelligent recommendations." },
-      { icon: "truck", title: "White-Glove Fulfilment", desc: "Hand-packaged, fully insured, and tracked door to door with dedicated concierge support at every step." },
-      { icon: "shieldCheck", title: "Assured & Authentic", desc: "Bank-grade payment security, guaranteed authenticity, and a frictionless returns and satisfaction promise." },
+      { icon: "sparkles", title: "Curated by intent", desc: "The experience prioritizes clarity, selection, and product presentation over volume." },
+      { icon: "shoppingBag", title: "Designed for conversion", desc: "Storefronts can be shaped around accessible browsing, checkout, and service touchpoints." },
+      { icon: "shieldCheck", title: "Trust-led retail", desc: "The model benefits from clear policies, transparent communication, and consistent fulfilment." },
+      { icon: "globe", title: "Built to adapt", desc: "The digital format can support new collections, categories, and markets over time." },
     ],
-    testimonialQuote:
-      "The most considered online purchase experience I have encountered. From the curation to the packaging to the concierge follow-up, every touchpoint feels intentional - this is how premium commerce should feel.",
-    testimonialAuthor: "Sebastian V., Private Client",
-    ctaTitle: "Discover the Emporium",
+    pathwayTitle: "Customer Pathway",
+    pathway: ["Discover", "Evaluate", "Enquire or purchase", "Fulfilment", "Aftercare"],
+    ctaTitle: "Enquire About Acemen Emporium",
     ctaDescription:
-      "Explore a curated world of premium goods, delivered with white-glove service and concierge-level care to your door.",
-    ctaPrimaryLabel: "Browse the Collection",
+      "Use the enquiry form to discuss commerce, product, or partnership opportunities connected to this venture.",
+    ctaPrimaryLabel: "Start a Private Inquiry",
     metadata: {
       title: "Acemen Emporium - Curated Digital Commerce",
       description:
-        "Acemen Emporium - a curated direct-to-consumer commerce house pairing an impeccably edited marketplace with white-glove fulfilment for a discerning global clientele.",
+        "Acemen Emporium is a curated digital commerce venture focused on refined retail experiences, fulfilment, and client care.",
     },
   },
   {
     slug: "it-solutions",
     ventureNumber: "02",
     title: "Acemen Digital",
-    tagline: "Enterprise Architecture & AI Intelligence",
+    tagline: "Enterprise Architecture & AI",
     summary:
-      "Acemen Digital - we engineer proprietary AI, cloud frameworks, and enterprise-grade software ecosystems that keep industry leaders permanently ahead of the market.",
+      "A digital systems venture focused on software architecture, automation, and technology advisory.",
     description:
-      "We engineer bespoke digital infrastructure and enterprise-grade software ecosystems for industry leaders. From proprietary artificial intelligence to high-scalability application development, we transform complex technological challenges into fluid competitive advantages.",
+      "Acemen Digital is positioned around enterprise-grade digital systems, software delivery, automation, and technology strategy.",
     href: "/ventures/it-solutions",
     accentColor: "#7d8ca3",
     icon: "code",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80",
+    imageAlt: "Server hardware and enterprise technology infrastructure",
     features: [
-      "Elite Full-Stack & Architecture Engineering",
-      "Next-Generation AI & Hyper-Automation Systems",
-      "Tailored Digital Ecosystems & Mobile Masterpieces",
-      "High-Level Visionary Technology Consulting",
+      "Software architecture",
+      "AI and automation workflows",
+      "Mobile and web systems",
+      "Technology consulting",
     ],
-    subtitle: "Enterprise Architecture & AI Intelligence",
-    heroDescription:
-      "We engineer bespoke digital infrastructure and enterprise-grade software ecosystems for industry leaders. From proprietary artificial intelligence to high-scalability application development, we transform complex technological challenges into fluid competitive advantages.",
-    categoriesTitle: "Our Engineering Disciplines",
+    categoriesLabel: "What it does",
+    categoriesTitle: "Digital Systems and Advisory",
     categoriesSubtitle:
-      "Bespoke digital ecosystems engineered for industry leaders and market definers.",
-    categoriesLabel: "Our Expertise",
+      "The venture is framed around practical technology delivery and operational intelligence.",
     categories: [
-      { name: "Bespoke Software Engineering", desc: "Enterprise-grade, tailormade applications architected to your organisation's unique operational DNA", icon: "code" },
-      { name: "AI & Hyper-Automation", desc: "Proprietary machine intelligence, predictive analytics, and autonomous workflow systems", icon: "brain" },
-      { name: "Mobile Masterpieces", desc: "Native and cross-platform applications delivering flawless UX at enterprise scale", icon: "smartphone" },
-      { name: "Visionary Technology Consulting", desc: "C-suite advisory on digital transformation, architecture strategy, and emerging technology integration", icon: "cpu" },
+      { name: "Software Engineering", desc: "Custom software and platform work shaped around business requirements.", icon: "code" },
+      { name: "AI & Automation", desc: "Workflow automation and intelligence systems where they can create operational value.", icon: "brain" },
+      { name: "Application Experiences", desc: "Web and mobile interfaces with an emphasis on usability and maintainability.", icon: "smartphone" },
+      { name: "Technology Advisory", desc: "Guidance on architecture, delivery planning, and implementation priorities.", icon: "cpu" },
     ],
-    differentiatorsTitle: "The Vanguard Standard",
-    differentiatorsLabel: "The Vanguard Distinction",
+    differentiatorsLabel: "Why it matters",
+    differentiatorsTitle: "Technology With Operational Clarity",
     differentiators: [
-      { icon: "zap", title: "Elite Full-Stack Engineering", desc: "Deep expertise across the complete technology stack - from bare-metal architecture to pixel-perfect front-end execution." },
-      { icon: "brain", title: "Next-Gen AI & Automation", desc: "We architect proprietary AI systems and hyper-automation pipelines that become your definitive competitive moat." },
-      { icon: "shield", title: "Fortress-Grade Security", desc: "Zero-trust architectures, end-to-end encryption, and compliance frameworks protecting your most critical digital assets." },
-      { icon: "barChart", title: "Data-Driven Dominance", desc: "Embedded analytics and real-time intelligence transforming raw data into executive-level strategic advantage." },
+      { icon: "zap", title: "Practical delivery", desc: "The emphasis is on systems that improve real workflows rather than decorative technology." },
+      { icon: "barChart", title: "Data-aware decisions", desc: "Digital products can be designed to make operational information easier to act on." },
+      { icon: "shield", title: "Security posture", desc: "Security and access control should be considered from the architecture stage." },
+      { icon: "layers", title: "Scalable foundations", desc: "A disciplined architecture makes future product evolution easier to manage." },
     ],
-    testimonialQuote:
-      "Engaging Acemen's Vanguard team was a watershed moment for our enterprise. They didn't just build software - they architected our entire digital future. The AI pipeline alone has delivered a 340% efficiency gain.",
-    testimonialAuthor: "Henrik V., Chief Digital Officer, Meridian Global",
-    ctaTitle: "Architect Your Digital Future",
+    pathwayTitle: "Project Pathway",
+    pathway: ["Brief", "Architecture", "Prototype", "Build", "Support"],
+    ctaTitle: "Discuss a Digital Brief",
     ctaDescription:
-      "Ready to commission bespoke digital infrastructure that defines your industry? Our elite engineering cohort awaits your briefing.",
-    ctaPrimaryLabel: "Commission a Project",
+      "Use the enquiry form to start a conversation about software, automation, or technology advisory needs.",
+    ctaPrimaryLabel: "Enquire About This Venture",
     metadata: {
-      title: "Acemen Digital - Enterprise Architecture & AI Intelligence",
+      title: "Acemen Digital - Enterprise Architecture & AI",
       description:
-        "Acemen Digital - proprietary AI, cloud frameworks, and enterprise-grade software ecosystems engineered to keep industry leaders permanently ahead of the market.",
+        "Acemen Digital is a technology venture focused on software architecture, automation, and digital systems.",
     },
   },
   {
@@ -181,104 +171,98 @@ export const ventures: VentureDetail[] = [
     title: "Acre & Hide",
     tagline: "Sartorial Leather & Footwear",
     summary:
-      "Acre & Hide - a maison of fine leather goods. Handcrafted footwear, bags, jackets, wallets, and belts, sculpted from the world's most exceptional hides.",
+      "A leather goods and footwear venture focused on craft, materials, and considered product experience.",
     description:
-      "A maison devoted to the art of fine leatherwork - hand-lasted footwear, structured bags, sculpted jackets, wallets, and belts, each crafted from the world's most exceptional full-grain hides for those who refuse to compromise between presence and comfort.",
+      "Acre & Hide is positioned around fine leather goods, footwear, and accessories with a focus on materials, craft, and customer experience.",
     href: "/ventures/shoes",
     accentColor: "#9c6b45",
     icon: "footprints",
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=1200&q=80",
+    imageAlt: "Fine leather bag and accessories arranged on a work surface",
     features: [
-      "Master-Artisan Handcraftsmanship",
-      "Full-Grain, Heritage-Grade Hides",
-      "Footwear, Bags, Outerwear & Small Goods",
-      "Lifetime Restoration Guarantee",
+      "Footwear concepts",
+      "Bags and leather goods",
+      "Small accessories",
+      "Material-led collections",
     ],
-    subtitle: "Sartorial Leather & Footwear",
-    heroDescription:
-      "A maison devoted to the art of fine leatherwork. From hand-lasted footwear to structured bags, sculpted jackets, wallets, and belts - every piece is crafted from the world's most exceptional hides, for those who refuse to compromise between presence and comfort.",
-    categoriesTitle: "The Maison Collections",
+    categoriesLabel: "What it does",
+    categoriesTitle: "A Leather House in Development",
     categoriesSubtitle:
-      "A complete house of leather - footwear, bags, outerwear, and fine small goods, crafted for the uncompromising.",
-    categoriesLabel: "Our Craft",
+      "The venture is framed around leather categories where material, form, and finish matter.",
     categories: [
-      { name: "Footwear Atelier", desc: "Hand-lasted oxfords, derbies, and loafers uniting Italian artistry with all-day orthotic comfort", icon: "footprints" },
-      { name: "Fine Bags & Holdalls", desc: "Structured totes, briefcases, and weekenders cut from full-grain heritage hides", icon: "briefcase" },
-      { name: "Leather Outerwear", desc: "Investment-grade jackets, hand-stitched and sculpted to develop a lifelong patina", icon: "crown" },
-      { name: "Wallets & Small Goods", desc: "Bifolds, cardholders, and belts with personalised monogramming and edge-painted finishing", icon: "gem" },
+      { name: "Footwear", desc: "Footwear concepts shaped around presence, comfort, and material quality.", icon: "footprints" },
+      { name: "Bags & Holdalls", desc: "Carry goods where structure, durability, and finish are central.", icon: "briefcase" },
+      { name: "Outerwear", desc: "Leather outerwear concepts with a focus on silhouette and longevity.", icon: "crown" },
+      { name: "Small Goods", desc: "Wallets, belts, and accessories that support a coherent leather collection.", icon: "gem" },
     ],
-    differentiatorsTitle: "The Acre & Hide Distinction",
-    differentiatorsLabel: "The Artisan Pledge",
+    differentiatorsLabel: "Why it matters",
+    differentiatorsTitle: "Craft as a Brand Standard",
     differentiators: [
-      { icon: "scissors", title: "Master-Artisan Handcraftsmanship", desc: "Every piece is cut, stitched, and finished by generational leather artisans using techniques refined over centuries." },
-      { icon: "award", title: "Heritage-Grade Full-Grain Hides", desc: "We source exclusively full-grain and top-grain leathers from ethical, premier tanneries across Italy and France." },
-      { icon: "layers", title: "Limited-Run Atelier Production", desc: "Each collection is released in numbered micro-batches - ensuring exclusivity and uncompromising quality control." },
-      { icon: "shieldCheck", title: "Lifetime Restoration Guarantee", desc: "An uncompromising promise - every piece is backed by our lifetime craftsmanship warranty and restoration service." },
+      { icon: "scissors", title: "Material discipline", desc: "The brand benefits from careful material selection and transparent product standards." },
+      { icon: "award", title: "Refined finish", desc: "Details such as stitching, edge treatment, and proportions define perceived quality." },
+      { icon: "layers", title: "Collection clarity", desc: "A focused range can feel more premium than a broad but unfocused catalogue." },
+      { icon: "shieldCheck", title: "Service expectation", desc: "A luxury product experience should include clear support and aftercare expectations." },
     ],
-    testimonialQuote:
-      "I have collected from the finest houses across Milan and Paris. Acre & Hide rivals them all - the leather, the hand-stitching, the patina that deepens with every year. From the boots to the weekender bag, this is heirloom-level craftsmanship.",
-    testimonialAuthor: "Victoria K., Private Collector",
-    ctaTitle: "Commission a Masterpiece",
+    pathwayTitle: "Product Pathway",
+    pathway: ["Concept", "Material selection", "Sampling", "Collection", "Client care"],
+    ctaTitle: "Enquire About Acre & Hide",
     ctaDescription:
-      "Discover our limited-run leather collections - footwear, bags, outerwear, and small goods, delivered with white-glove service to your door.",
-    ctaPrimaryLabel: "Enter the Atelier",
+      "Use the enquiry form to discuss leather goods, footwear, or collection-related opportunities.",
+    ctaPrimaryLabel: "Start a Private Inquiry",
     metadata: {
       title: "Acre & Hide - Sartorial Leather & Footwear",
       description:
-        "Acre & Hide - a maison of fine leather goods. Handcrafted footwear, bags, jackets, wallets, and belts, sculpted from the world's most exceptional full-grain hides.",
+        "Acre & Hide is a leather goods and footwear venture focused on materials, craft, and considered product experience.",
     },
   },
   {
     slug: "ticketing-travel",
     ventureNumber: "04",
     title: "Ascend",
-    tagline: "Global Concierge & Mobility Logistics",
+    tagline: "Concierge & Mobility Logistics",
     summary:
-      "Ascend - a private concierge for the world's most coveted events and bespoke travel, delivering first-tier access and seamless mobility logistics.",
+      "A concierge-led access and mobility venture focused on travel, events, and carefully managed enquiries.",
     description:
-      "An ultra-premium ecosystem granting unfettered access to global events and bespoke travel. We curate highly sought-after, sold-out access alongside elite, tailormade itinerary design for high-net-worth individuals and corporate institutions.",
+      "Ascend is positioned around event access, travel coordination, and concierge-led mobility conversations for private and business enquiries.",
     href: "/ventures/ticketing-travel",
     accentColor: "#6f8778",
     icon: "ticket",
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200&q=80",
+    imageAlt: "Airport terminal and travel movement",
     features: [
-      "First-Tier Access to Global Events & Arenas",
-      "Bespoke Luxury Itinerary & Expedition Curation",
-      "Seamless, High-Security Booking Interface",
-      "Dedicated 24/7 Elite Lifestyle Management",
+      "Event access enquiries",
+      "Travel coordination",
+      "Accommodation support",
+      "Concierge communication",
     ],
-    subtitle: "Global Concierge & Mobility Logistics",
-    heroDescription:
-      "An ultra-premium ecosystem granting unfettered access to global events and bespoke travel. We curate highly sought-after, sold-out access alongside elite, tailormade itinerary design for high-net-worth individuals and corporate institutions.",
-    categoriesTitle: "The Ascend Portfolio",
+    categoriesLabel: "What it does",
+    categoriesTitle: "Access and Travel Coordination",
     categoriesSubtitle:
-      "An ultra-premium ecosystem of access, curated for the world's most discerning.",
-    categoriesLabel: "Our Domain",
+      "The venture is framed around carefully managed enquiries for events, travel, and mobility support.",
     categories: [
-      { name: "First-Tier Event Access", desc: "Guaranteed entry to sold-out arenas, VIP hospitality, and exclusive global spectacles", icon: "ticket" },
-      { name: "Private Aviation & Charters", desc: "Curated private jet and first-class commercial itineraries with zero friction", icon: "plane" },
-      { name: "Elite Accommodations", desc: "Hand-selected presidential suites, private villas, and members-only luxury retreats", icon: "hotel" },
-      { name: "Bespoke Expedition Curation", desc: "Tailormade journeys designed by elite travel architects for the most discerning globetrotters", icon: "mapPin" },
+      { name: "Event Access", desc: "Enquiries around event attendance, hospitality, and managed access.", icon: "ticket" },
+      { name: "Travel Coordination", desc: "Support conversations around flights, mobility, and trip planning.", icon: "plane" },
+      { name: "Accommodation", desc: "Accommodation-related support where requirements call for a considered approach.", icon: "hotel" },
+      { name: "Bespoke Itineraries", desc: "Tailored planning conversations for private or business travel needs.", icon: "mapPin" },
     ],
-    differentiatorsTitle: "The Ascend Advantage",
-    differentiatorsLabel: "The Ascend Distinction",
+    differentiatorsLabel: "Why it matters",
+    differentiatorsTitle: "Coordination With Discretion",
     differentiators: [
-      { icon: "crown", title: "First-Tier Global Access", desc: "Unlock sold-out arenas, exclusive VIP enclosures, and private global spectacles inaccessible to the general public." },
-      { icon: "sparkles", title: "Bespoke Itinerary Curation", desc: "Every journey is architecturally designed by elite travel specialists - from private aviation to members-only retreats." },
-      { icon: "shield", title: "High-Security Booking Protocol", desc: "Fortress-grade encrypted transactions, biometric verification, and absolute privacy for high-net-worth clientele." },
-      { icon: "gem", title: "24/7 Elite Lifestyle Management", desc: "A dedicated personal concierge available around the clock for last-minute alterations, upgrades, and exclusive requests." },
+      { icon: "crown", title: "Private access mindset", desc: "The experience should feel controlled, clear, and respectful of client context." },
+      { icon: "sparkles", title: "Tailored handling", desc: "Concierge work benefits from understanding the request before suggesting the path." },
+      { icon: "shield", title: "Privacy-aware process", desc: "Sensitive travel and event conversations require careful communication." },
+      { icon: "gem", title: "Detail orientation", desc: "The value sits in timing, coordination, and reliable follow-through." },
     ],
-    testimonialQuote:
-      "Ascend secured us front-row access to a sold-out Monaco Grand Prix weekend - private yacht transfer, penthouse suite, and a concierge who anticipated every need before we voiced it. Simply extraordinary.",
-    testimonialAuthor: "Alistair & Penelope C., Private Clients",
-    ctaTitle: "Embark on Your Next Expedition",
+    pathwayTitle: "Enquiry Pathway",
+    pathway: ["Request", "Clarify", "Coordinate", "Confirm", "Support"],
+    ctaTitle: "Enquire About Ascend",
     ctaDescription:
-      "Grant yourself unfettered access to the world's most coveted events and bespoke travel experiences, curated exclusively for you.",
-    ctaPrimaryLabel: "Engage Your Concierge",
+      "Use the enquiry form to discuss event access, travel coordination, or concierge-related requirements.",
+    ctaPrimaryLabel: "Start a Private Inquiry",
     metadata: {
-      title: "Ascend - Concierge Ticketing & Global Expeditions",
+      title: "Ascend - Concierge & Mobility Logistics",
       description:
-        "Ascend - an ultra-premium ecosystem granting unfettered access to global events and bespoke travel for high-net-worth individuals and corporate institutions.",
+        "Ascend is a concierge and mobility venture focused on event access, travel coordination, and private enquiries.",
     },
   },
 ];

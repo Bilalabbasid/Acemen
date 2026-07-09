@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "The Institution",
   description:
-    "Learn about Acemen Ventures — our story, mission, vision, values, and the team behind our multi-sector ventures group.",
+    "Learn about the Acemen Ventures operating principles, portfolio direction, and approach to private venture conversations.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {

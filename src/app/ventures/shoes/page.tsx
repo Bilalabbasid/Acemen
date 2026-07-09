@@ -7,6 +7,9 @@ const venture = getVentureBySlug("shoes");
 export const metadata: Metadata = {
   title: venture?.metadata.title,
   description: venture?.metadata.description,
+  alternates: {
+    canonical: "/ventures/shoes",
+  },
 };
 
 export default function ShoesPage() {

@@ -18,7 +18,7 @@ export const quickLinks: NavigationLink[] = [
 
 export const ventureLinks = ventures.map((venture) => ({
   href: venture.href,
-  label: venture.tagline,
+  label: venture.title,
 }));
 
 export const navLinks: NavigationLink[] = [
@@ -34,4 +34,9 @@ export const navLinks: NavigationLink[] = [
     ],
   },
   quickLinks[3],
+];
+
+export const legalLinks: NavigationLink[] = [
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms-of-service", label: "Terms of Service" },
 ];

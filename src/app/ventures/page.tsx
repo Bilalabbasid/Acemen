@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import VenturesPageClient from "./VenturesPageClient";
 
 export const metadata: Metadata = {
-  title: "Our Ventures",
+  title: "Venture Portfolio",
   description:
-    "A curated collective of premier enterprises — Premium Leather Goods, Acre & Sole Haute Footwear, Enterprise IT & Intelligence, and Ascend Concierge Ticketing — united by master-tier craftsmanship and uncompromising quality.",
+    "Explore Acemen Ventures across Acemen Emporium, Acemen Digital, Acre & Hide, and Ascend.",
+  alternates: {
+    canonical: "/ventures",
+  },
 };
 
 export default function VenturesPage() {
