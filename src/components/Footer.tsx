@@ -1,21 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Mail, Phone, ArrowUpRight } from "lucide-react";
-
-const ventures = [
-  { href: "/ventures/e-commerce", label: "Curated Digital Commerce" },
-  { href: "/ventures/it-solutions", label: "Enterprise Architecture & AI" },
-  { href: "/ventures/shoes", label: "Sartorial Leather & Footwear" },
-  { href: "/ventures/ticketing-travel", label: "Global Concierge & Mobility" },
-];
-
-const quickLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "The Institution" },
-  { href: "/ventures", label: "The Portfolio" },
-  { href: "/contact", label: "Contact" },
-];
+import { MapPin, Mail, Phone } from "lucide-react";
+import { quickLinks, ventureLinks } from "@/data/navigation";
 
 const socialLinks = [
   {
@@ -127,7 +114,7 @@ export default function Footer() {
               Our Ventures
             </h4>
             <ul className="space-y-3">
-              {ventures.map((v) => (
+              {ventureLinks.map((v) => (
                 <li key={v.href}>
                   <Link
                     href={v.href}

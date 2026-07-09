@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import TicketingTravelPageClient from "./TicketingTravelPageClient";
+import { getVentureBySlug } from "@/data/ventures";
+
+const venture = getVentureBySlug("ticketing-travel");
 
 export const metadata: Metadata = {
-  title: "Ascend — Concierge Ticketing & Global Expeditions",
-  description:
-    "Ascend — an ultra-premium ecosystem granting unfettered access to global events and bespoke travel for high-net-worth individuals and corporate institutions.",
+  title: venture?.metadata.title,
+  description: venture?.metadata.description,
 };
 
 export default function TicketingTravelPage() {

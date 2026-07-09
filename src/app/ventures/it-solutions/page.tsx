@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import ITSolutionsPageClient from "./ITSolutionsPageClient";
+import { getVentureBySlug } from "@/data/ventures";
+
+const venture = getVentureBySlug("it-solutions");
 
 export const metadata: Metadata = {
-  title: "Acemen Digital — Enterprise Architecture & AI Intelligence",
-  description:
-    "Acemen Digital — proprietary AI, cloud frameworks, and enterprise-grade software ecosystems engineered to keep industry leaders permanently ahead of the market.",
+  title: venture?.metadata.title,
+  description: venture?.metadata.description,
 };
 
 export default function ITSolutionsPage() {

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import ECommercePageClient from "./ECommercePageClient";
+import { getVentureBySlug } from "@/data/ventures";
+
+const venture = getVentureBySlug("e-commerce");
 
 export const metadata: Metadata = {
-  title: "Acemen Emporium — Curated Digital Commerce",
-  description:
-    "Acemen Emporium — a curated direct-to-consumer commerce house pairing an impeccably edited marketplace with white-glove fulfilment for a discerning global clientele.",
+  title: venture?.metadata.title,
+  description: venture?.metadata.description,
 };
 
 export default function ECommercePage() {

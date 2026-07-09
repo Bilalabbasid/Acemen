@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import ShoesPageClient from "./ShoesPageClient";
+import { getVentureBySlug } from "@/data/ventures";
+
+const venture = getVentureBySlug("shoes");
 
 export const metadata: Metadata = {
-  title: "Acre & Hide — Sartorial Leather & Footwear",
-  description:
-    "Acre & Hide — a maison of fine leather goods. Handcrafted footwear, bags, jackets, wallets, and belts, sculpted from the world's most exceptional full-grain hides.",
+  title: venture?.metadata.title,
+  description: venture?.metadata.description,
 };
 
 export default function ShoesPage() {

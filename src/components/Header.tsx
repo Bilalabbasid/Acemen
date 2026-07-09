@@ -5,22 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "The Institution" },
-  {
-    href: "/ventures",
-    label: "The Portfolio",
-    children: [
-      { href: "/ventures/e-commerce", label: "Curated Commerce" },
-      { href: "/ventures/it-solutions", label: "Enterprise & AI" },
-      { href: "/ventures/shoes", label: "Leather & Footwear" },
-      { href: "/ventures/ticketing-travel", label: "Concierge & Mobility" },
-    ],
-  },
-  { href: "/contact", label: "Contact" },
-];
+import { navLinks } from "@/data/navigation";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
