@@ -150,7 +150,7 @@ export default function AboutPageClient() {
               <ScrollReveal direction="right">
                 <div className="relative rounded-3xl overflow-hidden shadow-premium-xl border border-white/10 group">
                   <img
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1000&q=80"
+                    src="/images/about-building.png"
                     alt="Corporate Heritage"
                     className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
                   />

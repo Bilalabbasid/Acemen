@@ -147,10 +147,10 @@ export default function Footer() {
                   <Mail className="w-3.5 h-3.5 text-gold-400" />
                 </div>
                 <a
-                  href="mailto:hello@acemenventures.com"
+                  href="mailto:info@acemen.co.uk"
                   className="text-gray-400 hover:text-gold-400 transition-colors"
                 >
-                  hello@acemenventures.com
+                  info@acemen.co.uk
                 </a>
               </li>
               <li className="flex items-center gap-3">

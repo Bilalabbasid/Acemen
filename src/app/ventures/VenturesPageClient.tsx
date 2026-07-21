@@ -25,7 +25,7 @@ const ventures = [
     href: "/ventures/e-commerce",
     accentColor: "#b08d57",
     icon: <ShoppingBag className="w-7 h-7" />,
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+    image: "/images/ecommerce.png",
     features: [
       "Editorially Curated Marketplace",
       "White-Glove Global Fulfilment",
@@ -53,15 +53,15 @@ const ventures = [
     title: "Acre & Hide",
     tagline: "Sartorial Leather & Footwear",
     description:
-      "A maison devoted to the art of fine leatherwork — hand-lasted footwear, structured bags, sculpted jackets, wallets, and belts, each crafted from the world's most exceptional full-grain hides for those who refuse to compromise between presence and comfort.",
+      "A maison devoted to the art of fine leatherwork — hand-lasted footwear, shoes and leather, sculpted jackets, wallets, and belts, each crafted from the world's most exceptional full-grain hides for those who refuse to compromise between presence and comfort.",
     href: "/ventures/shoes",
     accentColor: "#9c6b45",
     icon: <Footprints className="w-7 h-7" />,
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80",
+    image: "/images/leather.png",
     features: [
       "Master-Artisan Handcraftsmanship",
       "Full-Grain, Heritage-Grade Hides",
-      "Footwear, Bags, Outerwear & Small Goods",
+      "Footwear, Shoes and Leather, Outerwear & Small Goods",
       "Lifetime Restoration Guarantee",
     ],
   },
@@ -73,7 +73,7 @@ const ventures = [
     href: "/ventures/ticketing-travel",
     accentColor: "#6f8778",
     icon: <Ticket className="w-7 h-7" />,
-    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
+    image: "/images/travel.png",
     features: [
       "First-Tier Access to Global Events & Arenas",
       "Bespoke Luxury Itinerary & Expedition Curation",

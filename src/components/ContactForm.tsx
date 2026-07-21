@@ -55,7 +55,7 @@ export default function ContactForm() {
     setStatus("submitting");
 
     try {
-      const mailtoLink = `mailto:hello@acemenventures.com?subject=${encodeURIComponent(
+      const mailtoLink = `mailto:info@acemen.co.uk?subject=${encodeURIComponent(
         formData.subject
       )}&body=${encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`

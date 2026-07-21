@@ -35,7 +35,7 @@ const ventures = [
     href: "/ventures/e-commerce",
     accentColor: "#b08d57",
     icon: <ShoppingBag className="w-6 h-6" />,
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+    image: "/images/ecommerce.png",
   },
   {
     title: "Enterprise Architecture & AI",
@@ -49,11 +49,11 @@ const ventures = [
   {
     title: "Sartorial Leather & Footwear",
     description:
-      "Acre & Hide — a maison of fine leather goods. Handcrafted footwear, bags, jackets, wallets, and belts, sculpted from the world's most exceptional hides.",
+      "Acre & Hide — a maison of fine leather goods. Handcrafted footwear, shoes and leather, jackets, wallets, and belts, sculpted from the world's most exceptional hides.",
     href: "/ventures/shoes",
     accentColor: "#9c6b45",
     icon: <Footprints className="w-6 h-6" />,
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80",
+    image: "/images/leather.png",
   },
   {
     title: "Global Concierge & Mobility",
@@ -62,7 +62,7 @@ const ventures = [
     href: "/ventures/ticketing-travel",
     accentColor: "#6f8778",
     icon: <Ticket className="w-6 h-6" />,
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
+    image: "/images/travel.png",
   },
 ];
 
@@ -224,7 +224,7 @@ export default function HomePage() {
               <ScrollReveal direction="scale">
                 <div className="relative rounded-3xl overflow-hidden shadow-premium-xl border border-white/10 group">
                   <img
-                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&q=80"
+                    src="/images/corporate-hq.png"
                     alt="Corporate Headquarters"
                     className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
                   />

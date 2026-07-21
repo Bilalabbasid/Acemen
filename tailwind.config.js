@@ -64,6 +64,7 @@ module.exports = {
         'gradient-shift': 'gradient-shift 6s ease infinite',
         'marquee': 'marquee 30s linear infinite',
         'spin-slow': 'spin-slow 20s linear infinite',
+        'skeleton': 'skeleton 1.5s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -110,6 +111,10 @@ module.exports = {
         'spin-slow': {
           from: { transform: 'rotate(0deg)' },
           to: { transform: 'rotate(360deg)' },
+        },
+        skeleton: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
         },
       },
       backdropBlur: {

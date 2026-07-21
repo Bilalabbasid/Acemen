@@ -29,10 +29,10 @@ const contactInfo = [
   {
     icon: <Mail className="w-5 h-5" />,
     title: "Email Us",
-    lines: ["hello@acemenventures.com"],
+    lines: ["info@acemen.co.uk"],
     action: {
       label: "Send an email →",
-      href: "mailto:hello@acemenventures.com",
+      href: "mailto:info@acemen.co.uk",
     },
   },
   {
@@ -164,7 +164,7 @@ export default function ContactPageClient() {
           <ScrollReveal>
             <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-premium relative" style={{ height: "400px" }}>
               <img
-                src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&q=80"
+                src="/images/contact-london.png"
                 alt="London skyline - Acemen Ventures headquarters location"
                 className="w-full h-full object-cover"
               />
