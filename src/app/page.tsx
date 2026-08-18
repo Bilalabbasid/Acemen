@@ -7,7 +7,6 @@ import {
   Footprints,
   Ticket,
   ArrowRight,
-  Sparkles,
   Shield,
   TrendingUp,
   Heart,
@@ -21,7 +20,6 @@ import VentureCard from "@/components/VentureCard";
 import ScrollReveal from "@/components/ScrollReveal";
 import StatsStrip from "@/components/StatsStrip";
 import CTASection from "@/components/CTASection";
-import PartnersLogos from "@/components/PartnersLogos";
 import TestimonialCard from "@/components/TestimonialCard";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import IndustryGrid from "@/components/IndustryGrid";
@@ -113,106 +111,126 @@ export default function HomePage() {
   return (
     <div ref={containerRef} className="relative bg-navy-950 text-white min-h-screen">
       {/* ==================== HERO ==================== */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Parallax background */}
+      <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
+        {/* Parallax background — two orbs only; four muddied the field */}
         <motion.div
           style={{ y: heroBgY, opacity: heroOpacity }}
           className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 gradient-hero" />
-          <div className="absolute inset-0 dot-pattern opacity-30" />
-          <GradientOrb color="gold" size="xl" className="-top-40 -right-40 opacity-70" />
-          <GradientOrb color="navy" size="lg" className="-bottom-32 -left-32 opacity-80" />
-          <GradientOrb color="emerald" size="md" className="top-1/3 -left-20 opacity-30" />
-          <GradientOrb color="blue" size="md" className="bottom-1/4 right-10 opacity-30" />
+          <div className="absolute inset-0 dot-pattern opacity-25" />
+          <GradientOrb color="gold" size="xl" className="-top-56 -right-40 opacity-60" />
+          <GradientOrb color="navy" size="lg" className="-bottom-40 -left-40 opacity-70" />
         </motion.div>
 
-        {/* Floating Wireframe Grid Overlay */}
-        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" aria-hidden="true">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
-                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="white" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
-
-        <div className="container-page relative z-10 py-32 flex flex-col items-center">
-          <div className="max-w-5xl mx-auto text-center">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10 mb-8 shadow-glow-gold/10"
-            >
-              <div className="w-2 h-2 rounded-full bg-gold-400 animate-pulse" />
-              <span className="text-gold-300 font-bold text-xs tracking-[0.25em] uppercase">
-                A Private UK Holding House — Est. London
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="hero-heading mb-8"
-            >
-              Architecting the Future of<br className="hidden sm:block" />{" "}
-              Commerce, <span className="gradient-gold-text">Luxury</span>, and Technology
-            </motion.h1>
-
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-gray-300/80 text-base sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed font-medium"
-            >
-              Acemen Ventures is a premier sovereign holding group. We acquire, build, and
-              scale world-class enterprises across high-growth digital ecosystems, artisanal
-              luxury retail, and elite global infrastructure.
-            </motion.p>
-
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-5"
-            >
-              <Link href="/ventures" className="btn-gold text-xs sm:text-sm !py-4 !px-9 tracking-wider uppercase font-black group">
-                Explore the Portfolio
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1 inline" />
-              </Link>
-              <Link href="/about" className="btn-outline text-xs sm:text-sm !py-4 !px-9 tracking-wider uppercase font-bold border-white/20 hover:border-white/40">
-                The Institution
-              </Link>
-            </motion.div>
+        {/* Editorial rule grid */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none hidden lg:block"
+          aria-hidden="true"
+        >
+          <div className="container-page h-full relative">
+            <div className="absolute inset-y-0 left-5 sm:left-6 lg:left-8 w-px bg-white/[0.06]" />
+            <div className="absolute inset-y-0 right-5 sm:right-6 lg:right-8 w-px bg-white/[0.06]" />
+            <div className="absolute inset-y-0 left-1/2 w-px bg-white/[0.04]" />
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5"
-          >
-            <div className="w-1.5 h-3 rounded-full bg-gold-400" />
-          </motion.div>
-        </div>
-      </section>
+        {/* ── Masthead line ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="relative z-10 container-page pt-28 sm:pt-32"
+        >
+          <div className="flex items-baseline justify-between gap-6 pb-5 border-b border-white/10">
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-gold-400/90">
+              A Private UK Holding House
+            </span>
+            <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.28em] uppercase text-white/35 whitespace-nowrap">
+              Est. London
+            </span>
+          </div>
+        </motion.div>
 
-      {/* ==================== PARTNERS LOGOS ==================== */}
-      <section className="py-16 sm:py-20 bg-navy-950 border-y border-white/5 relative">
-        <div className="container-page">
-          <ScrollReveal>
-            <p className="text-center text-xs text-gray-400/80 font-black tracking-[0.3em] uppercase mb-10">
-              Trusted by Industry Leaders Worldwide
-            </p>
-          </ScrollReveal>
-          <PartnersLogos />
+        {/* ── Statement ── */}
+        <div className="relative z-10 container-page flex-1 flex items-center py-14 sm:py-20">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-y-10 gap-x-8 items-end">
+            <div className="lg:col-span-9 xl:col-span-8">
+              <motion.h1
+                initial={{ y: 24, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="hero-heading"
+              >
+                Architecting the future of commerce,{" "}
+                <span className="font-display italic font-normal text-gold-300">
+                  luxury
+                </span>
+                , and technology.
+              </motion.h1>
+            </div>
+
+            <div className="lg:col-span-3 xl:col-span-4 lg:pl-8 xl:pl-12">
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.35 }}
+              >
+                <span className="block w-10 h-px bg-gold-500 mb-6" aria-hidden="true" />
+                <p className="text-[15px] sm:text-base text-gray-300/75 leading-relaxed max-w-md">
+                  Acemen Ventures acquires, builds, and scales enterprises across
+                  digital commerce, enterprise technology, fine leather goods, and
+                  global concierge.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-x-7 gap-y-4 mt-8">
+                  <Link
+                    href="/ventures"
+                    className="btn-gold !text-[11px] !py-3.5 !px-7 tracking-[0.16em] uppercase font-black group"
+                  >
+                    Explore the Portfolio
+                    <ArrowRight className="w-3.5 h-3.5 ml-2 transition-transform duration-300 group-hover:translate-x-1 inline" />
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="text-[11px] font-bold tracking-[0.16em] uppercase text-white/60 hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
+                  >
+                    The Institution
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
+
+        {/* ── Venture index ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="relative z-10 container-page pb-10 sm:pb-12"
+        >
+          <div className="border-t border-white/10 pt-6 grid grid-cols-2 lg:grid-cols-4">
+            {ventures.map((v, i) => (
+              <Link
+                key={v.href}
+                href={v.href}
+                className="group flex items-baseline gap-3 py-3 lg:py-0 lg:px-5 first:lg:pl-0 last:lg:pr-0 lg:border-l lg:border-white/[0.07] first:lg:border-l-0"
+              >
+                <span
+                  className="font-display text-xs text-white/25 group-hover:text-gold-400/70 transition-colors duration-300 tabular-nums"
+                  aria-hidden="true"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[11px] sm:text-xs font-semibold tracking-[0.1em] uppercase text-white/55 group-hover:text-white transition-colors duration-300 leading-snug">
+                  {v.title}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </motion.div>
       </section>
 
       {/* ==================== COMPANY INTRODUCTION ==================== */}
@@ -289,6 +307,8 @@ export default function HomePage() {
           <SectionHeader
             label="The Portfolio"
             title="Four Houses, One Standard"
+            align="left"
+            index="01"
             subtitle="Four category-defining enterprises, each governed by a single, uncompromising pursuit of the absolute standard."
           />
 
@@ -372,6 +392,8 @@ export default function HomePage() {
           <SectionHeader
             label="Spheres of Influence"
             title="The Markets We Shape"
+            align="left"
+            index="03"
             subtitle="Deepening our authority across high-value sectors, bringing craftsmanship and intelligence wherever we build."
           />
           <IndustryGrid />
@@ -398,6 +420,8 @@ export default function HomePage() {
           <SectionHeader
             label="In Confidence"
             title="Trusted by the Discerning"
+            align="left"
+            index="05"
             subtitle="Reflections from co-investors, enterprise principals, and private clients."
           />
           <TestimonialCard />
