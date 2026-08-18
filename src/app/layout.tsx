@@ -97,7 +97,7 @@ export default function RootLayout({
     <html lang="en" className={`${cormorant.variable} ${outfit.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

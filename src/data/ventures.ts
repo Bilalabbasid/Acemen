@@ -37,6 +37,10 @@ export interface VentureListItem {
   icon: VentureIcon;
   image: string;
   features: string[];
+  /** When true the detail page renders the holding screen instead of the full layout. */
+  comingSoon?: boolean;
+  /** When true the detail page renders the delivered-work showcase. */
+  hasProjects?: boolean;
 }
 
 export interface VentureDetail extends VentureListItem {
@@ -88,6 +92,7 @@ export const ventures: VentureDetail[] = [
       "Frictionless, Secure Checkout",
       "Dedicated Client Concierge",
     ],
+    comingSoon: true,
     subtitle: "Curated Digital Commerce",
     heroDescription:
       "Our direct-to-consumer commerce house, pairing an impeccably curated marketplace with the technology and logistics to serve a discerning global clientele. Where premium goods meet a purchase experience engineered to the same standard as the products themselves.",
@@ -134,13 +139,15 @@ export const ventures: VentureDetail[] = [
     href: "/ventures/it-solutions",
     accentColor: "#7d8ca3",
     icon: "code",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: "/images/it-solutions.jpg",
     features: [
       "Elite Full-Stack & Architecture Engineering",
       "Next-Generation AI & Hyper-Automation Systems",
       "Tailored Digital Ecosystems & Mobile Masterpieces",
       "High-Level Visionary Technology Consulting",
     ],
+    comingSoon: false,
+    hasProjects: true,
     subtitle: "Enterprise Architecture & AI Intelligence",
     heroDescription:
       "We engineer bespoke digital infrastructure and enterprise-grade software ecosystems for industry leaders. From proprietary artificial intelligence to high-scalability application development, we transform complex technological challenges into fluid competitive advantages.",
@@ -194,6 +201,7 @@ export const ventures: VentureDetail[] = [
       "Footwear, Shoes and Leather, Outerwear & Small Goods",
       "Lifetime Restoration Guarantee",
     ],
+    comingSoon: true,
     subtitle: "Sartorial Leather & Footwear",
     heroDescription:
       "A maison devoted to the art of fine leatherwork. From hand-lasted footwear to shoes and leather, sculpted jackets, wallets, and belts - every piece is crafted from the world's most exceptional hides, for those who refuse to compromise between presence and comfort.",
@@ -247,6 +255,7 @@ export const ventures: VentureDetail[] = [
       "Seamless, High-Security Booking Interface",
       "Dedicated 24/7 Elite Lifestyle Management",
     ],
+    comingSoon: true,
     subtitle: "Global Concierge & Mobility Logistics",
     heroDescription:
       "An ultra-premium ecosystem granting unfettered access to global events and bespoke travel. We curate highly sought-after, sold-out access alongside elite, tailormade itinerary design for high-net-worth individuals and corporate institutions.",

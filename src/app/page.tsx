@@ -26,6 +26,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import IndustryGrid from "@/components/IndustryGrid";
 import GradientOrb from "@/components/GradientOrb";
+import SectionHeader from "@/components/SectionHeader";
 
 const ventures = [
   {
@@ -44,7 +45,7 @@ const ventures = [
     href: "/ventures/it-solutions",
     accentColor: "#7d8ca3",
     icon: <Code2 className="w-6 h-6" />,
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: "/images/it-solutions.jpg",
   },
   {
     title: "Sartorial Leather & Footwear",
@@ -156,7 +157,7 @@ export default function HomePage() {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="display-heading text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.05] sm:leading-[1.02] mb-8 text-balance"
+              className="hero-heading mb-8"
             >
               Architecting the Future of<br className="hidden sm:block" />{" "}
               Commerce, <span className="gradient-gold-text">Luxury</span>, and Technology
@@ -179,11 +180,11 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-5"
             >
-              <Link href="/ventures" className="btn-gold text-xs sm:text-sm !py-4.5 !px-9 tracking-wider uppercase font-black group">
+              <Link href="/ventures" className="btn-gold text-xs sm:text-sm !py-4 !px-9 tracking-wider uppercase font-black group">
                 Explore the Portfolio
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1 inline" />
               </Link>
-              <Link href="/about" className="btn-outline text-xs sm:text-sm !py-4.5 !px-9 tracking-wider uppercase font-bold border-white/20 hover:border-white/40">
+              <Link href="/about" className="btn-outline text-xs sm:text-sm !py-4 !px-9 tracking-wider uppercase font-bold border-white/20 hover:border-white/40">
                 The Institution
               </Link>
             </motion.div>
@@ -247,7 +248,7 @@ export default function HomePage() {
             <div className="lg:col-span-6">
               <ScrollReveal direction="right">
                 <span className="section-label">The Manifesto</span>
-                <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-8">
+                <h2 className="section-heading-light mb-8">
                   The Pursuit of<br />
                   <span className="gradient-gold-text">Absolute</span> Standard
                 </h2>
@@ -285,18 +286,11 @@ export default function HomePage() {
       <section className="py-24 sm:py-32 bg-navy-950/50 relative overflow-hidden">
         <GradientOrb color="blue" size="xl" className="-bottom-40 -left-40 opacity-15" />
         <div className="container-page relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-20">
-              <span className="section-label">The Portfolio</span>
-              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
-                Four Houses, One Standard
-              </h2>
-              <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Four category-defining enterprises, each governed by a single, uncompromising
-                pursuit of the absolute standard.
-              </p>
-            </div>
-          </ScrollReveal>
+          <SectionHeader
+            label="The Portfolio"
+            title="Four Houses, One Standard"
+            subtitle="Four category-defining enterprises, each governed by a single, uncompromising pursuit of the absolute standard."
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
             {ventures.map((venture, i) => (
@@ -324,37 +318,47 @@ export default function HomePage() {
       <section className="py-24 sm:py-32 bg-navy-950 relative overflow-hidden">
         <div className="absolute inset-0 dot-pattern opacity-10" aria-hidden="true" />
         <div className="container-page relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-20">
-              <span className="section-label">The Acemen Advantage</span>
-              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
-                Engineered for Prestige
-              </h2>
-              <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Why principals, institutions, and enterprise partners choose to build
-                alongside Acemen Ventures.
-              </p>
-            </div>
-          </ScrollReveal>
+          <SectionHeader
+            label="The Acemen Advantage"
+            title="Engineered for Prestige"
+            subtitle="Why principals, institutions, and enterprise partners choose to build alongside Acemen Ventures."
+          />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7">
             {whyChooseUs.map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 80}>
+              <ScrollReveal key={item.title} delay={Math.min(i, 3) * 70}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="glass rounded-3xl p-8 border border-white/10 hover:border-gold-500/30 transition-all duration-300 h-full flex flex-col justify-between shadow-premium group"
+                  transition={{ type: "spring", stiffness: 320, damping: 26 }}
+                  className="relative h-full overflow-hidden rounded-3xl p-7 sm:p-8 glass border border-white/10 hover:border-gold-500/30 transition-colors duration-500 group"
                 >
-                  <div>
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-105 group-hover:bg-gold-500/10 transition-all duration-500 border border-white/5 group-hover:border-gold-500/20">
+                  {/* Index watermark */}
+                  <span
+                    className="absolute top-5 right-6 font-display text-5xl font-semibold text-white/[0.05] leading-none select-none transition-colors duration-500 group-hover:text-gold-500/10"
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-2xl bg-white/[0.06] flex items-center justify-center mb-6 border border-white/[0.07] transition-all duration-500 group-hover:bg-gold-500/10 group-hover:border-gold-500/25 group-hover:scale-105">
                       {item.icon}
                     </div>
-                    <h3 className="text-xl font-heading font-bold text-white mb-3 tracking-wide">
+
+                    <h3 className="font-heading font-bold text-white mb-3 tracking-wide text-lg sm:text-xl text-balance">
                       {item.title}
                     </h3>
+
                     <p className="text-gray-300/70 text-sm leading-relaxed font-medium">
                       {item.desc}
                     </p>
                   </div>
+
+                  {/* Base glow on hover */}
+                  <span
+                    className="absolute inset-x-8 -bottom-px h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    aria-hidden="true"
+                  />
                 </motion.div>
               </ScrollReveal>
             ))}
@@ -365,18 +369,11 @@ export default function HomePage() {
       {/* ==================== INDUSTRIES ==================== */}
       <section className="py-24 sm:py-32 bg-navy-950/40 relative">
         <div className="container-page">
-          <ScrollReveal>
-            <div className="text-center mb-20">
-              <span className="section-label">Spheres of Influence</span>
-              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
-                The Markets We Shape
-              </h2>
-              <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Deepening our authority across high-value sectors, bringing craftsmanship
-                and intelligence wherever we build.
-              </p>
-            </div>
-          </ScrollReveal>
+          <SectionHeader
+            label="Spheres of Influence"
+            title="The Markets We Shape"
+            subtitle="Deepening our authority across high-value sectors, bringing craftsmanship and intelligence wherever we build."
+          />
           <IndustryGrid />
         </div>
       </section>
@@ -385,18 +382,11 @@ export default function HomePage() {
       <section className="py-24 sm:py-32 bg-navy-950 relative overflow-hidden">
         <GradientOrb color="gold" size="lg" className="-top-40 -left-40 opacity-10" />
         <div className="container-page relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-20">
-              <span className="section-label">The Blueprint</span>
-              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
-                From Vision to Market Authority
-              </h2>
-              <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Our disciplined methodology for identifying, incubating, and scaling
-                enterprises into global standard-bearers.
-              </p>
-            </div>
-          </ScrollReveal>
+          <SectionHeader
+            label="The Blueprint"
+            title="From Vision to Market Authority"
+            subtitle="Our disciplined methodology for identifying, incubating, and scaling enterprises into global standard-bearers."
+          />
           <ProcessTimeline />
         </div>
       </section>
@@ -405,17 +395,11 @@ export default function HomePage() {
       <section className="py-24 sm:py-32 bg-navy-950/60 relative overflow-hidden">
         <GradientOrb color="emerald" size="md" className="-bottom-20 -right-20 opacity-15" />
         <div className="container-page relative z-10">
-          <ScrollReveal>
-            <div className="text-center mb-20">
-              <span className="section-label">In Confidence</span>
-              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
-                Trusted by the Discerning
-              </h2>
-              <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-                Reflections from co-investors, enterprise principals, and private clients.
-              </p>
-            </div>
-          </ScrollReveal>
+          <SectionHeader
+            label="In Confidence"
+            title="Trusted by the Discerning"
+            subtitle="Reflections from co-investors, enterprise principals, and private clients."
+          />
           <TestimonialCard />
         </div>
       </section>

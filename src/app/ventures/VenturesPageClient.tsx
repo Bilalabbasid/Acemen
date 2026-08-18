@@ -41,7 +41,7 @@ const ventures = [
     href: "/ventures/it-solutions",
     accentColor: "#7d8ca3",
     icon: <Code2 className="w-7 h-7" />,
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+    image: "/images/it-solutions.jpg",
     features: [
       "Elite Full-Stack & Architecture Engineering",
       "Next-Generation AI & Hyper-Automation Systems",
@@ -120,7 +120,7 @@ export default function VenturesPageClient() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/[0.08] mb-6">
               <span className="text-gold-400 font-medium text-sm tracking-wide">The Portfolio</span>
             </div>
-            <h1 className="display-heading text-[2.6rem] sm:text-6xl lg:text-7xl text-white mb-6 text-balance leading-[1.05]">
+            <h1 className="page-heading mb-6">
               Four Houses, One Standard
             </h1>
             <p className="text-lg sm:text-xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed">

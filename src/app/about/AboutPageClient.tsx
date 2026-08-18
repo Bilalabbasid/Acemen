@@ -100,7 +100,7 @@ export default function AboutPageClient() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10 mb-6">
               <span className="text-gold-400 font-bold text-xs tracking-wider uppercase">The Institution</span>
             </div>
-            <h1 className="display-heading text-[2.6rem] sm:text-6xl md:text-7xl leading-[1.05] sm:leading-[1.02] mb-6">
+            <h1 className="page-heading mb-6">
               An Institutional Blueprint<br className="hidden sm:block" /> for Global Excellence
             </h1>
             <p className="text-lg sm:text-xl text-gray-300/90 max-w-3xl mx-auto leading-relaxed font-medium">
@@ -120,7 +120,7 @@ export default function AboutPageClient() {
             <div className="lg:col-span-6">
               <ScrollReveal>
                 <span className="section-label">The Corporate Mission</span>
-                <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-8">
+                <h2 className="section-heading-light mb-8">
                   A Vanguard<br /><span className="gradient-gold-text">Investment</span> House
                 </h2>
                 <div className="space-y-6 text-gray-300/80 leading-relaxed font-medium text-[15px] sm:text-base">
@@ -234,7 +234,7 @@ export default function AboutPageClient() {
           <ScrollReveal>
             <div className="text-center mb-20">
               <span className="section-label">What We Stand For</span>
-              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+              <h2 className="section-heading-light mb-4">
                 The Core Pillars
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
@@ -269,7 +269,7 @@ export default function AboutPageClient() {
           <ScrollReveal>
             <div className="text-center mb-20">
               <span className="section-label">The Difference</span>
-              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+              <h2 className="section-heading-light mb-4">
                 Why Acemen
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
@@ -301,7 +301,7 @@ export default function AboutPageClient() {
           <ScrollReveal>
             <div className="text-center mb-20">
               <span className="section-label">Our People</span>
-              <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-4">
+              <h2 className="section-heading-light mb-4">
                 Directorship
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
@@ -341,7 +341,7 @@ export default function AboutPageClient() {
           <GradientOrb color="gold" size="lg" className="-top-20 -right-20 opacity-40" />
 
           <div className="relative z-10 py-16 sm:py-24 text-center max-w-2xl mx-auto px-6">
-            <h2 className="display-heading text-4xl sm:text-5xl lg:text-6xl text-white mb-5">
+            <h2 className="section-heading-light mb-5">
               Initiate an Alliance
             </h2>
             <p className="text-gray-300/80 mb-8 leading-relaxed font-medium">

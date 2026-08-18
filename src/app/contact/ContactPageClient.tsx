@@ -73,7 +73,7 @@ export default function ContactPageClient() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/[0.08] mb-6">
               <span className="text-gold-400 font-medium text-sm tracking-wide">Private Intake</span>
             </div>
-            <h1 className="display-heading text-[2.6rem] sm:text-6xl lg:text-7xl text-white mb-6 text-balance leading-[1.05]">
+            <h1 className="page-heading mb-6">
               Initiate an Alliance
             </h1>
             <p className="text-lg sm:text-xl text-gray-300/90 max-w-2xl mx-auto leading-relaxed">

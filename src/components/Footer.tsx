@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone, Check } from "lucide-react";
 import { quickLinks, ventureLinks } from "@/data/navigation";
 
 const socialLinks = [
@@ -45,6 +46,8 @@ const socialLinks = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
 
   return (
     <footer className="relative bg-navy-900 overflow-hidden">
@@ -98,7 +101,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-gold-400 transition-all duration-300 text-sm flex items-center gap-2 group"
+                    className="text-gray-400 hover:text-gold-400 transition-all duration-300 text-sm flex items-center gap-2 py-1 group"
                   >
                     <span className="w-0 group-hover:w-2 h-px bg-gold-500 transition-all duration-300" />
                     {link.label}
@@ -118,7 +121,7 @@ export default function Footer() {
                 <li key={v.href}>
                   <Link
                     href={v.href}
-                    className="text-gray-400 hover:text-gold-400 transition-all duration-300 text-sm flex items-center gap-2 group"
+                    className="text-gray-400 hover:text-gold-400 transition-all duration-300 text-sm flex items-center gap-2 py-1 group"
                   >
                     <span className="w-0 group-hover:w-2 h-px bg-gold-500 transition-all duration-300" />
                     {v.label}
@@ -176,20 +179,39 @@ export default function Footer() {
               Considered dispatches on our houses, acquisitions, and market perspective —
               delivered in confidence.
             </p>
-            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Your email"
-                aria-label="Email address for newsletter"
-                className="flex-1 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder-gray-500 text-sm focus:outline-none focus:border-gold-500/30 focus:bg-white/[0.06] transition-all duration-300"
-              />
-              <button
-                type="submit"
-                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-navy-900 font-semibold text-sm hover:from-gold-400 hover:to-gold-500 transition-all duration-300 shrink-0"
+            {subscribed ? (
+              <p
+                className="flex items-center gap-2 text-sm text-gold-300 py-2.5"
+                role="status"
               >
-                Join
-              </button>
-            </form>
+                <Check className="w-4 h-4 shrink-0" aria-hidden="true" />
+                Thank you — your request has been noted.
+              </p>
+            ) : (
+              <form
+                className="flex gap-2"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSubscribed(true);
+                }}
+              >
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email"
+                  aria-label="Email address for newsletter"
+                  className="flex-1 min-w-0 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder-gray-500 text-sm focus:outline-none focus:border-gold-500/30 focus:bg-white/[0.06] transition-all duration-300"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-navy-900 font-semibold text-sm hover:from-gold-400 hover:to-gold-500 transition-all duration-300 shrink-0"
+                >
+                  Join
+                </button>
+              </form>
+            )}
 
             {/* Social links */}
             <div className="flex gap-2.5 mt-6">
