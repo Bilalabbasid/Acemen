@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ShieldCheck, Compass, Plane, Sparkles } from "lucide-react";
 
 export default function PilotEditorialSection() {
@@ -10,8 +9,10 @@ export default function PilotEditorialSection() {
     <section className="relative py-24 sm:py-32 bg-noir-950 text-white overflow-hidden">
       {/* Background Image */}
       <img
-        src="/images/luxury/pilot-campaign.jpg"
+        src="/images/luxury/pilot-campaign.webp"
         alt="The Pilot Collection — ACEMEN Aviation Line"
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover object-center opacity-45 scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-noir-950 via-noir-950/80 to-transparent" />

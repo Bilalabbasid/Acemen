@@ -34,6 +34,8 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         <img
           src={product.images.primary}
           alt={product.name}
+          loading="lazy"
+          decoding="async"
           className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-out ${
             hasDistinctSecondary
               ? isHovered
@@ -50,6 +52,8 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           <img
             src={product.images.secondary}
             alt={`${product.name} alternate view`}
+            loading="lazy"
+            decoding="async"
             className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-out ${
               isHovered ? "opacity-100 scale-105" : "opacity-0 scale-100"
             }`}

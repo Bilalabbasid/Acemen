@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { brandData } from "@/data/brand";
 import { ShieldCheck, Scissors, Sparkles, Award, MapPin, Phone, Mail } from "lucide-react";
 import ServicesBar from "@/components/luxury/ServicesBar";
@@ -21,8 +20,10 @@ export default function AboutPageClient() {
       {/* ── 1. Hero Campaign Banner ── */}
       <section className="relative h-[60vh] sm:h-[70vh] w-full overflow-hidden bg-noir-950 flex items-end justify-center pb-16 sm:pb-20">
         <img
-          src="/images/luxury/craftsmanship.jpg"
+          src="/images/luxury/craftsmanship.webp"
           alt="The House of ACEMEN — Savoir-Faire"
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover object-center scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30" />
@@ -69,8 +70,10 @@ export default function AboutPageClient() {
             <div className="lg:col-span-6">
               <div className="relative aspect-[4/5] bg-ivory-100 overflow-hidden border border-neutral-200 shadow-sm">
                 <img
-                  src="/images/luxury/hero-campaign.jpg"
+                  src="/images/luxury/hero-campaign.webp"
                   alt="ACEMEN London Leather Atelier"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -98,18 +101,15 @@ export default function AboutPageClient() {
             {brandData.pillars.map((pillar) => (
               <div
                 key={pillar.title}
-                className="bg-white p-8 sm:p-10 border border-neutral-200 space-y-3 relative group hover:border-noir-950 transition-colors"
+                className="bg-white p-8 sm:p-10 border border-neutral-200 shadow-xs space-y-4"
               >
-                <div className="w-12 h-12 bg-ivory-100 flex items-center justify-center mb-2">
-                  {pillarIcons[pillar.iconName]}
+                <div className="w-12 h-12 bg-ivory-100 rounded-full flex items-center justify-center mb-2">
+                  {pillarIcons[pillar.iconName] || <Sparkles className="w-6 h-6 text-leather-cognac stroke-[1.2]" />}
                 </div>
-                <span className="text-[10px] font-heading font-bold tracking-[0.25em] uppercase text-neutral-400 block">
-                  {pillar.subtitle}
-                </span>
-                <h3 className="font-display text-2xl font-semibold text-noir-950">
+                <h3 className="font-display text-xl sm:text-2xl font-semibold text-noir-950">
                   {pillar.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed pt-1">
+                <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
                   {pillar.description}
                 </p>
               </div>
@@ -118,62 +118,43 @@ export default function AboutPageClient() {
         </div>
       </section>
 
-      {/* ── 4. London Headquarters & Private Client Salon ── */}
-      <section className="py-20 sm:py-32 bg-white">
-        <div className="container-page">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left: London Building / Skyline Image */}
-            <div className="lg:col-span-6 order-2 lg:order-1">
-              <div className="relative aspect-[16/11] bg-ivory-100 overflow-hidden border border-neutral-200">
-                <img
-                  src="/images/contact-london.png"
-                  alt="London Headquarters location"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+      {/* ── 4. London Atelier & Bespoke Commissions Contact Banner ── */}
+      <section className="py-20 sm:py-28 bg-noir-950 text-white">
+        <div className="container-page text-center max-w-2xl mx-auto space-y-6">
+          <span className="text-[10px] font-heading font-bold tracking-[0.3em] uppercase text-champagne-400 block">
+            PRIVATE CLIENT APPOINTMENTS
+          </span>
+          <h2 className="font-display text-3xl sm:text-5xl font-medium text-white leading-tight">
+            VISIT THE LONDON SALON
+          </h2>
+          <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
+            Experience our full leather range in person, commission bespoke monogramming, or consult with our master artisans on bespoke luggage orders.
+          </p>
 
-            {/* Right: Info */}
-            <div className="lg:col-span-6 space-y-6 order-1 lg:order-2">
-              <span className="text-[10px] font-heading font-bold tracking-[0.3em] uppercase text-leather-cognac block">
-                THE LONDON SALON
-              </span>
-              <h2 className="font-display text-3xl sm:text-5xl font-medium text-noir-950 leading-tight">
-                Private Consultations & Bespoke Commissions
-              </h2>
-              <p className="text-neutral-600 text-sm font-light leading-relaxed">
-                Our London office is located at {brandData.address.full}. We welcome private clients by appointment for bespoke leather commissions, personalized monogramming consultations, and collection previews.
-              </p>
-              <div className="space-y-3 pt-2 text-xs text-neutral-700 font-light">
-                <p className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 text-leather-cognac shrink-0" />
-                  <span>{brandData.address.full}</span>
-                </p>
-                <p className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-leather-cognac shrink-0" />
-                  <a href={`tel:${brandData.contact.phone}`} className="hover:underline font-medium">
-                    {brandData.contact.phoneFormatted}
-                  </a>
-                </p>
-                <p className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-leather-cognac shrink-0" />
-                  <a href={`mailto:${brandData.contact.email}`} className="hover:underline font-medium">
-                    {brandData.contact.email}
-                  </a>
-                </p>
-              </div>
-
-              <div className="pt-4">
-                <Link href="/contact" className="btn-luxury-primary">
-                  Schedule a Private Consultation
-                </Link>
-              </div>
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs text-neutral-300 font-light">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-champagne-400" />
+              <span>{brandData.address?.full || "551 Staines Road, London"}</span>
             </div>
+            <div className="flex items-center gap-2">
+              <Phone className="w-4 h-4 text-champagne-400" />
+              <span>{brandData.contact?.phoneFormatted || "+44 7587 386522"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Mail className="w-4 h-4 text-champagne-400" />
+              <span>{brandData.contact?.email || "info@acemen.co.uk"}</span>
+            </div>
+          </div>
+
+          <div className="pt-6">
+            <Link href="/contact" className="btn-luxury-white">
+              Request Private Atelier Appointment
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Services & Newsletter */}
+      {/* ── 5. Services Bar & Newsletter ── */}
       <ServicesBar />
       <NewsletterSection />
     </div>

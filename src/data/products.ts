@@ -73,13 +73,13 @@ export const luxuryProducts: ProductItem[] = [
     isBestSeller: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-oxford-1.jpg",
-      secondary: "/images/luxury/prod-oxford-2.jpg", // Toe burnish & lacing detail of this exact Oxford
+      primary: "/images/luxury/prod-oxford-1.webp",
+      secondary: "/images/luxury/prod-oxford-2.webp",
       gallery: [
-        "/images/luxury/prod-oxford-1.jpg",
-        "/images/luxury/prod-oxford-2.jpg",
-        "/images/luxury/footwear-campaign.jpg",
-        "/images/luxury/craftsmanship.jpg",
+        "/images/luxury/prod-oxford-1.webp",
+        "/images/luxury/prod-oxford-2.webp",
+        "/images/luxury/footwear-campaign.webp",
+        "/images/luxury/craftsmanship.webp",
       ],
     },
     colors: [
@@ -132,13 +132,13 @@ export const luxuryProducts: ProductItem[] = [
     isNewArrival: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-pilot-1.jpg",
-      secondary: "/images/luxury/prod-pilot-2.jpg", // Podium pair view of this exact Pilot Shoe
+      primary: "/images/luxury/prod-pilot-1.webp",
+      secondary: "/images/luxury/prod-pilot-2.webp",
       gallery: [
-        "/images/luxury/prod-pilot-1.jpg",
-        "/images/luxury/prod-pilot-2.jpg",
-        "/images/luxury/pilot-campaign.jpg",
-        "/images/luxury/travel-campaign.jpg",
+        "/images/luxury/prod-pilot-1.webp",
+        "/images/luxury/prod-pilot-2.webp",
+        "/images/luxury/pilot-campaign.webp",
+        "/images/luxury/travel-campaign.webp",
       ],
     },
     colors: [
@@ -189,12 +189,12 @@ export const luxuryProducts: ProductItem[] = [
     isBestSeller: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-monk-1.jpg",
-      secondary: "/images/luxury/prod-monk-2.jpg", // Macro buckle & patina detail of this exact monk shoe
+      primary: "/images/luxury/prod-monk-1.webp",
+      secondary: "/images/luxury/prod-monk-2.webp",
       gallery: [
-        "/images/luxury/prod-monk-1.jpg",
-        "/images/luxury/prod-monk-2.jpg",
-        "/images/luxury/men-campaign.jpg",
+        "/images/luxury/prod-monk-1.webp",
+        "/images/luxury/prod-monk-2.webp",
+        "/images/luxury/men-campaign.webp",
       ],
     },
     colors: [
@@ -244,12 +244,12 @@ export const luxuryProducts: ProductItem[] = [
     isNewArrival: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-chelsea-1.jpg",
-      secondary: "/images/luxury/prod-chelsea-2.jpg", // Podium pair view of this exact Chelsea boot
+      primary: "/images/luxury/prod-chelsea-1.webp",
+      secondary: "/images/luxury/prod-chelsea-2.webp",
       gallery: [
-        "/images/luxury/prod-chelsea-1.jpg",
-        "/images/luxury/prod-chelsea-2.jpg",
-        "/images/luxury/footwear-campaign.jpg",
+        "/images/luxury/prod-chelsea-1.webp",
+        "/images/luxury/prod-chelsea-2.webp",
+        "/images/luxury/footwear-campaign.webp",
       ],
     },
     colors: [
@@ -297,12 +297,12 @@ export const luxuryProducts: ProductItem[] = [
     tag: "Modern Classic",
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-derby-1.jpg",
-      secondary: "/images/luxury/prod-derby-1.jpg", // Exact same mahogany Derby with smooth zoom
+      primary: "/images/luxury/prod-derby-1.webp",
+      secondary: "/images/luxury/prod-derby-1.webp",
       gallery: [
-        "/images/luxury/prod-derby-1.jpg",
-        "/images/luxury/footwear-campaign.jpg",
-        "/images/luxury/craftsmanship.jpg",
+        "/images/luxury/prod-derby-1.webp",
+        "/images/luxury/footwear-campaign.webp",
+        "/images/luxury/craftsmanship.webp",
       ],
     },
     colors: [
@@ -348,12 +348,12 @@ export const luxuryProducts: ProductItem[] = [
     isNewArrival: true,
     sizes: standardJacketSizes,
     images: {
-      primary: "/images/luxury/prod-jacket-classic-1.jpg",
-      secondary: "/images/luxury/prod-jacket-classic-1.jpg", // Exact same black classic jacket with smooth zoom
+      primary: "/images/luxury/prod-jacket-classic-1.webp",
+      secondary: "/images/luxury/prod-jacket-classic-1.webp",
       gallery: [
-        "/images/luxury/prod-jacket-classic-1.jpg",
-        "/images/luxury/men-campaign.jpg",
-        "/images/luxury/craftsmanship.jpg",
+        "/images/luxury/prod-jacket-classic-1.webp",
+        "/images/luxury/men-campaign.webp",
+        "/images/luxury/craftsmanship.webp",
       ],
     },
     colors: [
@@ -400,12 +400,12 @@ export const luxuryProducts: ProductItem[] = [
     isBestSeller: true,
     sizes: standardJacketSizes,
     images: {
-      primary: "/images/luxury/prod-jacket-bomber-1.jpg",
-      secondary: "/images/luxury/prod-jacket-bomber-1.jpg", // Exact same espresso bomber with smooth zoom
+      primary: "/images/luxury/prod-jacket-bomber-1.webp",
+      secondary: "/images/luxury/prod-jacket-bomber-1.webp",
       gallery: [
-        "/images/luxury/prod-jacket-bomber-1.jpg",
-        "/images/luxury/craftsmanship.jpg",
-        "/images/luxury/men-campaign.jpg",
+        "/images/luxury/prod-jacket-bomber-1.webp",
+        "/images/luxury/craftsmanship.webp",
+        "/images/luxury/men-campaign.webp",
       ],
     },
     colors: [
@@ -448,13 +448,13 @@ export const luxuryProducts: ProductItem[] = [
     isIconic: true,
     isNewArrival: true,
     images: {
-      primary: "/images/luxury/prod-weekender-1.jpg",
-      secondary: "/images/luxury/prod-weekender-2.jpg", // Side angle of this exact weekender
+      primary: "/images/luxury/prod-weekender-1.webp",
+      secondary: "/images/luxury/prod-weekender-2.webp",
       gallery: [
-        "/images/luxury/prod-weekender-1.jpg",
-        "/images/luxury/prod-weekender-2.jpg",
-        "/images/luxury/hero-campaign.jpg",
-        "/images/luxury/craftsmanship.jpg",
+        "/images/luxury/prod-weekender-1.webp",
+        "/images/luxury/prod-weekender-2.webp",
+        "/images/luxury/hero-campaign.webp",
+        "/images/luxury/craftsmanship.webp",
       ],
     },
     colors: [
@@ -508,12 +508,12 @@ export const luxuryProducts: ProductItem[] = [
     isIconic: true,
     isBestSeller: true,
     images: {
-      primary: "/images/luxury/prod-briefcase-1.jpg",
-      secondary: "/images/luxury/prod-briefcase-2.jpg", // Side perspective of this exact briefcase
+      primary: "/images/luxury/prod-briefcase-1.webp",
+      secondary: "/images/luxury/prod-briefcase-2.webp",
       gallery: [
-        "/images/luxury/prod-briefcase-1.jpg",
-        "/images/luxury/prod-briefcase-2.jpg",
-        "/images/luxury/men-campaign.jpg",
+        "/images/luxury/prod-briefcase-1.webp",
+        "/images/luxury/prod-briefcase-2.webp",
+        "/images/luxury/men-campaign.webp",
       ],
     },
     colors: [
@@ -561,12 +561,12 @@ export const luxuryProducts: ProductItem[] = [
     tag: "New Arrival",
     isNewArrival: true,
     images: {
-      primary: "/images/luxury/prod-tote-1.jpg",
-      secondary: "/images/luxury/prod-tote-2.jpg", // Angled perspective of this exact tote
+      primary: "/images/luxury/prod-tote-1.webp",
+      secondary: "/images/luxury/prod-tote-2.webp",
       gallery: [
-        "/images/luxury/prod-tote-1.jpg",
-        "/images/luxury/prod-tote-2.jpg",
-        "/images/luxury/women-campaign.jpg",
+        "/images/luxury/prod-tote-1.webp",
+        "/images/luxury/prod-tote-2.webp",
+        "/images/luxury/women-campaign.webp",
       ],
     },
     colors: [
@@ -616,11 +616,11 @@ export const luxuryProducts: ProductItem[] = [
     tag: "Essential",
     isBestSeller: true,
     images: {
-      primary: "/images/luxury/prod-wallet-1.jpg",
-      secondary: "/images/luxury/prod-wallet-1.jpg", // Exact same bifold wallet with smooth zoom
+      primary: "/images/luxury/prod-wallet-1.webp",
+      secondary: "/images/luxury/prod-wallet-1.webp",
       gallery: [
-        "/images/luxury/prod-wallet-1.jpg",
-        "/images/luxury/craftsmanship.jpg",
+        "/images/luxury/prod-wallet-1.webp",
+        "/images/luxury/craftsmanship.webp",
       ],
     },
     colors: [
@@ -664,11 +664,11 @@ export const luxuryProducts: ProductItem[] = [
     tag: "Atelier Favorite",
     isNewArrival: true,
     images: {
-      primary: "/images/luxury/prod-wallet-2.jpg",
-      secondary: "/images/luxury/prod-wallet-2.jpg", // Exact same cardholder with smooth zoom
+      primary: "/images/luxury/prod-wallet-2.webp",
+      secondary: "/images/luxury/prod-wallet-2.webp",
       gallery: [
-        "/images/luxury/prod-wallet-2.jpg",
-        "/images/luxury/women-campaign.jpg",
+        "/images/luxury/prod-wallet-2.webp",
+        "/images/luxury/women-campaign.webp",
       ],
     },
     colors: [
@@ -713,11 +713,11 @@ export const luxuryProducts: ProductItem[] = [
     tag: "Masterpiece",
     isIconic: true,
     images: {
-      primary: "/images/luxury/travel-campaign.jpg",
-      secondary: "/images/luxury/travel-campaign.jpg", // Exact same cabin luggage campaign with smooth zoom
+      primary: "/images/luxury/travel-campaign.webp",
+      secondary: "/images/luxury/travel-campaign.webp",
       gallery: [
-        "/images/luxury/travel-campaign.jpg",
-        "/images/luxury/hero-campaign.jpg",
+        "/images/luxury/travel-campaign.webp",
+        "/images/luxury/hero-campaign.webp",
       ],
     },
     colors: [{ name: "Saddle Tan", hex: "#A06A3B" }],

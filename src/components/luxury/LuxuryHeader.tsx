@@ -25,7 +25,7 @@ const navCategories: NavCategory[] = [
   {
     title: "Women",
     href: "/collections/women",
-    previewImage: "/images/luxury/women-campaign.jpg",
+    previewImage: "/images/luxury/women-campaign.webp",
     tagline: "Sculptural Totes & Hand-Stitched Essentials",
     columns: [
       {
@@ -47,7 +47,7 @@ const navCategories: NavCategory[] = [
   {
     title: "Men",
     href: "/collections/men",
-    previewImage: "/images/luxury/men-campaign.jpg",
+    previewImage: "/images/luxury/men-campaign.webp",
     tagline: "Enduring Executive Pieces & Sartorial Leather",
     columns: [
       {
@@ -71,7 +71,7 @@ const navCategories: NavCategory[] = [
   {
     title: "Bags",
     href: "/collections/bags",
-    previewImage: "/images/luxury/hero-campaign.jpg",
+    previewImage: "/images/luxury/hero-campaign.webp",
     tagline: "Handcrafted Holdalls, Briefcases & Totes",
     columns: [
       {
@@ -95,7 +95,7 @@ const navCategories: NavCategory[] = [
   {
     title: "Shoes",
     href: "/collections/shoes",
-    previewImage: "/images/luxury/footwear-campaign.jpg",
+    previewImage: "/images/luxury/footwear-campaign.webp",
     tagline: "Hand-Lasted British Oxfords, Monks & Boots",
     columns: [
       {
@@ -120,7 +120,7 @@ const navCategories: NavCategory[] = [
   {
     title: "Jackets",
     href: "/collections/jackets",
-    previewImage: "/images/luxury/prod-jacket-classic-1.jpg",
+    previewImage: "/images/luxury/prod-jacket-classic-1.webp",
     tagline: "Tailored Full-Grain French Calfskin Outerwear",
     columns: [
       {
@@ -143,7 +143,7 @@ const navCategories: NavCategory[] = [
   {
     title: "Wallets",
     href: "/collections/wallets",
-    previewImage: "/images/luxury/prod-wallet-1.jpg",
+    previewImage: "/images/luxury/prod-wallet-1.webp",
     tagline: "Pocket Accessories Cut from Premier Tuscan Hides",
     columns: [
       {
@@ -166,7 +166,7 @@ const navCategories: NavCategory[] = [
   {
     title: "Collections",
     href: "/products",
-    previewImage: "/images/luxury/travel-campaign.jpg",
+    previewImage: "/images/luxury/travel-campaign.webp",
     tagline: "The Complete House of ACEMEN Catalog",
     columns: [
       {
@@ -407,6 +407,8 @@ export default function LuxuryHeader() {
                         <img
                           src={activeDropdown.previewImage}
                           alt={activeDropdown.title}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>

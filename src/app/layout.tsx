@@ -65,7 +65,7 @@ export const metadata: Metadata = {
       "Crafted to endure. Discover handcrafted luxury leather holdalls, briefcases, wallets, and travel trunks sculpted from premier full-grain hides.",
     images: [
       {
-        url: "/images/luxury/hero-campaign.jpg",
+        url: "/images/luxury/.webp",
         width: 1200,
         height: 630,
         alt: "ACEMEN Luxury Leather Goods",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     title: "ACEMEN | World-Class Luxury Leather Goods • London",
     description:
       "Crafted to endure. Discover handcrafted luxury leather holdalls, briefcases, wallets, and travel trunks sculpted from premier full-grain hides.",
-    images: ["/images/luxury/hero-campaign.jpg"],
+    images: ["/images/luxury/.webp"],
   },
   robots: {
     index: true,

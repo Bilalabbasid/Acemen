@@ -10,9 +10,11 @@ export default function HeroCampaign() {
       {/* Cinematic Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/luxury/hero-campaign.jpg"
+          src="/images/luxury/hero-campaign.webp"
           alt="ACEMEN Autumn-Winter Campaign — The Sovereign Atelier"
           className="w-full h-full object-cover object-center scale-105 animate-fade-in"
+          fetchPriority="high"
+          decoding="async"
         />
         {/* Subtle Luxury Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/30" />
@@ -60,9 +62,12 @@ export default function HeroCampaign() {
         </motion.div>
       </div>
 
-      {/* Bottom Scroll Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2">
-        <div className="w-[1px] h-8 bg-gradient-to-b from-white/60 to-transparent animate-pulse" />
+      {/* Subtle Scroll Indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity">
+        <span className="text-[9px] font-heading font-semibold tracking-[0.3em] uppercase text-white/80">
+          Scroll to explore
+        </span>
+        <div className="w-[1px] h-8 bg-gradient-to-b from-white to-transparent" />
       </div>
     </section>
   );

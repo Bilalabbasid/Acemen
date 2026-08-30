@@ -8,37 +8,37 @@ const categories = [
   {
     name: "Footwear Atelier",
     count: "Oxfords, Monks & Boots",
-    image: "/images/luxury/prod-oxford-1.jpg",
+    image: "/images/luxury/prod-oxford-1.webp",
     href: "/collections/shoes",
   },
   {
     name: "The Pilot Collection",
     count: "Aviation Professional",
-    image: "/images/luxury/prod-pilot-1.jpg",
+    image: "/images/luxury/prod-pilot-1.webp",
     href: "/collections/pilot",
   },
   {
     name: "Leather Jackets",
     count: "Classic & Bombers",
-    image: "/images/luxury/prod-jacket-classic-1.jpg",
+    image: "/images/luxury/prod-jacket-classic-1.webp",
     href: "/collections/jackets",
   },
   {
     name: "Holdalls & Bags",
     count: "Weekenders & Totes",
-    image: "/images/luxury/prod-weekender-1.jpg",
+    image: "/images/luxury/prod-weekender-1.webp",
     href: "/collections/bags",
   },
   {
     name: "Wallets & Pocket Goods",
     count: "Bifolds & Cardholders",
-    image: "/images/luxury/prod-wallet-1.jpg",
+    image: "/images/luxury/prod-wallet-1.webp",
     href: "/collections/wallets",
   },
   {
     name: "Trunks & Travel",
     count: "Cabin Trolleys & Luggage",
-    image: "/images/luxury/travel-campaign.jpg",
+    image: "/images/luxury/travel-campaign.webp",
     href: "/collections/travel",
   },
 ];
@@ -84,6 +84,8 @@ export default function CategoryDiscovery() {
                   <img
                     src={cat.image}
                     alt={cat.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />

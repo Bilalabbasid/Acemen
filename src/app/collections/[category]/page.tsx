@@ -19,7 +19,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   shoes: {
     title: "THE FOOTWEAR ATELIER",
     eyebrow: "HAND-LASTED BRITISH DISTINCTION",
-    heroImage: "/images/luxury/footwear-campaign.jpg",
+    heroImage: "/images/luxury/footwear-campaign.webp",
     description:
       "Goodyear-welted Oxford shoes, double monk straps, Chelsea boots, and blucher derbies sculpted from French box calf and Bavarian hides.",
     categoryFilter: "Shoes",
@@ -27,7 +27,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   pilot: {
     title: "THE PILOT COLLECTION",
     eyebrow: "AVIATION GRADE • FLIGHT DECK SARTORIAL",
-    heroImage: "/images/luxury/pilot-campaign.jpg",
+    heroImage: "/images/luxury/pilot-campaign.webp",
     description:
       "Precision-crafted leather footwear engineered specifically for pilots and flight deck professionals. Airport scanner compliant and built for multi-hour cockpit endurance.",
     categoryFilter: "Pilot Collection",
@@ -35,7 +35,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   jackets: {
     title: "SARTORIAL LEATHER JACKETS",
     eyebrow: "OUTERWEAR ATELIER",
-    heroImage: "/images/luxury/prod-jacket-classic-1.jpg",
+    heroImage: "/images/luxury/prod-jacket-classic-1.webp",
     description:
       "Minimalist classic leather jackets and bombers cut from full-grain French box calfskin and supple Bavarian hides.",
     categoryFilter: "Jackets",
@@ -43,7 +43,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   bags: {
     title: "FINE LEATHER BAGS",
     eyebrow: "ICONIC SILHOUETTES",
-    heroImage: "/images/luxury/hero-campaign.jpg",
+    heroImage: "/images/luxury/hero-campaign.webp",
     description:
       "From spacious travel holdalls to structured executive briefcases and everyday totes, hand saddle-stitched in London.",
     categoryFilter: "Bags",
@@ -51,7 +51,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   wallets: {
     title: "WALLETS & SMALL LEATHER GOODS",
     eyebrow: "POCKET ARTISANRY",
-    heroImage: "/images/luxury/prod-wallet-1.jpg",
+    heroImage: "/images/luxury/prod-wallet-1.webp",
     description:
       "Precision-crafted bifold wallets, ultra-slim cardholders, and passport cases finished with hand-burnished edges.",
     categoryFilter: "Wallets",
@@ -59,7 +59,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   travel: {
     title: "TRUNKS & TRAVEL ATELIER",
     eyebrow: "GRAND VOYAGE",
-    heroImage: "/images/luxury/travel-campaign.jpg",
+    heroImage: "/images/luxury/travel-campaign.webp",
     description:
       "Wheeled cabin suitcases, weekender duffles, and garment luggage designed for effortless international movement.",
     categoryFilter: "Travel",
@@ -67,7 +67,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   women: {
     title: "WOMEN'S LEATHER GOODS",
     eyebrow: "THE ATELIER COLLECTION",
-    heroImage: "/images/luxury/women-campaign.jpg",
+    heroImage: "/images/luxury/women-campaign.webp",
     description:
       "Sculptural totes, compact crossbodies, and pocket accessories engineered from French box calfskin and Tuscan grain hides.",
     genderFilter: "women",
@@ -75,7 +75,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   men: {
     title: "MEN'S SARTORIAL LEATHER",
     eyebrow: "THE EXECUTIVE LINE",
-    heroImage: "/images/luxury/men-campaign.jpg",
+    heroImage: "/images/luxury/men-campaign.webp",
     description:
       "Executive briefcases, weekend holdalls, hand-lasted shoes, and tailored leather jackets cut from dense full-grain hides.",
     genderFilter: "men",
@@ -112,6 +112,8 @@ export default function CollectionPage({
         <img
           src={config.heroImage}
           alt={config.title}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover object-center scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/30" />

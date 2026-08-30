@@ -48,8 +48,10 @@ export default function HomePage() {
       {/* 9. Full-Bleed Lifestyle Campaign Spread */}
       <section className="relative py-24 sm:py-36 bg-noir-950 text-white overflow-hidden flex items-center justify-center">
         <img
-          src="/images/luxury/travel-campaign.jpg"
+          src="/images/luxury/travel-campaign.webp"
           alt="ACEMEN Jet-Set Travel Atelier"
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover object-center opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-noir-950 via-noir-950/40 to-noir-950/60" />

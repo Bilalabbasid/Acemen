@@ -9,8 +9,10 @@ export default function FootwearEditorialSection() {
     <section className="relative py-24 sm:py-36 bg-noir-950 text-white overflow-hidden flex items-center justify-center">
       {/* Editorial Background Image */}
       <img
-        src="/images/luxury/footwear-campaign.jpg"
+        src="/images/luxury/footwear-campaign.webp"
         alt="The ACEMEN Hand-Lasted Footwear Atelier"
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover object-center opacity-55 scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-noir-950 via-noir-950/50 to-noir-950/70" />
