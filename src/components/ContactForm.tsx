@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import React, { useState } from "react";
+import { Send, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
+    phone: "",
+    subject: "Bespoke Leather Commission",
     message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -17,21 +18,20 @@ export default function ContactForm() {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Full name is required";
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Email address is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+      newErrors.email = "Please enter a valid email address";
     }
-    if (!formData.subject.trim()) newErrors.subject = "Organisation is required";
     if (!formData.message.trim()) {
-      newErrors.message = "Please describe the nature of your inquiry";
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Please provide at least 10 characters";
+      newErrors.message = "Please detail the nature of your inquiry";
+    } else if (formData.message.trim().length < 8) {
+      newErrors.message = "Please provide at least 8 characters";
     }
     return newErrors;
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -56,158 +56,165 @@ export default function ContactForm() {
 
     try {
       const mailtoLink = `mailto:info@acemen.co.uk?subject=${encodeURIComponent(
-        formData.subject
+        `[ACEMEN Concierge] ${formData.subject} - ${formData.name}`
       )}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+        `Client Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nInquiry Type: ${formData.subject}\n\nMessage:\n${formData.message}`
       )}`;
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 800));
       window.location.href = mailtoLink;
 
       setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", subject: "Bespoke Leather Commission", message: "" });
     } catch {
       setStatus("error");
     }
   };
 
-  const inputClasses =
-    "w-full px-5 py-3.5 rounded-xl bg-white border border-gray-200 text-gray-800 placeholder-gray-400 transition-all duration-300 focus:outline-none focus:border-gold-500/50 focus:ring-4 focus:ring-gold-500/10 hover:border-gray-300 text-sm";
-
   return (
-    <div className="relative">
-      {/* Decorative gradient */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-gold-500/10 via-navy-600/5 to-gold-500/10 rounded-[20px] blur-sm" aria-hidden="true" />
-
-      <div className="relative bg-white rounded-2xl shadow-premium-lg border border-gray-100/80 p-7 sm:p-10">
-        {status === "success" ? (
-          <div className="text-center py-16">
-            <div className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-green-500" />
-            </div>
-            <h3 className="display-heading text-3xl text-navy-800 mb-3">Inquiry Received</h3>
-            <p className="text-gray-500 mb-8 max-w-sm mx-auto">
-              Thank you. Your inquiry has been transmitted to our private office — we
-              will respond, in confidence, within one business day.
-            </p>
-            <button
-              onClick={() => setStatus("idle")}
-              className="btn-primary"
-            >
-              Submit another inquiry
+    <div className="bg-white border border-neutral-200 p-8 sm:p-12 shadow-sm">
+      {status === "success" ? (
+        <div className="text-center py-16 space-y-4">
+          <div className="w-16 h-16 rounded-full bg-ivory-100 flex items-center justify-center mx-auto text-leather-cognac">
+            <CheckCircle2 className="w-8 h-8 stroke-[1.2]" />
+          </div>
+          <h3 className="font-display text-3xl text-noir-950 font-medium">Inquiry Transmitted</h3>
+          <p className="text-neutral-600 text-xs sm:text-sm font-light max-w-md mx-auto leading-relaxed">
+            Thank you for contacting ACEMEN. Your brief has been dispatched to our London Private Client Desk. Our leather specialist will reply in confidence within one business day.
+          </p>
+          <div className="pt-4">
+            <button onClick={() => setStatus("idle")} className="btn-luxury-outline">
+              Submit Another Inquiry
             </button>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} noValidate>
-            {status === "error" && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 text-sm">
-                <AlertCircle className="w-5 h-5 shrink-0" />
-                Something went wrong. Please try again or email us directly.
-              </div>
-            )}
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} noValidate className="space-y-6">
+          <div className="space-y-1 pb-2 border-b border-neutral-100">
+            <span className="text-[10px] font-heading font-bold tracking-[0.25em] uppercase text-leather-cognac block">
+              SECURE CLIENT INTAKE
+            </span>
+            <h3 className="font-display text-2xl sm:text-3xl font-medium text-noir-950">
+              Brief Our Concierge Desk
+            </h3>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-              <div>
-                <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Full Name &amp; Title <span className="text-gold-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="contact-name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={`${inputClasses} ${
-                    errors.name ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
-                  }`}
-                  placeholder="Alexandra Reed, Managing Partner"
-                />
-                {errors.name && (
-                  <p className="mt-1.5 text-xs text-red-500">{errors.name}</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address <span className="text-gold-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="contact-email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`${inputClasses} ${
-                    errors.email ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
-                  }`}
-                  placeholder="you@institution.com"
-                />
-                {errors.email && (
-                  <p className="mt-1.5 text-xs text-red-500">{errors.email}</p>
-                )}
-              </div>
+          {status === "error" && (
+            <div className="p-4 bg-red-50 border border-red-200 flex items-center gap-3 text-red-700 text-xs">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>An error occurred. Please contact us directly at info@acemen.co.uk.</span>
             </div>
+          )}
 
-            <div className="mb-5">
-              <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 mb-2">
-                Organisation / Institutional Affiliation <span className="text-gold-500">*</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="contact-name" className="block text-xs font-heading tracking-wider uppercase font-semibold text-noir-950 mb-2">
+                Full Name <span className="text-leather-cognac">*</span>
               </label>
               <input
                 type="text"
+                id="contact-name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="e.g. Lord Alexander Wright"
+                className="w-full px-4 py-3 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 placeholder-neutral-400 focus:outline-none focus:border-noir-950 transition-colors"
+              />
+              {errors.name && <p className="mt-1 text-[11px] text-red-600">{errors.name}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="contact-email" className="block text-xs font-heading tracking-wider uppercase font-semibold text-noir-950 mb-2">
+                Email Address <span className="text-leather-cognac">*</span>
+              </label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="you@domain.com"
+                className="w-full px-4 py-3 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 placeholder-neutral-400 focus:outline-none focus:border-noir-950 transition-colors"
+              />
+              {errors.email && <p className="mt-1 text-[11px] text-red-600">{errors.email}</p>}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="contact-phone" className="block text-xs font-heading tracking-wider uppercase font-semibold text-noir-950 mb-2">
+                Telephone / WhatsApp
+              </label>
+              <input
+                type="tel"
+                id="contact-phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="+44 7587 386522"
+                className="w-full px-4 py-3 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 placeholder-neutral-400 focus:outline-none focus:border-noir-950 transition-colors"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="contact-subject" className="block text-xs font-heading tracking-wider uppercase font-semibold text-noir-950 mb-2">
+                Inquiry Nature
+              </label>
+              <select
                 id="contact-subject"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                className={`${inputClasses} ${
-                  errors.subject ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
-                }`}
-                placeholder="Company or institutional affiliation"
-              />
-              {errors.subject && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.subject}</p>
-              )}
+                className="w-full px-4 py-3 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950 transition-colors"
+              >
+                <option value="Bespoke Leather Commission">Bespoke Leather Commission</option>
+                <option value="Product Availability & Ordering">Product Availability & Ordering</option>
+                <option value="Personal Monogramming Inquiry">Personal Monogramming Inquiry</option>
+                <option value="Private London Atelier Appointment">Private London Atelier Appointment</option>
+                <option value="Corporate & VIP Gifting">Corporate & VIP Gifting</option>
+                <option value="Lifetime Restoration & Service">Lifetime Restoration & Service</option>
+              </select>
             </div>
+          </div>
 
-            <div className="mb-8">
-              <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-2">
-                Nature of Inquiry <span className="text-gold-500">*</span>
-                <span className="text-gray-400 font-normal"> — Investment, Enterprise IT, Luxury Retail, or Concierge</span>
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-                className={`${inputClasses} resize-none ${
-                  errors.message ? "border-red-300 focus:border-red-400 focus:ring-red-500/10" : ""
-                }`}
-                placeholder="Please describe the nature of your inquiry and how our office may assist you."
-              />
-              {errors.message && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.message}</p>
-              )}
-            </div>
+          <div>
+            <label htmlFor="contact-message" className="block text-xs font-heading tracking-wider uppercase font-semibold text-noir-950 mb-2">
+              Inquiry Details <span className="text-leather-cognac">*</span>
+            </label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows={5}
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Please describe your requirements, specifications, or preferred appointment dates."
+              className="w-full px-4 py-3 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 placeholder-neutral-400 resize-none focus:outline-none focus:border-noir-950 transition-colors"
+            />
+            {errors.message && <p className="mt-1 text-[11px] text-red-600">{errors.message}</p>}
+          </div>
 
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="btn-gold w-full sm:w-auto gap-2 disabled:opacity-60 disabled:cursor-not-allowed group"
+              className="w-full sm:w-auto btn-luxury-primary py-4 px-8 tracking-[0.25em] flex items-center justify-center gap-2"
             >
               {status === "submitting" ? (
-                <>
-                  <span className="w-4 h-4 border-2 border-navy-900/30 border-t-navy-900 rounded-full animate-spin" />
-                  Transmitting...
-                </>
+                <span>Transmitting Brief...</span>
               ) : (
                 <>
-                  <Send className="w-4 h-4" />
-                  Transmit Secure Inquiry
+                  <span>Transmit Inquiry</span>
+                  <Send className="w-3.5 h-3.5" />
                 </>
               )}
             </button>
-          </form>
-        )}
-      </div>
+
+            <span className="text-[10px] text-neutral-400 font-heading tracking-wider uppercase">
+              Confidentiality Guaranteed
+            </span>
+          </div>
+        </form>
+      )}
     </div>
   );
 }

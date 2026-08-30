@@ -4,65 +4,97 @@
 
 @layer base {
   :root {
-    /* Premium Color Palette */
-    --color-navy-deep: #050a18;
-    --color-navy: #0a1628;
-    --color-navy-light: #152240;
-    --color-navy-mid: #1c2d4f;
-    --color-gold: #c9a84c;
-    --color-gold-light: #e8d5a0;
-    --color-gold-bright: #f0c654;
-    --color-emerald: #10b981;
-    --color-slate: #94a3b8;
-
-    /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    /* Luxury Restrained Palette */
+    --color-noir: #0a0a0a;
+    --color-noir-muted: #1c1c1c;
+    --color-ivory: #faf8f5;
+    --color-ivory-warm: #f4f0e6;
+    --color-leather-cognac: #8c5835;
+    --color-leather-saddle: #a06a3b;
+    --color-gold: #c5a869;
+    --color-gray-border: rgba(0, 0, 0, 0.08);
+    --color-gray-border-dark: rgba(255, 255, 255, 0.12);
   }
 
   html {
     scroll-padding-top: 5rem;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    background-color: #ffffff;
+    color: #0a0a0a;
   }
 
   body {
-    @apply font-body text-white bg-navy-950 antialiased;
+    @apply font-body text-noir-950 bg-white antialiased;
     overflow-x: hidden;
     max-width: 100vw;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1, "liga" 1;
   }
 
-  /* Responsive media safety — never let an asset force horizontal scroll */
+  /* Responsive media safety */
   img, svg, video, canvas {
     max-width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold tracking-tight;
+    @apply font-display tracking-tight text-noir-950;
   }
 
-  /* Serif display treatment for flagship headlines */
-  .display-heading {
-    @apply font-display font-semibold tracking-tight;
-    letter-spacing: -0.01em;
+  /* Editorial display headings */
+  .display-serif {
+    @apply font-display font-medium tracking-tight;
   }
   .display-italic {
-    @apply font-display italic font-medium;
+    @apply font-display italic font-normal;
+  }
+  .utility-sans {
+    @apply font-heading tracking-[0.18em] uppercase text-xs;
   }
 
-  /* Premium selection */
+  /* Luxury selection */
   ::selection {
-    background: rgba(201, 168, 76, 0.30);
+    background: rgba(140, 88, 53, 0.25);
+    color: #0a0a0a;
   }
 }
 
 @layer components {
+  /* ─── Louis Vuitton Inspired Luxury UI Components ─── */
+  .btn-luxury-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-noir-950 text-white font-heading text-xs tracking-[0.2em] uppercase font-semibold transition-all duration-300 hover:bg-noir-800 active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-luxury-outline {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-noir-950 border border-noir-950 font-heading text-xs tracking-[0.2em] uppercase font-semibold transition-all duration-300 hover:bg-noir-950 hover:text-white active:scale-[0.99];
+  }
+
+  .btn-luxury-white {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-white text-noir-950 font-heading text-xs tracking-[0.2em] uppercase font-semibold transition-all duration-300 hover:bg-ivory-100 hover:text-noir-950 active:scale-[0.99];
+  }
+
+  .btn-luxury-white-outline {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-white border border-white font-heading text-xs tracking-[0.2em] uppercase font-semibold transition-all duration-300 hover:bg-white hover:text-noir-950 active:scale-[0.99];
+  }
+
+  .editorial-link {
+    @apply relative inline-flex items-center gap-2 font-heading text-xs tracking-[0.22em] uppercase font-semibold text-noir-950 pb-1.5 transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-noir-950 after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .editorial-link-white {
+    @apply relative inline-flex items-center gap-2 font-heading text-xs tracking-[0.22em] uppercase font-semibold text-white pb-1.5 transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-white after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .luxury-tag {
+    @apply font-heading text-[10px] tracking-[0.25em] uppercase font-semibold text-leather-cognac;
+  }
+
   /* ─── Container ─── */
   .container-page {
-    @apply max-w-7xl mx-auto px-5 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-10;
+  }
+  .container-fluid {
+    @apply max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12;
   }
 
   /* ─── Premium Buttons ─── */

@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { Outfit, Inter, Cormorant_Garamond } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import LuxuryHeader from "@/components/luxury/LuxuryHeader";
+import LuxuryFooter from "@/components/luxury/LuxuryFooter";
+import CartDrawer from "@/components/luxury/CartDrawer";
+import WishlistDrawer from "@/components/luxury/WishlistDrawer";
+import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import "./globals.css";
 
-// Elegant high-contrast serif for display headlines (luxury flagship voice)
+// High-contrast luxury editorial serif font (Louis Vuitton style display)
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -28,59 +32,52 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://acemenventures.com"),
+  metadataBase: new URL("https://acemen.co.uk"),
   title: {
-    default: "Acemen Ventures | A Private Multi-Sector Holding House",
-    template: "%s | Acemen Ventures",
+    default: "ACEMEN | Luxury Leather Goods • London",
+    template: "%s | ACEMEN",
   },
   description:
-    "Acemen Ventures is a private, UK-incorporated holding house architecting world-class enterprises across curated digital commerce, enterprise technology & AI, fine leather goods, and global concierge & mobility.",
+    "ACEMEN is a British luxury leather house crafting fine holdalls, briefcases, small leather goods, and travel luggage from premier French and Italian full-grain hides.",
   keywords: [
-    "Acemen Ventures",
-    "holding company",
-    "private holding house",
-    "UK ventures",
-    "curated commerce",
-    "enterprise architecture",
-    "AI intelligence",
-    "fine leather goods",
-    "luxury leather",
-    "global concierge",
-    "mobility logistics",
+    "ACEMEN",
+    "Luxury Leather Goods",
+    "Full-Grain Leather Bags",
+    "Handcrafted Leather Briefcase",
+    "Leather Weekender Duffle",
+    "London Leather Atelier",
+    "Luxury Travel Luggage",
+    "Sartorial Leather Wallets",
   ],
-  authors: [{ name: "Acemen Ventures" }],
-  creator: "Acemen Ventures",
+  authors: [{ name: "ACEMEN" }],
+  creator: "ACEMEN",
   icons: {
-    icon: [
-      { url: "/favicon.png", type: "image/png" },
-    ],
-    apple: [
-      { url: "/favicon.png", type: "image/png" },
-    ],
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: [{ url: "/favicon.png", type: "image/png" }],
   },
   openGraph: {
     type: "website",
     locale: "en_GB",
-    url: "https://acemenventures.com",
-    siteName: "Acemen Ventures",
-    title: "Acemen Ventures | A Private Multi-Sector Holding House",
+    url: "https://acemen.co.uk",
+    siteName: "ACEMEN",
+    title: "ACEMEN | World-Class Luxury Leather Goods • London",
     description:
-      "Architecting the future of commerce, luxury, and technology — a private UK holding house scaling world-class enterprises.",
+      "Crafted to endure. Discover handcrafted luxury leather holdalls, briefcases, wallets, and travel trunks sculpted from premier full-grain hides.",
     images: [
       {
-        url: "/images/logo.png",
+        url: "/images/luxury/hero-campaign.jpg",
         width: 1200,
         height: 630,
-        alt: "Acemen Ventures",
+        alt: "ACEMEN Luxury Leather Goods",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Acemen Ventures | A Private Multi-Sector Holding House",
+    title: "ACEMEN | World-Class Luxury Leather Goods • London",
     description:
-      "Architecting the future of commerce, luxury, and technology — a private UK holding house scaling world-class enterprises.",
-    images: ["/images/logo.png"],
+      "Crafted to endure. Discover handcrafted luxury leather holdalls, briefcases, wallets, and travel trunks sculpted from premier full-grain hides.",
+    images: ["/images/luxury/hero-campaign.jpg"],
   },
   robots: {
     index: true,
@@ -95,10 +92,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${outfit.variable} ${inter.variable}`}>
-      <body className="min-h-screen flex flex-col">
-        <Header />
-        <main id="main" className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-screen flex flex-col bg-white text-noir-950 antialiased selection:bg-leather-cognac/20 selection:text-noir-950">
+        <CartProvider>
+          <WishlistProvider>
+            <LuxuryHeader />
+            <main id="main" className="flex-1 w-full">
+              {children}
+            </main>
+            <LuxuryFooter />
+            <CartDrawer />
+            <WishlistDrawer />
+          </WishlistProvider>
+        </CartProvider>
       </body>
     </html>
   );

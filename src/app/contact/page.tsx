@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ContactPageClient from "./ContactPageClient";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Client Concierge & Bespoke Commissions | ACEMEN London",
   description:
-    "Get in touch with Acemen Ventures — reach out via our contact form, email, phone, or visit our UK office.",
+    "Contact the ACEMEN London Private Client Desk for bespoke leather commissions, monogramming appointments, and worldwide client services.",
 };
 
 export default function ContactPage() {

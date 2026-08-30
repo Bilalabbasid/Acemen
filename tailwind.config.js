@@ -6,6 +6,33 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        noir: {
+          950: '#080808',
+          900: '#0f0f0f',
+          850: '#141414',
+          800: '#1c1c1c',
+          700: '#2a2a2a',
+          600: '#3d3d3d',
+        },
+        ivory: {
+          50: '#fcfbf8',
+          100: '#f8f6f0',
+          200: '#f0ece1',
+          300: '#e5dfd0',
+          400: '#cfc6b2',
+        },
+        leather: {
+          espresso: '#2b1e16',
+          cognac: '#8c5835',
+          saddle: '#a06a3b',
+          tan: '#c29b6e',
+          sand: '#dfcfbe',
+        },
+        champagne: {
+          400: '#dfc278',
+          500: '#c5a869',
+          600: '#ad9051',
+        },
         navy: {
           50: '#f0f3f9',
           100: '#dce3f0',
@@ -30,13 +57,6 @@ module.exports = {
           700: '#8a6e22',
           800: '#5c4917',
           900: '#2e240b',
-        },
-        // Muted luxury accents — desaturated metallics & earth tones (no bright primaries)
-        venture: {
-          ecommerce: '#b08d57', // antique brass
-          it: '#7d8ca3',        // brushed pewter
-          shoes: '#9c6b45',     // cognac leather
-          travel: '#6f8778',    // muted verdigris
         },
       },
       fontFamily: {
