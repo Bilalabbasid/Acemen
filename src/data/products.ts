@@ -56,6 +56,300 @@ const standardShoeSizes = ["39", "40", "41", "42", "43", "44", "45", "46"];
 const standardJacketSizes = ["S", "M", "L", "XL", "XXL"];
 
 export const luxuryProducts: ProductItem[] = [
+  // ── NEW: THE REGENT OXFORD ──
+  {
+    id: "acemen-regent-oxford",
+    slug: "regent-cap-toe-oxford",
+    name: "The Regent Cap-Toe Oxford",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Oxford",
+    gender: "men",
+    price: 720,
+    currency: "GBP",
+    formattedPrice: "£720",
+    tag: "Atelier Exclusive",
+    isNewArrival: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-oxford-regent-1.webp",
+      secondary: "/images/luxury/prod-oxford-regent-2.webp",
+    },
+    colors: [{ name: "Jet Black", hex: "#0a0a0a" }],
+    shortDescription: "A minimalist cap-toe Oxford cut from mirror-polished jet black full-grain calfskin.",
+    story: "Designed for the highest tiers of formal dress, the Regent utilizes a single, seamless vamp pattern and a hand-polished cap-toe that delivers a mirror-like finish, embodying London sartorial strictness.",
+    materials: [
+      "100% Full-grain French box calfskin upper",
+      "Oak bark-tanned leather sole",
+      "Glove-calfskin lining",
+    ],
+    dimensions: {
+      heelHeight: "25 mm stacked leather heel",
+      soleType: "Goodyear welted closed-channel sole",
+    },
+    details: [
+      "Mirror-polished cap-toe",
+      "Blind five-eyelet lacing",
+      "Includes solid cedar shoe trees",
+    ],
+    careInstructions: [
+      "Insert cedar shoe trees immediately following every wear",
+      "Clean with soft horsehair brush and polish with ACEMEN high-wax cream",
+    ],
+    inStock: true,
+  },
+
+  // ── NEW: THE MAYFAIR OXFORD ──
+  {
+    id: "acemen-mayfair-oxford",
+    slug: "mayfair-plain-toe-oxford",
+    name: "The Mayfair Plain-Toe Oxford",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Oxford",
+    gender: "men",
+    price: 690,
+    currency: "GBP",
+    formattedPrice: "£690",
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-oxford-mayfair-1.webp",
+      secondary: "/images/luxury/prod-oxford-mayfair-2.webp",
+    },
+    colors: [{ name: "Dark Chocolate", hex: "#3B2F2F" }],
+    shortDescription: "A seamless plain-toe Oxford rendered in deep espresso dark brown smooth leather.",
+    story: "The Mayfair showcases the absolute purity of the leather hide. With no cap-toe or broguing to hide behind, only the most flawless sections of calfskin are selected for this wholecut-inspired plain-toe Oxford.",
+    materials: [
+      "100% Full-grain calfskin upper",
+      "Oak bark-tanned leather sole",
+      "Glove-calfskin lining",
+    ],
+    dimensions: {
+      heelHeight: "25 mm stacked leather heel",
+      soleType: "Goodyear welted closed-channel sole",
+    },
+    details: [
+      "Seamless plain-toe design",
+      "Blind five-eyelet lacing",
+      "Includes solid cedar shoe trees",
+    ],
+    careInstructions: [
+      "Insert cedar shoe trees immediately following every wear",
+      "Clean with soft horsehair brush",
+    ],
+    inStock: true,
+  },
+
+  // ── NEW: THE GROSVENOR OXFORD ──
+  {
+    id: "acemen-grosvenor-oxford",
+    slug: "grosvenor-brogue-oxford",
+    name: "The Grosvenor Brogue Oxford",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Oxford",
+    gender: "men",
+    price: 740,
+    currency: "GBP",
+    formattedPrice: "£740",
+    isIconic: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-oxford-grosvenor-1.webp",
+      secondary: "/images/luxury/prod-oxford-grosvenor-2.webp",
+    },
+    colors: [{ name: "Burnished Cognac", hex: "#8B4513" }],
+    shortDescription: "Rich warm cognac tan leather featuring a hand-burnished toe box and minimal quarter broguing.",
+    story: "The Grosvenor introduces subtle architectural broguing along the quarters and toe cap. The cognac calfskin is hand-burnished by our master colorists to create a rich, antiqued patina that deepens beautifully over time.",
+    materials: [
+      "100% Full-grain calfskin upper with burnished finish",
+      "Oak bark-tanned leather sole",
+      "Glove-calfskin lining",
+    ],
+    dimensions: {
+      heelHeight: "25 mm stacked leather heel",
+      soleType: "Goodyear welted closed-channel sole",
+    },
+    details: [
+      "Hand-burnished toe box and heel counter",
+      "Subtle quarter brogue detailing",
+      "Includes solid cedar shoe trees",
+    ],
+    careInstructions: [
+      "Insert cedar shoe trees immediately following every wear",
+      "Polish with neutral or cognac cream to maintain patina",
+    ],
+    inStock: true,
+  },
+
+  // ── NEW: THE ST. JAMES OXFORD ──
+  {
+    id: "acemen-stjames-oxford",
+    slug: "st-james-oxblood-oxford",
+    name: "The St. James Oxford",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Oxford",
+    gender: "men",
+    price: 720,
+    currency: "GBP",
+    formattedPrice: "£720",
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-oxford-stjames-1.webp",
+      secondary: "/images/luxury/prod-oxford-stjames-2.webp",
+    },
+    colors: [{ name: "Deep Oxblood", hex: "#4A0E1A" }],
+    shortDescription: "A classic silhouette crafted from rich dark burgundy polished leather.",
+    story: "A masterful alternative to black, the St. James is dyed in a deep, rich oxblood hue that reveals its complexity under direct light. A testament to classical English shoemaking with a subtle contemporary edge.",
+    materials: [
+      "100% Full-grain calfskin upper",
+      "Oak bark-tanned leather sole",
+      "Glove-calfskin lining",
+    ],
+    dimensions: {
+      heelHeight: "25 mm stacked leather heel",
+      soleType: "Goodyear welted closed-channel sole",
+    },
+    details: [
+      "Rich oxblood dye finish",
+      "Blind five-eyelet lacing",
+      "Includes solid cedar shoe trees",
+    ],
+    careInstructions: [
+      "Insert cedar shoe trees immediately following every wear",
+      "Polish with burgundy cream",
+    ],
+    inStock: true,
+  },
+
+  // ── NEW: THE MILANO SINGLE MONK ──
+  {
+    id: "acemen-milano-single-monk",
+    slug: "milano-single-monk-strap",
+    name: "The Milano Single Monk Strap",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Monk",
+    gender: "men",
+    price: 710,
+    currency: "GBP",
+    formattedPrice: "£710",
+    isNewArrival: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-monk-milano-1.webp",
+      secondary: "/images/luxury/prod-monk-milano-2.webp",
+    },
+    colors: [{ name: "Black Calfskin", hex: "#111111" }],
+    shortDescription: "Polished black calfskin leather fastened with a single solid silver-finish buckle.",
+    story: "The Milano single monk strap offers an uncompromised, clean silhouette. Sweeping lines of unbroken calfskin meet over the instep, secured by a custom-milled, silver-finish buckle for understated European elegance.",
+    materials: [
+      "100% Full-grain French calfskin upper",
+      "Oak bark-tanned leather sole",
+      "Silver-finish solid brass hardware",
+    ],
+    dimensions: {
+      heelHeight: "25 mm stacked leather heel",
+      soleType: "Goodyear welted closed-channel sole",
+    },
+    details: [
+      "Single strap closure",
+      "Silver-finish hardware",
+      "Includes solid cedar shoe trees",
+    ],
+    careInstructions: [
+      "Insert cedar shoe trees immediately following every wear",
+      "Clean with soft horsehair brush",
+    ],
+    inStock: true,
+  },
+
+  // ── NEW: THE SAVOY DOUBLE MONK ──
+  {
+    id: "acemen-savoy-double-monk",
+    slug: "savoy-double-monk-strap",
+    name: "The Savoy Double Monk Strap",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Monk",
+    gender: "men",
+    price: 750,
+    currency: "GBP",
+    formattedPrice: "£750",
+    isBestSeller: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-monk-savoy-1.webp",
+      secondary: "/images/luxury/prod-monk-savoy-2.webp",
+    },
+    colors: [{ name: "Espresso Brown", hex: "#2C1B14" }],
+    shortDescription: "Deep chocolate brown calfskin secured by solid brass double buckles.",
+    story: "The Savoy is an authoritative double monk strap design. Cut from rich espresso calfskin and featuring twin brass buckles, it provides a striking, architectural anchor to both tailored suiting and smart casual wear.",
+    materials: [
+      "100% Full-grain calfskin upper",
+      "Oak bark-tanned leather sole",
+      "Solid brass hardware",
+    ],
+    dimensions: {
+      heelHeight: "25 mm stacked leather heel",
+      soleType: "Goodyear welted closed-channel sole",
+    },
+    details: [
+      "Double strap closure",
+      "Solid brass hardware",
+      "Hand-burnished toe",
+      "Includes solid cedar shoe trees",
+    ],
+    careInstructions: [
+      "Insert cedar shoe trees immediately following every wear",
+      "Clean with soft horsehair brush",
+    ],
+    inStock: true,
+  },
+
+  // ── NEW: THE CAVENDISH DOUBLE MONK ──
+  {
+    id: "acemen-cavendish-double-monk",
+    slug: "cavendish-double-monk-strap",
+    name: "The Cavendish Double Monk",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Monk",
+    gender: "men",
+    price: 760,
+    currency: "GBP",
+    formattedPrice: "£760",
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-monk-cavendish-1.webp",
+      secondary: "/images/luxury/prod-monk-cavendish-1.webp", // Fallback to primary for slow zoom
+    },
+    colors: [{ name: "Tan Calfskin", hex: "#A87042" }],
+    shortDescription: "Rich warm tan calfskin with double brass buckles and an architectural brogue toe cap.",
+    story: "A masterful expression of continental style, the Cavendish combines the robust architecture of a double monk strap with the intricate detailing of a brogue toe cap, all presented in a brilliant, hand-finished tan.",
+    materials: [
+      "100% Full-grain calfskin upper",
+      "Oak bark-tanned leather sole",
+      "Solid brass hardware",
+    ],
+    dimensions: {
+      heelHeight: "25 mm stacked leather heel",
+      soleType: "Goodyear welted closed-channel sole",
+    },
+    details: [
+      "Double strap closure",
+      "Solid brass hardware",
+      "Brogue toe cap detailing",
+      "Includes solid cedar shoe trees",
+    ],
+    careInstructions: [
+      "Insert cedar shoe trees immediately following every wear",
+      "Clean with soft horsehair brush",
+    ],
+    inStock: true,
+  },
+
   // ── 1. FOOTWEAR: THE JERMYN CLASSIC OXFORD ──
   {
     id: "acemen-jermyn-classic-oxford",
