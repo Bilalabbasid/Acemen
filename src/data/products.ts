@@ -104,10 +104,10 @@ export const luxuryProducts: ProductItem[] = [
     isBestSeller: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-oxford-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-oxford-pair.jpg",
+      primary: "/images/luxury/prod-shoe-oxford-pair.webp",
+      secondary: "/images/luxury/prod-shoe-oxford-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-oxford-pair.jpg",
+        "/images/luxury/prod-shoe-oxford-pair.webp",
         "/images/luxury/footwear-campaign.webp",
         "/images/luxury/craftsmanship.webp",
       ],
@@ -165,10 +165,10 @@ export const luxuryProducts: ProductItem[] = [
     isBestSeller: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-monk-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-monk-pair.jpg",
+      primary: "/images/luxury/prod-shoe-monk-pair.webp",
+      secondary: "/images/luxury/prod-shoe-monk-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-monk-pair.jpg",
+        "/images/luxury/prod-shoe-monk-pair.webp",
         "/images/luxury/men-campaign.webp",
       ],
     },
@@ -225,10 +225,10 @@ export const luxuryProducts: ProductItem[] = [
     isNewArrival: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-chelsea-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-chelsea-pair.jpg",
+      primary: "/images/luxury/prod-shoe-chelsea-pair.webp",
+      secondary: "/images/luxury/prod-shoe-chelsea-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-chelsea-pair.jpg",
+        "/images/luxury/prod-shoe-chelsea-pair.webp",
         "/images/luxury/footwear-campaign.webp",
       ],
     },
@@ -285,10 +285,10 @@ export const luxuryProducts: ProductItem[] = [
     isNewArrival: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-dressboot-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-dressboot-pair.jpg",
+      primary: "/images/luxury/prod-shoe-dressboot-pair.webp",
+      secondary: "/images/luxury/prod-shoe-dressboot-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-dressboot-pair.jpg",
+        "/images/luxury/prod-shoe-dressboot-pair.webp",
         "/images/luxury/craftsmanship.webp",
       ],
     },
@@ -344,10 +344,10 @@ export const luxuryProducts: ProductItem[] = [
     tag: "Casual Luxury",
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-chukka-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-chukka-pair.jpg",
+      primary: "/images/luxury/prod-shoe-chukka-pair.webp",
+      secondary: "/images/luxury/prod-shoe-chukka-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-chukka-pair.jpg",
+        "/images/luxury/prod-shoe-chukka-pair.webp",
         "/images/luxury/footwear-campaign.webp",
       ],
     },
@@ -404,10 +404,10 @@ export const luxuryProducts: ProductItem[] = [
     isBestSeller: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-loafer-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-loafer-pair.jpg",
+      primary: "/images/luxury/prod-shoe-loafer-pair.webp",
+      secondary: "/images/luxury/prod-shoe-loafer-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-loafer-pair.jpg",
+        "/images/luxury/prod-shoe-loafer-pair.webp",
         "/images/luxury/men-campaign.webp",
       ],
     },
@@ -465,10 +465,10 @@ export const luxuryProducts: ProductItem[] = [
     isNewArrival: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-pilot-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-pilot-pair.jpg",
+      primary: "/images/luxury/prod-shoe-pilot-pair.webp",
+      secondary: "/images/luxury/prod-shoe-pilot-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-pilot-pair.jpg",
+        "/images/luxury/prod-shoe-pilot-pair.webp",
         "/images/luxury/pilot-campaign.webp",
         "/images/luxury/travel-campaign.webp",
       ],
@@ -525,10 +525,10 @@ export const luxuryProducts: ProductItem[] = [
     tag: "Everyday Luxury",
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-casualderby-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-casualderby-pair.jpg",
+      primary: "/images/luxury/prod-shoe-casualderby-pair.webp",
+      secondary: "/images/luxury/prod-shoe-casualderby-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-casualderby-pair.jpg",
+        "/images/luxury/prod-shoe-casualderby-pair.webp",
         "/images/luxury/footwear-campaign.webp",
       ],
     },
@@ -585,10 +585,10 @@ export const luxuryProducts: ProductItem[] = [
     isNewArrival: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-sneaker-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-sneaker-pair.jpg",
+      primary: "/images/luxury/prod-shoe-sneaker-pair.webp",
+      secondary: "/images/luxury/prod-shoe-sneaker-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-sneaker-pair.jpg",
+        "/images/luxury/prod-shoe-sneaker-pair.webp",
         "/images/luxury/footwear-campaign.webp",
       ],
     },
@@ -646,10 +646,10 @@ export const luxuryProducts: ProductItem[] = [
     isNewArrival: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-shoe-patina-pair.jpg",
-      secondary: "/images/luxury/prod-shoe-patina-pair.jpg",
+      primary: "/images/luxury/prod-shoe-patina-pair.webp",
+      secondary: "/images/luxury/prod-shoe-patina-pair.webp",
       gallery: [
-        "/images/luxury/prod-shoe-patina-pair.jpg",
+        "/images/luxury/prod-shoe-patina-pair.webp",
         "/images/luxury/craftsmanship.webp",
         "/images/luxury/men-campaign.webp",
       ],

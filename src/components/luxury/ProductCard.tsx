@@ -38,6 +38,8 @@ export default function ProductCard({ product, onQuickView, onOpenQuote }: Produ
         <img
           src={product.images.primary}
           alt={product.name}
+          width={600}
+          height={600}
           loading="lazy"
           decoding="async"
           className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-out ${
@@ -56,6 +58,8 @@ export default function ProductCard({ product, onQuickView, onOpenQuote }: Produ
           <img
             src={product.images.secondary}
             alt={`${product.name} alternate view`}
+            width={600}
+            height={600}
             loading="lazy"
             decoding="async"
             className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-out ${
