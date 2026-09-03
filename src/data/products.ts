@@ -18,6 +18,7 @@ export interface ProductItem {
   category: ProductCategory;
   subType?: string;
   gender: GenderCategory;
+  // B2B MODE — D2C pricing temporarily disabled for front-end visitors; preserved for backend/quote baselines
   price: number;
   currency: string;
   formattedPrice: string;
@@ -50,399 +51,435 @@ export interface ProductItem {
   details: string[];
   careInstructions: string[];
   inStock: boolean;
+
+  // B2B & Wholesale Manufacturing Attributes
+  modelNumber?: string;
+  upperLeather?: string;
+  finishOptions?: string[];
+  soleOptions?: string[];
+  customBranding?: string;
+  customizationAvailable?: boolean;
+}
+
+export function getProductModelNumber(product: ProductItem): string {
+  if (product.modelNumber) return product.modelNumber;
+  const prefixMap: Record<string, string> = {
+    "Shoes": "ACE-SH",
+    "Pilot Collection": "ACE-PLT",
+    "Jackets": "ACE-JKT",
+    "Bags": "ACE-BAG",
+    "Wallets": "ACE-WLT",
+    "Belts": "ACE-BLT",
+    "Travel": "ACE-TRV",
+    "Accessories": "ACE-ACC",
+  };
+  const prefix = prefixMap[product.category] || "ACE-MD";
+  const num = Math.abs(product.id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0) % 89) + 10;
+  return `${prefix}-${num}`;
 }
 
 const standardShoeSizes = ["39", "40", "41", "42", "43", "44", "45", "46"];
 const standardJacketSizes = ["S", "M", "L", "XL", "XXL"];
 
 export const luxuryProducts: ProductItem[] = [
-  // ── NEW: THE REGENT OXFORD ──
+  // ─────────────────────────────────────────────────────────────
+  // ── THE 10 DIVERSE FOOTWEAR MODELS (EACH A COMPLETE PAIR) ──
+  // ─────────────────────────────────────────────────────────────
+
+  // 1. CLASSIC OXFORD
   {
     id: "acemen-regent-oxford",
     slug: "regent-cap-toe-oxford",
-    name: "The Regent Cap-Toe Oxford",
+    name: "The Regent Classic Oxford",
+    modelNumber: "ACE-OXF-01",
     collection: "The Footwear Atelier",
     category: "Shoes",
-    subType: "Oxford",
+    subType: "Classic Oxford",
     gender: "men",
     price: 720,
     currency: "GBP",
     formattedPrice: "£720",
-    tag: "Atelier Exclusive",
-    isNewArrival: true,
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-oxford-regent-1.webp",
-      secondary: "/images/luxury/prod-oxford-regent-2.webp",
-    },
-    colors: [{ name: "Jet Black", hex: "#0a0a0a" }],
-    shortDescription: "A minimalist cap-toe Oxford cut from mirror-polished jet black full-grain calfskin.",
-    story: "Designed for the highest tiers of formal dress, the Regent utilizes a single, seamless vamp pattern and a hand-polished cap-toe that delivers a mirror-like finish, embodying London sartorial strictness.",
-    materials: [
-      "100% Full-grain French box calfskin upper",
-      "Oak bark-tanned leather sole",
-      "Glove-calfskin lining",
-    ],
-    dimensions: {
-      heelHeight: "25 mm stacked leather heel",
-      soleType: "Goodyear welted closed-channel sole",
-    },
-    details: [
-      "Mirror-polished cap-toe",
-      "Blind five-eyelet lacing",
-      "Includes solid cedar shoe trees",
-    ],
-    careInstructions: [
-      "Insert cedar shoe trees immediately following every wear",
-      "Clean with soft horsehair brush and polish with ACEMEN high-wax cream",
-    ],
-    inStock: true,
-  },
-
-  // ── NEW: THE MAYFAIR OXFORD ──
-  {
-    id: "acemen-mayfair-oxford",
-    slug: "mayfair-plain-toe-oxford",
-    name: "The Mayfair Plain-Toe Oxford",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Oxford",
-    gender: "men",
-    price: 690,
-    currency: "GBP",
-    formattedPrice: "£690",
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-oxford-mayfair-1.webp",
-      secondary: "/images/luxury/prod-oxford-mayfair-2.webp",
-    },
-    colors: [{ name: "Dark Chocolate", hex: "#3B2F2F" }],
-    shortDescription: "A seamless plain-toe Oxford rendered in deep espresso dark brown smooth leather.",
-    story: "The Mayfair showcases the absolute purity of the leather hide. With no cap-toe or broguing to hide behind, only the most flawless sections of calfskin are selected for this wholecut-inspired plain-toe Oxford.",
-    materials: [
-      "100% Full-grain calfskin upper",
-      "Oak bark-tanned leather sole",
-      "Glove-calfskin lining",
-    ],
-    dimensions: {
-      heelHeight: "25 mm stacked leather heel",
-      soleType: "Goodyear welted closed-channel sole",
-    },
-    details: [
-      "Seamless plain-toe design",
-      "Blind five-eyelet lacing",
-      "Includes solid cedar shoe trees",
-    ],
-    careInstructions: [
-      "Insert cedar shoe trees immediately following every wear",
-      "Clean with soft horsehair brush",
-    ],
-    inStock: true,
-  },
-
-  // ── NEW: THE GROSVENOR OXFORD ──
-  {
-    id: "acemen-grosvenor-oxford",
-    slug: "grosvenor-brogue-oxford",
-    name: "The Grosvenor Brogue Oxford",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Oxford",
-    gender: "men",
-    price: 740,
-    currency: "GBP",
-    formattedPrice: "£740",
-    isIconic: true,
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-oxford-grosvenor-1.webp",
-      secondary: "/images/luxury/prod-oxford-grosvenor-2.webp",
-    },
-    colors: [{ name: "Burnished Cognac", hex: "#8B4513" }],
-    shortDescription: "Rich warm cognac tan leather featuring a hand-burnished toe box and minimal quarter broguing.",
-    story: "The Grosvenor introduces subtle architectural broguing along the quarters and toe cap. The cognac calfskin is hand-burnished by our master colorists to create a rich, antiqued patina that deepens beautifully over time.",
-    materials: [
-      "100% Full-grain calfskin upper with burnished finish",
-      "Oak bark-tanned leather sole",
-      "Glove-calfskin lining",
-    ],
-    dimensions: {
-      heelHeight: "25 mm stacked leather heel",
-      soleType: "Goodyear welted closed-channel sole",
-    },
-    details: [
-      "Hand-burnished toe box and heel counter",
-      "Subtle quarter brogue detailing",
-      "Includes solid cedar shoe trees",
-    ],
-    careInstructions: [
-      "Insert cedar shoe trees immediately following every wear",
-      "Polish with neutral or cognac cream to maintain patina",
-    ],
-    inStock: true,
-  },
-
-  // ── NEW: THE ST. JAMES OXFORD ──
-  {
-    id: "acemen-stjames-oxford",
-    slug: "st-james-oxblood-oxford",
-    name: "The St. James Oxford",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Oxford",
-    gender: "men",
-    price: 720,
-    currency: "GBP",
-    formattedPrice: "£720",
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-oxford-stjames-1.webp",
-      secondary: "/images/luxury/prod-oxford-stjames-2.webp",
-    },
-    colors: [{ name: "Deep Oxblood", hex: "#4A0E1A" }],
-    shortDescription: "A classic silhouette crafted from rich dark burgundy polished leather.",
-    story: "A masterful alternative to black, the St. James is dyed in a deep, rich oxblood hue that reveals its complexity under direct light. A testament to classical English shoemaking with a subtle contemporary edge.",
-    materials: [
-      "100% Full-grain calfskin upper",
-      "Oak bark-tanned leather sole",
-      "Glove-calfskin lining",
-    ],
-    dimensions: {
-      heelHeight: "25 mm stacked leather heel",
-      soleType: "Goodyear welted closed-channel sole",
-    },
-    details: [
-      "Rich oxblood dye finish",
-      "Blind five-eyelet lacing",
-      "Includes solid cedar shoe trees",
-    ],
-    careInstructions: [
-      "Insert cedar shoe trees immediately following every wear",
-      "Polish with burgundy cream",
-    ],
-    inStock: true,
-  },
-
-  // ── NEW: THE MILANO SINGLE MONK ──
-  {
-    id: "acemen-milano-single-monk",
-    slug: "milano-single-monk-strap",
-    name: "The Milano Single Monk Strap",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Monk",
-    gender: "men",
-    price: 710,
-    currency: "GBP",
-    formattedPrice: "£710",
-    isNewArrival: true,
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-monk-milano-1.webp",
-      secondary: "/images/luxury/prod-monk-milano-2.webp",
-    },
-    colors: [{ name: "Black Calfskin", hex: "#111111" }],
-    shortDescription: "Polished black calfskin leather fastened with a single solid silver-finish buckle.",
-    story: "The Milano single monk strap offers an uncompromised, clean silhouette. Sweeping lines of unbroken calfskin meet over the instep, secured by a custom-milled, silver-finish buckle for understated European elegance.",
-    materials: [
-      "100% Full-grain French calfskin upper",
-      "Oak bark-tanned leather sole",
-      "Silver-finish solid brass hardware",
-    ],
-    dimensions: {
-      heelHeight: "25 mm stacked leather heel",
-      soleType: "Goodyear welted closed-channel sole",
-    },
-    details: [
-      "Single strap closure",
-      "Silver-finish hardware",
-      "Includes solid cedar shoe trees",
-    ],
-    careInstructions: [
-      "Insert cedar shoe trees immediately following every wear",
-      "Clean with soft horsehair brush",
-    ],
-    inStock: true,
-  },
-
-  // ── NEW: THE SAVOY DOUBLE MONK ──
-  {
-    id: "acemen-savoy-double-monk",
-    slug: "savoy-double-monk-strap",
-    name: "The Savoy Double Monk Strap",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Monk",
-    gender: "men",
-    price: 750,
-    currency: "GBP",
-    formattedPrice: "£750",
-    isBestSeller: true,
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-monk-savoy-1.webp",
-      secondary: "/images/luxury/prod-monk-savoy-2.webp",
-    },
-    colors: [{ name: "Espresso Brown", hex: "#2C1B14" }],
-    shortDescription: "Deep chocolate brown calfskin secured by solid brass double buckles.",
-    story: "The Savoy is an authoritative double monk strap design. Cut from rich espresso calfskin and featuring twin brass buckles, it provides a striking, architectural anchor to both tailored suiting and smart casual wear.",
-    materials: [
-      "100% Full-grain calfskin upper",
-      "Oak bark-tanned leather sole",
-      "Solid brass hardware",
-    ],
-    dimensions: {
-      heelHeight: "25 mm stacked leather heel",
-      soleType: "Goodyear welted closed-channel sole",
-    },
-    details: [
-      "Double strap closure",
-      "Solid brass hardware",
-      "Hand-burnished toe",
-      "Includes solid cedar shoe trees",
-    ],
-    careInstructions: [
-      "Insert cedar shoe trees immediately following every wear",
-      "Clean with soft horsehair brush",
-    ],
-    inStock: true,
-  },
-
-  // ── NEW: THE CAVENDISH DOUBLE MONK ──
-  {
-    id: "acemen-cavendish-double-monk",
-    slug: "cavendish-double-monk-strap",
-    name: "The Cavendish Double Monk",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Monk",
-    gender: "men",
-    price: 760,
-    currency: "GBP",
-    formattedPrice: "£760",
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-monk-cavendish-1.webp",
-      secondary: "/images/luxury/prod-monk-cavendish-1.webp", // Fallback to primary for slow zoom
-    },
-    colors: [{ name: "Tan Calfskin", hex: "#A87042" }],
-    shortDescription: "Rich warm tan calfskin with double brass buckles and an architectural brogue toe cap.",
-    story: "A masterful expression of continental style, the Cavendish combines the robust architecture of a double monk strap with the intricate detailing of a brogue toe cap, all presented in a brilliant, hand-finished tan.",
-    materials: [
-      "100% Full-grain calfskin upper",
-      "Oak bark-tanned leather sole",
-      "Solid brass hardware",
-    ],
-    dimensions: {
-      heelHeight: "25 mm stacked leather heel",
-      soleType: "Goodyear welted closed-channel sole",
-    },
-    details: [
-      "Double strap closure",
-      "Solid brass hardware",
-      "Brogue toe cap detailing",
-      "Includes solid cedar shoe trees",
-    ],
-    careInstructions: [
-      "Insert cedar shoe trees immediately following every wear",
-      "Clean with soft horsehair brush",
-    ],
-    inStock: true,
-  },
-
-  // ── 1. FOOTWEAR: THE JERMYN CLASSIC OXFORD ──
-  {
-    id: "acemen-jermyn-classic-oxford",
-    slug: "jermyn-classic-oxford-shoe",
-    name: "The Jermyn Hand-Lasted Oxford",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Oxford",
-    gender: "men",
-    price: 680,
-    currency: "GBP",
-    formattedPrice: "£680",
-    tag: "Artisan Benchmark",
+    tag: "Formal Benchmark",
     isIconic: true,
     isBestSeller: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-oxford-1.webp",
-      secondary: "/images/luxury/prod-oxford-2.webp",
+      primary: "/images/luxury/prod-shoe-oxford-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-oxford-pair.jpg",
       gallery: [
-        "/images/luxury/prod-oxford-1.webp",
-        "/images/luxury/prod-oxford-2.webp",
+        "/images/luxury/prod-shoe-oxford-pair.jpg",
         "/images/luxury/footwear-campaign.webp",
         "/images/luxury/craftsmanship.webp",
       ],
     },
     colors: [
-      { name: "Obsidian Black", hex: "#111111" },
-      { name: "Burnished Mahogany", hex: "#4A281E" },
+      { name: "Jet Black", hex: "#0A0A0A" },
+      { name: "Espresso Brown", hex: "#2C1B14" },
     ],
     shortDescription:
-      "A classic five-eyelet closed-lacing Oxford shoe, sculpted from mirror-gloss French box calf leather with hand-sewn Goodyear welted construction.",
+      "Crafted in smooth polished black French box calfskin, the Regent Classic Oxford combines a refined cap-toe silhouette with understated five-eyelet closed lacing. Designed for formal occasions and polished executive attire.",
     story:
-      "Cut and shaped on our signature London chisel last, The Jermyn Oxford embodies the apex of British bespoke shoemaking. Every pair undergoes over two hundred individual hand operations in our atelier, including channeled oak-bark leather soles, hand-beveled waists, and a hand-applied mirror toe burnish.",
+      "Sculpted on our signature London chisel Last, the Regent Classic Oxford represents the quintessential British dress shoe. Every pair undergoes over two hundred hand operations in our atelier, featuring channeled oak-bark leather soles, hand-beveled waists, and a mirror-like high-friction cap burnish.",
     materials: [
       "100% Full-grain French box calfskin upper",
-      "Oak bark-tanned English leather sole with brass nail reinforcement",
-      "Full glove-calfskin lining and vegetable-tanned leather insole",
-      "Traditional Goodyear welted channeled construction",
+      "Oak bark-tanned leather sole with brass nail reinforcement",
+      "Full glove-calfskin lining and vegetable-tanned insole",
+      "Goodyear-welted closed-channel sole construction",
     ],
     dimensions: {
       heelHeight: "25 mm stacked leather heel with rubber dovetail",
-      soleType: "Goodyear welted oak bark leather sole with concealed channeled stitching",
+      soleType: "Goodyear-welted closed-channel leather sole",
     },
     details: [
-      "Hand-lasted closed five-eyelet lacing structure",
-      "Channeled sole stitching concealed beneath a skived leather flap",
-      "Debossed ACEMEN hallmark on natural leather insole",
-      "Hand-burnished toe box with mirror glaze finish",
-      "Includes solid cedar shoe trees and cotton flannel travel bags",
+      "Mirror-polished cap-toe with delicate punch perforations",
+      "Closed five-eyelet lacing structure",
+      "Concealed channeled sole stitching",
+      "Includes solid cedar shoe trees and cotton travel bags",
     ],
     careInstructions: [
       "Insert cedar shoe trees immediately following every wear",
-      "Clean with soft horsehair brush and polish with ACEMEN high-wax cream",
-      "Allow 24 hours between wearings for leather to breathe",
+      "Clean with soft horsehair brush and polish with ACEMEN high-wax black cream",
     ],
     inStock: true,
+    upperLeather: "French Box Calfskin (1.2mm)",
+    finishOptions: ["Mirror Glaze", "Hand-Burnished", "Semi-Matte"],
+    soleOptions: ["Closed-Channel Leather", "Dainite Rubber", "Half-Rubber Tread"],
+    customBranding: "Gold leaf insole stamping, custom laser sole debossing",
+    customizationAvailable: true,
   },
 
-  // ── 2. FOOTWEAR: THE AVIATOR SOVEREIGN PILOT SHOE ──
+  // 2. MONK STRAP
   {
-    id: "acemen-aviator-sovereign-pilot-shoe",
+    id: "acemen-savile-monk",
+    slug: "savile-double-monk-strap",
+    name: "The Savile Double Monk Strap",
+    modelNumber: "ACE-MNK-01",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Monk Strap",
+    gender: "men",
+    price: 760,
+    currency: "GBP",
+    formattedPrice: "£760",
+    tag: "Atelier Signature",
+    isBestSeller: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-shoe-monk-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-monk-pair.jpg",
+      gallery: [
+        "/images/luxury/prod-shoe-monk-pair.jpg",
+        "/images/luxury/men-campaign.webp",
+      ],
+    },
+    colors: [
+      { name: "Patinated Cognac", hex: "#8C5835" },
+      { name: "Espresso Dark Brown", hex: "#2B1E16" },
+    ],
+    shortDescription:
+      "Defined by its distinctive double-buckle fastening, the Savile Monk Strap brings a contemporary edge to traditional leather craftsmanship. Finished in rich hand-patinated cognac leather with hand-burnished toe and heel shading.",
+    story:
+      "The Savile is hand-dyed in small batches using layered pigment washes to create an organic, deep cognac patina. Fastened with dual solid forged brass buckles anchored on elasticated gussets for effortless slip-on entrance and enduring architectural form.",
+    materials: [
+      "100% Full-grain Bavarian crust calfskin upper",
+      "Milled solid brass buckle closures with satin gold plating",
+      "Goodyear-welted channeled leather sole with rubber dovetail heel",
+      "Full glove-calfskin lining",
+    ],
+    dimensions: {
+      heelHeight: "26 mm stacked leather heel",
+      soleType: "Goodyear-welted Italian leather sole with blind waist stitching",
+    },
+    details: [
+      "Adjustable dual strap closure with concealed elastic flex release",
+      "Hand-painted antique edge burnishing",
+      "Subtle hand-finished toe shading",
+      "Gold foil debossed ACEMEN insole crest",
+    ],
+    careInstructions: [
+      "Polish with tinted cognac wax polish to preserve color depth",
+      "Condition leather twice yearly with nourishing balm",
+    ],
+    inStock: true,
+    upperLeather: "Bavarian Full-Grain Crust Calfskin",
+    finishOptions: ["Hand-Applied Museum Patina", "Antique Burnish", "Aniline Dip"],
+    soleOptions: ["Full Leather Sole", "Dainite Studded Rubber", "Vibram Half-Sole"],
+    customBranding: "Laser-engraved buckle hardware, gold leaf insole crest",
+    customizationAvailable: true,
+  },
+
+  // 3. CHELSEA BOOT
+  {
+    id: "acemen-mayfair-chelsea",
+    slug: "mayfair-leather-chelsea-boot",
+    name: "The Mayfair Leather Chelsea Boot",
+    modelNumber: "ACE-BOT-01",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Chelsea Boot",
+    gender: "unisex",
+    price: 790,
+    currency: "GBP",
+    formattedPrice: "£790",
+    tag: "Iconic Silhouette",
+    isNewArrival: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-shoe-chelsea-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-chelsea-pair.jpg",
+      gallery: [
+        "/images/luxury/prod-shoe-chelsea-pair.jpg",
+        "/images/luxury/footwear-campaign.webp",
+      ],
+    },
+    colors: [
+      { name: "Espresso Dark Brown", hex: "#2A1D17" },
+      { name: "Obsidian Black", hex: "#0F0F0F" },
+    ],
+    shortDescription:
+      "Cut from seamless full-grain French calfskin, the Mayfair Chelsea Boot features a sleek tapered ankle silhouette with tone-on-tone elastic side gussets and woven pull tabs. Goodyear-welted to a British Dainite studded sole for all-weather grip.",
+    story:
+      "Sculpted from a single seamless cut of French calf leather to eliminate unnecessary outer seams. The Mayfair Chelsea effortlessly transitions from London tailoring to relaxed outerwear, reinforced with a low-profile Dainite rubber sole engineered for wet city pavements.",
+    materials: [
+      "Single-piece full-grain French calfskin leather upper",
+      "Durable British Dainite studded rubber sole",
+      "Heavy-duty elasticated side gores with woven grosgrain pull tabs",
+      "Full glove-leather lining",
+    ],
+    dimensions: {
+      heelHeight: "28 mm stacked leather heel",
+      soleType: "Goodyear storm-welted all-weather Dainite studded rubber sole",
+    },
+    details: [
+      "Seamless wholecut-inspired side profile",
+      "Reinforced woven ACEMEN rear pull-tab for easy entry",
+      "Weatherproof 360° storm welt",
+      "Hand-finished and wax-sealed edges",
+    ],
+    careInstructions: [
+      "Wipe clean after rain and apply neutral waterproofing leather cream",
+      "Store upright with boot trees to maintain ankle shape",
+    ],
+    inStock: true,
+    upperLeather: "French Box Calfskin / Waterproof Treated Hides",
+    finishOptions: ["Sleek Smooth Aniline", "Weatherproof Waxed", "Matte Pebble"],
+    soleOptions: ["Dainite Studded Rubber", "Vibram Lug Sole", "Leather Sole"],
+    customBranding: "Custom woven pull-tab ribbon, embossed insole logo",
+    customizationAvailable: true,
+  },
+
+  // 4. LEATHER DRESS BOOT
+  {
+    id: "acemen-belgravia-dress-boot",
+    slug: "belgravia-leather-dress-boot",
+    name: "The Belgravia Leather Dress Boot",
+    modelNumber: "ACE-BOT-02",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Dress Boot",
+    gender: "men",
+    price: 850,
+    currency: "GBP",
+    formattedPrice: "£850",
+    tag: "Artisan Benchmade",
+    isNewArrival: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-shoe-dressboot-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-dressboot-pair.jpg",
+      gallery: [
+        "/images/luxury/prod-shoe-dressboot-pair.jpg",
+        "/images/luxury/craftsmanship.webp",
+      ],
+    },
+    colors: [
+      { name: "Burnished Walnut", hex: "#633C24" },
+      { name: "Dark Chocolate", hex: "#2C1B14" },
+    ],
+    shortDescription:
+      "A sophisticated formal lace-up ankle boot tailored for bespoke suiting and tailored outerwear. Featuring delicate cap-toe brogue perforations, blind eyelets transitioning into solid brass speed hooks, and a hand-burnished walnut patina.",
+    story:
+      "The Belgravia Dress Boot marries the structural grandeur of British military dress boots with refined Edwardian formal lines. Built with high-shaft ankle support, a double leather Goodyear welted sole, and solid milled brass speed hooks.",
+    materials: [
+      "100% Full-grain hand-burnished calfskin upper",
+      "Double-thickness oak bark-tanned leather sole",
+      "Solid milled brass speed hooks and eyelets",
+      "Full glove-calfskin lining and leather counter",
+    ],
+    dimensions: {
+      heelHeight: "28 mm stacked leather heel",
+      soleType: "Goodyear-welted double leather sole with rubber top-piece",
+    },
+    details: [
+      "Balmoral cap-toe design with fine brogue punching",
+      "Blind lower eyelets with top brass speed hooks for fast lacing",
+      "Hand-burnished toe box and heel counter",
+      "Includes solid cedar boot trees and flannel travel bags",
+    ],
+    careInstructions: [
+      "Store with cedar boot trees to preserve ankle alignment",
+      "Condition with walnut leather cream and horsehair brush buff",
+    ],
+    inStock: true,
+    upperLeather: "Full-Grain French Calfskin",
+    finishOptions: ["Antique Burnished Walnut", "Black High-Wax", "Museum Patina"],
+    soleOptions: ["Double Leather Sole", "Commando Rubber", "Dainite Studded"],
+    customBranding: "Embossed ankle crest, custom brass hardware finish",
+    customizationAvailable: true,
+  },
+
+  // 5. CHUKKA / DESERT-INSPIRED BOOT
+  {
+    id: "acemen-kensington-chukka",
+    slug: "kensington-suede-desert-chukka",
+    name: "The Kensington Suede Desert Chukka",
+    modelNumber: "ACE-CHK-01",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Chukka Boot",
+    gender: "men",
+    price: 680,
+    currency: "GBP",
+    formattedPrice: "£680",
+    tag: "Casual Luxury",
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-shoe-chukka-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-chukka-pair.jpg",
+      gallery: [
+        "/images/luxury/prod-shoe-chukka-pair.jpg",
+        "/images/luxury/footwear-campaign.webp",
+      ],
+    },
+    colors: [
+      { name: "Snuff Tan Suede", hex: "#B58348" },
+      { name: "Dark Espresso Suede", hex: "#3A261D" },
+    ],
+    shortDescription:
+      "Sculpted from supple snuff tan Italian calf suede, the Kensington Chukka delivers effortless casual luxury. Designed with a two-eyelet minimal lace-up silhouette, leather storm welt, and natural crepe rubber outsole for supreme walking comfort.",
+    story:
+      "The quintessential off-duty companion, the Kensington Desert Chukka pairs velvety Italian suede with an ultra-flexible natural crepe sole. Pre-treated with a Scotchgard water-repellent barrier, it provides relaxed sophistication that effortlessly transitions between city and countryside.",
+    materials: [
+      "100% Italian velvety calf suede with water-repellent treatment",
+      "Natural plantation crepe rubber sole with leather storm welt",
+      "Supple unlined forefoot with calfskin heel counter",
+      "Waxed tonal cotton laces",
+    ],
+    dimensions: {
+      heelHeight: "22 mm integrated crepe rubber heel",
+      soleType: "Natural plantation crepe rubber sole with leather welt",
+    },
+    details: [
+      "Minimal two-eyelet ankle lacing profile",
+      "Water-repellent Scotchgard pre-treatment",
+      "Cushioned leather arch-support insole",
+      "Includes ACEMEN suede brush and dust covers",
+    ],
+    careInstructions: [
+      "Brush regularly with brass/crepe suede brush to maintain nap",
+      "Spray with suede protector every season",
+    ],
+    inStock: true,
+    upperLeather: "Italian Calf Suede / Waxy Pull-Up Leather",
+    finishOptions: ["Snuff Tan Suede", "Chocolate Suede", "Oiled Pull-Up Hide"],
+    soleOptions: ["Natural Crepe Rubber", "Vibram Morflex", "Dainite Studded"],
+    customBranding: "Heat-embossed suede tongue stamp, custom insole deboss",
+    customizationAvailable: true,
+  },
+
+  // 6. PREMIUM LEATHER LOAFER
+  {
+    id: "acemen-stjames-loafer",
+    slug: "st-james-leather-penny-loafer",
+    name: "The St. James Leather Penny Loafer",
+    modelNumber: "ACE-LOF-01",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Loafer",
+    gender: "men",
+    price: 690,
+    currency: "GBP",
+    formattedPrice: "£690",
+    tag: "Smart Casual Essential",
+    isBestSeller: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-shoe-loafer-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-loafer-pair.jpg",
+      gallery: [
+        "/images/luxury/prod-shoe-loafer-pair.jpg",
+        "/images/luxury/men-campaign.webp",
+      ],
+    },
+    colors: [
+      { name: "Deep Espresso Brown", hex: "#1F1612" },
+      { name: "Saddle Cognac", hex: "#7B4624" },
+    ],
+    shortDescription:
+      "An icon of smart-casual refinement, the St. James Penny Loafer showcases a hand-stitched raised apron seam and classic cutout bridge saddle. Goodyear welted on a slender closed-channel leather sole with beveled waist.",
+    story:
+      "Crafted in deep espresso Tuscan calfskin, the St. James Penny Loafer delivers an impeccable slip-on silhouette for both formal suiting and linen tailoring. Every apron is sewn by hand using waxed cord for authentic dimensional character.",
+    materials: [
+      "100% Full-grain Tuscan box calfskin upper",
+      "Closed-channel oak bark-tanned leather sole",
+      "Full glove-calfskin lining with padded heel cup",
+      "Hand-stitched apron seam with waxed thread",
+    ],
+    dimensions: {
+      heelHeight: "22 mm stacked leather heel",
+      soleType: "Goodyear-welted closed-channel leather sole with beveled waist",
+    },
+    details: [
+      "Hand-sewn apron seam with raised ridge",
+      "Classic penny cutout saddle strap across bridge",
+      "Glove-soft calf lining for sockless or tailored wear",
+      "Gold debossed ACEMEN insole insignia",
+    ],
+    careInstructions: [
+      "Insert cedar shoe trees immediately after wear",
+      "Polish with espresso cream and buff to soft sheen",
+    ],
+    inStock: true,
+    upperLeather: "Tuscan Full-Grain Box Calf",
+    finishOptions: ["Espresso Polished", "Cognac Burnished", "Dark Brown Suede"],
+    soleOptions: ["Closed-Channel Leather", "Half-Rubber Tread", "Flexible Flex-Welt"],
+    customBranding: "Gold foil insole crest, custom saddle strap embroidery",
+    customizationAvailable: true,
+  },
+
+  // 7. AVIATION / PILOT SHOE
+  {
+    id: "acemen-aviator-pilot",
     slug: "aviator-sovereign-pilot-shoe",
     name: "The Aviator Sovereign Pilot Shoe",
+    modelNumber: "ACE-PLT-01",
     collection: "The Pilot Collection",
     category: "Pilot Collection",
-    subType: "Pilot",
+    subType: "Aviation Shoe",
     gender: "men",
-    price: 640,
+    price: 740,
     currency: "GBP",
-    formattedPrice: "£640",
+    formattedPrice: "£740",
     tag: "Aviation Standard",
     isIconic: true,
     isNewArrival: true,
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-pilot-1.webp",
-      secondary: "/images/luxury/prod-pilot-2.webp",
+      primary: "/images/luxury/prod-shoe-pilot-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-pilot-pair.jpg",
       gallery: [
-        "/images/luxury/prod-pilot-1.webp",
-        "/images/luxury/prod-pilot-2.webp",
+        "/images/luxury/prod-shoe-pilot-pair.jpg",
         "/images/luxury/pilot-campaign.webp",
         "/images/luxury/travel-campaign.webp",
       ],
     },
     colors: [
-      { name: "Mirror Gloss Black", hex: "#080808" },
-      { name: "Deep Midnight Black", hex: "#141414" },
+      { name: "Mirror Gloss Black", hex: "#050505" },
     ],
     shortDescription:
-      "Engineered specifically for pilots and flight deck professionals — ultra-polished black calfskin pairing immaculate formal uniform aesthetic with all-day ergonomic arch support.",
+      "Engineered specifically for airline flight decks, corporate aviation crews, and formal cockpit attire. Constructed from mirror-polish black calfskin with non-metallic composite shanks for seamless airport security clearance and anti-static flight traction.",
     story:
-      "Born from confidential briefings with senior captains and private aviation crew, The Aviator Sovereign Pilot Shoe unites uncompromising formal elegance with specialized flight deck demands. Featuring airport security-friendly composite shanks, anti-fatigue memory cushioning, and non-marking anti-static rubber outsoles, it maintains a razor-sharp mirror shine through international long-haul itineraries.",
+      "Born from direct collaboration with commercial airline pilots and corporate flight crew, The Aviator Sovereign unites immaculate uniform aesthetic with all-day flight deck ergonomics. Features airport scanner-compliant composite shanks, orthotic memory cushioning, and oil-resistant anti-static outsoles that maintain a mirror shine across global routes.",
     materials: [
       "Water-resistant full-grain black calfskin with high-shine temper",
       "Orthotic memory foam insole lined in breathable perforated calf leather",
@@ -465,171 +502,202 @@ export const luxuryProducts: ProductItem[] = [
       "Re-polish with ACEMEN black gloss cream for high-reflectivity uniform standard",
     ],
     inStock: true,
+    upperLeather: "High-Gloss Uniform Box Calfskin",
+    finishOptions: ["Mirror Gloss Black", "Semi-Matte Black"],
+    soleOptions: ["Anti-Static Flight Deck Rubber", "Dainite Studded"],
+    customBranding: "Airline corporate crest debossing, custom crew serial numbers",
+    customizationAvailable: true,
   },
 
-  // ── 3. FOOTWEAR: THE SAVILE DOUBLE MONK STRAP ──
+  // 8. CASUAL LUXURY LEATHER SHOE
   {
-    id: "acemen-savile-double-monk",
-    slug: "savile-double-monk-strap",
-    name: "The Savile Double Monk Strap",
+    id: "acemen-piccadilly-derby",
+    slug: "piccadilly-casual-luxury-derby",
+    name: "The Piccadilly Casual Luxury Derby",
+    modelNumber: "ACE-DRB-01",
     collection: "The Footwear Atelier",
     category: "Shoes",
-    subType: "Monk Strap",
+    subType: "Casual Derby",
     gender: "men",
     price: 710,
     currency: "GBP",
     formattedPrice: "£710",
-    tag: "Atelier Signature",
-    isBestSeller: true,
+    tag: "Everyday Luxury",
     sizes: standardShoeSizes,
     images: {
-      primary: "/images/luxury/prod-monk-1.webp",
-      secondary: "/images/luxury/prod-monk-2.webp",
+      primary: "/images/luxury/prod-shoe-casualderby-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-casualderby-pair.jpg",
       gallery: [
-        "/images/luxury/prod-monk-1.webp",
-        "/images/luxury/prod-monk-2.webp",
+        "/images/luxury/prod-shoe-casualderby-pair.jpg",
+        "/images/luxury/footwear-campaign.webp",
+      ],
+    },
+    colors: [
+      { name: "Chestnut Walnut Pebble Grain", hex: "#7B4728" },
+      { name: "Dark Chocolate", hex: "#2C1B14" },
+    ],
+    shortDescription:
+      "Designed for refined everyday luxury, the Piccadilly Derby combines textured Bavarian pebble-grain leather with open four-eyelet blucher lacing. Built on a lightweight Vibram rubber commando sole for exceptional grip and enduring comfort.",
+    story:
+      "The Piccadilly Blucher Derby balances rugged material resilience with sophisticated British Last tailoring. The open-throat lacing accommodates varying instep heights with ease, while the tactile pebble-grain leather resists scuffs during everyday travel and urban movement.",
+    materials: [
+      "Full-grain Bavarian pebble-grain cowhide leather upper",
+      "Lightweight Vibram rubber commando sole with leather midsole",
+      "Anatomical arch support insole lined in glove calfskin",
+      "Hand-stitched facing bar-tacks for structural reinforcement",
+    ],
+    dimensions: {
+      heelHeight: "26 mm rugged stacked rubber heel",
+      soleType: "Goodyear storm-welted Vibram commando lug sole",
+    },
+    details: [
+      "Open four-eyelet lacing structure for flexible instep comfort",
+      "Rich tactile pebble-grain texture",
+      "Antiqued brass eyelets with heavy-gauge waxed laces",
+      "Full 360° storm welt for moisture protection",
+    ],
+    careInstructions: [
+      "Condition periodically with nourishing leather balm",
+      "Brush out pebble grain crevices with horsehair brush",
+    ],
+    inStock: true,
+    upperLeather: "Bavarian Pebble-Grain Cowhide / Suede",
+    finishOptions: ["Chestnut Walnut Grain", "Espresso Pebble", "Antique Aniline"],
+    soleOptions: ["Vibram Commando Lug", "Dainite Rubber", "Flex Leather"],
+    customBranding: "Custom insole hot-stamp, bespoke brass eyelet finish",
+    customizationAvailable: true,
+  },
+
+  // 9. LUXURY LEATHER SNEAKER
+  {
+    id: "acemen-sovereign-court-sneaker",
+    slug: "sovereign-court-leather-sneaker",
+    name: "The Sovereign Court Leather Sneaker",
+    modelNumber: "ACE-SNK-01",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Luxury Sneaker",
+    gender: "unisex",
+    price: 590,
+    currency: "GBP",
+    formattedPrice: "£590",
+    tag: "Minimalist Icon",
+    isNewArrival: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-shoe-sneaker-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-sneaker-pair.jpg",
+      gallery: [
+        "/images/luxury/prod-shoe-sneaker-pair.jpg",
+        "/images/luxury/footwear-campaign.webp",
+      ],
+    },
+    colors: [
+      { name: "Chalk White & Cream", hex: "#F7F5F0" },
+      { name: "Obsidian Black", hex: "#111111" },
+    ],
+    shortDescription:
+      "A minimalist luxury low-top court sneaker handcrafted from ultra-supple chalk white Italian calfskin. Features tonal cotton laces, glove-calfskin lining, and an authentic stitched Margom rubber cupsole for understated elegance without overt logos.",
+    story:
+      "Engineered with clean architectural lines and unadorned leather purity. The Sovereign Court Sneaker is hand-stitched in small batches in our atelier using full-grain Italian Nappa calf that shapes to the wearer's foot, anchored by an authentic Italian Margom rubber cupsole.",
+    materials: [
+      "100% Full-grain Italian Nappa calfskin upper",
+      "Authentic Italian Margom rubber cupsole with 360° perimeter stitch",
+      "Removable ergonomic leather-lined memory foam footbed",
+      "Full glove-calfskin interior lining",
+    ],
+    dimensions: {
+      heelHeight: "28 mm integrated Margom rubber cupsole",
+      soleType: "Stitched Margom Italian rubber cupsole",
+    },
+    details: [
+      "Clean low-top court silhouette without exterior branding",
+      "Tonal waxed cotton laces with reinforced eyelet facings",
+      "Padded collar and tongue for friction-free comfort",
+      "Includes spare tonal laces and custom dust bags",
+    ],
+    careInstructions: [
+      "Wipe clean with damp cloth and leather cleaning foam",
+      "Condition white leather with neutral sneaker balm",
+    ],
+    inStock: true,
+    upperLeather: "Italian Nappa Calfskin (1.2mm)",
+    finishOptions: ["Chalk White Nappa", "Cream Suede Trim", "Monochrome Black"],
+    soleOptions: ["Stitched Margom Cupsole", "Recycled Rubber Outsole"],
+    customBranding: "Blind heel deboss, custom gold foil insole stamping",
+    customizationAvailable: true,
+  },
+
+  // 10. PREMIUM LEATHER / PATINA SHOE
+  {
+    id: "acemen-grand-sovereign-patina",
+    slug: "grand-sovereign-museum-patina-shoe",
+    name: "The Grand Sovereign Museum Patina Shoe",
+    modelNumber: "ACE-PAT-01",
+    collection: "The Footwear Atelier",
+    category: "Shoes",
+    subType: "Patina Wholecut",
+    gender: "men",
+    price: 890,
+    currency: "GBP",
+    formattedPrice: "£890",
+    tag: "Atelier Masterwork",
+    isIconic: true,
+    isNewArrival: true,
+    sizes: standardShoeSizes,
+    images: {
+      primary: "/images/luxury/prod-shoe-patina-pair.jpg",
+      secondary: "/images/luxury/prod-shoe-patina-pair.jpg",
+      gallery: [
+        "/images/luxury/prod-shoe-patina-pair.jpg",
+        "/images/luxury/craftsmanship.webp",
         "/images/luxury/men-campaign.webp",
       ],
     },
     colors: [
-      { name: "Dark Cognac Patina", hex: "#6B3B1E" },
-      { name: "Espresso Brown", hex: "#2B1E16" },
+      { name: "Deep Oxblood & Cherry Marble", hex: "#521B21" },
+      { name: "Antique Cognac Marble", hex: "#784120" },
     ],
     shortDescription:
-      "A commanding double monk strap dress shoe with solid brass hardware, hand-painted crust calfskin, and Goodyear welted sole.",
+      "A masterpiece of artisanal finishing, the Grand Sovereign is cut from a single flawless hide of French calfskin and hand-dyed with multi-layered oxblood and dark cherry museum patina. Finished with high-wax toe burnishing and a fiddleback waist leather sole.",
     story:
-      "The Savile Double Monk is hand-dyed in small batches using layered pigment washes to create an organic, deep tortoiseshell patina. Fastened with solid forged brass buckles anchored on elasticated gussets for effortless slip-on entrance.",
+      "The pinnacle of ACEMEN shoemaking virtuosity. The Grand Sovereign Wholecut is hand-patinated by our master colorists over multiple days using delicate sponges and artisanal dye washes, creating a stone-marbled depth of oxblood and blackened cherry that is completely unique to every pair.",
     materials: [
-      "Italian hand-patinated full-grain crust calfskin",
-      "Solid milled brass buckle closures with satin gold plating",
-      "Goodyear welted channeled leather sole with rubber heel insert",
-      "Soft calfskin interior lining",
+      "Single-piece seamless French crust calfskin upper",
+      "Hand-applied multi-layered artisanal museum patina dye",
+      "Oak bark-tanned leather sole with sculpted fiddleback waist",
+      "Full glove-calfskin lining and brass-nailed heel",
     ],
     dimensions: {
-      heelHeight: "26 mm stacked leather heel with rubber dovetail",
-      soleType: "Goodyear welted Italian leather sole with blind waist stitching",
+      heelHeight: "26 mm stacked leather heel with brass nail pattern",
+      soleType: "Hand-sculpted fiddleback waist closed-channel leather sole",
     },
     details: [
-      "Adjustable dual strap closure with concealed elastic release",
-      "Hand-painted antique edge burnishing",
-      "Subtle toe cap broguing line",
-      "Gold foil debossed insole crest",
+      "Seamless single-piece wholecut construction",
+      "Unique hand-applied museum marble patina finish",
+      "High-friction mirror gloss burnished toe cap and heel",
+      "Includes solid cedar shoe trees and velvet presentation pouch",
     ],
     careInstructions: [
-      "Polish with tinted cognac wax polish to preserve color depth",
-      "Condition leather twice yearly with nourishing milk",
+      "Nourish exclusively with delicate leather cream and tinted burgundy wax",
+      "Buff gently with horsehair brush to maintain marbled patina luster",
     ],
     inStock: true,
+    upperLeather: "French Crust Calfskin (Unfinished Base for Custom Dyeing)",
+    finishOptions: ["Oxblood Museum Marble", "Emerald Green Patina", "Cobalt Navy Patina", "Tobacco Marble"],
+    soleOptions: ["Fiddleback Waist Leather Sole", "Closed-Channel Leather"],
+    customBranding: "Bespoke initials monogramming on waist, 24k gold leaf insole deboss",
+    customizationAvailable: true,
   },
 
-  // ── 4. FOOTWEAR: THE MAYFAIR CHELSEA BOOT ──
-  {
-    id: "acemen-mayfair-chelsea-boot",
-    slug: "mayfair-leather-chelsea-boot",
-    name: "The Mayfair Leather Chelsea Boot",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Chelsea",
-    gender: "unisex",
-    price: 750,
-    currency: "GBP",
-    formattedPrice: "£750",
-    tag: "Iconic Silhouette",
-    isNewArrival: true,
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-chelsea-1.webp",
-      secondary: "/images/luxury/prod-chelsea-2.webp",
-      gallery: [
-        "/images/luxury/prod-chelsea-1.webp",
-        "/images/luxury/prod-chelsea-2.webp",
-        "/images/luxury/footwear-campaign.webp",
-      ],
-    },
-    colors: [
-      { name: "Obsidian Black", hex: "#111111" },
-    ],
-    shortDescription:
-      "An immaculate full-grain leather Chelsea boot featuring a sleek British toe silhouette, durable elastic side gussets, and storm-welted sole.",
-    story:
-      "Sculpted from a single seamless cut of French calf leather to eliminate unnecessary outer seams. The Mayfair Chelsea effortlessly transitions from London tailoring to relaxed weekend attire, reinforced with a low-profile Dainite rubber sole for wet city pavements.",
-    materials: [
-      "Single-piece full-grain calfskin leather upper",
-      "Durable British Dainite rubber stud sole",
-      "Heavy-duty elasticated side gores with grosgrain pull tabs",
-      "Full glove-leather lining",
-    ],
-    dimensions: {
-      heelHeight: "28 mm stacked leather heel",
-      soleType: "Goodyear storm-welted all-weather Dainite studded rubber sole",
-    },
-    details: [
-      "Seamless wholecut-inspired side profile",
-      "Reinforced woven ACEMEN rear pull-tab for easy entry",
-      "Weatherproof 360° storm welt",
-      "Hand-finished and wax-sealed edges",
-    ],
-    careInstructions: [
-      "Wipe clean after rain and apply neutral waterproofing leather cream",
-      "Store upright with boot trees to maintain ankle shape",
-    ],
-    inStock: true,
-  },
-
-  // ── 5. FOOTWEAR: THE PICCADILLY BLUCHER DERBY ──
-  {
-    id: "acemen-piccadilly-blucher-derby",
-    slug: "piccadilly-blucher-derby",
-    name: "The Piccadilly Blucher Derby",
-    collection: "The Footwear Atelier",
-    category: "Shoes",
-    subType: "Derby",
-    gender: "men",
-    price: 660,
-    currency: "GBP",
-    formattedPrice: "£660",
-    tag: "Modern Classic",
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-derby-1.webp",
-      secondary: "/images/luxury/prod-derby-1.webp",
-      gallery: [
-        "/images/luxury/prod-derby-1.webp",
-        "/images/luxury/footwear-campaign.webp",
-        "/images/luxury/craftsmanship.webp",
-      ],
-    },
-    colors: [
-      { name: "Mahogany Calfskin", hex: "#4A2B20" },
-    ],
-    shortDescription:
-      "An open-lacing Derby shoe cut from supple full-grain Bavarian calfskin with a softly rounded toe profile and cushioned arch support.",
-    story:
-      "The open-throat lacing design of The Piccadilly provides a generous, adaptable fit across the instep while maintaining refined bespoke proportions. Finished with discreet hand-stitched bar tacks on the facings and a durable Goodyear welted sole.",
-    materials: [
-      "Full-grain Bavarian calfskin leather upper with natural pebble grain",
-      "Vegetable-tanned leather midsole and arch-support insole",
-      "Goodyear welted channeled sole with protective half-rubber tread",
-    ],
-    dimensions: {
-      heelHeight: "24 mm stacked leather heel",
-      soleType: "Goodyear welted leather sole with half-rubber protective tread",
-    },
-    details: [
-      "Open four-eyelet lacing structure for flexible instep comfort",
-      "Hand-stitched facing bar-tacks for structural resilience",
-      "Anatomical arch support insert",
-      "Subtle hot-stamped gold foil ACEMEN hallmark",
-    ],
-    careInstructions: ["Condition with neutral leather cream and polish periodically"],
-    inStock: true,
-  },
-
-  // ── 6. LEATHER JACKETS: THE SOVEREIGN CLASSIC ──
+  // ─────────────────────────────────────────────────────────────
+  // ── SARTORIAL LEATHER OUTERWEAR ──
+  // ─────────────────────────────────────────────────────────────
   {
     id: "acemen-sovereign-classic-jacket",
     slug: "sovereign-classic-leather-jacket",
     name: "The Sovereign Classic Leather Jacket",
+    modelNumber: "ACE-JKT-01",
     collection: "Sartorial Outerwear",
     category: "Jackets",
     subType: "Classic Jacket",
@@ -676,13 +744,16 @@ export const luxuryProducts: ProductItem[] = [
       "Store on broad wooden coat hanger in breathable garment bag",
     ],
     inStock: true,
+    upperLeather: "French Box Calfskin (1.1mm)",
+    finishOptions: ["Obsidian Black", "Espresso Brown", "Cognac Saddle"],
+    customBranding: "Custom engraved Swiss Riri zips, woven label",
+    customizationAvailable: true,
   },
-
-  // ── 7. LEATHER JACKETS: THE SIGNATURE BOMBER ──
   {
     id: "acemen-signature-leather-bomber",
     slug: "signature-leather-bomber-jacket",
     name: "The Signature Leather Bomber",
+    modelNumber: "ACE-JKT-02",
     collection: "Sartorial Outerwear",
     category: "Jackets",
     subType: "Bomber",
@@ -722,85 +793,97 @@ export const luxuryProducts: ProductItem[] = [
       "Dual angled welt hand-warmer pockets with magnetic closure",
       "Twin interior security pockets for travel documents",
     ],
-    careInstructions: ["Specialist leather care only"],
+    careInstructions: [
+      "Professional leather care only",
+      "Store away from direct sunlight",
+    ],
     inStock: true,
+    upperLeather: "Bavarian Full-Grain Calfskin",
+    finishOptions: ["Espresso Brown", "Dark Cognac", "Vintage Black"],
+    customBranding: "Solid brass hardware deboss, bespoke jacquard lining",
+    customizationAvailable: true,
   },
 
-  // ── 8. FINE LEATHER BAGS ──
+  // ─────────────────────────────────────────────────────────────
+  // ── FINE LEATHER BAGS & HOLDALLS ──
+  // ─────────────────────────────────────────────────────────────
   {
     id: "acemen-grand-sovereign-weekender",
     slug: "grand-sovereign-weekender",
     name: "The Grand Sovereign Weekender",
-    collection: "The Sovereign Atelier",
+    modelNumber: "ACE-BAG-01",
+    collection: "Grand Sovereign",
     category: "Bags",
-    subType: "Weekender",
+    subType: "Holdall",
     gender: "unisex",
-    price: 1450,
+    price: 1650,
     currency: "GBP",
-    formattedPrice: "£1,450",
-    tag: "Iconic Masterpiece",
+    formattedPrice: "£1,650",
+    tag: "Permanent Collection",
     isIconic: true,
-    isNewArrival: true,
+    isBestSeller: true,
     images: {
       primary: "/images/luxury/prod-weekender-1.webp",
       secondary: "/images/luxury/prod-weekender-2.webp",
       gallery: [
         "/images/luxury/prod-weekender-1.webp",
         "/images/luxury/prod-weekender-2.webp",
-        "/images/luxury/hero-campaign.webp",
+        "/images/luxury/travel-campaign.webp",
         "/images/luxury/craftsmanship.webp",
       ],
     },
     colors: [
-      { name: "Espresso Brown", hex: "#2B1E16" },
-      { name: "Saddle Cognac", hex: "#8C5835" },
-      { name: "Obsidian Black", hex: "#111111" },
+      { name: "Cognac Saddle", hex: "#8C5835" },
+      { name: "Noir Black", hex: "#0F0F0F" },
     ],
     shortDescription:
-      "Our flagship holdall, hand-sculpted from full-grain French calfskin with solid brushed brass hardware, padlock clochette, and herringbone wool lining.",
+      "A flagship luxury travel holdall hand saddle-stitched in London from certified full-grain French box calf hide with Swiss Riri hardware.",
     story:
-      "Engineered for the discerning voyager, The Grand Sovereign Weekender represents the pinnacle of British leather craftsmanship. Each piece requires forty-two hours of meticulous hand assembly in our London atelier, featuring double-rolled load-bearing handles, reinforced corners, and a structured base designed to age with an unmatched patina.",
+      "Engineered for the discerning transatlantic traveler. Hand-sculpted over twenty-eight hours, the Grand Sovereign Weekender balances generous volume with architectural proportion.",
     materials: [
-      "100% Full-grain French vegetable-tanned calfskin",
-      "Solid milled brass hardware with 24k gold galvanic finish",
-      "Heavyweight herringbone weave interior lining",
-      "Beeswax-coated linen saddle stitching",
+      "100% Certified French box calfskin (1.8 mm hide)",
+      "Solid forged brass hardware with champagne satin electroplating",
+      "Custom woven herringbone cotton-linen lining",
+      "Reinforced 5-ply bonded nylon saddle stitching",
     ],
     dimensions: {
       height: "32 cm (12.6 in)",
       width: "52 cm (20.5 in)",
-      depth: "24 cm (9.4 in)",
+      depth: "26 cm (10.2 in)",
       strapDrop: "45 – 58 cm adjustable",
     },
     details: [
-      "Signature ACEMEN gold foil hot-stamping",
-      "Detachable, padded leather shoulder strap",
-      "Dual internal zip security pockets and laptop divider",
-      "Brass protective feet on reinforced base",
-      "Complimentary custom initial monogramming on clochette tag",
+      "Cabin luggage compliant across major international airlines",
+      "Two-way Swiss Riri padlockable zip closure with key fob",
+      "Dual interior zipped accessory compartments and padded 16\" laptop sleeve",
+      "Protective solid brass base studs",
+      "Detachable ergonomic leather shoulder strap with sliding pad",
     ],
     careInstructions: [
-      "Avoid prolonged exposure to direct sunlight and high humidity",
-      "Clean gently using a soft, dry microfiber cloth",
-      "Nourish annually with ACEMEN beeswax leather balm",
-      "Store in provided heavy cotton dust bag with interior stuffing",
+      "Wipe clean with a soft dry cloth",
+      "Apply ACEMEN organic leather balm twice annually",
+      "Store in the provided heavy-weight unbleached cotton dust bag with tissue stuffing",
     ],
     inStock: true,
+    upperLeather: "French Box Calfskin (1.8mm)",
+    finishOptions: ["Cognac Saddle", "Noir Black", "Espresso Dark Brown"],
+    customBranding: "Hot-stamped insole badge, custom brass lock monogram",
+    customizationAvailable: true,
   },
   {
     id: "acemen-audley-leather-briefcase",
     slug: "audley-leather-briefcase",
     name: "The Audley Leather Briefcase",
-    collection: "Men's Sartorial Line",
+    modelNumber: "ACE-BAG-02",
+    collection: "Mayfair Sartorial",
     category: "Bags",
     subType: "Briefcase",
     gender: "men",
-    price: 1280,
+    price: 1350,
     currency: "GBP",
-    formattedPrice: "£1,280",
-    tag: "Signature Atelier",
+    formattedPrice: "£1,350",
+    tag: "Executive Benchmark",
     isIconic: true,
-    isBestSeller: true,
     images: {
       primary: "/images/luxury/prod-briefcase-1.webp",
       secondary: "/images/luxury/prod-briefcase-2.webp",
@@ -811,49 +894,54 @@ export const luxuryProducts: ProductItem[] = [
       ],
     },
     colors: [
-      { name: "Obsidian Black", hex: "#111111" },
-      { name: "Cognac Tan", hex: "#8C5835" },
+      { name: "Espresso Dark Brown", hex: "#2B1E16" },
+      { name: "Noir Black", hex: "#0F0F0F" },
     ],
     shortDescription:
-      "A structured executive briefcase cut from obsidian full-grain calfskin, fitted with custom dual brass buckles and burgundy velvet organizer.",
+      "A structured executive briefcase in vegetable-tanned Bavarian hide, crafted with bevelled hand-painted edges and bespoke brass lock closure.",
     story:
-      "Designed for leaders and visionaries, The Audley Briefcase combines commanding architectural lines with effortless utility. The burgundy velvet-lined interior houses dedicated compartments for a 16-inch laptop, writing instruments, and travel documents.",
+      "Tailored for the modern boardroom. The Audley features dual gusseted chambers, rigid perimeter reinforcement, and an integrated trolley sleeve for seamless travel pairing.",
     materials: [
-      "Full-grain Bavarian calfskin with natural pebble grain",
-      "Italian velvet and microfiber suede lining",
-      "Brushed solid brass buckle hardware",
-      "Hand-painted and heat-sealed edges",
+      "Full-grain Bavarian vegetable-tanned cowhide",
+      "Bespoke push-lock mechanism in milled solid brass",
+      "Micro-suede lining with protective leather binding",
     ],
     dimensions: {
-      height: "30 cm (11.8 in)",
-      width: "41 cm (16.1 in)",
+      height: "29 cm (11.4 in)",
+      width: "40 cm (15.7 in)",
       depth: "10 cm (3.9 in)",
+      strapDrop: "42 – 55 cm adjustable",
     },
     details: [
-      "Padded compartment accommodating up to 16\" MacBook Pro",
-      "Dedicated pen holsters and passport slip pocket",
-      "Trolley pass-through sleeve on back for travel ease",
-      "Hand-finished rolled leather carry handle",
+      "Accommodates up to 15-inch MacBook Pro in dedicated padded sleeve",
+      "Interior organizer panel for writing instruments, passport, and business cards",
+      "Concealed rear magnetic pocket for boarding pass and newspaper",
+      "Hand-finished wax-burnished edges",
     ],
     careInstructions: [
-      "Wipe clean with a soft dry cloth",
-      "Store in cool, dry climate inside provided dust bag",
+      "Avoid prolonged exposure to direct sunlight and heavy moisture",
+      "Condition annually with neutral wax-based leather cream",
     ],
     inStock: true,
+    upperLeather: "Bavarian Veg-Tan Cowhide",
+    finishOptions: ["Espresso Brown", "Noir Black", "Antique Saddle"],
+    customBranding: "Private label debossing, bespoke brass lock clasp",
+    customizationAvailable: true,
   },
   {
-    id: "acemen-kensington-structured-tote",
+    id: "acemen-kensington-tote",
     slug: "kensington-structured-tote",
     name: "The Kensington Structured Tote",
-    collection: "Women's Leather Essentials",
+    modelNumber: "ACE-BAG-03",
+    collection: "Kensington Atelier",
     category: "Bags",
     subType: "Tote",
     gender: "women",
-    price: 1150,
+    price: 1250,
     currency: "GBP",
-    formattedPrice: "£1,150",
-    tag: "New Arrival",
-    isNewArrival: true,
+    formattedPrice: "£1,250",
+    tag: "Maison Icon",
+    isBestSeller: true,
     images: {
       primary: "/images/luxury/prod-tote-1.webp",
       secondary: "/images/luxury/prod-tote-2.webp",
@@ -864,179 +952,307 @@ export const luxuryProducts: ProductItem[] = [
       ],
     },
     colors: [
-      { name: "Camel Saddle", hex: "#A06A3B" },
-      { name: "Midnight Noir", hex: "#111111" },
+      { name: "Cognac Saddle", hex: "#8C5835" },
+      { name: "Ivory Cream", hex: "#EDE8DC" },
     ],
     shortDescription:
-      "Sculpted from warm saddle-tan calfskin with gold hardware, generous interior volume, and zip security closure.",
+      "An architectural everyday leather tote with dual rolled handles, magnetic bridge closure, and removable zip pouch in soft calf leather.",
     story:
-      "The Kensington Tote embodies effortless day-to-night luxury. With its clean trapezoidal silhouette, reinforced base, and ultra-plush caramel microfiber lining, it effortlessly balances sophisticated form and day-to-day utility.",
+      "Defined by clean sculptural lines and generous capacity, the Kensington Tote bridges daytime elegance and evening poise with effortless restraint.",
     materials: [
-      "Full-grain French box calf leather",
-      "Caramel microfiber suede lining",
-      "24k gold-plated brass zip and studs",
-      "Hand-edge sealed in deep mahogany paint",
+      "Full-grain Tuscan calfskin with semi-matte smooth finish",
+      "Solid brass foot studs and clip ring hardware",
+      "Unlined interior exposing natural suede flesh",
     ],
     dimensions: {
-      height: "28 cm (11.0 in)",
-      width: "38 cm (15.0 in)",
-      depth: "15 cm (5.9 in)",
+      height: "33 cm (13.0 in)",
+      width: "44 cm (17.3 in)",
+      depth: "16 cm (6.3 in)",
+      strapDrop: "24 cm shoulder drop",
     },
     details: [
-      "Top zip closure with leather pull tab",
-      "Central zip partition and dual smartphone slots",
-      "Protective base studs",
-      "Gold debossed ACEMEN hallmark",
+      "Removable zipped internal clutch pouch included",
+      "Reinforced base with 5 protective solid brass studs",
+      "Magnetic bridge closure across top aperture",
     ],
     careInstructions: [
-      "Protect from rain and grease",
-      "Condition every six months with neutral leather cream",
+      "Clean with a soft slightly damp microfiber cloth",
+      "Store upright in dust bag to maintain structured silhouette",
     ],
     inStock: true,
+    upperLeather: "Tuscan Calfskin Hide",
+    finishOptions: ["Cognac Saddle", "Ivory Cream", "Black Onyx"],
+    customBranding: "Hot-stamped foil logo, custom color matching",
+    customizationAvailable: true,
   },
 
-  // ── 9. WALLETS & POCKET LEATHER GOODS ──
+  // ─────────────────────────────────────────────────────────────
+  // ── WALLETS & POCKET LEATHER GOODS ──
+  // ─────────────────────────────────────────────────────────────
   {
     id: "acemen-sovereign-bifold-wallet",
     slug: "sovereign-bifold-wallet",
     name: "The Sovereign Bifold Wallet",
-    collection: "Small Leather Goods",
+    modelNumber: "ACE-WLT-01",
+    collection: "Pocket Sartorial",
     category: "Wallets",
     subType: "Bifold",
     gender: "unisex",
-    price: 340,
+    price: 295,
     currency: "GBP",
-    formattedPrice: "£340",
+    formattedPrice: "£295",
     tag: "Essential",
     isBestSeller: true,
     images: {
       primary: "/images/luxury/prod-wallet-1.webp",
-      secondary: "/images/luxury/prod-wallet-1.webp",
+      secondary: "/images/luxury/prod-wallet-2.webp",
       gallery: [
         "/images/luxury/prod-wallet-1.webp",
-        "/images/luxury/craftsmanship.webp",
+        "/images/luxury/prod-wallet-2.webp",
       ],
     },
     colors: [
-      { name: "Cognac Tan", hex: "#8C5835" },
-      { name: "Obsidian Noir", hex: "#111111" },
+      { name: "Noir Black", hex: "#0F0F0F" },
+      { name: "Cognac Saddle", hex: "#8C5835" },
     ],
     shortDescription:
-      "An eight-card bifold wallet sculpted from vegetable-tanned full-grain leather with gold foil debossed ACEMEN signature.",
+      "An ultra-slim 8-card bifold wallet sculpted from French box calf with hand-creased card edges and RFID security lining.",
     story:
-      "Ultra-slim yet accommodating, The Sovereign Bifold is cut from the densest cut of Tuscan full-grain leather. Finished with wafer-thin turned edges and eight precision card slots that mold to your daily cards over time.",
+      "Engineered to maintain an impossibly slim silhouette even at full capacity. Every pocket edge is skived by hand to 0.4 mm and heat-creased with traditional London bone tools.",
     materials: [
-      "100% Full-grain Tuscan vegetable-tanned leather",
-      "Silk moiré internal note lining",
-      "Gold foil debossed signature",
+      "Full-grain French box calfskin (exterior and interior pockets)",
+      "RFID electromagnetic protective blocking membrane",
+      "Silk-rayon banknote compartment lining",
     ],
     dimensions: {
-      height: "9.5 cm",
-      width: "11.5 cm",
-      depth: "1.2 cm",
+      height: "9.5 cm (3.7 in)",
+      width: "11.2 cm (4.4 in)",
+      depth: "1.0 cm (0.4 in)",
     },
     details: [
-      "8 credit card slots",
-      "2 hidden slip pockets for receipts",
-      "Full-length currency compartment",
-      "Hand-beveled and burnished edges",
+      "8 credit card slots with precision curved access notches",
+      "2 hidden slip pockets for additional cards or receipts",
+      "Full-length currency compartment sized for GBP, EUR, and USD",
+      "Gold foil debossed hallmark",
     ],
-    careInstructions: ["Store in dry conditions and nourish periodically"],
+    careInstructions: ["Avoid overloading pockets to preserve leather tension"],
     inStock: true,
+    upperLeather: "French Box Calf (0.4mm Skived)",
+    finishOptions: ["Noir Black", "Cognac Saddle", "Burgundy Cherry"],
+    customBranding: "Gold foil deboss, custom gift box packaging",
+    customizationAvailable: true,
   },
   {
     id: "acemen-cavendish-slim-cardholder",
     slug: "cavendish-slim-cardholder",
     name: "The Cavendish Slim Cardholder",
-    collection: "Small Leather Goods",
+    modelNumber: "ACE-WLT-02",
+    collection: "Pocket Sartorial",
     category: "Wallets",
     subType: "Cardholder",
     gender: "unisex",
     price: 195,
     currency: "GBP",
     formattedPrice: "£195",
-    tag: "Atelier Favorite",
-    isNewArrival: true,
+    tag: "Minimalist",
     images: {
-      primary: "/images/luxury/prod-wallet-2.webp",
-      secondary: "/images/luxury/prod-wallet-2.webp",
+      primary: "/images/luxury/prod-cardholder-1.webp",
+      secondary: "/images/luxury/prod-cardholder-2.webp",
       gallery: [
-        "/images/luxury/prod-wallet-2.webp",
-        "/images/luxury/women-campaign.webp",
+        "/images/luxury/prod-cardholder-1.webp",
+        "/images/luxury/prod-cardholder-2.webp",
       ],
     },
     colors: [
-      { name: "Two-Tone Cognac & Noir", hex: "#8C5835" },
-      { name: "Monochrome Noir", hex: "#111111" },
+      { name: "Cognac Saddle", hex: "#8C5835" },
+      { name: "Noir Black", hex: "#0F0F0F" },
     ],
     shortDescription:
-      "Two-tone cognac and noir leather slim cardholder with central bill slot and hand-stitched edges.",
+      "A 5-slot minimalist cardholder with central cash pocket, bevelled edge paint, and hand-creased card dividers.",
     story:
-      "Minimalism perfected. The Cavendish slides imperceptibly into tailored trousers or suit jacket pockets while keeping four essential cards and folded bills impeccably organized.",
+      "The pinnacle of pocket minimalism. Designed for effortless pocket carriage without disrupting the clean line of tailored trousers.",
     materials: [
-      "French box calf leather",
-      "Contrast saddle stitching",
-      "Gold leaf logo stamping",
+      "Full-grain Bavarian calfskin",
+      "Wax-sealed and heat-ironed edge finishing",
     ],
     dimensions: {
-      height: "7.5 cm",
-      width: "10 cm",
-      depth: "0.4 cm",
+      height: "7.5 cm (3.0 in)",
+      width: "10.2 cm (4.0 in)",
+      depth: "0.4 cm (0.15 in)",
     },
     details: [
       "4 card slots (2 per side)",
-      "1 central slip compartment for banknotes",
-      "Ultra-thin profile",
+      "1 central slip compartment for folded banknotes",
+      "Hand-burnished edge sealing",
     ],
-    careInstructions: ["Avoid overloading slots to preserve leather memory"],
+    careInstructions: ["Store in velvet pouch when not in daily use"],
     inStock: true,
+    upperLeather: "Bavarian Calfskin",
+    finishOptions: ["Cognac Saddle", "Noir Black", "Forest Green"],
+    customBranding: "Blind deboss stamping, custom packaging",
+    customizationAvailable: true,
   },
 
-  // ── 10. TRUNKS & TRAVEL ──
+  // ─────────────────────────────────────────────────────────────
+  // ── SARTORIAL BELTS ──
+  // ─────────────────────────────────────────────────────────────
   {
-    id: "acemen-sovereign-cabin-trolley",
-    slug: "sovereign-cabin-trolley",
-    name: "The Sovereign Cabin Trolley Case",
-    collection: "Trunks & Travel",
-    category: "Travel",
-    subType: "Travel",
-    gender: "unisex",
-    price: 2100,
+    id: "acemen-sovereign-reversible-belt",
+    slug: "sovereign-reversible-saddle-belt",
+    name: "The Sovereign Reversible Saddle Belt",
+    modelNumber: "ACE-BLT-01",
+    collection: "Mayfair Sartorial",
+    category: "Belts",
+    subType: "Reversible Belt",
+    gender: "men",
+    price: 340,
     currency: "GBP",
-    formattedPrice: "£2,100",
-    tag: "Masterpiece",
-    isIconic: true,
+    formattedPrice: "£340",
+    tag: "Dual Tone",
+    sizes: ["85", "90", "95", "100", "105", "110"],
     images: {
-      primary: "/images/luxury/travel-campaign.webp",
-      secondary: "/images/luxury/travel-campaign.webp",
+      primary: "/images/luxury/prod-belt-1.webp",
+      secondary: "/images/luxury/prod-belt-2.webp",
       gallery: [
-        "/images/luxury/travel-campaign.webp",
-        "/images/luxury/hero-campaign.webp",
+        "/images/luxury/prod-belt-1.webp",
+        "/images/luxury/prod-belt-2.webp",
       ],
     },
-    colors: [{ name: "Saddle Tan", hex: "#A06A3B" }],
+    colors: [
+      { name: "Noir / Cognac Reversible", hex: "#0F0F0F" },
+    ],
     shortDescription:
-      "Hand-crafted wheeled cabin case with reinforced leather corners, 360-degree silent multi-wheels, and TSA lock.",
+      "A 35 mm reversible bridle leather belt featuring solid brass twist buckle mechanism, transitioning from obsidian black to cognac saddle.",
     story:
-      "Constructed around an aerospace-grade lightweight aluminum frame and wrapped entirely in top-grade saddle leather. Featuring custom Japanese silent wheels and solid brass latch locks for international travel elegance.",
+      "Two essential belts in one exquisite piece. Crafted from full-thickness English bridle leather that resists stretching and distortion.",
     materials: [
-      "Full-grain saddle hide exterior",
-      "Aluminum-magnesium lightweight chassis",
-      "Japanese Hinomoto 360° silent ball-bearing wheels",
-      "Solid brass TSA-integrated locks",
+      "Full-thickness English bridle leather (reversible dual face)",
+      "Solid forged brass reversible swivel buckle in satin champagne gold",
     ],
     dimensions: {
-      height: "55 cm (21.6 in)",
-      width: "39 cm (15.3 in)",
+      width: "35 mm (1.38 in) standard belt width",
+    },
+    details: [
+      "Patented smooth swivel buckle mechanism",
+      "Bevelled, hand-dyed, and wax-burnished edges",
+      "5 teardrop sizing holes with 1-inch spacing",
+    ],
+    careInstructions: ["Condition bridle leather with equestrian saddle soap"],
+    inStock: true,
+    upperLeather: "English Bridle Leather (3.5mm)",
+    finishOptions: ["Black / Cognac Dual Tone", "Espresso / Tan"],
+    customBranding: "Laser-engraved buckle, custom sizing emboss",
+    customizationAvailable: true,
+  },
+  {
+    id: "acemen-heritage-brass-buckle-belt",
+    slug: "heritage-brass-buckle-belt",
+    name: "The Heritage Brass Buckle Belt",
+    modelNumber: "ACE-BLT-02",
+    collection: "Mayfair Sartorial",
+    category: "Belts",
+    subType: "Formal Belt",
+    gender: "men",
+    price: 310,
+    currency: "GBP",
+    formattedPrice: "£310",
+    tag: "Timeless",
+    sizes: ["85", "90", "95", "100", "105", "110"],
+    images: {
+      primary: "/images/luxury/prod-belt-2.webp",
+      secondary: "/images/luxury/prod-belt-1.webp",
+      gallery: [
+        "/images/luxury/prod-belt-2.webp",
+        "/images/luxury/prod-belt-1.webp",
+      ],
+    },
+    colors: [
+      { name: "Espresso Dark Brown", hex: "#2B1E16" },
+      { name: "Obsidian Black", hex: "#0F0F0F" },
+    ],
+    shortDescription:
+      "A classic 32 mm formal dress belt in vegetable-tanned full-grain calfskin with milled solid brass buckle.",
+    story:
+      "The definitive formal companion to tailored suiting and hand-lasted footwear. Subtle feather-edged profile with tone-on-tone perimeter stitching.",
+    materials: [
+      "Vegetable-tanned French calfskin leather",
+      "Milled solid brass buckle with palladium or champagne plating",
+    ],
+    dimensions: {
+      width: "32 mm (1.25 in) formal width",
+    },
+    details: [
+      "Feathered edge profile with hand-painted perimeter",
+      "Hand-sewn leather keeper loop",
+    ],
+    careInstructions: ["Buff with horsehair brush and neutral wax"],
+    inStock: true,
+    upperLeather: "French Calfskin",
+    finishOptions: ["Espresso Brown", "Obsidian Black"],
+    customBranding: "Buckle engraving, custom length options",
+    customizationAvailable: true,
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // ── TRUNKS & TRAVEL ATELIER ──
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "acemen-sovereign-cabin-trolley",
+    slug: "sovereign-cabin-trolley-case",
+    name: "The Sovereign Cabin Trolley Case",
+    modelNumber: "ACE-TRV-01",
+    collection: "Grand Sovereign Travel",
+    category: "Travel",
+    subType: "Cabin Case",
+    gender: "unisex",
+    price: 2650,
+    currency: "GBP",
+    formattedPrice: "£2,650",
+    tag: "Jet-Set Benchmark",
+    isIconic: true,
+    isNewArrival: true,
+    images: {
+      primary: "/images/luxury/travel-campaign.webp",
+      secondary: "/images/luxury/prod-weekender-1.webp",
+      gallery: [
+        "/images/luxury/travel-campaign.webp",
+        "/images/luxury/prod-weekender-1.webp",
+        "/images/luxury/craftsmanship.webp",
+      ],
+    },
+    colors: [
+      { name: "Cognac Saddle & Brass", hex: "#8C5835" },
+      { name: "Noir Black & Palladium", hex: "#0F0F0F" },
+    ],
+    shortDescription:
+      "A luxury 4-wheel wheeled cabin suitcase in molded full-grain calfskin leather, reinforced aluminum frame, and integrated TSA combination locks.",
+    story:
+      "Crafted for effortless international transit. Combines traditional hand-riveted leather corner guards with aerospace-grade whisper-silent Japanese Hinomoto spinner wheels.",
+    materials: [
+      "Molded full-grain French box calfskin hide",
+      "Anodized aluminum-magnesium perimeter frame",
+      "Japanese Hinomoto 360° silent ball-bearing spinner wheels",
+      "Quilted microfiber interior lining with compression divider straps",
+    ],
+    dimensions: {
+      height: "55 cm (21.7 in)",
+      width: "39 cm (15.4 in)",
       depth: "23 cm (9.0 in)",
     },
     details: [
-      "Approved IATA international cabin baggage dimensions",
-      "Multi-stage retractable telescopic handle",
-      "Dual interior compression straps and garment divider",
-      "Individual serial number engraved on brass plaque",
+      "IATA standard international cabin carry-on compliant",
+      "Dual integrated TSA-certified combination clasp locks",
+      "Telescopic 3-stage ergonomic aluminum handle with leather wrapped grip",
+      "Reinforced hand-stitched leather corner bumpers",
     ],
-    careInstructions: ["Store in specialized protective travel cover when checked"],
+    careInstructions: [
+      "Wipe shell clean with soft dry cloth",
+      "Condition leather corners annually with ACEMEN leather balm",
+    ],
     inStock: true,
+    upperLeather: "French Box Calfskin on Molded Frame",
+    finishOptions: ["Cognac Saddle", "Noir Black"],
+    customBranding: "Bespoke initials monogramming on leather luggage tag",
+    customizationAvailable: true,
   },
 ];

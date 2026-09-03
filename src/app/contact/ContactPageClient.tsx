@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   MapPin,
   Mail,
@@ -8,7 +10,9 @@ import {
   Clock,
   ShieldCheck,
   ArrowUpRight,
+  ArrowLeft,
   Sparkles,
+  Building2,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import ServicesBar from "@/components/luxury/ServicesBar";
@@ -19,43 +23,45 @@ const contactCards = [
     icon: <MapPin className="w-5 h-5 text-leather-cognac stroke-[1.2]" />,
     title: "London Headquarters & Atelier",
     lines: [
-      brandData.address.street,
-      brandData.address.area,
-      brandData.address.city + " " + brandData.address.postcode,
-      brandData.address.country,
+      // Address temporarily commented out
+      // brandData.address.street,
+      // brandData.address.area,
+      // brandData.address.city + " " + brandData.address.postcode,
+      "London, United Kingdom",
+      "Visits by trade appointment only",
     ],
     action: null,
   },
   {
     icon: <Phone className="w-5 h-5 text-leather-cognac stroke-[1.2]" />,
-    title: "Telephone & WhatsApp Direct",
+    title: "Direct B2B Line & WhatsApp",
     lines: [
       brandData.contact.phoneFormatted,
-      "Direct line to London Concierge Desk",
+      "Direct line to London Manufacturing Desk",
     ],
     action: {
-      label: "Call Now →",
+      label: "Call Desk →",
       href: `tel:${brandData.contact.phone}`,
     },
   },
   {
     icon: <Mail className="w-5 h-5 text-leather-cognac stroke-[1.2]" />,
-    title: "Private Inquiries Email",
+    title: "Wholesale & OEM Inquiries",
     lines: [
       brandData.contact.email,
-      "Response within 24 hours guaranteed",
+      "NDA and technical brief review within 24 hours",
     ],
     action: {
-      label: "Email Concierge →",
+      label: "Email Desk →",
       href: `mailto:${brandData.contact.email}`,
     },
   },
   {
     icon: <Clock className="w-5 h-5 text-leather-cognac stroke-[1.2]" />,
-    title: "Atelier Operating Hours",
+    title: "Atelier & Office Hours",
     lines: [
       "Monday – Friday: 9:00 AM – 6:00 PM GMT",
-      "Saturday: By Private Appointment",
+      "Saturday: By Trade Appointment",
       "Sunday: Closed for Artisans",
     ],
     action: null,
@@ -63,26 +69,54 @@ const contactCards = [
 ];
 
 export default function ContactPageClient() {
+  const router = useRouter();
+
   return (
     <div className="bg-white min-h-screen">
+      {/* ── Top Return Navigation Bar ── */}
+      <div className="pt-24 sm:pt-28 bg-noir-950 border-b border-neutral-800">
+        <div className="container-page py-3 flex items-center justify-between">
+          <button
+            onClick={() => {
+              if (window.history.length > 1) {
+                router.back();
+              } else {
+                router.push("/");
+              }
+            }}
+            className="inline-flex items-center gap-2 text-xs font-heading font-semibold tracking-widest uppercase text-champagne-400 hover:text-white transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>← Return to Previous Page</span>
+          </button>
+
+          <Link
+            href="/"
+            className="text-[11px] font-heading font-medium tracking-wider uppercase text-neutral-400 hover:text-white transition-colors"
+          >
+            ACEMEN Home
+          </Link>
+        </div>
+      </div>
+
       {/* ── Page Header ── */}
-      <section className="relative h-[45vh] sm:h-[55vh] bg-noir-950 text-white flex items-end justify-center pb-12 sm:pb-16 overflow-hidden">
+      <section className="relative h-[40vh] sm:h-[48vh] bg-noir-950 text-white flex items-end justify-center pb-12 sm:pb-16 overflow-hidden">
         <img
           src="/images/contact-london.png"
-          alt="London Private Office"
+          alt="London Private Office & Footwear Atelier"
           className="absolute inset-0 w-full h-full object-cover object-center opacity-40 scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-noir-950 via-noir-950/40 to-transparent" />
 
         <div className="relative z-10 container-page text-center max-w-2xl mx-auto space-y-3">
           <span className="text-[10px] font-heading font-bold tracking-[0.35em] uppercase text-champagne-400 block">
-            CLIENT CONCIERGE & ATELIER
+            B2B & WHOLESALE MANUFACTURING DESK
           </span>
           <h1 className="font-display text-4xl sm:text-6xl font-medium tracking-tight text-white leading-tight">
-            INITIATE A COMMISSION
+            INITIATE A PARTNERSHIP BRIEF
           </h1>
           <p className="font-body text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
-            Whether inquiring about bespoke creations, personalization, or private London atelier consultations, our desk is at your complete disposal.
+            Whether inquiring about wholesale line sheets, private-label footwear collections, custom OEM tech pack development, or private London consultations, our team is at your disposal.
           </p>
         </div>
       </section>
@@ -98,10 +132,10 @@ export default function ContactPageClient() {
                   DIRECT CHANNELS
                 </span>
                 <h2 className="font-display text-3xl font-medium text-noir-950">
-                  The Private Desk
+                  The Partnership Desk
                 </h2>
                 <p className="text-xs text-neutral-600 font-light mt-2 leading-relaxed">
-                  Reach our London team directly or complete the encrypted briefing form.
+                  Reach our London footwear development team directly or submit your project specifications below.
                 </p>
               </div>
 

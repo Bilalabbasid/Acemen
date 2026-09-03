@@ -134,7 +134,8 @@ export default function AboutPageClient() {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs text-neutral-300 font-light">
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-champagne-400" />
-              <span>{brandData.address?.full || "551 Staines Road, London"}</span>
+              {/* <span>{brandData.address?.full || "551 Staines Road, London"}</span> */}
+              <span>London, United Kingdom</span>
             </div>
             <div className="flex items-center gap-2">
               <Phone className="w-4 h-4 text-champagne-400" />

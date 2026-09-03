@@ -3,12 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Heart, ShoppingBag, Menu } from "lucide-react";
+import { Search, Heart, ShoppingBag, Menu, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { B2B_MODE } from "@/config/b2b";
 import MobileNav from "./MobileNav";
 import SearchModal from "./SearchModal";
+import InquiryQuoteModal from "./InquiryQuoteModal";
 
 interface NavCategory {
   title: string;
@@ -23,102 +25,59 @@ interface NavCategory {
 
 const navCategories: NavCategory[] = [
   {
-    title: "Women",
-    href: "/collections/women",
-    previewImage: "/images/luxury/women-campaign.webp",
-    tagline: "Sculptural Totes & Hand-Stitched Essentials",
-    columns: [
-      {
-        heading: "Handbags & Totes",
-        links: [
-          { name: "The Kensington Structured Tote", href: "/products/kensington-structured-tote" },
-          { name: "All Women's Bags", href: "/collections/women" },
-        ],
-      },
-      {
-        heading: "Small Leather Goods",
-        links: [
-          { name: "The Sovereign Bifold Wallet", href: "/products/sovereign-bifold-wallet" },
-          { name: "The Cavendish Cardholder", href: "/products/cavendish-slim-cardholder" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Men",
-    href: "/collections/men",
-    previewImage: "/images/luxury/men-campaign.webp",
-    tagline: "Enduring Executive Pieces & Sartorial Leather",
-    columns: [
-      {
-        heading: "Executive Bags & Luggage",
-        links: [
-          { name: "The Audley Leather Briefcase", href: "/products/audley-leather-briefcase" },
-          { name: "The Grand Sovereign Weekender", href: "/products/grand-sovereign-weekender" },
-          { name: "All Leather Holdalls", href: "/collections/bags" },
-        ],
-      },
-      {
-        heading: "Sartorial Footwear & Jackets",
-        links: [
-          { name: "The Jermyn Classic Oxford", href: "/products/jermyn-classic-oxford-shoe" },
-          { name: "The Sovereign Classic Leather Jacket", href: "/products/sovereign-classic-leather-jacket" },
-          { name: "The Signature Leather Bomber", href: "/products/signature-leather-bomber-jacket" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Bags",
-    href: "/collections/bags",
-    previewImage: "/images/luxury/hero-campaign.webp",
-    tagline: "Handcrafted Holdalls, Briefcases & Totes",
-    columns: [
-      {
-        heading: "By Silhouette",
-        links: [
-          { name: "The Grand Sovereign Weekender", href: "/products/grand-sovereign-weekender" },
-          { name: "The Audley Briefcase", href: "/products/audley-leather-briefcase" },
-          { name: "The Kensington Structured Tote", href: "/products/kensington-structured-tote" },
-        ],
-      },
-      {
-        heading: "Featured Provenance",
-        links: [
-          { name: "French Full-Grain Box Calf", href: "/collections/bags" },
-          { name: "Tuscan Vegetable-Tanned Hide", href: "/collections/bags" },
-          { name: "All Leather Bags", href: "/collections/bags" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Shoes",
+    title: "Footwear",
     href: "/collections/shoes",
     previewImage: "/images/luxury/footwear-campaign.webp",
-    tagline: "Hand-Lasted British Oxfords, Monks & Boots",
+    tagline: "Goodyear-Welted British Oxfords, Monks & Chelsea Boots",
     columns: [
       {
-        heading: "Formal Styles",
+        heading: "Formal & Atelier Silhouettes",
         links: [
-          { name: "The Jermyn Classic Oxford", href: "/products/jermyn-classic-oxford-shoe" },
-          { name: "The Savile Double Monk Strap", href: "/products/savile-double-monk-strap" },
-          { name: "The Mayfair Chelsea Boot", href: "/products/mayfair-leather-chelsea-boot" },
-          { name: "The Piccadilly Blucher Derby", href: "/products/piccadilly-blucher-derby" },
+          { name: "The Regent Classic Oxford (ACE-OXF-01)", href: "/products/regent-cap-toe-oxford" },
+          { name: "The Savile Double Monk Strap (ACE-MNK-01)", href: "/products/savile-double-monk-strap" },
+          { name: "The Mayfair Chelsea Boot (ACE-BOT-01)", href: "/products/mayfair-leather-chelsea-boot" },
+          { name: "The Belgravia Dress Boot (ACE-BOT-02)", href: "/products/belgravia-leather-dress-boot" },
+          { name: "The Grand Sovereign Patina Shoe (ACE-PAT-01)", href: "/products/grand-sovereign-museum-patina-shoe" },
         ],
       },
       {
-        heading: "Specialist Lines",
+        heading: "Casual & Smart Silhouettes",
         links: [
-          { name: "The Pilot Collection (Aviation)", href: "/collections/pilot" },
-          { name: "The Aviator Sovereign Pilot Shoe", href: "/products/aviator-sovereign-pilot-shoe" },
-          { name: "All Handcrafted Footwear", href: "/collections/shoes" },
+          { name: "The St. James Penny Loafer (ACE-LOF-01)", href: "/products/st-james-leather-penny-loafer" },
+          { name: "The Kensington Desert Chukka (ACE-CHK-01)", href: "/products/kensington-suede-desert-chukka" },
+          { name: "The Piccadilly Casual Derby (ACE-DRB-01)", href: "/products/piccadilly-casual-luxury-derby" },
+          { name: "The Sovereign Court Sneaker (ACE-SNK-01)", href: "/products/sovereign-court-leather-sneaker" },
+          { name: "Explore All 10 Footwear Styles", href: "/collections/shoes" },
         ],
       },
     ],
   },
   {
-    title: "Jackets",
+    title: "The Pilot Collection",
+    href: "/collections/pilot",
+    previewImage: "/images/luxury/pilot-campaign.webp",
+    tagline: "Aviation-Grade Scanner-Compliant Flight Deck Shoes",
+    columns: [
+      {
+        heading: "Aviation Line",
+        links: [
+          { name: "The Aviator Sovereign Pilot Shoe (ACE-PLT-01)", href: "/products/aviator-sovereign-pilot-shoe" },
+          { name: "Flight Deck Anti-Static Specifications", href: "/products/aviator-sovereign-pilot-shoe" },
+          { name: "Pilot Trunks & Travel Luggage", href: "/collections/travel" },
+        ],
+      },
+      {
+        heading: "Corporate Fleet Supply",
+        links: [
+          { name: "Airline Uniform Supply Contracts", href: "/contact" },
+          { name: "Airport Scanner Compliant ShOption", href: "/collections/pilot" },
+          { name: "Pilot Line Wholesale Inquiry", href: "/contact" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Outerwear",
     href: "/collections/jackets",
     previewImage: "/images/luxury/prod-jacket-classic-1.webp",
     tagline: "Tailored Full-Grain French Calfskin Outerwear",
@@ -128,55 +87,104 @@ const navCategories: NavCategory[] = [
         links: [
           { name: "The Sovereign Classic Leather Jacket", href: "/products/sovereign-classic-leather-jacket" },
           { name: "The Signature Leather Bomber", href: "/products/signature-leather-bomber-jacket" },
-          { name: "View All Leather Jackets", href: "/collections/jackets" },
+          { name: "View All Leather Outerwear", href: "/collections/jackets" },
         ],
       },
       {
-        heading: "Craftsmanship & Fit",
+        heading: "Manufacturing & Fit",
         links: [
           { name: "French Box Calfskin & Cupro Lining", href: "/about#craftsmanship" },
-          { name: "Bespoke Outerwear Appointments", href: "/contact" },
+          { name: "OEM Tech Pack Development", href: "/contact" },
         ],
       },
     ],
   },
   {
-    title: "Wallets",
-    href: "/collections/wallets",
-    previewImage: "/images/luxury/prod-wallet-1.webp",
-    tagline: "Pocket Accessories Cut from Premier Tuscan Hides",
+    title: "Leather Goods",
+    href: "/collections/bags",
+    previewImage: "/images/luxury/hero-campaign.webp",
+    tagline: "Holdalls, Executive Briefcases & Pocket Accessories",
     columns: [
+      {
+        heading: "Holdalls & Briefcases",
+        links: [
+          { name: "The Grand Sovereign Weekender", href: "/products/grand-sovereign-weekender" },
+          { name: "The Audley Leather Briefcase", href: "/products/audley-leather-briefcase" },
+          { name: "The Kensington Structured Tote", href: "/products/kensington-structured-tote" },
+        ],
+      },
       {
         heading: "Small Leather Goods",
         links: [
           { name: "The Sovereign Bifold Wallet", href: "/products/sovereign-bifold-wallet" },
           { name: "The Cavendish Slim Cardholder", href: "/products/cavendish-slim-cardholder" },
-          { name: "View All Wallets", href: "/collections/wallets" },
-        ],
-      },
-      {
-        heading: "Artisan Finishing",
-        links: [
-          { name: "Hand-Burnished Edge Inking", href: "/about#craftsmanship" },
-          { name: "Gold Leaf Monogramming", href: "/contact" },
+          { name: "Sartorial Belts Collection", href: "/collections/belts" },
         ],
       },
     ],
   },
   {
-    title: "Collections",
-    href: "/products",
-    previewImage: "/images/luxury/travel-campaign.webp",
-    tagline: "The Complete House of ACEMEN Catalog",
+    title: "Materials",
+    href: "/#leather",
+    previewImage: "/images/luxury/craftsmanship.webp",
+    tagline: "Certified European Full-Grain Hides & Finishes",
     columns: [
       {
-        heading: "Specialty Houses",
+        heading: "Leather Provenance",
+        links: [
+          { name: "Full-Grain French Box Calf", href: "/#leather" },
+          { name: "Bavarian Cowhide & Tuscan Veg-Tan", href: "/#leather" },
+          { name: "Calf Suede, Nubuck & Pebble Grain", href: "/#leather" },
+        ],
+      },
+      {
+        heading: "Custom Finishes",
+        links: [
+          { name: "Mirror Glazing & Hand-Burnished Patinas", href: "/#leather" },
+          { name: "Custom Dyeing & Aniline Dip Finishes", href: "/#leather" },
+          { name: "Request Material Swatches", href: "/contact" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Customization",
+    href: "/#customization",
+    previewImage: "/images/luxury/prod-oxford-regent-1.webp",
+    tagline: "Turnkey OEM, ODM & Private-Label Development",
+    columns: [
+      {
+        heading: "OEM & ODM Services",
+        links: [
+          { name: "12 Customizable Component Parameters", href: "/#customization" },
+          { name: "Manufacturing Parameters & MOQ", href: "/#manufacturing" },
+          { name: "Built For Brands Capabilities", href: "/#built-for-brands" },
+        ],
+      },
+      {
+        heading: "Partnership Inquiries",
+        links: [
+          { name: "Request Wholesale Line Sheet", href: "/products" },
+          { name: "Direct Tech Pack Review", href: "/contact" },
+          { name: "London Atelier Desk Consultation", href: "/contact" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Catalog",
+    href: "/products",
+    previewImage: "/images/luxury/travel-campaign.webp",
+    tagline: "The Complete ACEMEN Footwear & Leather Catalog",
+    columns: [
+      {
+        heading: "Complete Departments",
         links: [
           { name: "The Footwear Atelier", href: "/collections/shoes" },
           { name: "The Pilot Collection (Aviation)", href: "/collections/pilot" },
           { name: "Leather Outerwear", href: "/collections/jackets" },
-          { name: "Trunks & Travel", href: "/collections/travel" },
-          { name: "All Leather Creations", href: "/products" },
+          { name: "Fine Leather Goods & Trunks", href: "/collections/bags" },
+          { name: "All Catalog Models", href: "/products" },
         ],
       },
     ],
@@ -188,6 +196,7 @@ export default function LuxuryHeader() {
   const [activeDropdown, setActiveDropdown] = useState<NavCategory | null>(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isHeaderQuoteOpen, setIsHeaderQuoteOpen] = useState(false);
   const pathname = usePathname();
   const isHomepage = pathname === "/";
 
@@ -235,7 +244,7 @@ export default function LuxuryHeader() {
               <Link
                 href="/"
                 className="flex items-center gap-3 group"
-                aria-label="ACEMEN Luxury Leather Goods — Home"
+                aria-label="ACEMEN Premium Leather Footwear — Home"
               >
                 <img
                   src="/images/logo.png"
@@ -262,7 +271,7 @@ export default function LuxuryHeader() {
             </div>
 
             {/* ── Center: Desktop Editorial Navigation ── */}
-            <nav className="hidden lg:flex items-center justify-center space-x-6 xl:space-x-7 lg:w-3/5">
+            <nav className="hidden lg:flex items-center justify-center space-x-5 xl:space-x-6 lg:w-3/5">
               {navCategories.map((cat) => {
                 const isSelected = activeDropdown?.title === cat.title;
                 return (
@@ -273,7 +282,7 @@ export default function LuxuryHeader() {
                   >
                     <Link
                       href={cat.href}
-                      className={`text-xs font-heading font-semibold tracking-[0.18em] uppercase py-2 transition-all duration-200 relative ${
+                      className={`text-xs font-heading font-semibold tracking-[0.16em] uppercase py-2 transition-all duration-200 relative ${
                         isSelected
                           ? isTransparent
                             ? "text-white"
@@ -298,7 +307,7 @@ export default function LuxuryHeader() {
               })}
             </nav>
 
-            {/* ── Right: Utilities (Search, Wishlist, Bag, Concierge) ── */}
+            {/* ── Right: Utilities (Search, Wishlist/Specs, B2B Quote Action) ── */}
             <div className="flex items-center justify-end gap-3 sm:gap-4 lg:w-1/5">
               <button
                 onClick={() => setIsSearchOpen(true)}
@@ -314,7 +323,8 @@ export default function LuxuryHeader() {
               <button
                 onClick={openWishlist}
                 className="p-2 text-current hover:opacity-70 transition-opacity relative"
-                aria-label="Saved items"
+                aria-label="Saved specifications"
+                title="Saved specifications for quote"
               >
                 <Heart className="w-5 h-5 stroke-[1.5]" />
                 {wishlistCount > 0 && (
@@ -324,29 +334,47 @@ export default function LuxuryHeader() {
                 )}
               </button>
 
-              <button
-                onClick={openCart}
-                className="p-2 text-current hover:opacity-70 transition-opacity flex items-center gap-2"
-                aria-label="Shopping bag"
-              >
-                <div className="relative">
-                  <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
-                  {totalItems > 0 && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-leather-cognac text-white text-[9px] font-heading font-bold rounded-full flex items-center justify-center">
-                      {totalItems}
-                    </span>
-                  )}
-                </div>
-                <span className="hidden xl:inline text-[11px] font-heading tracking-[0.2em] uppercase font-semibold">
-                  Bag ({totalItems})
-                </span>
-              </button>
+              {/* B2B MODE — Shopping bag hidden for visitors. Replaced with Request a Quote CTA button */}
+              {B2B_MODE ? (
+                <button
+                  onClick={() => setIsHeaderQuoteOpen(true)}
+                  className={`hidden sm:inline-flex items-center text-[10px] font-heading tracking-[0.22em] uppercase font-bold px-3.5 py-1.5 border transition-all ${
+                    isTransparent
+                      ? "border-white/80 text-white hover:bg-white hover:text-noir-950"
+                      : "border-noir-950 bg-noir-950 text-white hover:bg-leather-cognac hover:border-leather-cognac"
+                  }`}
+                >
+                  REQUEST QUOTE
+                </button>
+              ) : (
+                <button
+                  onClick={openCart}
+                  className="p-2 text-current hover:opacity-70 transition-opacity flex items-center gap-2"
+                  aria-label="Shopping bag"
+                >
+                  <div className="relative">
+                    <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
+                    {totalItems > 0 && (
+                      <span className="absolute -top-1 -right-1 w-4 h-4 bg-leather-cognac text-white text-[9px] font-heading font-bold rounded-full flex items-center justify-center">
+                        {totalItems}
+                      </span>
+                    )}
+                  </div>
+                  <span className="hidden xl:inline text-[11px] font-heading tracking-[0.2em] uppercase font-semibold">
+                    Bag ({totalItems})
+                  </span>
+                </button>
+              )}
 
               <Link
                 href="/contact"
-                className="hidden sm:inline-flex items-center text-[10px] font-heading tracking-[0.25em] uppercase font-bold px-3 py-1.5 border border-current hover:bg-white hover:text-noir-950 transition-colors"
+                className={`hidden md:inline-flex items-center text-[10px] font-heading tracking-[0.25em] uppercase font-bold px-3 py-1.5 border ${
+                  isTransparent
+                    ? "border-transparent text-neutral-300 hover:text-white"
+                    : "border-transparent text-neutral-700 hover:text-noir-950"
+                } transition-colors`}
               >
-                Concierge
+                Desk
               </Link>
             </div>
           </div>
@@ -392,7 +420,7 @@ export default function LuxuryHeader() {
                         onClick={() => setActiveDropdown(null)}
                         className="editorial-link text-[11px]"
                       >
-                        Explore Entire {activeDropdown.title} Department
+                        Explore {activeDropdown.title} Catalog
                       </Link>
                     </div>
                   </div>
@@ -413,7 +441,7 @@ export default function LuxuryHeader() {
                         />
                       </div>
                       <span className="text-[10px] font-heading tracking-[0.2em] uppercase font-bold text-leather-cognac block mb-1">
-                        Featured Selection
+                        Wholesale & OEM Line
                       </span>
                       <p className="font-display text-base font-semibold text-noir-950 group-hover:text-leather-cognac transition-colors">
                         {activeDropdown.tagline}
@@ -436,6 +464,12 @@ export default function LuxuryHeader() {
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
+      />
+
+      <InquiryQuoteModal
+        isOpen={isHeaderQuoteOpen}
+        onClose={() => setIsHeaderQuoteOpen(false)}
+        defaultSubject="General Wholesale & Quote Inquiry"
       />
     </>
   );

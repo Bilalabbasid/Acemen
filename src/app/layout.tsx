@@ -34,20 +34,21 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://acemen.co.uk"),
   title: {
-    default: "ACEMEN | Luxury Leather Goods • London",
+    default: "ACEMEN | Premium Leather Footwear & Wholesale Manufacturing • London",
     template: "%s | ACEMEN",
   },
   description:
-    "ACEMEN is a British luxury leather house crafting fine holdalls, briefcases, small leather goods, and travel luggage from premier French and Italian full-grain hides.",
+    "ACEMEN is a British luxury leather footwear manufacturer and wholesale supplier. Developing Goodyear-welted shoes, aviation footwear, outerwear, and fine leather goods for international brands and OEM/ODM partners.",
   keywords: [
     "ACEMEN",
-    "Luxury Leather Goods",
-    "Full-Grain Leather Bags",
-    "Handcrafted Leather Briefcase",
-    "Leather Weekender Duffle",
-    "London Leather Atelier",
-    "Luxury Travel Luggage",
-    "Sartorial Leather Wallets",
+    "Footwear Manufacturer",
+    "Wholesale Leather Shoes",
+    "OEM Footwear Supplier",
+    "Private Label Footwear",
+    "Aviation Pilot Shoes",
+    "Goodyear Welted Shoes",
+    "London Footwear Atelier",
+    "Luxury Leather Goods Manufacturing",
   ],
   authors: [{ name: "ACEMEN" }],
   creator: "ACEMEN",
@@ -60,24 +61,24 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: "https://acemen.co.uk",
     siteName: "ACEMEN",
-    title: "ACEMEN | World-Class Luxury Leather Goods • London",
+    title: "ACEMEN | Premium Leather Footwear & Wholesale Manufacturing • London",
     description:
-      "Crafted to endure. Discover handcrafted luxury leather holdalls, briefcases, wallets, and travel trunks sculpted from premier full-grain hides.",
+      "Crafted for Brands. Built for Business. Discover Goodyear-welted footwear, pilot shoes, and fine leather goods for wholesale, private-label, and OEM partnerships.",
     images: [
       {
-        url: "/images/luxury/.webp",
+        url: "/images/luxury/hero-campaign.webp",
         width: 1200,
         height: 630,
-        alt: "ACEMEN Luxury Leather Goods",
+        alt: "ACEMEN Premium Leather Footwear & Manufacturing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ACEMEN | World-Class Luxury Leather Goods • London",
+    title: "ACEMEN | Premium Leather Footwear & Wholesale Manufacturing • London",
     description:
-      "Crafted to endure. Discover handcrafted luxury leather holdalls, briefcases, wallets, and travel trunks sculpted from premier full-grain hides.",
-    images: ["/images/luxury/.webp"],
+      "Crafted for Brands. Built for Business. Discover Goodyear-welted footwear, pilot shoes, and fine leather goods for wholesale, private-label, and OEM partnerships.",
+    images: ["/images/luxury/hero-campaign.webp"],
   },
   robots: {
     index: true,

@@ -14,12 +14,18 @@ import {
   Check,
   Ruler,
   Sparkles,
+  FileText,
+  Package,
+  Layers,
+  CheckCircle,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { luxuryProducts, ProductItem } from "@/data/products";
+import { luxuryProducts, ProductItem, getProductModelNumber } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { B2B_MODE } from "@/config/b2b";
 import ProductCard from "@/components/luxury/ProductCard";
+import InquiryQuoteModal from "@/components/luxury/InquiryQuoteModal";
 
 export default function ProductDetailPage({ params }: { params: { slug: string } }) {
   const product = luxuryProducts.find((p) => p.slug === params.slug);
@@ -38,9 +44,11 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
   const [activeAccordion, setActiveAccordion] = useState<string>("details");
   const [copied, setCopied] = useState(false);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const isFavorite = isInWishlist(product.id);
   const isFootwear = product.category === "Shoes" || product.category === "Pilot Collection" || !!product.sizes;
+  const modelNumber = getProductModelNumber(product);
 
   // Related products from same or adjacent category
   const relatedProducts = luxuryProducts
@@ -65,7 +73,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           </Link>
           <ChevronRight className="w-3 h-3 text-neutral-400" />
           <Link href="/products" className="hover:text-noir-950 transition-colors">
-            Atelier Catalog
+            Catalog
           </Link>
           <ChevronRight className="w-3 h-3 text-neutral-400" />
           <Link
@@ -91,13 +99,16 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 alt={product.name}
                 className="w-full h-full object-cover object-center transition-all duration-500"
               />
-              {product.tag && (
-                <div className="absolute top-4 left-4 z-10">
+              <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5">
+                {product.tag && (
                   <span className="bg-white text-noir-950 text-[10px] font-heading font-bold tracking-[0.25em] uppercase px-3 py-1.5 shadow-sm border border-neutral-200">
                     {product.tag}
                   </span>
-                </div>
-              )}
+                )}
+                <span className="bg-noir-950 text-champagne-400 text-[9px] font-heading font-bold tracking-[0.25em] uppercase px-3 py-1 shadow-sm">
+                  MODEL: {modelNumber}
+                </span>
+              </div>
             </div>
 
             {/* Thumbnail Strip */}
@@ -123,12 +134,12 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             <div className="p-6 bg-ivory-50 border border-neutral-200/80 mt-8 space-y-2">
               <div className="flex items-center gap-2 text-leather-cognac text-xs font-heading font-bold tracking-[0.25em] uppercase">
                 <Sparkles className="w-4 h-4" />
-                <span>London Atelier Craftsmanship</span>
+                <span>London Atelier Craftsmanship & OEM Standards</span>
               </div>
               <p className="text-xs text-neutral-600 font-light leading-relaxed">
                 {isFootwear
-                  ? "Every pair of ACEMEN shoes is hand-lasted over traditional British forms, finished with genuine Goodyear welted channeled soles and French box calfskin."
-                  : "Every ACEMEN creation is cut from certified French or Italian full-grain hides, hand saddle-stitched with waxed linen thread, and accompanied by our lifetime restoration guarantee."}
+                  ? "Every pair of ACEMEN shoes is hand-lasted over traditional British forms, finished with genuine Goodyear welted channeled soles and French box calfskin. Available for private-label development and custom volume manufacturing."
+                  : "Every ACEMEN creation is cut from certified French or Italian full-grain hides, hand saddle-stitched with waxed linen thread, and accompanied by our manufacturing lifetime restoration pledge."}
               </p>
             </div>
           </div>
@@ -148,7 +159,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   title="Copy link"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Share2 className="w-3.5 h-3.5" />}
-                  <span>{copied ? "Copied" : "Share"}</span>
+                  <span>{copied ? "Copied" : "Share Spec"}</span>
                 </button>
               </div>
 
@@ -156,14 +167,32 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 {product.name}
               </h1>
 
-              <div className="flex items-center justify-between pt-2">
-                <span className="font-heading text-2xl font-bold text-noir-950">
-                  {product.formattedPrice}
-                </span>
-                <span className="text-[11px] text-green-700 font-heading font-semibold tracking-wider uppercase bg-green-50 px-2.5 py-1 border border-green-200">
-                  In Stock • Atelier Ready
-                </span>
-              </div>
+              {/* B2B MODE — D2C pricing temporarily disabled. Restore when retail sales are enabled. */}
+              {B2B_MODE ? (
+                <div className="flex items-center justify-between pt-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono font-bold text-noir-950 px-2.5 py-1 bg-ivory-100 border border-neutral-200">
+                      MODEL: {modelNumber}
+                    </span>
+                    <span className="text-[11px] text-leather-cognac font-heading font-bold tracking-wider uppercase">
+                      Wholesale & OEM
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-green-700 font-heading font-semibold tracking-wider uppercase bg-green-50 px-2.5 py-1 border border-green-200">
+                    Production Ready
+                  </span>
+                </div>
+              ) : (
+                /* Retail D2C pricing block */
+                <div className="flex items-center justify-between pt-2">
+                  <span className="font-heading text-2xl font-bold text-noir-950">
+                    {product.formattedPrice}
+                  </span>
+                  <span className="text-[11px] text-green-700 font-heading font-semibold tracking-wider uppercase bg-green-50 px-2.5 py-1 border border-green-200">
+                    In Stock • Atelier Ready
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Short Editorial Description */}
@@ -171,12 +200,59 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               {product.shortDescription}
             </p>
 
-            {/* Color Selection */}
+            {/* ── B2B PRODUCT DETAILS & MANUFACTURING MATRIX ── */}
+            <div className="p-5 bg-ivory-50 border border-neutral-200 space-y-3">
+              <div className="flex items-center justify-between pb-2 border-b border-neutral-200">
+                <span className="text-[10px] font-heading font-bold tracking-[0.25em] uppercase text-leather-cognac">
+                  PRODUCT SPECIFICATIONS
+                </span>
+                <span className="text-[10px] font-mono text-neutral-500">
+                  {modelNumber}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-4 text-xs">
+                <div>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Model:</strong>
+                  <span className="text-noir-950 font-semibold">{modelNumber}</span>
+                </div>
+                <div>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Category:</strong>
+                  <span className="text-noir-950 font-semibold">{product.subType || product.category}</span>
+                </div>
+                <div>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Upper:</strong>
+                  <span className="text-noir-950 font-semibold">{product.materials[0]?.replace("100% ", "") || "Premium Leather"}</span>
+                </div>
+                <div>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Finish:</strong>
+                  <span className="text-noir-950 font-semibold">Multiple Finishes Available</span>
+                </div>
+                <div>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Colors:</strong>
+                  <span className="text-noir-950 font-semibold">Customizable (Dip Dye / Patina)</span>
+                </div>
+                <div>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Sole:</strong>
+                  <span className="text-noir-950 font-semibold">{product.dimensions.soleType || "Multiple Options Available"}</span>
+                </div>
+                <div>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Branding:</strong>
+                  <span className="text-noir-950 font-semibold">Private Label Available</span>
+                </div>
+                <div>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Customization:</strong>
+                  <span className="text-green-700 font-semibold">Available (OEM / ODM)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Color Selection & Swatches */}
             {product.colors && product.colors.length > 0 && (
               <div className="space-y-3 pt-1">
                 <div className="flex items-center justify-between text-xs font-heading tracking-wider uppercase">
-                  <span className="text-neutral-500">Color Palette:</span>
-                  <span className="font-bold text-noir-950">{selectedColor}</span>
+                  <span className="text-neutral-500">Available Colorways:</span>
+                  <span className="font-bold text-noir-950">{selectedColor} (Custom Dye Available)</span>
                 </div>
                 <div className="flex gap-2.5">
                   {product.colors.map((col) => (
@@ -200,17 +276,17 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
             )}
 
-            {/* Footwear Size Selector */}
+            {/* Footwear Size Matrix */}
             {isFootwear && product.sizes && (
               <div className="space-y-3 pt-2">
                 <div className="flex items-center justify-between text-xs font-heading tracking-wider uppercase">
-                  <span className="text-neutral-500">Select European Size:</span>
+                  <span className="text-neutral-500">Standard Sizing Matrix:</span>
                   <button
                     onClick={() => setShowSizeGuide(!showSizeGuide)}
                     className="text-leather-cognac hover:underline flex items-center gap-1 font-bold"
                   >
                     <Ruler className="w-3.5 h-3.5" />
-                    <span>Size & Conversion Guide</span>
+                    <span>Size Conversion Guide</span>
                   </button>
                 </div>
 
@@ -249,7 +325,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                         <div><strong>US</strong>: 6.5 | 7.5 | 8.5 | 9.5 | 10.5 | 11.5 | 12.5 | 13.5</div>
                       </div>
                       <p className="text-[10px] text-neutral-500 pt-1 font-light italic">
-                        ACEMEN lasts fit true to European sizing. For broader insteps, we recommend selecting a half size up.
+                        ACEMEN Lasts are graded to European standards. Custom volume production can be Lasted on US, UK, or bespoke client-supplied lasts.
                       </p>
                     </motion.div>
                   )}
@@ -257,57 +333,79 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
             )}
 
-            {/* Quantity Selector & Add to Bag CTA */}
+            {/* ── B2B ACTION BUTTONS & CTAs ── */}
             <div className="space-y-3 pt-4">
-              <div className="flex items-center gap-3">
-                {/* Quantity */}
-                <div className="flex items-center border border-neutral-300 h-12">
+              {/* B2B MODE — D2C retail purchasing temporarily disabled. Replaced with Request a Quote & Request Samples CTAs */}
+              {B2B_MODE ? (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setIsQuoteModalOpen(true)}
+                      className="flex-1 btn-luxury-primary h-13 tracking-[0.22em] flex items-center justify-center gap-2 text-xs font-bold"
+                    >
+                      <FileText className="w-4 h-4" />
+                      <span>REQUEST A QUOTE</span>
+                    </button>
+
+                    <button
+                      onClick={() => toggleWishlist(product)}
+                      className="w-13 h-13 border border-neutral-300 flex items-center justify-center text-noir-950 hover:border-noir-950 transition-colors shrink-0"
+                      aria-label="Save for quote inquiry"
+                      title={isFavorite ? "Saved for inquiry" : "Save specification"}
+                    >
+                      <Heart
+                        className={`w-5 h-5 ${
+                          isFavorite ? "fill-leather-cognac text-leather-cognac" : "text-neutral-600"
+                        }`}
+                      />
+                    </button>
+                  </div>
+
                   <button
-                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="w-10 h-full flex items-center justify-center text-neutral-600 hover:text-noir-950 hover:bg-neutral-100 transition-colors"
-                    aria-label="Decrease quantity"
+                    onClick={() => setIsQuoteModalOpen(true)}
+                    className="w-full btn-luxury-outline h-12 tracking-[0.2em] flex items-center justify-center gap-2 text-xs"
                   >
-                    <Minus className="w-3.5 h-3.5" />
-                  </button>
-                  <span className="w-10 text-center text-xs font-heading font-bold">
-                    {quantity}
-                  </span>
-                  <button
-                    onClick={() => setQuantity((q) => q + 1)}
-                    className="w-10 h-full flex items-center justify-center text-neutral-600 hover:text-noir-950 hover:bg-neutral-100 transition-colors"
-                    aria-label="Increase quantity"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
+                    <Package className="w-4 h-4" />
+                    <span>REQUEST SAMPLES & SPECIFICATIONS</span>
                   </button>
                 </div>
+              ) : (
+                /* Original D2C Add to Bag & Quantity selector (preserved for retail mode) */
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center border border-neutral-300 h-12">
+                    <button
+                      onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                      className="w-10 h-full flex items-center justify-center text-neutral-600 hover:text-noir-950 hover:bg-neutral-100 transition-colors"
+                      aria-label="Decrease quantity"
+                    >
+                      <Minus className="w-3.5 h-3.5" />
+                    </button>
+                    <span className="w-10 text-center text-xs font-heading font-bold">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity((q) => q + 1)}
+                      className="w-10 h-full flex items-center justify-center text-neutral-600 hover:text-noir-950 hover:bg-neutral-100 transition-colors"
+                      aria-label="Increase quantity"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
 
-                {/* Add to Bag Button */}
-                <button
-                  onClick={() => addToCart(product, selectedColor, quantity, selectedSize)}
-                  className="flex-1 btn-luxury-primary h-12 tracking-[0.25em] flex items-center justify-center gap-2"
-                >
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>Add to Bag</span>
-                </button>
+                  <button
+                    onClick={() => addToCart(product, selectedColor, quantity, selectedSize)}
+                    className="flex-1 btn-luxury-primary h-12 tracking-[0.25em] flex items-center justify-center gap-2"
+                  >
+                    <ShoppingBag className="w-4 h-4" />
+                    <span>Add to Bag</span>
+                  </button>
+                </div>
+              )}
 
-                {/* Wishlist Toggle */}
-                <button
-                  onClick={() => toggleWishlist(product)}
-                  className="w-12 h-12 border border-neutral-300 flex items-center justify-center text-noir-950 hover:border-noir-950 transition-colors shrink-0"
-                  aria-label={isFavorite ? "Remove from wishlist" : "Add to wishlist"}
-                >
-                  <Heart
-                    className={`w-5 h-5 ${
-                      isFavorite ? "fill-leather-cognac text-leather-cognac" : "text-neutral-600"
-                    }`}
-                  />
-                </button>
-              </div>
-
-              {/* Complimentary Packaging Promise */}
+              {/* B2B Manufacturing Promise */}
               <div className="pt-2 flex items-center gap-2 text-[11px] text-neutral-500 font-heading tracking-wider uppercase">
                 <ShieldCheck className="w-4 h-4 text-leather-cognac shrink-0" />
-                <span>Complimentary signature gift box, dust bag & worldwide insurance</span>
+                <span>OEM / ODM development, private-label branding & worldwide insured freight</span>
               </div>
             </div>
 
@@ -321,7 +419,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   }
                   className="w-full flex items-center justify-between font-heading text-xs tracking-[0.2em] uppercase font-bold text-noir-950 text-left"
                 >
-                  <span>Product Details & Story</span>
+                  <span>Design Narrative & Construction</span>
                   <span className="text-base font-light">
                     {activeAccordion === "details" ? "−" : "+"}
                   </span>
@@ -338,7 +436,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 )}
               </div>
 
-              {/* Accordion 2: Materials & Craftsmanship */}
+              {/* Accordion 2: Materials & Provenance */}
               <div className="py-4">
                 <button
                   onClick={() =>
@@ -346,7 +444,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   }
                   className="w-full flex items-center justify-between font-heading text-xs tracking-[0.2em] uppercase font-bold text-noir-950 text-left"
                 >
-                  <span>Materials & Provenance</span>
+                  <span>Materials & Leather Provenance</span>
                   <span className="text-base font-light">
                     {activeAccordion === "materials" ? "−" : "+"}
                   </span>
@@ -370,14 +468,14 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   }
                   className="w-full flex items-center justify-between font-heading text-xs tracking-[0.2em] uppercase font-bold text-noir-950 text-left"
                 >
-                  <span>{isFootwear ? "Last & Sole Specifications" : "Dimensions & Specifications"}</span>
+                  <span>{isFootwear ? "Last & Sole Technical Data" : "Dimensions & Specifications"}</span>
                   <span className="text-base font-light">
                     {activeAccordion === "dimensions" ? "−" : "+"}
                   </span>
                 </button>
                 {activeAccordion === "dimensions" && (
                   <div className="pt-3 text-xs text-neutral-600 space-y-1.5 font-light">
-                    {product.dimensions.heelHeight && <p>Heel Height: {product.dimensions.heelHeight}</p>}
+                    {product.dimensions.heelHeight && <p>Heel Profile: {product.dimensions.heelHeight}</p>}
                     {product.dimensions.soleType && <p>Sole Construction: {product.dimensions.soleType}</p>}
                     {product.dimensions.height && <p>Height: {product.dimensions.height}</p>}
                     {product.dimensions.width && <p>Width: {product.dimensions.width}</p>}
@@ -387,7 +485,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 )}
               </div>
 
-              {/* Accordion 4: White-Glove Shipping & Returns */}
+              {/* Accordion 4: Wholesale Dispatch & Sampling Terms */}
               <div className="py-4">
                 <button
                   onClick={() =>
@@ -395,7 +493,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   }
                   className="w-full flex items-center justify-between font-heading text-xs tracking-[0.2em] uppercase font-bold text-noir-950 text-left"
                 >
-                  <span>Shipping & Returns</span>
+                  <span>Wholesale Logistics & Sampling</span>
                   <span className="text-base font-light">
                     {activeAccordion === "shipping" ? "−" : "+"}
                   </span>
@@ -403,10 +501,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 {activeAccordion === "shipping" && (
                   <div className="pt-3 text-xs text-neutral-600 space-y-2 font-light leading-relaxed">
                     <p>
-                      <strong>Complimentary White-Glove Delivery:</strong> UK orders arrive within 1–2 business days via insured private courier. International delivery takes 3–5 business days.
+                      <strong>Sample Prototyping:</strong> Initial physical sample pairs are produced and dispatched via express international air freight following tech pack sign-off.
                     </p>
                     <p>
-                      <strong>30-Day Complimentary Exchanges:</strong> Shoes may be exchanged or returned in pristine unworn condition with all original packaging and protective sole covers intact.
+                      <strong>Volume Freight:</strong> Full commercial shipments are handled via air or sea freight with custom export documentation, full transit insurance, and port clearance support.
                     </p>
                   </div>
                 )}
@@ -420,10 +518,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           <div className="pt-24 sm:pt-32 border-t border-neutral-200 mt-20">
             <div className="text-center mb-12">
               <span className="text-[10px] font-heading font-bold tracking-[0.3em] uppercase text-leather-cognac block mb-2">
-                COMPLETE THE SUITE
+                COLLECTION PIECES
               </span>
               <h2 className="font-display text-3xl sm:text-4xl font-medium text-noir-950">
-                COMPLEMENTARY PIECES
+                RELATED CREATIONS & SILHOUETTES
               </h2>
             </div>
 
@@ -435,6 +533,13 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           </div>
         )}
       </div>
+
+      {/* Inquiry & Quote Modal */}
+      <InquiryQuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        product={product}
+      />
     </div>
   );
 }

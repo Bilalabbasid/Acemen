@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { luxuryProducts, ProductCategory, GenderCategory } from "@/data/products";
 import ProductCard from "@/components/luxury/ProductCard";
+import InquiryQuoteModal from "@/components/luxury/InquiryQuoteModal";
+import { ShieldCheck } from "lucide-react";
 
 interface CollectionMeta {
   title: string;
@@ -18,10 +20,10 @@ interface CollectionMeta {
 const collectionConfigs: Record<string, CollectionMeta> = {
   shoes: {
     title: "THE FOOTWEAR ATELIER",
-    eyebrow: "HAND-LASTED BRITISH DISTINCTION",
+    eyebrow: "WHOLESALE & PRIVATE-LABEL FOOTWEAR",
     heroImage: "/images/luxury/footwear-campaign.webp",
     description:
-      "Goodyear-welted Oxford shoes, double monk straps, Chelsea boots, and blucher derbies sculpted from French box calf and Bavarian hides.",
+      "Goodyear-welted Oxford shoes, double monk straps, Chelsea boots, and blucher derbies sculpted from French box calf and Bavarian hides. Available for OEM development and bespoke volume runs.",
     categoryFilter: "Shoes",
   },
   pilot: {
@@ -29,44 +31,44 @@ const collectionConfigs: Record<string, CollectionMeta> = {
     eyebrow: "AVIATION GRADE • FLIGHT DECK SARTORIAL",
     heroImage: "/images/luxury/pilot-campaign.webp",
     description:
-      "Precision-crafted leather footwear engineered specifically for pilots and flight deck professionals. Airport scanner compliant and built for multi-hour cockpit endurance.",
+      "Precision-crafted leather footwear engineered specifically for airline pilots, flight crews, and corporate aviation. Airport scanner compliant composite shanks and anti-static flight deck traction.",
     categoryFilter: "Pilot Collection",
   },
   jackets: {
-    title: "SARTORIAL LEATHER JACKETS",
-    eyebrow: "OUTERWEAR ATELIER",
+    title: "SARTORIAL LEATHER OUTERWEAR",
+    eyebrow: "WHOLESALE LEATHER OUTERWEAR ATELIER",
     heroImage: "/images/luxury/prod-jacket-classic-1.webp",
     description:
-      "Minimalist classic leather jackets and bombers cut from full-grain French box calfskin and supple Bavarian hides.",
+      "Minimalist classic leather jackets and bombers cut from full-grain French box calfskin, cupro lining, and Swiss Riri hardware for luxury brand collections.",
     categoryFilter: "Jackets",
   },
   bags: {
-    title: "FINE LEATHER BAGS",
-    eyebrow: "ICONIC SILHOUETTES",
+    title: "FINE LEATHER BAGS & HOLDALLS",
+    eyebrow: "EXECUTIVE LEATHER GOODS",
     heroImage: "/images/luxury/hero-campaign.webp",
     description:
-      "From spacious travel holdalls to structured executive briefcases and everyday totes, hand saddle-stitched in London.",
+      "From spacious travel holdalls to structured executive briefcases and everyday totes, hand saddle-stitched in London from premier full-grain hides.",
     categoryFilter: "Bags",
   },
   wallets: {
-    title: "WALLETS & SMALL LEATHER GOODS",
-    eyebrow: "POCKET ARTISANRY",
+    title: "WALLETS & POCKET LEATHER GOODS",
+    eyebrow: "SMALL LEATHER GOODS MANUFACTURING",
     heroImage: "/images/luxury/prod-wallet-1.webp",
     description:
-      "Precision-crafted bifold wallets, ultra-slim cardholders, and passport cases finished with hand-burnished edges.",
+      "Precision-crafted bifold wallets, ultra-slim cardholders, and passport cases finished with hand-burnished edges and private-label debossing.",
     categoryFilter: "Wallets",
   },
   travel: {
     title: "TRUNKS & TRAVEL ATELIER",
-    eyebrow: "GRAND VOYAGE",
+    eyebrow: "LUXURY TRAVEL LUGGAGE & CABIN TRUNKS",
     heroImage: "/images/luxury/travel-campaign.webp",
     description:
-      "Wheeled cabin suitcases, weekender duffles, and garment luggage designed for effortless international movement.",
+      "Wheeled cabin suitcases, weekender duffles, and garment luggage designed for effortless international movement and private-label production.",
     categoryFilter: "Travel",
   },
   women: {
     title: "WOMEN'S LEATHER GOODS",
-    eyebrow: "THE ATELIER COLLECTION",
+    eyebrow: "THE WOMEN'S ATELIER COLLECTION",
     heroImage: "/images/luxury/women-campaign.webp",
     description:
       "Sculptural totes, compact crossbodies, and pocket accessories engineered from French box calfskin and Tuscan grain hides.",
@@ -74,7 +76,7 @@ const collectionConfigs: Record<string, CollectionMeta> = {
   },
   men: {
     title: "MEN'S SARTORIAL LEATHER",
-    eyebrow: "THE EXECUTIVE LINE",
+    eyebrow: "THE MEN'S EXECUTIVE LINE",
     heroImage: "/images/luxury/men-campaign.webp",
     description:
       "Executive briefcases, weekend holdalls, hand-lasted shoes, and tailored leather jackets cut from dense full-grain hides.",
@@ -89,6 +91,7 @@ export default function CollectionPage({
 }) {
   const paramKey = params.category.toLowerCase();
   const config = collectionConfigs[paramKey];
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
   if (!config) {
     notFound();
@@ -134,9 +137,9 @@ export default function CollectionPage({
       {/* Products Grid */}
       <div className="container-fluid py-16 sm:py-24">
         <div className="flex items-center justify-between border-b border-neutral-200 pb-4 mb-10 text-xs font-heading tracking-wider uppercase text-neutral-500">
-          <span>{products.length} Available Creation{products.length !== 1 ? "s" : ""}</span>
+          <span>{products.length} Available Model{products.length !== 1 ? "s" : ""}</span>
           <Link href="/products" className="text-noir-950 underline hover:text-leather-cognac">
-            View All Atelier Pieces
+            View All Catalog Pieces
           </Link>
         </div>
 
@@ -145,7 +148,36 @@ export default function CollectionPage({
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        {/* B2B Callout */}
+        <div className="mt-20 p-8 sm:p-10 bg-ivory-50 border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="space-y-1 text-center sm:text-left">
+            <span className="text-[10px] font-heading font-bold tracking-[0.25em] uppercase text-leather-cognac block">
+              CUSTOM SPECIFICATIONS
+            </span>
+            <h3 className="font-display text-xl sm:text-2xl font-semibold text-noir-950">
+              Inquire About Customization on this Department
+            </h3>
+            <p className="text-xs text-neutral-600 font-light">
+              Discuss custom leather selection, private branding, sole options, and production timelines.
+            </p>
+          </div>
+
+          <button
+            onClick={() => setIsQuoteOpen(true)}
+            className="btn-luxury-primary text-xs tracking-[0.2em] shrink-0"
+          >
+            REQUEST WHOLESALE QUOTE
+          </button>
+        </div>
       </div>
+
+      {/* Inquiry Quote Modal */}
+      <InquiryQuoteModal
+        isOpen={isQuoteOpen}
+        onClose={() => setIsQuoteOpen(false)}
+        defaultSubject={`Inquiry regarding ${config.title}`}
+      />
     </div>
   );
 }

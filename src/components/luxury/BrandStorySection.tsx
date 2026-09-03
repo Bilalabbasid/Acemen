@@ -18,25 +18,28 @@ export default function BrandStorySection() {
             className="lg:col-span-6 space-y-6"
           >
             <span className="text-[10px] font-heading font-bold tracking-[0.35em] uppercase text-leather-cognac block">
-              THE HOUSE OF ACEMEN
+              YOUR BRAND. OUR CRAFT.
             </span>
 
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-noir-950 leading-tight">
-              A LEGACY SCULPTED IN FULL-GRAIN LEATHER
+              A LEGACY OF FOOTWEAR & LEATHER MANUFACTURING
             </h2>
 
             <div className="space-y-4 text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
               <p>
-                Founded on London’s Staines Road corridor, ACEMEN bridges Savile Row sartorial sensibilities with rigorous aeronautical travel standards.
+                Founded in London, ACEMEN bridges British architectural Last design with rigorous industrial manufacturing capability.
               </p>
               <p>
-                From hand-lasted Goodyear-welted oxfords to airport scanner-compliant pilot shoes and weekender holdalls, our creations are engineered to be lifelong companions that grow richer with every voyage.
+                From hand-lasted Goodyear-welted oxfords and airport scanner-compliant pilot shoes to sartorial leather jackets and holdalls, we partner with discerning brands, boutique retailers, and international distributors to turn footwear concepts into commercial reality.
               </p>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 flex items-center gap-6">
               <Link href="/about" className="editorial-link text-xs tracking-[0.2em]">
-                READ THE MAISON STORY
+                DISCOVER OUR SAVOIR-FAIRE
+              </Link>
+              <Link href="/contact" className="editorial-link text-xs tracking-[0.2em]">
+                BECOME A PARTNER
               </Link>
             </div>
           </motion.div>
@@ -52,7 +55,7 @@ export default function BrandStorySection() {
             >
               <img
                 src="/images/luxury/prod-oxford-1.webp"
-                alt="ACEMEN Footwear Craft"
+                alt="ACEMEN Footwear Craft & Manufacturing"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover"
@@ -67,7 +70,7 @@ export default function BrandStorySection() {
             >
               <img
                 src="/images/luxury/prod-briefcase-1.webp"
-                alt="ACEMEN Leather Briefcase"
+                alt="ACEMEN Leather Briefcase & Goods"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover"

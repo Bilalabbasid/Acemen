@@ -18,21 +18,21 @@ const collections: CollectionCard[] = [
     subtitle: "SCULPTURAL TOTES & ACCESSORIES",
     image: "/images/luxury/women-campaign.webp",
     href: "/collections/women",
-    ctaText: "EXPLORE WOMEN",
+    ctaText: "EXPLORE WOMEN'S LINE",
   },
   {
     title: "MEN'S SARTORIAL",
-    subtitle: "BRIEFCASES, SHOES & JACKETS",
+    subtitle: "FOOTWEAR, JACKETS & BRIEF CASES",
     image: "/images/luxury/men-campaign.webp",
     href: "/collections/men",
-    ctaText: "EXPLORE MEN",
+    ctaText: "EXPLORE MEN'S LINE",
   },
   {
     title: "TRUNKS & TRAVEL",
-    subtitle: "CABIN CASES & WEEKENDERS",
+    subtitle: "CABIN CASES & HOLDALLS",
     image: "/images/luxury/travel-campaign.webp",
     href: "/collections/travel",
-    ctaText: "EXPLORE TRAVEL",
+    ctaText: "EXPLORE TRAVEL LINE",
   },
 ];
 
@@ -43,7 +43,7 @@ export default function FeaturedCollections() {
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <span className="text-[10px] font-heading font-bold tracking-[0.3em] uppercase text-leather-cognac block mb-2">
-            MAISON DEPARTMENTS
+            CATALOG DEPARTMENTS
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-noir-950 font-medium tracking-tight">
             CURATED UNIVERSES

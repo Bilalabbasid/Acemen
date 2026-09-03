@@ -6,6 +6,8 @@ import { useSearchParams } from "next/navigation";
 import { luxuryProducts, ProductCategory, GenderCategory, ProductItem } from "@/data/products";
 import ProductCard from "@/components/luxury/ProductCard";
 import QuickViewModal from "@/components/luxury/QuickViewModal";
+import InquiryQuoteModal from "@/components/luxury/InquiryQuoteModal";
+import { FileText, Layers, ShieldCheck } from "lucide-react";
 
 const categoryTabs: Array<{ id: string; label: string; cat?: ProductCategory }> = [
   { id: "all", label: "All Items" },
@@ -28,6 +30,7 @@ function ProductsContent() {
   const [selectedColor, setSelectedColor] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("featured");
   const [quickViewProduct, setQuickViewProduct] = useState<ProductItem | null>(null);
+  const [isCatalogQuoteOpen, setIsCatalogQuoteOpen] = useState(false);
 
   // Available sub-types for active selection
   const availableSubTypes = useMemo(() => {
@@ -83,10 +86,10 @@ function ProductsContent() {
     }
 
     // Sorting
-    if (sortBy === "price-low") {
-      list.sort((a, b) => a.price - b.price);
-    } else if (sortBy === "price-high") {
-      list.sort((a, b) => b.price - a.price);
+    if (sortBy === "name-asc") {
+      list.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === "newest") {
+      list.sort((a, b) => (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0));
     }
 
     return list;
@@ -102,15 +105,15 @@ function ProductsContent() {
     <div className="bg-white min-h-screen pt-28 sm:pt-36 pb-24">
       <div className="container-fluid">
         {/* Page Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="text-[10px] font-heading font-bold tracking-[0.35em] uppercase text-leather-cognac block mb-2">
-            LONDON ATELIER CATALOG
+            B2B WHOLESALE & MANUFACTURING CATALOG
           </span>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-noir-950 font-medium tracking-tight">
-            ALL LEATHER CREATIONS
+            FOOTWEAR & LEATHER CREATIONS
           </h1>
           <p className="font-body text-neutral-600 text-xs sm:text-sm font-light mt-3 leading-relaxed">
-            Goodyear-welted footwear, aviation professional shoes, tailored leather outerwear, briefcases, holdalls, and pocket leather goods cut from premier full-grain hides.
+            Goodyear-welted footwear, aviation professional shoes, tailored leather outerwear, holdalls, briefcases, and pocket leather goods available for wholesale supply, OEM development, and private-label manufacturing.
           </p>
         </div>
 
@@ -145,7 +148,7 @@ function ProductsContent() {
             {availableSubTypes.length > 0 && (
               <div className="flex items-center gap-2">
                 <span className="text-neutral-500 uppercase tracking-wider text-[10px] font-bold">
-                  Type:
+                  Silhouette:
                 </span>
                 <select
                   value={selectedSubType}
@@ -162,40 +165,24 @@ function ProductsContent() {
               </div>
             )}
 
-            {/* Gender Filter */}
+            {/* Gender / Universe */}
             <div className="flex items-center gap-2">
               <span className="text-neutral-500 uppercase tracking-wider text-[10px] font-bold">
-                Gender:
+                Line:
               </span>
               <select
                 value={selectedGender}
                 onChange={(e) => setSelectedGender(e.target.value)}
                 className="bg-white border border-neutral-300 text-noir-950 text-xs px-2.5 py-1.5 focus:outline-none focus:border-noir-950"
               >
-                <option value="all">All</option>
-                <option value="men">Men</option>
-                <option value="women">Women</option>
+                <option value="all">All Lines</option>
+                <option value="men">Men&apos;s Line</option>
+                <option value="women">Women&apos;s Line</option>
+                <option value="unisex">Unisex / Aviation</option>
               </select>
             </div>
 
-            {/* Color Filter */}
-            <div className="flex items-center gap-2">
-              <span className="text-neutral-500 uppercase tracking-wider text-[10px] font-bold">
-                Color:
-              </span>
-              <select
-                value={selectedColor}
-                onChange={(e) => setSelectedColor(e.target.value)}
-                className="bg-white border border-neutral-300 text-noir-950 text-xs px-2.5 py-1.5 focus:outline-none focus:border-noir-950"
-              >
-                <option value="all">All Shades</option>
-                <option value="black">Obsidian / Black</option>
-                <option value="brown">Espresso / Brown</option>
-                <option value="cognac">Cognac / Tan</option>
-              </select>
-            </div>
-
-            {/* Clear Filters */}
+            {/* Reset Filters */}
             {hasActiveFilters && (
               <button
                 onClick={() => {
@@ -204,17 +191,17 @@ function ProductsContent() {
                   setSelectedSubType("all");
                   setSelectedColor("all");
                 }}
-                className="text-[10px] font-bold tracking-widest text-leather-cognac uppercase underline ml-2"
+                className="text-leather-cognac hover:underline font-bold text-[11px] uppercase tracking-wider"
               >
-                Reset Filters
+                Clear Filters
               </button>
             )}
           </div>
 
-          {/* Right: Results Count & Sort */}
-          <div className="flex items-center justify-between md:justify-end gap-4 border-t md:border-t-0 pt-3 md:pt-0">
-            <span className="text-neutral-500 uppercase tracking-wider text-[10px]">
-              {filteredProducts.length} Creation{filteredProducts.length !== 1 ? "s" : ""}
+          {/* Right: Results Count & Sorting */}
+          <div className="flex items-center justify-between md:justify-end gap-4">
+            <span className="text-neutral-500 text-[11px] tracking-wider uppercase">
+              {filteredProducts.length} Model{filteredProducts.length !== 1 ? "s" : ""}
             </span>
 
             <div className="flex items-center gap-2">
@@ -227,8 +214,8 @@ function ProductsContent() {
                 className="bg-white border border-neutral-300 text-noir-950 text-xs px-2.5 py-1.5 focus:outline-none focus:border-noir-950"
               >
                 <option value="featured">Featured Atelier</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
+                <option value="name-asc">Model Name (A–Z)</option>
+                <option value="newest">Latest Developments</option>
               </select>
             </div>
           </div>
@@ -247,9 +234,9 @@ function ProductsContent() {
           </div>
         ) : (
           <div className="text-center py-20 bg-ivory-50 border border-dashed border-neutral-300 max-w-lg mx-auto p-8">
-            <h3 className="font-display text-xl text-noir-950 mb-2">No creations found</h3>
+            <h3 className="font-display text-xl text-noir-950 mb-2">No models found</h3>
             <p className="text-xs text-neutral-500 font-light mb-6">
-              We could not find any pieces matching your chosen filter criteria.
+              We could not find any models matching your chosen filter criteria.
             </p>
             <button
               onClick={() => {
@@ -264,12 +251,42 @@ function ProductsContent() {
             </button>
           </div>
         )}
+
+        {/* 4. Bottom Wholesale Catalog Callout */}
+        <div className="mt-20 p-8 sm:p-12 bg-noir-950 text-white border border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center sm:text-left max-w-xl">
+            <div className="flex items-center justify-center sm:justify-start gap-2 text-champagne-400 text-[10px] font-heading font-bold tracking-[0.25em] uppercase">
+              <ShieldCheck className="w-4 h-4" />
+              <span>WHOLESALE PARTNERSHIP DESK</span>
+            </div>
+            <h3 className="font-display text-2xl sm:text-3xl font-medium text-white">
+              Request Full Wholesale Catalog & Line Sheet
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-300 font-light">
+              Receive high-resolution technical drawings, complete material swatch guides, volume pricing tiers, and OEM development terms.
+            </p>
+          </div>
+
+          <button
+            onClick={() => setIsCatalogQuoteOpen(true)}
+            className="btn-luxury-white text-xs tracking-[0.2em] shrink-0"
+          >
+            REQUEST FULL CATALOG & PRICING
+          </button>
+        </div>
       </div>
 
       {/* Quick View Modal */}
       <QuickViewModal
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
+      />
+
+      {/* Catalog Quote Modal */}
+      <InquiryQuoteModal
+        isOpen={isCatalogQuoteOpen}
+        onClose={() => setIsCatalogQuoteOpen(false)}
+        defaultSubject="Full Wholesale Catalog & Line Sheet Request"
       />
     </div>
   );

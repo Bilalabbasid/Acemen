@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Search, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { luxuryProducts, ProductItem } from "@/data/products";
+import { luxuryProducts, ProductItem, getProductModelNumber } from "@/data/products";
+import { B2B_MODE } from "@/config/b2b";
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -201,9 +202,16 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                           <h4 className="font-display text-base font-semibold text-noir-950 group-hover:text-leather-cognac transition-colors truncate">
                             {product.name}
                           </h4>
-                          <p className="text-sm font-heading font-semibold text-noir-950 mt-1">
-                            {product.formattedPrice}
-                          </p>
+                          {/* B2B MODE — D2C pricing temporarily disabled */}
+                          {B2B_MODE ? (
+                            <p className="text-xs font-heading font-medium text-neutral-500 mt-1">
+                              Model: {getProductModelNumber(product)} • Specifications Available
+                            </p>
+                          ) : (
+                            <p className="text-sm font-heading font-semibold text-noir-950 mt-1">
+                              {product.formattedPrice}
+                            </p>
+                          )}
                         </div>
                       </Link>
                     ))}

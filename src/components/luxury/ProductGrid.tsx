@@ -105,7 +105,7 @@ export default function ProductGrid({
               href="/products"
               className="btn-luxury-outline"
             >
-              DISCOVER FULL CATALOG ({luxuryProducts.length} PIECES)
+              DISCOVER FULL CATALOG ({luxuryProducts.length} MODELS)
             </Link>
           </div>
         )}

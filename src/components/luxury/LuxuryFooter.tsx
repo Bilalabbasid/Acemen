@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { MapPin, Phone, Mail, ArrowUpRight, Check } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowUpRight, Check, ShieldCheck } from "lucide-react";
 import { brandData } from "@/data/brand";
 
 export default function LuxuryFooter() {
@@ -39,7 +39,7 @@ export default function LuxuryFooter() {
               </div>
             </Link>
             <p className="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed">
-              ACEMEN is a luxury leather house incorporated in the United Kingdom. Devoted to the art of master craftsmanship, we sculpt fine footwear, aviation professional shoes, holdalls, briefcases, belts, and small leather goods from premier full-grain hides.
+              ACEMEN is a British luxury leather house and footwear manufacturer incorporated in the United Kingdom. We develop and manufacture fine Goodyear-welted shoes, aviation footwear, holdalls, briefcases, and small leather goods for brands, wholesale distributors, and private-label partners.
             </p>
           </div>
 
@@ -48,7 +48,9 @@ export default function LuxuryFooter() {
             <p className="font-heading tracking-widest text-[10px] uppercase font-bold text-champagne-400">
               London Headquarters & Atelier
             </p>
-            <p className="text-neutral-400 max-w-xs">{brandData.address.full}</p>
+            {/* Company address temporarily commented out */}
+            {/* <p className="text-neutral-400 max-w-xs">{brandData.address.full}</p> */}
+            <p className="text-neutral-400">London, United Kingdom</p>
             <div className="flex items-center gap-4 pt-1">
               <a
                 href={`tel:${brandData.contact.phone}`}
@@ -71,40 +73,40 @@ export default function LuxuryFooter() {
       {/* Main 4-Column Footer Navigation */}
       <div className="container-page py-14 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* Column 1: Client Services */}
+          {/* Column 1: Wholesale & OEM Services */}
           <div>
             <h4 className="font-heading text-xs tracking-[0.25em] uppercase font-bold text-champagne-400 mb-6">
-              Client Services
+              Wholesale & OEM
             </h4>
             <ul className="space-y-3.5 text-xs text-neutral-400 font-light">
               <li>
                 <Link href="/contact" className="hover:text-white transition-colors">
-                  Contact Concierge Desk
+                  Contact Manufacturing Desk
+                </Link>
+              </li>
+              <li>
+                <Link href="/#customization" className="hover:text-white transition-colors">
+                  Private-Label Development
+                </Link>
+              </li>
+              <li>
+                <Link href="/#leather" className="hover:text-white transition-colors">
+                  European Leather Sourcing
+                </Link>
+              </li>
+              <li>
+                <Link href="/#manufacturing" className="hover:text-white transition-colors">
+                  Manufacturing Specifications & MOQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-white transition-colors">
+                  Request Wholesale Line Sheet
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-white transition-colors">
-                  White-Glove Courier Delivery
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
-                  Complimentary 30-Day Returns
-                </Link>
-              </li>
-              <li>
-                <Link href="/about#craftsmanship" className="hover:text-white transition-colors">
-                  Lifetime Restoration Pledge
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
-                  Bespoke Monogramming & Commissions
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
-                  Private Atelier Appointments
+                  London Atelier Appointments
                 </Link>
               </li>
             </ul>
@@ -113,7 +115,7 @@ export default function LuxuryFooter() {
           {/* Column 2: The Atelier Collections */}
           <div>
             <h4 className="font-heading text-xs tracking-[0.25em] uppercase font-bold text-champagne-400 mb-6">
-              Atelier Collections
+              Catalog Departments
             </h4>
             <ul className="space-y-3.5 text-xs text-neutral-400 font-light">
               <li>
@@ -127,13 +129,13 @@ export default function LuxuryFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/collections/bags" className="hover:text-white transition-colors">
-                  Fine Leather Bags & Briefcases
+                <Link href="/collections/jackets" className="hover:text-white transition-colors">
+                  Sartorial Leather Outerwear
                 </Link>
               </li>
               <li>
-                <Link href="/collections/belts" className="hover:text-white transition-colors">
-                  Sartorial Bridle & Reversible Belts
+                <Link href="/collections/bags" className="hover:text-white transition-colors">
+                  Fine Leather Bags & Briefcases
                 </Link>
               </li>
               <li>
@@ -174,10 +176,10 @@ export default function LuxuryFooter() {
           {/* Column 4: Newsletter Signup */}
           <div>
             <h4 className="font-heading text-xs tracking-[0.25em] uppercase font-bold text-champagne-400 mb-6">
-              The Dispatch
+              The Industry Dispatch
             </h4>
             <p className="text-xs text-neutral-400 font-light mb-4 leading-relaxed">
-              Subscribe for exclusive previews of limited atelier editions and invitations to private London showcases.
+              Subscribe for exclusive previews of upcoming Last silhouettes, leather swatch updates, and private London showroom viewings.
             </p>
 
             {footerSubscribed ? (
@@ -192,14 +194,14 @@ export default function LuxuryFooter() {
                   required
                   value={footerEmail}
                   onChange={(e) => setFooterEmail(e.target.value)}
-                  placeholder="Your email address"
+                  placeholder="Your business email"
                   className="w-full px-3.5 py-2.5 bg-neutral-900 border border-neutral-700 text-white placeholder-neutral-500 text-xs focus:outline-none focus:border-champagne-400 transition-colors"
                 />
                 <button
                   type="submit"
                   className="w-full btn-luxury-white text-[10px] py-2.5 tracking-[0.2em]"
                 >
-                  Join The Salon
+                  Join The Dispatch
                 </button>
               </form>
             )}
@@ -220,10 +222,10 @@ export default function LuxuryFooter() {
               Terms & Conditions
             </Link>
             <Link href="/contact" className="hover:text-white transition-colors">
-              Shipping Policy
+              Wholesale Terms
             </Link>
             <Link href="/contact" className="hover:text-white transition-colors">
-              Returns Policy
+              Manufacturing FAQ
             </Link>
           </div>
         </div>

@@ -1,51 +1,76 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import HeroCampaign from "@/components/luxury/HeroCampaign";
+import BuiltForBrandsSection from "@/components/luxury/BuiltForBrandsSection";
 import FeaturedCollections from "@/components/luxury/FeaturedCollections";
 import CategoryDiscovery from "@/components/luxury/CategoryDiscovery";
 import ProductGrid from "@/components/luxury/ProductGrid";
 import FootwearEditorialSection from "@/components/luxury/FootwearEditorialSection";
 import PilotEditorialSection from "@/components/luxury/PilotEditorialSection";
+import LeatherMaterialsSection from "@/components/luxury/LeatherMaterialsSection";
+import CustomizationSection from "@/components/luxury/CustomizationSection";
 import CraftsmanshipSection from "@/components/luxury/CraftsmanshipSection";
+import ManufacturingCapacitySection from "@/components/luxury/ManufacturingCapacitySection";
 import BrandStorySection from "@/components/luxury/BrandStorySection";
 import ServicesBar from "@/components/luxury/ServicesBar";
 import NewsletterSection from "@/components/luxury/NewsletterSection";
+import InquiryQuoteModal from "@/components/luxury/InquiryQuoteModal";
 
 export default function HomePage() {
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [quoteSubject, setQuoteSubject] = useState("");
+
+  const handleOpenQuote = (subject?: string) => {
+    if (subject) setQuoteSubject(subject);
+    setIsQuoteOpen(true);
+  };
+
   return (
     <div className="w-full bg-white overflow-hidden">
       {/* 1. Full-Screen Luxury Campaign Hero */}
       <HeroCampaign />
 
-      {/* 2. Featured Collections Editorial Split (Women, Men, Travel) */}
+      {/* 2. Dedicated B2B Wholesale & Manufacturing Section: BUILT FOR BRANDS */}
+      <BuiltForBrandsSection onOpenInquiry={() => handleOpenQuote("Wholesale & OEM Partnership Inquiry")} />
+
+      {/* 3. Featured Collections Editorial Split (Women, Men, Travel) */}
       <FeaturedCollections />
 
-      {/* 3. Category Discovery (Footwear, Pilot, Jackets, Bags, Wallets, Travel) */}
+      {/* 4. Category Discovery (Footwear, Pilot, Jackets, Bags, Wallets, Travel) */}
       <CategoryDiscovery />
 
-      {/* 4. Featured Luxury Leather Creations (4-Column Grid with Tabs) */}
+      {/* 5. Featured Luxury Leather Creations (4-Column Grid with Tabs) */}
       <ProductGrid
-        title="ICONIC LEATHER PIECES"
-        subtitle="THE ATELIER COLLECTION"
+        title="CATALOGUE SHOWCASE"
+        subtitle="FEATURED FOOTWEAR & LEATHER MODELS"
         initialLimit={8}
         showFilters={true}
       />
 
-      {/* 5. Editorial Footwear Section — The ACEMEN Shoe Collection */}
+      {/* 6. Editorial Footwear Section — The ACEMEN Shoe Collection */}
       <FootwearEditorialSection />
 
-      {/* 6. Dedicated Aviation Feature — The Pilot Collection */}
+      {/* 7. Dedicated Aviation Feature — The Pilot Collection */}
       <PilotEditorialSection />
 
-      {/* 7. Editorial Savoir-Faire / Craftsmanship Feature */}
+      {/* 8. Dedicated Materials & Finishes Section: PREMIER LEATHERS & FINISHES */}
+      <LeatherMaterialsSection />
+
+      {/* 9. Dedicated Customization Section: MADE TO YOUR SPECIFICATION */}
+      <CustomizationSection onOpenInquiry={() => handleOpenQuote("Custom Specification & Tech Pack Review")} />
+
+      {/* 10. Editorial Savoir-Faire / Craftsmanship Feature */}
       <CraftsmanshipSection />
 
-      {/* 8. Asymmetric Editorial Maison & Philosophy Story */}
+      {/* 11. Dedicated Manufacturing Specifications Section */}
+      <ManufacturingCapacitySection onOpenInquiry={() => handleOpenQuote("Wholesale Pricing & Production Capacity Inquiry")} />
+
+      {/* 12. Asymmetric Editorial Maison & Philosophy Story */}
       <BrandStorySection />
 
-      {/* 9. Full-Bleed Lifestyle Campaign Spread */}
+      {/* 13. Full-Bleed Lifestyle Campaign Spread */}
       <section className="relative py-24 sm:py-36 bg-noir-950 text-white overflow-hidden flex items-center justify-center">
         <img
           src="/images/luxury/travel-campaign.webp"
@@ -64,7 +89,7 @@ export default function HomePage() {
             CRAFTED FOR THE ENDLESS HORIZON
           </h2>
           <p className="font-body text-neutral-300 text-xs sm:text-sm font-light leading-relaxed">
-            From the London atelier to international skies, ACEMEN trunks and weekender holdalls are companion pieces engineered to outlast the journey.
+            From the London atelier to international skies, ACEMEN trunks and weekender holdalls are companion pieces engineered to outlast the journey. Available for bespoke corporate and private-label collections.
           </p>
           <div className="pt-4">
             <Link
@@ -77,11 +102,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. White-Glove Client Services & Atelier Guarantees */}
+      {/* 14. B2B Client Services & Atelier Guarantees */}
       <ServicesBar />
 
-      {/* 11. Newsletter Subscription — The Private Dispatch */}
+      {/* 15. Newsletter Subscription — The Manufacturing Dispatch */}
       <NewsletterSection />
+
+      {/* Global Quote Modal */}
+      <InquiryQuoteModal
+        isOpen={isQuoteOpen}
+        onClose={() => setIsQuoteOpen(false)}
+        defaultSubject={quoteSubject}
+      />
     </div>
   );
 }
