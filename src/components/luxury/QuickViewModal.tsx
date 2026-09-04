@@ -29,7 +29,7 @@ export default function QuickViewModal({ product, onClose }: QuickViewModalProps
   const activeColor = selectedColor || product.colors[0]?.name || "Default";
   const activeSize = selectedSize || (product.sizes ? product.sizes[2] || product.sizes[0] : "");
   const isFav = isInWishlist(product.id);
-  const isFootwear = product.category === "Shoes" || product.category === "Pilot Collection" || !!product.sizes;
+  const isFootwear = product.category === "Shoes" || !!product.sizes;
   const modelNumber = getProductModelNumber(product);
 
   return (

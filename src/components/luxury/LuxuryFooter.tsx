@@ -39,7 +39,7 @@ export default function LuxuryFooter() {
               </div>
             </Link>
             <p className="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed">
-              ACEMEN is a British luxury leather house and master footwear atelier incorporated in the United Kingdom. We craft fine Goodyear-welted shoes, aviation footwear, holdalls, and small leather goods available by pre-order, private allocation, and bespoke commission.
+              ACEMEN is a British luxury leather house and master footwear atelier incorporated in the United Kingdom. We craft fine Goodyear-welted shoes, outerwear, holdalls, and small leather goods available by pre-order, private allocation, and bespoke commission.
             </p>
           </div>
 
@@ -124,8 +124,8 @@ export default function LuxuryFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/collections/pilot" className="hover:text-white transition-colors">
-                  The Pilot Collection (Aviation Grade)
+                <Link href="/collections/belts" className="hover:text-white transition-colors">
+                  Sartorial Belts & Accessories
                 </Link>
               </li>
               <li>

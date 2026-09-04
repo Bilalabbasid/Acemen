@@ -8,7 +8,6 @@ import FeaturedCollections from "@/components/luxury/FeaturedCollections";
 import CategoryDiscovery from "@/components/luxury/CategoryDiscovery";
 import ProductGrid from "@/components/luxury/ProductGrid";
 import FootwearEditorialSection from "@/components/luxury/FootwearEditorialSection";
-import PilotEditorialSection from "@/components/luxury/PilotEditorialSection";
 import LeatherMaterialsSection from "@/components/luxury/LeatherMaterialsSection";
 import CustomizationSection from "@/components/luxury/CustomizationSection";
 import CraftsmanshipSection from "@/components/luxury/CraftsmanshipSection";
@@ -38,7 +37,7 @@ export default function HomePage() {
       {/* 3. Featured Collections Editorial Split (Women, Men, Travel) */}
       <FeaturedCollections />
 
-      {/* 4. Category Discovery (Footwear, Pilot, Jackets, Bags, Wallets, Travel) */}
+      {/* 4. Category Discovery (Footwear, Jackets, Bags, Wallets, Belts, Travel) */}
       <CategoryDiscovery />
 
       {/* 5. Featured Luxury Leather Creations (4-Column Grid with Tabs) */}
@@ -52,10 +51,7 @@ export default function HomePage() {
       {/* 6. Editorial Footwear Section — The ACEMEN Shoe Collection */}
       <FootwearEditorialSection />
 
-      {/* 7. Dedicated Aviation Feature — The Pilot Collection */}
-      <PilotEditorialSection />
-
-      {/* 8. Dedicated Materials & Finishes Section: PREMIER LEATHERS & FINISHES */}
+      {/* 7. Dedicated Materials & Finishes Section: PREMIER LEATHERS & FINISHES */}
       <LeatherMaterialsSection />
 
       {/* 9. Dedicated Customization Section: MADE TO YOUR SPECIFICATION */}

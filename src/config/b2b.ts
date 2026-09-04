@@ -28,7 +28,7 @@ export const B2B_CONFIG = {
     "Individual Pre-Order (1–5 Pairs)",
     "Private Client Allocation / Waitlist",
     "Made-to-Order Bespoke Commission",
-    "Aviation Fleet / Corporate Uniform",
+    "Corporate & Private Fleet Allocation",
     "Boutique & Retail Partnership",
     "Other Special Request",
   ],
@@ -38,15 +38,15 @@ export const B2B_CONFIG = {
     "2 – 5 Pairs",
     "10 – 50 Pairs",
     "50 – 200 Pairs",
-    "200+ Pairs / Fleet Run",
+    "200+ Pairs / Volume Run",
   ],
 
   productCategories: [
     "Footwear (Oxfords, Monks, Chelsea Boots, Loafers, Derbies)",
-    "The Pilot Collection (Aviation Grade Scanner-Safe Footwear)",
     "Sartorial Leather Outerwear & Tailored Jackets",
     "Fine Leather Holdalls & Executive Briefcases",
     "Wallets & Small Leather Goods",
+    "Sartorial Belts & Leather Accessories",
     "Bespoke Made-to-Order Commission",
   ],
 };

@@ -26,13 +26,13 @@ const collectionConfigs: Record<string, CollectionMeta> = {
       "Goodyear-welted Oxford shoes, double monk straps, Chelsea boots, and blucher derbies sculpted from French box calf and Bavarian hides. Available for OEM development and bespoke volume runs.",
     categoryFilter: "Shoes",
   },
-  pilot: {
-    title: "THE PILOT COLLECTION",
-    eyebrow: "AVIATION GRADE • FLIGHT DECK SARTORIAL",
-    heroImage: "/images/luxury/pilot-campaign.webp",
+  belts: {
+    title: "SARTORIAL LEATHER BELTS",
+    eyebrow: "HAND-STITCHED LEATHER BELTS",
+    heroImage: "/images/luxury/prod-belt-1.webp",
     description:
-      "Precision-crafted leather footwear engineered specifically for airline pilots, flight crews, and corporate aviation. Airport scanner compliant composite shanks and anti-static flight deck traction.",
-    categoryFilter: "Pilot Collection",
+      "Hand-finished reversible and dress belts cut from full-grain French box calfskin and Bavarian hides with solid brass buckles. Tailored for corporate wardrobes and bespoke private label collections.",
+    categoryFilter: "Belts",
   },
   jackets: {
     title: "SARTORIAL LEATHER OUTERWEAR",

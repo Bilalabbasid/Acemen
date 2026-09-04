@@ -2,7 +2,6 @@ export type ProductCategory =
   | "Bags"
   | "Shoes"
   | "Jackets"
-  | "Pilot Collection"
   | "Wallets"
   | "Belts"
   | "Accessories"
@@ -65,7 +64,6 @@ export function getProductModelNumber(product: ProductItem): string {
   if (product.modelNumber) return product.modelNumber;
   const prefixMap: Record<string, string> = {
     "Shoes": "ACE-SH",
-    "Pilot Collection": "ACE-PLT",
     "Jackets": "ACE-JKT",
     "Bags": "ACE-BAG",
     "Wallets": "ACE-WLT",
@@ -447,67 +445,6 @@ export const luxuryProducts: ProductItem[] = [
     customizationAvailable: true,
   },
 
-  // 7. AVIATION / PILOT SHOE
-  {
-    id: "acemen-aviator-pilot",
-    slug: "aviator-sovereign-pilot-shoe",
-    name: "The Aviator Sovereign Pilot Shoe",
-    modelNumber: "ACE-PLT-01",
-    collection: "The Pilot Collection",
-    category: "Pilot Collection",
-    subType: "Aviation Shoe",
-    gender: "men",
-    price: 740,
-    currency: "GBP",
-    formattedPrice: "£740",
-    tag: "Aviation Standard",
-    isIconic: true,
-    isNewArrival: true,
-    sizes: standardShoeSizes,
-    images: {
-      primary: "/images/luxury/prod-shoe-pilot-pair.webp",
-      secondary: "/images/luxury/prod-shoe-pilot-pair.webp",
-      gallery: [
-        "/images/luxury/prod-shoe-pilot-pair.webp",
-        "/images/luxury/pilot-campaign.webp",
-        "/images/luxury/travel-campaign.webp",
-      ],
-    },
-    colors: [
-      { name: "Mirror Gloss Black", hex: "#050505" },
-    ],
-    shortDescription:
-      "Engineered specifically for airline flight decks, corporate aviation crews, and formal cockpit attire. Constructed from mirror-polish black calfskin with non-metallic composite shanks for seamless airport security clearance and anti-static flight traction.",
-    story:
-      "Born from direct collaboration with commercial airline pilots and corporate flight crew, The Aviator Sovereign unites immaculate uniform aesthetic with all-day flight deck ergonomics. Features airport scanner-compliant composite shanks, orthotic memory cushioning, and oil-resistant anti-static outsoles that maintain a mirror shine across global routes.",
-    materials: [
-      "Water-resistant full-grain black calfskin with high-shine temper",
-      "Orthotic memory foam insole lined in breathable perforated calf leather",
-      "Anti-static, oil-resistant flight deck rubber traction sole",
-      "Metal-free composite shank for airport scanner clearance",
-    ],
-    dimensions: {
-      heelHeight: "22 mm low-profile ergonomic heel",
-      soleType: "Non-marking, oil-resistant flight deck rubber sole with 360° storm welt",
-    },
-    details: [
-      "Airport scanner compliant (non-metallic composite shank)",
-      "Reinforced padded heel collar for multi-hour cockpit comfort",
-      "Subtle blind eyelets with waxed flat laces",
-      "Treated with moisture-barrier stain seal for tarmac endurance",
-      "Supplied with ACEMEN aviation shoe horn and velvet carry pouches",
-    ],
-    careInstructions: [
-      "Wipe tarmac dust with damp microfiber cloth and buff dry",
-      "Re-polish with ACEMEN black gloss cream for high-reflectivity uniform standard",
-    ],
-    inStock: true,
-    upperLeather: "High-Gloss Uniform Box Calfskin",
-    finishOptions: ["Mirror Gloss Black", "Semi-Matte Black"],
-    soleOptions: ["Anti-Static Flight Deck Rubber", "Dainite Studded"],
-    customBranding: "Airline corporate crest debossing, custom crew serial numbers",
-    customizationAvailable: true,
-  },
 
   // 8. CASUAL LUXURY LEATHER SHOE
   {

@@ -12,10 +12,10 @@ const categories = [
     href: "/collections/shoes",
   },
   {
-    name: "The Pilot Collection",
-    count: "Aviation Professional",
-    image: "/images/luxury/prod-pilot-1.webp",
-    href: "/collections/pilot",
+    name: "Sartorial Belts",
+    count: "Reversible & Dress Belts",
+    image: "/images/luxury/prod-belt-1.webp",
+    href: "/collections/belts",
   },
   {
     name: "Leather Jackets",

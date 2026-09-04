@@ -14,7 +14,7 @@ interface SearchModalProps {
 
 const suggestedSearches = [
   "Oxford Shoes",
-  "Pilot Collection",
+  "Leather Jackets",
   "Monk Strap",
   "Chelsea Boots",
   "Reversible Belt",
@@ -27,7 +27,7 @@ const suggestedSearches = [
 
 const popularCategories = [
   { name: "Footwear Atelier", href: "/collections/shoes" },
-  { name: "The Pilot Collection", href: "/collections/pilot" },
+  { name: "Leather Outerwear", href: "/collections/jackets" },
   { name: "Leather Bags", href: "/collections/bags" },
   { name: "Sartorial Belts", href: "/collections/belts" },
   { name: "Wallets & Cardholders", href: "/collections/wallets" },
@@ -107,7 +107,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search for oxfords, pilot shoes, belts, holdalls, briefcases, wallets..."
+                  placeholder="Search for oxfords, monks, boots, jackets, holdalls, briefcases, wallets..."
                   className="w-full pl-10 pr-4 py-3 font-display text-xl sm:text-2xl text-noir-950 placeholder-neutral-400 bg-transparent border-b border-neutral-300 focus:border-noir-950 focus:outline-none transition-colors"
                 />
                 {query && (
@@ -169,7 +169,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     No results found for &ldquo;{query}&rdquo;
                   </p>
                   <p className="text-neutral-500 text-xs font-heading tracking-wider uppercase">
-                    Try checking your spelling or exploring our footwear, pilot, bag, and belt collections.
+                    Try checking your spelling or exploring our footwear, jacket, bag, and belt collections.
                   </p>
                 </div>
               ) : (

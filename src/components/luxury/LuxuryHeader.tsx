@@ -53,30 +53,6 @@ const navCategories: NavCategory[] = [
     ],
   },
   {
-    title: "The Pilot Collection",
-    href: "/collections/pilot",
-    previewImage: "/images/luxury/pilot-campaign.webp",
-    tagline: "Aviation-Grade Scanner-Compliant Flight Deck Shoes",
-    columns: [
-      {
-        heading: "Aviation Line",
-        links: [
-          { name: "The Aviator Sovereign Pilot Shoe (ACE-PLT-01)", href: "/products/aviator-sovereign-pilot-shoe" },
-          { name: "Flight Deck Anti-Static Specifications", href: "/products/aviator-sovereign-pilot-shoe" },
-          { name: "Pilot Trunks & Travel Luggage", href: "/collections/travel" },
-        ],
-      },
-      {
-        heading: "Corporate Fleet Supply",
-        links: [
-          { name: "Airline Uniform Supply Contracts", href: "/contact" },
-          { name: "Airport Scanner Compliant ShOption", href: "/collections/pilot" },
-          { name: "Pilot Line Wholesale Inquiry", href: "/contact" },
-        ],
-      },
-    ],
-  },
-  {
     title: "Outerwear",
     href: "/collections/jackets",
     previewImage: "/images/luxury/prod-jacket-classic-1.webp",
@@ -181,7 +157,7 @@ const navCategories: NavCategory[] = [
         heading: "Complete Departments",
         links: [
           { name: "The Footwear Atelier", href: "/collections/shoes" },
-          { name: "The Pilot Collection (Aviation)", href: "/collections/pilot" },
+          { name: "Sartorial Belts & Accessories", href: "/collections/belts" },
           { name: "Leather Outerwear", href: "/collections/jackets" },
           { name: "Fine Leather Goods & Trunks", href: "/collections/bags" },
           { name: "All Catalog Models", href: "/products" },

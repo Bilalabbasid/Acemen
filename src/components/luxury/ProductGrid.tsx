@@ -18,10 +18,10 @@ interface ProductGridProps {
 const filterTabs: Array<{ label: string; category?: ProductCategory }> = [
   { label: "All Creations" },
   { label: "Footwear", category: "Shoes" },
-  { label: "The Pilot Line", category: "Pilot Collection" },
   { label: "Leather Jackets", category: "Jackets" },
   { label: "Bags", category: "Bags" },
   { label: "Wallets", category: "Wallets" },
+  { label: "Belts", category: "Belts" },
   { label: "Travel", category: "Travel" },
 ];
 

@@ -34,16 +34,6 @@ const navSections = [
     ],
   },
   {
-    title: "The Pilot Collection",
-    href: "/collections/pilot",
-    subItems: [
-      { label: "Aviation Professional Shoes", href: "/collections/pilot" },
-      { label: "The Aviator Sovereign Pilot Shoe", href: "/products/aviator-sovereign-pilot-shoe" },
-      { label: "Airline Fleet Supply & Uniforms", href: "/contact" },
-      { label: "Pilot Travel Luggage", href: "/collections/travel" },
-    ],
-  },
-  {
     title: "Leather Outerwear",
     href: "/collections/jackets",
     subItems: [

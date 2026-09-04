@@ -12,10 +12,10 @@ import { FileText, Layers, ShieldCheck } from "lucide-react";
 const categoryTabs: Array<{ id: string; label: string; cat?: ProductCategory }> = [
   { id: "all", label: "All Items" },
   { id: "shoes", label: "Footwear", cat: "Shoes" },
-  { id: "pilot", label: "The Pilot Line", cat: "Pilot Collection" },
   { id: "jackets", label: "Jackets", cat: "Jackets" },
   { id: "bags", label: "Bags", cat: "Bags" },
   { id: "wallets", label: "Wallets", cat: "Wallets" },
+  { id: "belts", label: "Belts", cat: "Belts" },
   { id: "travel", label: "Travel", cat: "Travel" },
 ];
 
@@ -52,10 +52,10 @@ function ProductsContent() {
     if (selectedCategory !== "all") {
       list = list.filter((p) => {
         if (selectedCategory === "shoes") return p.category === "Shoes";
-        if (selectedCategory === "pilot") return p.category === "Pilot Collection";
         if (selectedCategory === "jackets") return p.category === "Jackets";
         if (selectedCategory === "bags") return p.category === "Bags";
         if (selectedCategory === "wallets") return p.category === "Wallets";
+        if (selectedCategory === "belts") return p.category === "Belts";
         if (selectedCategory === "travel") return p.category === "Travel";
         return p.category.toLowerCase() === selectedCategory.toLowerCase();
       });

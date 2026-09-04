@@ -38,14 +38,13 @@ export const metadata: Metadata = {
     template: "%s | ACEMEN",
   },
   description:
-    "ACEMEN is a British luxury leather house and master footwear atelier. Handcrafting Goodyear-welted shoes, aviation footwear, outerwear, and fine leather goods available by Pre-Order, private waitlist allocation, and bespoke commission.",
+    "ACEMEN is a British luxury leather house and master footwear atelier. Handcrafting Goodyear-welted shoes, outerwear, and fine leather goods available by Pre-Order, private waitlist allocation, and bespoke commission.",
   keywords: [
     "ACEMEN",
     "Luxury Leather Footwear",
     "Goodyear Welted Shoes",
     "Pre-Order Luxury Shoes",
     "London Footwear Atelier",
-    "Aviation Pilot Shoes",
     "Bespoke Leather Goods",
     "Handcrafted Leather Shoes",
   ],
@@ -62,7 +61,7 @@ export const metadata: Metadata = {
     siteName: "ACEMEN",
     title: "ACEMEN | British Luxury Footwear & Sartorial Leather Atelier • London",
     description:
-      "Crafted by hand. Sculpted for distinction. Discover Goodyear-welted footwear, pilot shoes, and fine leather goods available for pre-order and bespoke commissions.",
+      "Crafted by hand. Sculpted for distinction. Discover Goodyear-welted footwear, tailored leather outerwear, and fine leather goods available for pre-order and bespoke commissions.",
     images: [
       {
         url: "/images/luxury/hero-campaign.webp",
@@ -76,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ACEMEN | British Luxury Footwear & Sartorial Leather Atelier • London",
     description:
-      "Crafted by hand. Sculpted for distinction. Discover Goodyear-welted footwear, pilot shoes, and fine leather goods available for pre-order and bespoke commissions.",
+      "Crafted by hand. Sculpted for distinction. Discover Goodyear-welted footwear, tailored leather outerwear, and fine leather goods available for pre-order and bespoke commissions.",
     images: ["/images/luxury/hero-campaign.webp"],
   },
   robots: {

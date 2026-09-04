@@ -46,8 +46,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
-  const isFavorite = isInWishlist(product.id);
-  const isFootwear = product.category === "Shoes" || product.category === "Pilot Collection" || !!product.sizes;
+  const isFootwear = product.category === "Shoes" || !!product.sizes;
   const modelNumber = getProductModelNumber(product);
 
   // Related products from same or adjacent category
@@ -77,7 +76,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           </Link>
           <ChevronRight className="w-3 h-3 text-neutral-400" />
           <Link
-            href={`/collections/${product.category === "Pilot Collection" ? "pilot" : product.category.toLowerCase()}`}
+            href={`/collections/${product.category.toLowerCase()}`}
             className="hover:text-noir-950 transition-colors"
           >
             {product.category}

@@ -30,7 +30,7 @@ export default function BrandStorySection() {
                 Founded in London, ACEMEN bridges British architectural Last design with rigorous industrial manufacturing capability.
               </p>
               <p>
-                From hand-lasted Goodyear-welted oxfords and airport scanner-compliant pilot shoes to sartorial leather jackets and holdalls, we partner with discerning brands, boutique retailers, and international distributors to turn footwear concepts into commercial reality.
+                From hand-lasted Goodyear-welted oxfords and double monk straps to sartorial leather jackets and holdalls, we partner with discerning brands, boutique retailers, and international distributors to turn footwear concepts into commercial reality.
               </p>
             </div>
 

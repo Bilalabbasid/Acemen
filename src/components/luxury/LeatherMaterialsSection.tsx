@@ -46,7 +46,7 @@ const leatherTypes: LeatherType[] = [
     name: "Top-Grain Smooth Leather",
     category: "Commercial Uniformity",
     characteristics: "Uniform surface grain with flexible temper, ideal for high-volume consistent private-label runs.",
-    recommendedFor: "Aviation Pilot Footwear, Uniform Shoes",
+    recommendedFor: "Executive Footwear, Tailored Uniform Shoes",
     finishType: "High-Gloss / Semi-Matte",
   },
   {
