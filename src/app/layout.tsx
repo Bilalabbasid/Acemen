@@ -34,21 +34,20 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://acemen.co.uk"),
   title: {
-    default: "ACEMEN | Premium Leather Footwear & Wholesale Manufacturing • London",
+    default: "ACEMEN | British Luxury Footwear & Sartorial Leather Atelier • London",
     template: "%s | ACEMEN",
   },
   description:
-    "ACEMEN is a British luxury leather footwear manufacturer and wholesale supplier. Developing Goodyear-welted shoes, aviation footwear, outerwear, and fine leather goods for international brands and OEM/ODM partners.",
+    "ACEMEN is a British luxury leather house and master footwear atelier. Handcrafting Goodyear-welted shoes, aviation footwear, outerwear, and fine leather goods available by Pre-Order, private waitlist allocation, and bespoke commission.",
   keywords: [
     "ACEMEN",
-    "Footwear Manufacturer",
-    "Wholesale Leather Shoes",
-    "OEM Footwear Supplier",
-    "Private Label Footwear",
-    "Aviation Pilot Shoes",
+    "Luxury Leather Footwear",
     "Goodyear Welted Shoes",
+    "Pre-Order Luxury Shoes",
     "London Footwear Atelier",
-    "Luxury Leather Goods Manufacturing",
+    "Aviation Pilot Shoes",
+    "Bespoke Leather Goods",
+    "Handcrafted Leather Shoes",
   ],
   authors: [{ name: "ACEMEN" }],
   creator: "ACEMEN",
@@ -61,23 +60,23 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: "https://acemen.co.uk",
     siteName: "ACEMEN",
-    title: "ACEMEN | Premium Leather Footwear & Wholesale Manufacturing • London",
+    title: "ACEMEN | British Luxury Footwear & Sartorial Leather Atelier • London",
     description:
-      "Crafted for Brands. Built for Business. Discover Goodyear-welted footwear, pilot shoes, and fine leather goods for wholesale, private-label, and OEM partnerships.",
+      "Crafted by hand. Sculpted for distinction. Discover Goodyear-welted footwear, pilot shoes, and fine leather goods available for pre-order and bespoke commissions.",
     images: [
       {
         url: "/images/luxury/hero-campaign.webp",
         width: 1200,
         height: 630,
-        alt: "ACEMEN Premium Leather Footwear & Manufacturing",
+        alt: "ACEMEN British Luxury Footwear & Leather Atelier",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ACEMEN | Premium Leather Footwear & Wholesale Manufacturing • London",
+    title: "ACEMEN | British Luxury Footwear & Sartorial Leather Atelier • London",
     description:
-      "Crafted for Brands. Built for Business. Discover Goodyear-welted footwear, pilot shoes, and fine leather goods for wholesale, private-label, and OEM partnerships.",
+      "Crafted by hand. Sculpted for distinction. Discover Goodyear-welted footwear, pilot shoes, and fine leather goods available for pre-order and bespoke commissions.",
     images: ["/images/luxury/hero-campaign.webp"],
   },
   robots: {

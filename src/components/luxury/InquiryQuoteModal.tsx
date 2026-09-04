@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, CheckCircle2, Send, Building2, Globe, Sparkles } from "lucide-react";
+import { X, CheckCircle2, Send, Sparkles, Clock, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProductItem } from "@/data/products";
 import { B2B_CONFIG } from "@/config/b2b";
@@ -22,13 +22,12 @@ export default function InquiryQuoteModal({
 }: InquiryQuoteModalProps) {
   const [formData, setFormData] = useState({
     name: "",
-    company: "",
     email: "",
     phone: "",
-    country: "",
-    companyType: "Brand",
+    orderType: "Individual Pre-Order (1–5 Pairs)",
     productInterest: "",
-    estimatedVolume: "200 – 500 Pairs",
+    desiredQuantity: "1 Pair / Single Piece",
+    size: "EU 42",
     message: "",
   });
 
@@ -41,7 +40,7 @@ export default function InquiryQuoteModal({
       if (product) {
         setFormData((prev) => ({
           ...prev,
-          productInterest: `${product.name} (Model: ${product.modelNumber || "ACE-ATELIER"})`,
+          productInterest: `${product.name} (${product.modelNumber || "ACE-ATELIER"})`,
         }));
       } else if (defaultSubject) {
         setFormData((prev) => ({
@@ -75,14 +74,10 @@ export default function InquiryQuoteModal({
   const validate = () => {
     const nextErrors: Record<string, string> = {};
     if (!formData.name.trim()) nextErrors.name = "Full name is required";
-    if (!formData.company.trim()) nextErrors.company = "Company / Brand name is required";
     if (!formData.email.trim()) {
-      nextErrors.email = "Business email is required";
+      nextErrors.email = "Email address is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       nextErrors.email = "Please enter a valid email address";
-    }
-    if (!formData.message.trim()) {
-      nextErrors.message = "Please describe your project, specifications, or inquiry";
     }
     return nextErrors;
   };
@@ -98,21 +93,19 @@ export default function InquiryQuoteModal({
     setStatus("submitting");
 
     try {
-      const subjectLine = `[ACEMEN B2B Inquiry] ${formData.company} - ${formData.productInterest || "Wholesale & OEM Inquiry"}`;
+      const subjectLine = `[ACEMEN Pre-Order / Waitlist] ${formData.name} - ${formData.productInterest || "Atelier Reservation"}`;
       const emailBody = [
-        `ACEMEN WHOLESALE & MANUFACTURING INQUIRY`,
+        `ACEMEN PRE-ORDER & ATELIER WAITLIST RESERVATION`,
         `----------------------------------------`,
-        `Contact Name: ${formData.name}`,
-        `Company / Brand: ${formData.company}`,
-        `Business Email: ${formData.email}`,
+        `Client Name: ${formData.name}`,
+        `Email: ${formData.email}`,
         `Phone / WhatsApp: ${formData.phone || "Not provided"}`,
-        `Country / Region: ${formData.country || "Not specified"}`,
-        `Company Type: ${formData.companyType}`,
-        `Product Interest: ${formData.productInterest || "General Catalog"}`,
-        `Estimated Order Volume: ${formData.estimatedVolume}`,
+        `Inquiry / Reservation Type: ${formData.orderType}`,
+        `Product Selection: ${formData.productInterest || "General Atelier Collection"}`,
+        `Selected Sizing / Volume: ${formData.size} (${formData.desiredQuantity})`,
         `----------------------------------------`,
-        `Project Brief & Specifications:`,
-        formData.message,
+        `Special Requests / Fitting Notes:`,
+        formData.message || "Standard atelier craftsmanship requested.",
       ].join("\n");
 
       const mailtoLink = `mailto:${brandData.contact.email}?subject=${encodeURIComponent(
@@ -121,7 +114,7 @@ export default function InquiryQuoteModal({
 
       await new Promise((resolve) => setTimeout(resolve, 600));
 
-      // Trigger user's mail client as primary fail-safe transmission
+      // Direct client email link trigger
       window.location.href = mailtoLink;
 
       setStatus("success");
@@ -150,52 +143,52 @@ export default function InquiryQuoteModal({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.96, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="relative w-full max-w-2xl bg-white text-noir-950 overflow-hidden shadow-2xl z-10 my-6 border border-neutral-200 max-h-[92vh] flex flex-col"
+            className="relative w-full max-w-xl bg-white text-noir-950 overflow-hidden shadow-2xl z-10 my-6 border border-neutral-200 max-h-[92vh] flex flex-col"
           >
             {/* Header */}
-            <div className="bg-noir-950 text-white p-6 sm:p-8 relative">
+            <div className="bg-noir-950 text-white p-6 sm:p-7 relative">
               <button
                 onClick={onClose}
                 className="absolute top-5 right-5 text-neutral-400 hover:text-white transition-colors p-2"
-                aria-label="Close inquiry modal"
+                aria-label="Close pre-order modal"
               >
                 <X className="w-5 h-5 stroke-[1.5]" />
               </button>
 
               <div className="flex items-center gap-2 text-champagne-400 text-[10px] font-heading font-bold tracking-[0.3em] uppercase mb-1">
-                <Building2 className="w-3.5 h-3.5" />
-                <span>B2B & WHOLESALE PARTNERSHIP DESK</span>
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>ACEMEN ATELIER • LONDON</span>
               </div>
               <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-white">
-                Request Specifications & Quote
+                Pre-Order & Private Waitlist
               </h2>
               <p className="text-xs sm:text-sm text-neutral-300 font-light mt-1">
-                Connect with our London manufacturing specialists to discuss wholesale pricing, custom sampling, OEM development, or private-label production.
+                Reserve your handcrafted piece from our upcoming atelier run, or join the private allocation waitlist for priority delivery.
               </p>
             </div>
 
             {/* Content Body */}
-            <div className="p-6 sm:p-8 overflow-y-auto flex-1">
+            <div className="p-6 sm:p-7 overflow-y-auto flex-1">
               {status === "success" ? (
                 <div className="text-center py-10 space-y-4">
                   <div className="w-16 h-16 rounded-full bg-ivory-100 flex items-center justify-center mx-auto text-leather-cognac">
                     <CheckCircle2 className="w-8 h-8 stroke-[1.2]" />
                   </div>
                   <h3 className="font-display text-2xl sm:text-3xl text-noir-950 font-medium">
-                    Inquiry Dispatched to London Desk
+                    Reservation Transmitted
                   </h3>
                   <p className="text-neutral-600 text-xs sm:text-sm font-light max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong>{formData.name}</strong>. Your wholesale and production brief for <strong>{formData.company}</strong> has been transmitted to our London team. A senior footwear development director will review your requirements and reply within one business day.
+                    Thank you, <strong>{formData.name}</strong>. Your pre-order / waitlist reservation has been dispatched to our London atelier concierge. We will confirm your allocation and completion timeline shortly.
                   </p>
                   <div className="pt-4 flex justify-center gap-4">
                     <button onClick={onClose} className="btn-luxury-primary">
-                      Return to Catalog
+                      Return to Collection
                     </button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="space-y-4">
-                  {/* Row 1: Name & Company */}
+                  {/* Row 1: Name & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
@@ -206,7 +199,7 @@ export default function InquiryQuoteModal({
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="e.g. Johnathan Vance"
+                        placeholder="e.g. Lord Harrington"
                         className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950"
                       />
                       {errors.name && <p className="mt-1 text-[10px] text-red-600">{errors.name}</p>}
@@ -214,79 +207,47 @@ export default function InquiryQuoteModal({
 
                     <div>
                       <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
-                        Company / Brand Name <span className="text-leather-cognac">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        placeholder="e.g. Vance & Co. Footwear"
-                        className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950"
-                      />
-                      {errors.company && <p className="mt-1 text-[10px] text-red-600">{errors.company}</p>}
-                    </div>
-                  </div>
-
-                  {/* Row 2: Email & Phone */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
-                        Work Email <span className="text-leather-cognac">*</span>
+                        Email Address <span className="text-leather-cognac">*</span>
                       </label>
                       <input
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="name@company.com"
+                        placeholder="client@luxury.com"
                         className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950"
                       />
                       {errors.email && <p className="mt-1 text-[10px] text-red-600">{errors.email}</p>}
                     </div>
+                  </div>
 
+                  {/* Row 2: Phone & Order Type */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
-                        Phone / WhatsApp Direct
+                        Phone / WhatsApp
                       </label>
                       <input
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+44 / +1 / International"
-                        className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Row 3: Country & Company Type */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
-                        Country / Market
-                      </label>
-                      <input
-                        type="text"
-                        name="country"
-                        value={formData.country}
-                        onChange={handleChange}
-                        placeholder="e.g. United Kingdom, USA, UAE..."
+                        placeholder="+44 7000 000000"
                         className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950"
                       />
                     </div>
 
                     <div>
                       <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
-                        Company Type
+                        Request Type
                       </label>
                       <select
-                        name="companyType"
-                        value={formData.companyType}
+                        name="orderType"
+                        value={formData.orderType}
                         onChange={handleChange}
                         className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950"
                       >
-                        {B2B_CONFIG.companyTypes.map((type) => (
+                        {B2B_CONFIG.orderTypes.map((type) => (
                           <option key={type} value={type}>
                             {type}
                           </option>
@@ -295,29 +256,29 @@ export default function InquiryQuoteModal({
                     </div>
                   </div>
 
-                  {/* Row 4: Product Reference & Estimated Volume */}
+                  {/* Row 3: Product Interest & Size/Quantity */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
-                        Product / Model Reference
+                        Selected Piece
                       </label>
                       <input
                         type="text"
                         name="productInterest"
                         value={formData.productInterest}
                         onChange={handleChange}
-                        placeholder="e.g. The Regent Oxford (ACE-OXF-01)"
+                        placeholder="e.g. The Regent Classic Oxford"
                         className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950"
                       />
                     </div>
 
                     <div>
                       <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
-                        Estimated Order Volume
+                        Size / Quantity
                       </label>
                       <select
-                        name="estimatedVolume"
-                        value={formData.estimatedVolume}
+                        name="desiredQuantity"
+                        value={formData.desiredQuantity}
                         onChange={handleChange}
                         className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 focus:outline-none focus:border-noir-950"
                       >
@@ -330,20 +291,19 @@ export default function InquiryQuoteModal({
                     </div>
                   </div>
 
-                  {/* Message / Specifications */}
+                  {/* Special Notes / Sizing */}
                   <div>
                     <label className="block text-[11px] font-heading tracking-wider uppercase font-semibold text-noir-950 mb-1">
-                      Project Brief, Leather & Branding Specifications <span className="text-leather-cognac">*</span>
+                      Fitting Notes, Custom Monogram & Special Instructions
                     </label>
                     <textarea
                       name="message"
                       rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Please describe your required specifications (e.g. leather preference, sole type, custom branding, target delivery window, prototype requirements)."
+                      placeholder="Please note your preferred EU/UK shoe size, custom color requests, personalized initial debossing, or any bespoke fitting details."
                       className="w-full px-3.5 py-2.5 bg-ivory-50 border border-neutral-300 text-xs font-body text-noir-950 placeholder-neutral-400 resize-none focus:outline-none focus:border-noir-950"
                     />
-                    {errors.message && <p className="mt-1 text-[10px] text-red-600">{errors.message}</p>}
                   </div>
 
                   {/* Actions */}
@@ -351,20 +311,22 @@ export default function InquiryQuoteModal({
                     <button
                       type="submit"
                       disabled={status === "submitting"}
-                      className="w-full sm:w-auto btn-luxury-primary py-3 px-7 text-xs tracking-[0.2em] flex items-center justify-center gap-2"
+                      className="w-full sm:w-auto btn-luxury-primary py-3 px-7 text-xs tracking-[0.2em] flex items-center justify-center gap-2 font-bold"
                     >
                       {status === "submitting" ? (
-                        <span>Transmitting Brief...</span>
+                        <span>Reserving Piece...</span>
                       ) : (
                         <>
-                          <span>SEND INQUIRY</span>
+                          <Clock className="w-3.5 h-3.5" />
+                          <span>CONFIRM PRE-ORDER / WAITLIST</span>
                           <Send className="w-3.5 h-3.5" />
                         </>
                       )}
                     </button>
-                    <span className="text-[10px] text-neutral-400 font-heading tracking-wider uppercase">
-                      NDA & Confidentiality Respected
-                    </span>
+                    <div className="flex items-center gap-1 text-[10px] text-neutral-400 font-heading tracking-wider uppercase">
+                      <ShieldCheck className="w-3.5 h-3.5 text-leather-cognac" />
+                      <span>Atelier Guaranteed Allocation</span>
+                    </div>
                   </div>
                 </form>
               )}

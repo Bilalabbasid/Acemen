@@ -156,10 +156,10 @@ export default function WishlistDrawer() {
                         closeWishlist();
                         setIsQuoteOpen(true);
                       }}
-                      className="w-full btn-luxury-primary py-3.5 tracking-[0.2em] flex items-center justify-center gap-2 text-xs"
+                      className="w-full btn-luxury-primary py-3.5 tracking-[0.2em] flex items-center justify-center gap-2 text-xs font-bold"
                     >
-                      <FileText className="w-4 h-4" />
-                      REQUEST QUOTE FOR SAVED MODELS ({wishlistCount})
+                      <Sparkles className="w-4 h-4" />
+                      PRE-ORDER SAVED PIECES ({wishlistCount})
                     </button>
                   </div>
                 )}
@@ -172,7 +172,7 @@ export default function WishlistDrawer() {
       <InquiryQuoteModal
         isOpen={isQuoteOpen}
         onClose={() => setIsQuoteOpen(false)}
-        defaultSubject={`Wholesale Quote for ${wishlistItems.map(i => i.name).join(", ")}`}
+        defaultSubject={`Pre-Order & Waitlist for ${wishlistItems.map(i => i.name).join(", ")}`}
       />
     </>
   );

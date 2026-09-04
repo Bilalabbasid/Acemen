@@ -216,11 +216,11 @@ export default function CartDrawer() {
                         </button>
                       </>
                     ) : (
-                      /* B2B Quote Submission */
+                      /* Atelier Pre-Order & Waitlist Submission */
                       <div className="space-y-3">
                         <div className="flex items-center gap-2 text-[11px] text-neutral-500 font-heading tracking-wider">
                           <ShieldCheck className="w-3.5 h-3.5 text-leather-cognac shrink-0" />
-                          <span>Confidential wholesale & OEM manufacturing quotes</span>
+                          <span>Guaranteed atelier allocation for upcoming batch</span>
                         </div>
 
                         <button
@@ -228,16 +228,16 @@ export default function CartDrawer() {
                             closeCart();
                             setIsQuoteModalOpen(true);
                           }}
-                          className="w-full btn-luxury-primary py-4 tracking-[0.2em] flex items-center justify-center gap-2 text-xs"
+                          className="w-full btn-luxury-primary py-4 tracking-[0.2em] flex items-center justify-center gap-2 text-xs font-bold"
                         >
-                          <FileText className="w-4 h-4" />
-                          <span>REQUEST WHOLESALE QUOTE FOR SELECTED</span>
+                          <Sparkles className="w-4 h-4" />
+                          <span>PRE-ORDER SELECTED PIECES</span>
                         </button>
                       </div>
                     )}
 
                     <p className="text-center text-[10px] text-neutral-400 font-heading tracking-widest uppercase">
-                      ACEMEN London Atelier • OEM / ODM Production
+                      ACEMEN London Atelier • Handcrafted in Limited Batches
                     </p>
                   </div>
                 )}
@@ -250,7 +250,7 @@ export default function CartDrawer() {
       <InquiryQuoteModal
         isOpen={isQuoteModalOpen}
         onClose={() => setIsQuoteModalOpen(false)}
-        defaultSubject={`Wholesale Quote for ${cartItems.map(i => i.product.name).join(", ")}`}
+        defaultSubject={`Pre-Order / Reservation for ${cartItems.map(i => i.product.name).join(", ")}`}
       />
     </>
   );

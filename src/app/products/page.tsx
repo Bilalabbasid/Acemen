@@ -252,26 +252,26 @@ function ProductsContent() {
           </div>
         )}
 
-        {/* 4. Bottom Wholesale Catalog Callout */}
+        {/* 4. Bottom Atelier Pre-Order & Waitlist Callout */}
         <div className="mt-20 p-8 sm:p-12 bg-noir-950 text-white border border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center sm:text-left max-w-xl">
             <div className="flex items-center justify-center sm:justify-start gap-2 text-champagne-400 text-[10px] font-heading font-bold tracking-[0.25em] uppercase">
               <ShieldCheck className="w-4 h-4" />
-              <span>WHOLESALE PARTNERSHIP DESK</span>
+              <span>ACEMEN ATELIER CONCIERGE</span>
             </div>
             <h3 className="font-display text-2xl sm:text-3xl font-medium text-white">
-              Request Full Wholesale Catalog & Line Sheet
+              Pre-Order Allocations & Bespoke Commissions
             </h3>
             <p className="text-xs sm:text-sm text-neutral-300 font-light">
-              Receive high-resolution technical drawings, complete material swatch guides, volume pricing tiers, and OEM development terms.
+              Reserve pieces from our upcoming limited production runs, join private allocation waitlists, or inquire about bespoke commissions.
             </p>
           </div>
 
           <button
             onClick={() => setIsCatalogQuoteOpen(true)}
-            className="btn-luxury-white text-xs tracking-[0.2em] shrink-0"
+            className="btn-luxury-white text-xs tracking-[0.2em] shrink-0 font-bold"
           >
-            REQUEST FULL CATALOG & PRICING
+            PRE-ORDER / JOIN WAITLIST
           </button>
         </div>
       </div>
@@ -286,7 +286,7 @@ function ProductsContent() {
       <InquiryQuoteModal
         isOpen={isCatalogQuoteOpen}
         onClose={() => setIsCatalogQuoteOpen(false)}
-        defaultSubject="Full Wholesale Catalog & Line Sheet Request"
+        defaultSubject="Atelier Pre-Order & Private Lookbook Request"
       />
     </div>
   );

@@ -132,7 +132,7 @@ export default function BuiltForBrandsSection({ onOpenInquiry }: BuiltForBrandsP
                 </div>
 
                 <div className="pt-4 mt-4 border-t border-neutral-850 flex items-center justify-between text-[10px] font-heading tracking-widest text-champagne-400 uppercase font-semibold group-hover:text-white transition-colors">
-                  <span>REQUEST QUOTE</span>
+                  <span>PRE-ORDER & INQUIRE</span>
                   <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
@@ -143,22 +143,19 @@ export default function BuiltForBrandsSection({ onOpenInquiry }: BuiltForBrandsP
         {/* Bottom Banner Callout */}
         <div className="mt-16 p-8 sm:p-10 bg-noir-900 border border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center sm:text-left">
-            <h4 className="font-display text-xl sm:text-2xl font-medium text-white">
-              Launch or Expand Your Footwear Collection
-            </h4>
-            <p className="text-xs text-neutral-400 font-light">
-              From technical specification review to prototype dispatch and volume delivery.
+            <h3 className="font-display text-2xl sm:text-3xl font-medium text-white">
+              Reserve Upcoming Atelier Allocations
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-400 font-light max-w-xl">
+              From private pre-orders to bespoke boutique partnerships, our London atelier is ready to accommodate your requirements.
             </p>
           </div>
-
-          <div className="flex items-center gap-4 shrink-0">
-            <Link
-              href="/contact?subject=Full%20Collection%20Development%20(OEM%20%2F%20ODM)&details=Requesting%20consultation%20for%20end-to-end%20footwear%20collection%20development%20and%20volume%20manufacturing.#form"
-              className="btn-luxury-white text-xs tracking-[0.2em]"
-            >
-              DISCUSS YOUR COLLECTION
-            </Link>
-          </div>
+          <Link
+            href="/contact"
+            className="btn-luxury-primary shrink-0 tracking-[0.22em] text-xs font-bold"
+          >
+            PRE-ORDER & INQUIRE
+          </Link>
         </div>
       </div>
     </section>

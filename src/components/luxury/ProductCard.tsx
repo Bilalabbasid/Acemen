@@ -104,13 +104,13 @@ export default function ProductCard({ product, onQuickView, onOpenQuote }: Produ
             isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
           }`}
         >
-          {/* B2B MODE — D2C pricing & retail Add to Bag temporarily disabled. Restore when retail sales are enabled. */}
+          {/* Atelier Pre-Order & Waitlist mode */}
           {B2B_MODE ? (
             <Link
               href={`/products/${product.slug}`}
-              className="flex-1 btn-luxury-white text-[10px] py-2.5 px-3 tracking-[0.18em] shadow-md text-center"
+              className="flex-1 btn-luxury-white text-[10px] py-2.5 px-3 tracking-[0.18em] shadow-md text-center font-bold"
             >
-              VIEW DETAILS
+              PRE-ORDER / WAITLIST
             </Link>
           ) : (
             <button
@@ -131,7 +131,7 @@ export default function ProductCard({ product, onQuickView, onOpenQuote }: Produ
                 onQuickView(product);
               }}
               className="w-9 h-9 bg-white text-noir-950 flex items-center justify-center hover:bg-ivory-100 transition-colors shadow-md shrink-0"
-              aria-label="View technical specifications"
+              aria-label="View specifications & details"
               title="Quick Specifications"
             >
               <Eye className="w-4 h-4 stroke-[1.5]" />
@@ -156,9 +156,9 @@ export default function ProductCard({ product, onQuickView, onOpenQuote }: Produ
           {product.name}
         </Link>
 
-        {/* B2B Manufacturing Specs / Color swatches */}
+        {/* Specs / Color swatches */}
         <div className="pt-0.5 space-y-1">
-          {/* B2B MODE — D2C pricing temporarily disabled */}
+          {/* Atelier Pre-Order & Waitlist display */}
           {B2B_MODE ? (
             <div className="flex items-center justify-between text-[11px] text-neutral-600 font-light">
               <span className="truncate max-w-[170px]">
@@ -167,7 +167,7 @@ export default function ProductCard({ product, onQuickView, onOpenQuote }: Produ
 
               {/* Color swatches */}
               {product.colors && product.colors.length > 0 && (
-                <div className="flex items-center gap-1.5 shrink-0" title={`Colors: ${product.colors.map(c => c.name).join(", ")} (Custom Dye Available)`}>
+                <div className="flex items-center gap-1.5 shrink-0" title={`Colors: ${product.colors.map(c => c.name).join(", ")}`}>
                   {product.colors.slice(0, 3).map((col) => (
                     <span
                       key={col.name}
@@ -187,11 +187,11 @@ export default function ProductCard({ product, onQuickView, onOpenQuote }: Produ
             </div>
           )}
 
-          {/* B2B Custom Branding Badge */}
+          {/* Limited Batch / Pre-Order Badge */}
           {B2B_MODE && (
             <div className="flex items-center gap-1 pt-0.5 text-[9.5px] font-heading tracking-wider uppercase text-neutral-500 font-semibold">
               <ShieldCheck className="w-3 h-3 text-leather-cognac shrink-0" />
-              <span>Custom Branding Available</span>
+              <span>Handcrafted in Limited Atelier Batches</span>
             </div>
           )}
         </div>

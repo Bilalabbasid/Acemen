@@ -34,20 +34,20 @@ export default function HeroCampaign() {
           >
             {/* Eyebrow */}
             <span className="inline-block text-[11px] sm:text-xs font-heading font-bold tracking-[0.35em] uppercase text-champagne-400">
-              PREMIUM LEATHER FOOTWEAR • LONDON
+              BRITISH LUXURY FOOTWEAR & LEATHER ATELIER • LONDON
             </span>
 
             {/* Title */}
             <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-medium tracking-tight text-white leading-[1.05] text-balance">
-              CRAFTED FOR BRANDS. BUILT FOR BUSINESS.
+              CRAFTED BY HAND. SCULPTED FOR DISTINCTION.
             </h1>
 
-            {/* B2B Positioning Statement */}
+            {/* Positioning Statement */}
             <p className="font-body text-sm sm:text-base text-neutral-200/90 font-light tracking-wide max-w-xl mx-auto leading-relaxed pt-1">
-              Premium leather footwear developed for wholesale, private-label, OEM and ODM partnerships.
+              Handcrafted in limited atelier batches. Available for Pre-Order, private allocation waitlist, and bespoke commissions.
             </p>
 
-            {/* B2B CTAs */}
+            {/* CTAs */}
             <div className="pt-6 flex flex-wrap items-center justify-center gap-6">
               <Link
                 href="/products"
@@ -60,7 +60,7 @@ export default function HeroCampaign() {
                 onClick={() => setIsQuoteOpen(true)}
                 className="text-xs sm:text-sm font-heading font-semibold tracking-[0.25em] uppercase text-neutral-300 hover:text-white transition-colors"
               >
-                WORK WITH ACEMAN
+                PRE-ORDER / JOIN WAITLIST
               </button>
             </div>
           </motion.div>

@@ -107,17 +107,17 @@ export default function ManufacturingCapacitySection({ onOpenInquiry }: Manufact
         {/* Note / Callout */}
         <div className="mt-12 p-6 bg-white border border-neutral-200 text-center max-w-2xl mx-auto space-y-2">
           <p className="text-xs font-heading tracking-wider uppercase text-neutral-500 font-semibold">
-            Confidential Wholesale Pricing & Volume Tiers
+            Atelier Batch Scheduling & Private Allocations
           </p>
           <p className="text-xs text-neutral-600 font-light">
-            Exact production schedules, sample turnaround, and tiered wholesale pricing matrix are provided upon direct review of your brand&apos;s project brief.
+            Exact production schedules, hand-lasting timelines, and private allocation availability are provided upon direct reservation.
           </p>
           <div className="pt-3">
             <button
               onClick={onOpenInquiry}
               className="editorial-link text-xs tracking-[0.2em]"
             >
-              REQUEST WHOLESALE PRICING MATRIX →
+              INQUIRE ABOUT PRE-ORDERS & ALLOCATIONS →
             </button>
           </div>
         </div>

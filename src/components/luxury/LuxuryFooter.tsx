@@ -39,7 +39,7 @@ export default function LuxuryFooter() {
               </div>
             </Link>
             <p className="text-neutral-400 text-xs sm:text-sm font-light leading-relaxed">
-              ACEMEN is a British luxury leather house and footwear manufacturer incorporated in the United Kingdom. We develop and manufacture fine Goodyear-welted shoes, aviation footwear, holdalls, briefcases, and small leather goods for brands, wholesale distributors, and private-label partners.
+              ACEMEN is a British luxury leather house and master footwear atelier incorporated in the United Kingdom. We craft fine Goodyear-welted shoes, aviation footwear, holdalls, and small leather goods available by pre-order, private allocation, and bespoke commission.
             </p>
           </div>
 
@@ -73,40 +73,40 @@ export default function LuxuryFooter() {
       {/* Main 4-Column Footer Navigation */}
       <div className="container-page py-14 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* Column 1: Wholesale & OEM Services */}
+          {/* Column 1: Atelier & Pre-Orders */}
           <div>
             <h4 className="font-heading text-xs tracking-[0.25em] uppercase font-bold text-champagne-400 mb-6">
-              Wholesale & OEM
+              Atelier & Pre-Orders
             </h4>
             <ul className="space-y-3.5 text-xs text-neutral-400 font-light">
               <li>
                 <Link href="/contact" className="hover:text-white transition-colors">
-                  Contact Manufacturing Desk
-                </Link>
-              </li>
-              <li>
-                <Link href="/#customization" className="hover:text-white transition-colors">
-                  Private-Label Development
-                </Link>
-              </li>
-              <li>
-                <Link href="/#leather" className="hover:text-white transition-colors">
-                  European Leather Sourcing
-                </Link>
-              </li>
-              <li>
-                <Link href="/#manufacturing" className="hover:text-white transition-colors">
-                  Manufacturing Specifications & MOQ
+                  Atelier Concierge & Reservations
                 </Link>
               </li>
               <li>
                 <Link href="/products" className="hover:text-white transition-colors">
-                  Request Wholesale Line Sheet
+                  Join Private Waitlist
+                </Link>
+              </li>
+              <li>
+                <Link href="/#customization" className="hover:text-white transition-colors">
+                  Bespoke Commissions & Sizing
+                </Link>
+              </li>
+              <li>
+                <Link href="/#leather" className="hover:text-white transition-colors">
+                  European Leather Sourcing & Provenance
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-white transition-colors">
+                  Request Atelier Lookbook
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-white transition-colors">
-                  London Atelier Appointments
+                  London Atelier Private Consultation
                 </Link>
               </li>
             </ul>

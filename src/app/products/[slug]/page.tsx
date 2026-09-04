@@ -167,7 +167,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 {product.name}
               </h1>
 
-              {/* B2B MODE — D2C pricing temporarily disabled. Restore when retail sales are enabled. */}
+              {/* Atelier Pre-Order & Waitlist mode */}
               {B2B_MODE ? (
                 <div className="flex items-center justify-between pt-2">
                   <div className="flex items-center gap-2">
@@ -175,11 +175,11 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                       MODEL: {modelNumber}
                     </span>
                     <span className="text-[11px] text-leather-cognac font-heading font-bold tracking-wider uppercase">
-                      Wholesale & OEM
+                      Atelier Allocation
                     </span>
                   </div>
                   <span className="text-[11px] text-green-700 font-heading font-semibold tracking-wider uppercase bg-green-50 px-2.5 py-1 border border-green-200">
-                    Production Ready
+                    Handcrafted in Small Batches
                   </span>
                 </div>
               ) : (
@@ -200,11 +200,11 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               {product.shortDescription}
             </p>
 
-            {/* ── B2B PRODUCT DETAILS & MANUFACTURING MATRIX ── */}
+            {/* ── PRODUCT DETAILS & CRAFTSMANSHIP SPECIFICATIONS ── */}
             <div className="p-5 bg-ivory-50 border border-neutral-200 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-neutral-200">
                 <span className="text-[10px] font-heading font-bold tracking-[0.25em] uppercase text-leather-cognac">
-                  PRODUCT SPECIFICATIONS
+                  ATELIER SPECIFICATIONS
                 </span>
                 <span className="text-[10px] font-mono text-neutral-500">
                   {modelNumber}
@@ -226,23 +226,23 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 </div>
                 <div>
                   <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Finish:</strong>
-                  <span className="text-noir-950 font-semibold">Multiple Finishes Available</span>
+                  <span className="text-noir-950 font-semibold">Hand-Burnished / Mirror Glaze</span>
                 </div>
                 <div>
                   <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Colors:</strong>
-                  <span className="text-noir-950 font-semibold">Customizable (Dip Dye / Patina)</span>
+                  <span className="text-noir-950 font-semibold">Cognac, Noir, Espresso & Custom</span>
                 </div>
                 <div>
                   <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Sole:</strong>
-                  <span className="text-noir-950 font-semibold">{product.dimensions.soleType || "Multiple Options Available"}</span>
+                  <span className="text-noir-950 font-semibold">{product.dimensions.soleType || "Closed-Channel Leather / Dainite"}</span>
                 </div>
                 <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Branding:</strong>
-                  <span className="text-noir-950 font-semibold">Private Label Available</span>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Craftsmanship:</strong>
+                  <span className="text-noir-950 font-semibold">Goodyear-Welted / Hand-Lasted</span>
                 </div>
                 <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Customization:</strong>
-                  <span className="text-green-700 font-semibold">Available (OEM / ODM)</span>
+                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Allocation:</strong>
+                  <span className="text-green-700 font-semibold">Available for Pre-Order</span>
                 </div>
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               <div className="space-y-3 pt-1">
                 <div className="flex items-center justify-between text-xs font-heading tracking-wider uppercase">
                   <span className="text-neutral-500">Available Colorways:</span>
-                  <span className="font-bold text-noir-950">{selectedColor} (Custom Dye Available)</span>
+                  <span className="font-bold text-noir-950">{selectedColor}</span>
                 </div>
                 <div className="flex gap-2.5">
                   {product.colors.map((col) => (
@@ -280,7 +280,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             {isFootwear && product.sizes && (
               <div className="space-y-3 pt-2">
                 <div className="flex items-center justify-between text-xs font-heading tracking-wider uppercase">
-                  <span className="text-neutral-500">Standard Sizing Matrix:</span>
+                  <span className="text-neutral-500">Select Sizing For Pre-Order:</span>
                   <button
                     onClick={() => setShowSizeGuide(!showSizeGuide)}
                     className="text-leather-cognac hover:underline flex items-center gap-1 font-bold"
@@ -333,9 +333,9 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
             )}
 
-            {/* ── B2B ACTION BUTTONS & CTAs ── */}
+            {/* ── PRE-ORDER & WAITLIST ACTION BUTTONS ── */}
             <div className="space-y-3 pt-4">
-              {/* B2B MODE — D2C retail purchasing temporarily disabled. Replaced with Request a Quote & Request Samples CTAs */}
+              {/* Atelier Pre-Order & Waitlist Mode */}
               {B2B_MODE ? (
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
@@ -343,15 +343,15 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                       onClick={() => setIsQuoteModalOpen(true)}
                       className="flex-1 btn-luxury-primary h-13 tracking-[0.22em] flex items-center justify-center gap-2 text-xs font-bold"
                     >
-                      <FileText className="w-4 h-4" />
-                      <span>REQUEST A QUOTE</span>
+                      <Sparkles className="w-4 h-4" />
+                      <span>PRE-ORDER NOW</span>
                     </button>
 
                     <button
                       onClick={() => toggleWishlist(product)}
                       className="w-13 h-13 border border-neutral-300 flex items-center justify-center text-noir-950 hover:border-noir-950 transition-colors shrink-0"
-                      aria-label="Save for quote inquiry"
-                      title={isFavorite ? "Saved for inquiry" : "Save specification"}
+                      aria-label="Save for pre-order waitlist"
+                      title={isFavorite ? "Saved in wish list" : "Save specification"}
                     >
                       <Heart
                         className={`w-5 h-5 ${
@@ -363,10 +363,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
                   <button
                     onClick={() => setIsQuoteModalOpen(true)}
-                    className="w-full btn-luxury-outline h-12 tracking-[0.2em] flex items-center justify-center gap-2 text-xs"
+                    className="w-full btn-luxury-outline h-12 tracking-[0.2em] flex items-center justify-center gap-2 text-xs font-bold"
                   >
                     <Package className="w-4 h-4" />
-                    <span>REQUEST SAMPLES & SPECIFICATIONS</span>
+                    <span>JOIN THE WAITLIST & INQUIRE</span>
                   </button>
                 </div>
               ) : (

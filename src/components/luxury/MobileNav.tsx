@@ -267,7 +267,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
                     onClick={onClose}
                     className="font-display text-xl font-medium text-leather-cognac hover:text-noir-950 block py-1.5"
                   >
-                    Wholesale & OEM Desk
+                    Atelier Concierge & Inquiries
                   </Link>
                 </div>
               </div>

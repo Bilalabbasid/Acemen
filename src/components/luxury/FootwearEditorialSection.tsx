@@ -54,7 +54,7 @@ export default function FootwearEditorialSection() {
                 onClick={() => setIsQuoteOpen(true)}
                 className="text-xs sm:text-sm font-heading font-semibold tracking-[0.25em] uppercase text-neutral-300 hover:text-white transition-colors"
               >
-                REQUEST WHOLESALE PRICING
+                PRE-ORDER FOOTWEAR
               </button>
             </div>
           </motion.div>
@@ -64,7 +64,7 @@ export default function FootwearEditorialSection() {
       <InquiryQuoteModal
         isOpen={isQuoteOpen}
         onClose={() => setIsQuoteOpen(false)}
-        defaultSubject="Footwear Atelier Wholesale Inquiry"
+        defaultSubject="Footwear Atelier Pre-Order & Waitlist Inquiry"
       />
     </>
   );

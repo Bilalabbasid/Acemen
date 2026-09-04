@@ -334,7 +334,7 @@ export default function LuxuryHeader() {
                 )}
               </button>
 
-              {/* B2B MODE — Shopping bag hidden for visitors. Replaced with Request a Quote CTA button */}
+              {/* B2B / Atelier Pre-Order & Waitlist mode */}
               {B2B_MODE ? (
                 <button
                   onClick={() => setIsHeaderQuoteOpen(true)}
@@ -344,7 +344,7 @@ export default function LuxuryHeader() {
                       : "border-noir-950 bg-noir-950 text-white hover:bg-leather-cognac hover:border-leather-cognac"
                   }`}
                 >
-                  REQUEST QUOTE
+                  PRE-ORDER / WAITLIST
                 </button>
               ) : (
                 <button
@@ -374,7 +374,7 @@ export default function LuxuryHeader() {
                     : "border-transparent text-neutral-700 hover:text-noir-950"
                 } transition-colors`}
               >
-                Desk
+                Concierge
               </Link>
             </div>
           </div>
@@ -441,7 +441,7 @@ export default function LuxuryHeader() {
                         />
                       </div>
                       <span className="text-[10px] font-heading tracking-[0.2em] uppercase font-bold text-leather-cognac block mb-1">
-                        Wholesale & OEM Line
+                        Atelier & Pre-Order Collection
                       </span>
                       <p className="font-display text-base font-semibold text-noir-950 group-hover:text-leather-cognac transition-colors">
                         {activeDropdown.tagline}

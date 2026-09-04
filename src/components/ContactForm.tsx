@@ -155,10 +155,10 @@ function ContactFormInner({ defaultSubject, defaultProduct }: ContactFormProps) 
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
           <div className="space-y-1 pb-2 border-b border-neutral-100">
             <span className="text-[10px] font-heading font-bold tracking-[0.25em] uppercase text-leather-cognac block">
-              B2B PARTNERSHIP & MANUFACTURING DESK
+              ACEMEN ATELIER CONCIERGE • LONDON
             </span>
             <h3 className="font-display text-2xl sm:text-3xl font-medium text-noir-950">
-              Initiate a Wholesale or OEM Brief
+              Pre-Order, Waitlist & Bespoke Inquiries
             </h3>
             {paramSubject && (
               <p className="text-xs text-leather-cognac font-medium pt-1">

@@ -64,9 +64,9 @@ export default function PilotEditorialSection() {
               </Link>
               <button
                 onClick={() => setIsQuoteOpen(true)}
-                className="btn-luxury-outline text-white border-white/30 hover:border-white text-xs"
+                className="btn-luxury-outline text-white border-white/30 hover:border-white text-xs font-bold"
               >
-                Request Fleet / Volume Quote
+                Pre-Order Pilot Shoe / Waitlist
               </button>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function PilotEditorialSection() {
       <InquiryQuoteModal
         isOpen={isQuoteOpen}
         onClose={() => setIsQuoteOpen(false)}
-        defaultSubject="Aviation Pilot Collection Fleet / Wholesale Inquiry"
+        defaultSubject="The Aviator Pilot Shoe Pre-Order & Waitlist"
       />
     </>
   );
