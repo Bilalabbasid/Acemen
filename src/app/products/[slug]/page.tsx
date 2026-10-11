@@ -1,530 +1,653 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { INITIAL_PRODUCTS } from '@/lib/data';
+import { useStore } from '@/lib/store';
 import {
-  Heart,
-  ShoppingBag,
-  ShieldCheck,
-  ChevronRight,
-  Minus,
-  Plus,
-  Share2,
-  Check,
   Ruler,
+  ChevronDown,
+  ChevronUp,
+  ShoppingBag,
+  Check,
+  ZoomIn,
   Sparkles,
-  FileText,
-  Package,
-  Layers,
-  CheckCircle,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { luxuryProducts, ProductItem, getProductModelNumber } from "@/data/products";
-import { useCart } from "@/context/CartContext";
-import { useWishlist } from "@/context/WishlistContext";
-import { B2B_MODE } from "@/config/b2b";
-import ProductCard from "@/components/luxury/ProductCard";
-import InquiryQuoteModal from "@/components/luxury/InquiryQuoteModal";
+  Clock,
+} from 'lucide-react';
+import ProductCard from '@/components/ProductCard';
+import WaitlistModal from '@/components/WaitlistModal';
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  const product = luxuryProducts.find((p) => p.slug === params.slug);
+interface PDPProps {
+  params: {
+    slug: string;
+  };
+}
+
+// Shoe size parser and formatter
+function parseShoeSize(rawSize: string) {
+  const ukMatch = rawSize.match(/UK\s*(\d+(\.\d+)?)/i);
+  const usMatch = rawSize.match(/US\s*(\d+(\.\d+)?)/i);
+  const euMatch = rawSize.match(/EU\s*(\d+(\.\d+)?)/i);
+
+  const uk = ukMatch ? ukMatch[1] : '';
+  const us = usMatch ? usMatch[1] : (uk ? String(Number(uk) + 1) : '');
+  const eu = euMatch ? euMatch[1] : (uk ? String(Number(uk) + 34) : '');
+
+  return { uk, us, eu };
+}
+
+function getShoeDisplay(rawSize: string, scale: 'UK' | 'US' | 'EU') {
+  const { uk, us, eu } = parseShoeSize(rawSize);
+  if (!uk && !us && !eu) {
+    return { primary: rawSize, secondary: '', all: rawSize };
+  }
+
+  if (scale === 'UK') {
+    return {
+      primary: `UK ${uk}`,
+      secondary: `US ${us} · EU ${eu}`,
+      all: `UK ${uk} (US ${us} / EU ${eu})`,
+    };
+  } else if (scale === 'US') {
+    return {
+      primary: `US ${us}`,
+      secondary: `UK ${uk} · EU ${eu}`,
+      all: `US ${us} (UK ${uk} / EU ${eu})`,
+    };
+  } else {
+    return {
+      primary: `EU ${eu}`,
+      secondary: `UK ${uk} · US ${us}`,
+      all: `EU ${eu} (UK ${uk} / US ${us})`,
+    };
+  }
+}
+
+// Jacket size parser and formatter
+function parseJacketSize(rawSize: string) {
+  if (rawSize.includes('Small')) {
+    return { letter: 'Small', chest: '38R', fit: 'Fits 36"–38" chest' };
+  } else if (rawSize.includes('Medium')) {
+    return { letter: 'Medium', chest: '40R', fit: 'Fits 39"–41" chest' };
+  } else if (rawSize.includes('Large') && !rawSize.includes('Extra')) {
+    return { letter: 'Large', chest: '42R', fit: 'Fits 42"–44" chest' };
+  } else if (rawSize.includes('Extra Large') || rawSize.includes('XL')) {
+    return { letter: 'Extra Large (XL)', chest: '44R', fit: 'Fits 45"–47" chest' };
+  } else if (rawSize.includes('XXL')) {
+    return { letter: 'XXL', chest: '46R', fit: 'Fits 48"–50" chest' };
+  }
+
+  const chestMatch = rawSize.match(/(\d+R)/i);
+  const chest = chestMatch ? chestMatch[1] : rawSize;
+  const letter = rawSize.split('/')[1]?.trim() || rawSize;
+  return { letter, chest, fit: 'Tailored Regular Cut' };
+}
+
+function getJacketDisplay(rawSize: string, scale: 'letter' | 'chest') {
+  const { letter, chest, fit } = parseJacketSize(rawSize);
+
+  if (scale === 'letter') {
+    return {
+      primary: letter,
+      secondary: `Chest ${chest} · ${fit}`,
+      summary: `${letter} — Chest ${chest} (${fit})`,
+    };
+  } else {
+    return {
+      primary: `Chest ${chest}`,
+      secondary: `${letter} · ${fit}`,
+      summary: `Chest ${chest} — ${letter} (${fit})`,
+    };
+  }
+}
+
+export default function ProductDetailPage({ params }: PDPProps) {
+  const { slug } = params;
+  const product = INITIAL_PRODUCTS.find((p) => p.slug === slug);
 
   if (!product) {
     notFound();
   }
 
-  const { addToCart } = useCart();
-  const { toggleWishlist, isInWishlist } = useWishlist();
+  const {
+    formatPricePence,
+    addToCart,
+    openSizeGuide,
+  } = useStore();
 
-  const [selectedImage, setSelectedImage] = useState(product.images.primary);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || "Standard");
-  const [selectedSize, setSelectedSize] = useState(product.sizes ? product.sizes[2] || product.sizes[0] : "");
-  const [quantity, setQuantity] = useState(1);
-  const [activeAccordion, setActiveAccordion] = useState<string>("details");
-  const [copied, setCopied] = useState(false);
-  const [showSizeGuide, setShowSizeGuide] = useState(false);
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  // Category & Product Type Flags
+  const isFootwear =
+    product.categoryId.includes('shoes') ||
+    product.slug.includes('shoe') ||
+    product.slug.includes('boot') ||
+    product.slug.includes('loafer') ||
+    product.slug.includes('derby') ||
+    product.slug.includes('oxford') ||
+    product.variants.some((v) => v.size.includes('UK'));
 
-  const isFootwear = product.category === "Shoes" || !!product.sizes;
-  const modelNumber = getProductModelNumber(product);
+  const isJacket =
+    product.categoryId.includes('jackets') ||
+    product.slug.includes('jacket') ||
+    product.slug.includes('shearling') ||
+    product.slug.includes('biker') ||
+    product.variants.some((v) => v.size.includes('R') || v.size.includes('Small') || v.size.includes('Large'));
 
-  // Related products from same or adjacent category
-  const relatedProducts = luxuryProducts
-    .filter((p) => p.id !== product.id && (p.category === product.category || p.gender === product.gender))
-    .slice(0, 4);
+  // Sizing standard toggles
+  const [shoeScale, setShoeScale] = useState<'UK' | 'US' | 'EU'>('UK');
+  const [jacketScale, setJacketScale] = useState<'letter' | 'chest'>('letter');
 
-  const handleShare = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+  // Variant & State
+  const activeVariants = (product.variants || []).filter((v) => v.isActive);
+  const [selectedVariant, setSelectedVariant] = useState(
+    activeVariants[0] || product.variants[0]
+  );
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [addedAnimation, setAddedAnimation] = useState(false);
+  const [openSection, setOpenSection] = useState<'desc' | 'craft' | 'care' | 'delivery' | null>('desc');
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const [waitlistModalOpen, setWaitlistModalOpen] = useState(false);
+  const addToBagRef = useRef<HTMLButtonElement>(null);
+
+  // Show sticky bar when main add-to-bag button scrolls out of view
+  useEffect(() => {
+    const el = addToBagRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyBar(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const toggleSection = (section: 'desc' | 'craft' | 'care' | 'delivery') => {
+    setOpenSection(openSection === section ? null : section);
+  };
+
+  const handleAdd = () => {
+    if (!selectedVariant || selectedVariant.stockQuantity <= 0) return;
+    addToCart(product, selectedVariant, 1);
+    setAddedAnimation(true);
+    setTimeout(() => setAddedAnimation(false), 1200);
+  };
+
+  // Related products from same category or priority
+  const relatedProducts = INITIAL_PRODUCTS.filter(
+    (p) => p.id !== product.id && (p.categoryId === product.categoryId || p.isTopSelling)
+  ).slice(0, 2);
+
+  const images = product.images || [];
+  const primaryImage = images[activeImageIndex] || images[0];
+
+  // Currency price calculation
+  const currentPriceInPence =
+    selectedVariant?.priceOverrideInPence ?? product.priceInPence;
+
+  // JSON-LD structured data for luxury product SEO
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.title,
+    image: images.map((img) => img.url),
+    description: product.description,
+    sku: product.styleCode,
+    brand: {
+      '@type': 'Brand',
+      name: 'ACEMEN',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: `https://acemen.co.uk/products/${product.slug}`,
+      priceCurrency: 'GBP',
+      price: (currentPriceInPence / 100).toFixed(2),
+      availability:
+        selectedVariant?.stockQuantity > 0
+          ? 'https://schema.org/InStock'
+          : 'https://schema.org/OutOfStock',
+      itemCondition: 'https://schema.org/NewCondition',
+    },
   };
 
   return (
-    <div className="bg-white min-h-screen pt-24 sm:pt-32 pb-24">
-      {/* Breadcrumb */}
-      <div className="container-fluid py-4 border-b border-neutral-100">
-        <nav className="flex items-center gap-2 text-[11px] font-heading tracking-wider uppercase text-neutral-500">
-          <Link href="/" className="hover:text-noir-950 transition-colors">
+    <div className="bg-white min-h-screen text-[#111111]">
+      {/* Inject JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Breadcrumb Bar */}
+      <div className="border-b border-[#E5E5E5] py-3.5 px-4 sm:px-8 bg-white">
+        <div className="max-w-7xl mx-auto flex items-center text-[10px] uppercase tracking-[0.2em] font-mono text-[#767676]">
+          <Link href="/" className="hover:text-[#111111]">
             Home
           </Link>
-          <ChevronRight className="w-3 h-3 text-neutral-400" />
-          <Link href="/products" className="hover:text-noir-950 transition-colors">
-            Catalog
-          </Link>
-          <ChevronRight className="w-3 h-3 text-neutral-400" />
+          <span className="mx-2">/</span>
           <Link
-            href={`/collections/${product.category.toLowerCase()}`}
-            className="hover:text-noir-950 transition-colors"
+            href={`/collection/${product.categoryId.replace('cat-', '')}`}
+            className="hover:text-[#111111]"
           >
-            {product.category}
+            {product.category?.name || 'Collections'}
           </Link>
-          <ChevronRight className="w-3 h-3 text-neutral-400" />
-          <span className="text-noir-950 font-semibold truncate max-w-xs">{product.name}</span>
-        </nav>
+          <span className="mx-2">/</span>
+          <span className="text-[#111111] truncate">{product.title}</span>
+        </div>
       </div>
 
-      {/* Main PDP Grid */}
-      <div className="container-fluid pt-8 sm:pt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-16 items-start">
-          {/* ── LEFT: Large Product Image Gallery (7 Cols) ── */}
-          <div className="lg:col-span-7 space-y-4">
-            {/* Primary Large View */}
-            <div className="relative aspect-square w-full bg-ivory-100/60 overflow-hidden border border-neutral-200">
-              <img
-                src={selectedImage}
-                alt={product.name}
-                className="w-full h-full object-cover object-center transition-all duration-500"
-              />
-              <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5">
-                {product.tag && (
-                  <span className="bg-white text-noir-950 text-[10px] font-heading font-bold tracking-[0.25em] uppercase px-3 py-1.5 shadow-sm border border-neutral-200">
-                    {product.tag}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* LEFT: Editorial Gallery (Desktop Vertical Stack + Mobile Interactive Switcher) */}
+          <div className="lg:col-span-6 flex flex-col space-y-4 max-w-lg lg:max-w-none mx-auto w-full">
+            {/* Main Featured Photo View with accessible Zoom toggle */}
+            <div
+              className={`relative aspect-[3/4] max-h-[540px] w-full bg-neutral-50 border border-[#E5E5E5] overflow-hidden ${
+                isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
+              }`}
+              onClick={() => setIsZoomed(!isZoomed)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setIsZoomed(!isZoomed);
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label="Toggle high-resolution image zoom"
+            >
+              {primaryImage && (
+                <Image
+                  src={primaryImage.url}
+                  alt={primaryImage.altText || `${product.title} by ACEMEN`}
+                  fill
+                  priority
+                  className={`object-cover object-center transition-transform duration-300 ${
+                    isZoomed ? 'scale-150' : 'scale-100'
+                  }`}
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                />
+              )}
+
+              {/* Status Badges */}
+              <div className="absolute top-4 left-4 flex flex-col space-y-2 pointer-events-none">
+                {product.isFeaturedHero && (
+                  <span className="bg-[#111111] text-white text-[9px] uppercase tracking-[0.25em] font-mono px-2.5 py-1">
+                    Atelier Hero Piece
                   </span>
                 )}
-                <span className="bg-noir-950 text-champagne-400 text-[9px] font-heading font-bold tracking-[0.25em] uppercase px-3 py-1 shadow-sm">
-                  MODEL: {modelNumber}
-                </span>
+                {product.isTopSelling && (
+                  <span className="bg-white text-[#111111] text-[9px] uppercase tracking-[0.25em] font-mono px-2.5 py-1 border border-[#E5E5E5]">
+                    Iconic Allocation
+                  </span>
+                )}
+              </div>
+
+              {/* Zoom Instruction Cue */}
+              <div className="absolute bottom-4 right-4 bg-white/90 border border-[#E5E5E5] px-2 py-1 text-[9px] font-mono uppercase tracking-widest text-[#767676] flex items-center space-x-1">
+                <ZoomIn size={11} />
+                <span>{isZoomed ? 'Click to Reset' : 'Zoom'}</span>
               </div>
             </div>
 
             {/* Thumbnail Strip */}
-            {product.images.gallery && product.images.gallery.length > 1 && (
-              <div className="grid grid-cols-4 gap-3 sm:gap-4">
-                {product.images.gallery.map((imgUrl, i) => (
+            {images.length > 1 && (
+              <div className="grid grid-cols-4 gap-3">
+                {images.map((img, idx) => (
                   <button
-                    key={i}
-                    onClick={() => setSelectedImage(imgUrl)}
-                    className={`relative aspect-square bg-ivory-50 overflow-hidden border transition-all ${
-                      selectedImage === imgUrl
-                        ? "border-noir-950 ring-1 ring-noir-950"
-                        : "border-neutral-200 opacity-70 hover:opacity-100"
+                    key={img.id || idx}
+                    onClick={() => {
+                      setActiveImageIndex(idx);
+                      setIsZoomed(false);
+                    }}
+                    className={`relative aspect-[3/4] border transition-all overflow-hidden bg-neutral-50 ${
+                      activeImageIndex === idx
+                        ? 'border-[#111111] ring-1 ring-[#111111]'
+                        : 'border-[#E5E5E5] opacity-70 hover:opacity-100'
                     }`}
+                    aria-label={`View angle ${idx + 1}`}
                   >
-                    <img src={imgUrl} alt="" className="w-full h-full object-cover" />
+                    <Image
+                      src={img.url}
+                      alt={img.altText || `${product.title} angle ${idx + 1}`}
+                      fill
+                      className="object-cover object-center"
+                      sizes="120px"
+                    />
                   </button>
                 ))}
               </div>
             )}
 
-            {/* Savoir-Faire Callout Banner under images */}
-            <div className="p-6 bg-ivory-50 border border-neutral-200/80 mt-8 space-y-2">
-              <div className="flex items-center gap-2 text-leather-cognac text-xs font-heading font-bold tracking-[0.25em] uppercase">
-                <Sparkles className="w-4 h-4" />
-                <span>London Atelier Craftsmanship & OEM Standards</span>
+            {/* Desktop Vertical Secondary Angle (Editorial Walkthrough) */}
+            {images.length > 1 && (
+              <div className="hidden lg:block pt-8 border-t border-[#E5E5E5] space-y-8">
+                <div className="space-y-2">
+                  <span className="text-[10px] tracking-[0.25em] uppercase font-mono text-[#767676] block">
+                    Tailoring Perspective
+                  </span>
+                  <p className="text-xs text-[#767676] leading-relaxed">
+                    Sculpted to preserve structural integrity over decades. Every seam is reinforced with double-needle saddle stitching and hand-creased perimeter edges.
+                  </p>
+                </div>
+                <div className="relative aspect-[3/4] w-full bg-neutral-50 border border-[#E5E5E5] overflow-hidden">
+                  <Image
+                    src={images[1].url}
+                    alt={images[1].altText || `${product.title} perspective`}
+                    fill
+                    className="object-cover object-center"
+                    sizes="60vw"
+                  />
+                </div>
               </div>
-              <p className="text-xs text-neutral-600 font-light leading-relaxed">
-                {isFootwear
-                  ? "Every pair of ACEMEN shoes is hand-lasted over traditional British forms, finished with genuine Goodyear welted channeled soles and French box calfskin. Available for private-label development and custom volume manufacturing."
-                  : "Every ACEMEN creation is cut from certified French or Italian full-grain hides, hand saddle-stitched with waxed linen thread, and accompanied by our manufacturing lifetime restoration pledge."}
-              </p>
-            </div>
+            )}
           </div>
 
-          {/* ── RIGHT: Product Info & Commerce Actions (5 Cols - Sticky) ── */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
-            {/* Header / Titles */}
-            <div className="border-b border-neutral-200 pb-6 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-heading font-bold tracking-[0.3em] uppercase text-leather-cognac">
-                  ACEMEN • {product.collection}
-                </span>
-
-                <button
-                  onClick={handleShare}
-                  className="text-neutral-500 hover:text-noir-950 p-1 flex items-center gap-1 text-[10px] font-heading tracking-wider uppercase"
-                  title="Copy link"
-                >
-                  {copied ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Share2 className="w-3.5 h-3.5" />}
-                  <span>{copied ? "Copied" : "Share Spec"}</span>
-                </button>
+          {/* RIGHT: Sticky Purchase & Specifications Panel */}
+          <div className="lg:col-span-6">
+            <div className="lg:sticky lg:top-24 space-y-6">
+              {/* Style Code & Category */}
+              <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.25em] font-mono text-[#767676] border-b border-[#E5E5E5] pb-3">
+                <span>SKU: {product.styleCode}</span>
+                <span>{product.category?.name}</span>
               </div>
 
-              <h1 className="font-display text-3xl sm:text-4xl font-medium tracking-tight text-noir-950 leading-tight">
-                {product.name}
-              </h1>
+              {/* Title & Pricing */}
+              <div>
+                <h1 className="font-serif text-3xl sm:text-4xl font-light tracking-tight text-[#111111] leading-tight mb-2">
+                  {product.title}
+                </h1>
 
-              {/* Atelier Pre-Order & Waitlist mode */}
-              {B2B_MODE ? (
-                <div className="flex items-center justify-between pt-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-noir-950 px-2.5 py-1 bg-ivory-100 border border-neutral-200">
-                      MODEL: {modelNumber}
-                    </span>
-                    <span className="text-[11px] text-leather-cognac font-heading font-bold tracking-wider uppercase">
-                      Atelier Allocation
-                    </span>
+                {/* Price Display */}
+                <div className="flex items-baseline space-x-3">
+                  <span className="font-mono text-2xl sm:text-3xl font-normal text-[#111111]">
+                    {formatPricePence(currentPriceInPence)}
+                  </span>
+                  <span className="text-[11px] uppercase tracking-widest text-[#767676] font-mono">
+                    UK VAT Included • Direct Atelier Allocation
+                  </span>
+                </div>
+              </div>
+
+              {/* Material & Leather Grade Summary */}
+              <div className="py-3 px-4 bg-neutral-50 border border-[#E5E5E5] text-xs space-y-1">
+                <div className="flex justify-between">
+                  <span className="text-[#767676]">Primary Material:</span>
+                  <span className="font-medium text-[#111111]">{product.material}</span>
+                </div>
+                {product.leatherGrade && (
+                  <div className="flex justify-between">
+                    <span className="text-[#767676]">Tannery Grade:</span>
+                    <span className="font-medium text-[#111111]">{product.leatherGrade}</span>
                   </div>
-                  <span className="text-[11px] text-green-700 font-heading font-semibold tracking-wider uppercase bg-green-50 px-2.5 py-1 border border-green-200">
-                    Handcrafted in Small Batches
-                  </span>
-                </div>
-              ) : (
-                /* Retail D2C pricing block */
-                <div className="flex items-center justify-between pt-2">
-                  <span className="font-heading text-2xl font-bold text-noir-950">
-                    {product.formattedPrice}
-                  </span>
-                  <span className="text-[11px] text-green-700 font-heading font-semibold tracking-wider uppercase bg-green-50 px-2.5 py-1 border border-green-200">
-                    In Stock • Atelier Ready
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Short Editorial Description */}
-            <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed font-light">
-              {product.shortDescription}
-            </p>
-
-            {/* ── PRODUCT DETAILS & CRAFTSMANSHIP SPECIFICATIONS ── */}
-            <div className="p-5 bg-ivory-50 border border-neutral-200 space-y-3">
-              <div className="flex items-center justify-between pb-2 border-b border-neutral-200">
-                <span className="text-[10px] font-heading font-bold tracking-[0.25em] uppercase text-leather-cognac">
-                  ATELIER SPECIFICATIONS
-                </span>
-                <span className="text-[10px] font-mono text-neutral-500">
-                  {modelNumber}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-4 text-xs">
-                <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Model:</strong>
-                  <span className="text-noir-950 font-semibold">{modelNumber}</span>
-                </div>
-                <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Category:</strong>
-                  <span className="text-noir-950 font-semibold">{product.subType || product.category}</span>
-                </div>
-                <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Upper:</strong>
-                  <span className="text-noir-950 font-semibold">{product.materials[0]?.replace("100% ", "") || "Premium Leather"}</span>
-                </div>
-                <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Finish:</strong>
-                  <span className="text-noir-950 font-semibold">Hand-Burnished / Mirror Glaze</span>
-                </div>
-                <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Colors:</strong>
-                  <span className="text-noir-950 font-semibold">Cognac, Noir, Espresso & Custom</span>
-                </div>
-                <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Sole:</strong>
-                  <span className="text-noir-950 font-semibold">{product.dimensions.soleType || "Closed-Channel Leather / Dainite"}</span>
-                </div>
-                <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Craftsmanship:</strong>
-                  <span className="text-noir-950 font-semibold">Goodyear-Welted / Hand-Lasted</span>
-                </div>
-                <div>
-                  <strong className="text-neutral-500 font-heading uppercase text-[10px] tracking-wider block">Allocation:</strong>
-                  <span className="text-green-700 font-semibold">Available for Pre-Order</span>
+                )}
+                <div className="flex justify-between">
+                  <span className="text-[#767676]">Color Family:</span>
+                  <span className="font-medium text-[#111111]">{product.colorFamily}</span>
                 </div>
               </div>
-            </div>
 
-            {/* Color Selection & Swatches */}
-            {product.colors && product.colors.length > 0 && (
-              <div className="space-y-3 pt-1">
-                <div className="flex items-center justify-between text-xs font-heading tracking-wider uppercase">
-                  <span className="text-neutral-500">Available Colorways:</span>
-                  <span className="font-bold text-noir-950">{selectedColor}</span>
+              {/* Short Editorial Description */}
+              <p className="text-xs text-[#767676] font-sans leading-relaxed tracking-wide">
+                {product.description}
+              </p>
+
+              {/* Variant / Size Selection */}
+              <div className="space-y-3 pt-3 border-t border-[#E5E5E5]">
+                {/* Header row: SIZE + Scale selector (for shoes) + Size Guide */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <span className="font-sans text-xs uppercase tracking-widest font-semibold text-[#111111]">
+                      SIZE
+                    </span>
+
+                    {/* Shoe Scale Switcher: UK / US / EU */}
+                    {isFootwear && (
+                      <div className="inline-flex items-center space-x-1.5 text-[11px] font-mono border-l border-[#E5E5E5] pl-3">
+                        <span className="text-[#888888] text-[10px] uppercase">Scale:</span>
+                        {(['UK', 'US', 'EU'] as const).map((scale) => (
+                          <button
+                            key={scale}
+                            type="button"
+                            onClick={() => setShoeScale(scale)}
+                            className={`px-1.5 py-0.5 transition-colors text-[10px] tracking-wider uppercase font-semibold ${
+                              shoeScale === scale
+                                ? 'text-[#111111] underline underline-offset-4 decoration-2'
+                                : 'text-[#888888] hover:text-[#111111]'
+                            }`}
+                          >
+                            {scale}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={() => openSizeGuide(product.categoryId)}
+                    className="text-[10px] uppercase tracking-wider text-[#767676] hover:text-[#111111] flex items-center space-x-1 underline min-h-[32px]"
+                  >
+                    <Ruler size={11} />
+                    <span>Size Guide</span>
+                  </button>
                 </div>
-                <div className="flex gap-2.5">
-                  {product.colors.map((col) => (
+
+                {/* Horizontal Rounded Pills (Matching exact reference design) */}
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                  {product.variants.map((v) => {
+                    const isSelected = selectedVariant?.id === v.id;
+                    const isOutOfStock = v.stockQuantity <= 0;
+
+                    let pillText = v.size;
+
+                    if (isJacket) {
+                      if (v.size.includes('Small')) pillText = 'SMALL';
+                      else if (v.size.includes('Medium')) pillText = 'MEDIUM';
+                      else if (v.size.includes('Extra Large') || v.size.includes('XL')) pillText = 'XL';
+                      else if (v.size.includes('XXL')) pillText = 'XXL';
+                      else if (v.size.includes('Large')) pillText = 'LARGE';
+                    } else if (isFootwear) {
+                      const { uk, us, eu } = parseShoeSize(v.size);
+                      if (shoeScale === 'UK') pillText = `UK ${uk}`;
+                      else if (shoeScale === 'US') pillText = `US ${us}`;
+                      else if (shoeScale === 'EU') pillText = `EU ${eu}`;
+                    }
+
+                    return (
+                      <button
+                        key={v.id}
+                        disabled={!v.isActive || isOutOfStock}
+                        onClick={() => setSelectedVariant(v)}
+                        className={`min-w-[76px] sm:min-w-[88px] px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs uppercase tracking-wider font-sans transition-all text-center border ${
+                          isSelected
+                            ? 'bg-[#111111] text-white border-[#111111] shadow-xs'
+                            : isOutOfStock
+                            ? 'bg-neutral-50 text-neutral-300 border-neutral-200 cursor-not-allowed line-through'
+                            : 'bg-white text-[#111111] border-neutral-300 hover:border-black'
+                        }`}
+                      >
+                        {pillText}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Selected Sizing Specification Hint */}
+                {selectedVariant && (
+                  <p className="text-[11px] font-mono text-[#767676] pt-0.5">
+                    {isFootwear ? (
+                      <>
+                        Selected: <span className="text-[#111111] font-medium">{getShoeDisplay(selectedVariant.size, 'UK').all}</span> · Standard F-Width British Fitting
+                      </>
+                    ) : isJacket ? (
+                      <>
+                        Selected: <span className="text-[#111111] font-medium">{getJacketDisplay(selectedVariant.size, 'letter').summary}</span>
+                      </>
+                    ) : (
+                      <>
+                        Selected: <span className="text-[#111111] font-medium">{selectedVariant.size}</span>
+                      </>
+                    )}
+                  </p>
+                )}
+
+                {/* Action Buttons: Add to Bag or Join Waitlist */}
+                {selectedVariant?.stockQuantity <= 0 || product.categoryId === 'cat-waitlist' || product.category?.slug === 'waitlist' ? (
+                  <button
+                    ref={addToBagRef}
+                    type="button"
+                    onClick={() => setWaitlistModalOpen(true)}
+                    className="w-full min-h-[50px] py-4 bg-[#111111] hover:bg-black text-white text-xs uppercase tracking-[0.2em] font-medium transition-colors flex items-center justify-center space-x-2 shadow-xs"
+                  >
+                    <Sparkles size={14} className="text-[#C5A869]" />
+                    <span>Join Atelier Waitlist / Reserve Allocation</span>
+                  </button>
+                ) : (
+                  <div className="space-y-2">
                     <button
-                      key={col.name}
-                      onClick={() => setSelectedColor(col.name)}
-                      className={`w-9 h-9 rounded-full border-2 transition-all flex items-center justify-center ${
-                        selectedColor === col.name
-                          ? "border-noir-950 scale-110 shadow-sm"
-                          : "border-transparent opacity-75 hover:opacity-100"
-                      }`}
-                      style={{ backgroundColor: col.hex }}
-                      title={col.name}
+                      ref={addToBagRef}
+                      onClick={handleAdd}
+                      disabled={!selectedVariant}
+                      className="w-full min-h-[50px] py-4 bg-[#111111] hover:bg-black text-white text-xs uppercase tracking-[0.2em] font-medium transition-colors flex items-center justify-center space-x-2 disabled:bg-neutral-200 disabled:text-neutral-400 disabled:cursor-not-allowed"
                     >
-                      {selectedColor === col.name && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-white shadow-xs" />
+                      {addedAnimation ? (
+                        <>
+                          <Check size={14} />
+                          <span>Added to Shopping Bag</span>
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingBag size={14} />
+                          <span>Add to Shopping Bag</span>
+                        </>
                       )}
                     </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Footwear Size Matrix */}
-            {isFootwear && product.sizes && (
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center justify-between text-xs font-heading tracking-wider uppercase">
-                  <span className="text-neutral-500">Select Sizing For Pre-Order:</span>
-                  <button
-                    onClick={() => setShowSizeGuide(!showSizeGuide)}
-                    className="text-leather-cognac hover:underline flex items-center gap-1 font-bold"
-                  >
-                    <Ruler className="w-3.5 h-3.5" />
-                    <span>Size Conversion Guide</span>
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
-                  {product.sizes.map((sz) => (
                     <button
-                      key={sz}
-                      onClick={() => setSelectedSize(sz)}
-                      className={`h-11 flex items-center justify-center font-heading text-xs font-semibold tracking-wider transition-all border ${
-                        selectedSize === sz
-                          ? "bg-noir-950 text-white border-noir-950"
-                          : "bg-white text-neutral-800 border-neutral-300 hover:border-noir-950"
-                      }`}
+                      type="button"
+                      onClick={() => setWaitlistModalOpen(true)}
+                      className="w-full py-2.5 border border-[#E5E5E5] hover:border-[#111111] text-[#767676] hover:text-[#111111] text-[10px] uppercase tracking-[0.16em] font-mono transition-colors flex items-center justify-center gap-1.5"
                     >
-                      EU {sz}
+                      <Clock size={11} className="text-[#C5A869]" />
+                      <span>Request Bespoke Sizing / Private Allocation</span>
                     </button>
-                  ))}
-                </div>
+                  </div>
+                )}
+              </div>
 
-                {/* Size guide modal / callout */}
-                <AnimatePresence>
-                  {showSizeGuide && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="p-4 bg-ivory-100 border border-neutral-200 text-xs space-y-2 overflow-hidden"
-                    >
-                      <div className="flex items-center justify-between font-heading font-bold uppercase tracking-wider text-noir-950">
-                        <span>International Sizing Matrix</span>
-                        <button onClick={() => setShowSizeGuide(false)} className="text-neutral-500 hover:text-noir-950">✕</button>
-                      </div>
-                      <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-heading pt-1 border-t border-neutral-200">
-                        <div><strong>EU</strong>: 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46</div>
-                        <div><strong>UK</strong>: 5.5 | 6.5 | 7.5 | 8.5 | 9.5 | 10.5 | 11.5 | 12.5</div>
-                        <div><strong>US</strong>: 6.5 | 7.5 | 8.5 | 9.5 | 10.5 | 11.5 | 12.5 | 13.5</div>
-                      </div>
-                      <p className="text-[10px] text-neutral-500 pt-1 font-light italic">
-                        ACEMEN Lasts are graded to European standards. Custom volume production can be Lasted on US, UK, or bespoke client-supplied lasts.
+              {/* Expandable Accordions: Craft Notes, Care, Delivery */}
+              <div className="border-t border-[#E5E5E5] divide-y divide-[#E5E5E5] pt-2">
+                {/* Product Description with Embedded Size Chart Image */}
+                <div>
+                  <button
+                    onClick={() => toggleSection('desc')}
+                    className="w-full py-3.5 flex items-center justify-between text-left text-xs uppercase tracking-wider font-medium text-[#111111]"
+                  >
+                    <span>Product Description</span>
+                    {openSection === 'desc' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                  </button>
+                  {openSection === 'desc' && (
+                    <div className="pb-5 space-y-4">
+                      <p className="text-xs text-[#767676] font-sans leading-relaxed tracking-wide">
+                        {product.description}
                       </p>
-                    </motion.div>
+
+                      {/* Uploaded Size Chart Image */}
+                      {product.sizeChartImage && (
+                        <div className="mt-4 space-y-2 pt-3 border-t border-[#E5E5E5]">
+                          <div className="flex items-center justify-between text-[10px] uppercase font-mono tracking-widest text-[#767676]">
+                            <span>Size & Measurement Matrix</span>
+                            <span className="text-[#111111] font-sans">Official Atelier Specifications</span>
+                          </div>
+                          <div className="relative w-full overflow-hidden border border-[#E5E5E5] bg-white rounded-md shadow-xs">
+                            <Image
+                              src={product.sizeChartImage}
+                              alt={`${product.title} Size Chart`}
+                              width={700}
+                              height={340}
+                              className="w-full h-auto object-contain"
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   )}
-                </AnimatePresence>
-              </div>
-            )}
-
-            {/* ── PRE-ORDER & WAITLIST ACTION BUTTONS ── */}
-            <div className="space-y-3 pt-4">
-              {/* Atelier Pre-Order & Waitlist Mode */}
-              {B2B_MODE ? (
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => setIsQuoteModalOpen(true)}
-                      className="flex-1 btn-luxury-primary h-13 tracking-[0.22em] flex items-center justify-center gap-2 text-xs font-bold"
-                    >
-                      <Sparkles className="w-4 h-4" />
-                      <span>PRE-ORDER NOW</span>
-                    </button>
-
-                    <button
-                      onClick={() => toggleWishlist(product)}
-                      className="w-13 h-13 border border-neutral-300 flex items-center justify-center text-noir-950 hover:border-noir-950 transition-colors shrink-0"
-                      aria-label="Save for pre-order waitlist"
-                      title={isFavorite ? "Saved in wish list" : "Save specification"}
-                    >
-                      <Heart
-                        className={`w-5 h-5 ${
-                          isFavorite ? "fill-leather-cognac text-leather-cognac" : "text-neutral-600"
-                        }`}
-                      />
-                    </button>
-                  </div>
-
-                  <button
-                    onClick={() => setIsQuoteModalOpen(true)}
-                    className="w-full btn-luxury-outline h-12 tracking-[0.2em] flex items-center justify-center gap-2 text-xs font-bold"
-                  >
-                    <Package className="w-4 h-4" />
-                    <span>JOIN THE WAITLIST & INQUIRE</span>
-                  </button>
                 </div>
-              ) : (
-                /* Original D2C Add to Bag & Quantity selector (preserved for retail mode) */
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center border border-neutral-300 h-12">
-                    <button
-                      onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="w-10 h-full flex items-center justify-center text-neutral-600 hover:text-noir-950 hover:bg-neutral-100 transition-colors"
-                      aria-label="Decrease quantity"
-                    >
-                      <Minus className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="w-10 text-center text-xs font-heading font-bold">
-                      {quantity}
-                    </span>
-                    <button
-                      onClick={() => setQuantity((q) => q + 1)}
-                      className="w-10 h-full flex items-center justify-center text-neutral-600 hover:text-noir-950 hover:bg-neutral-100 transition-colors"
-                      aria-label="Increase quantity"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
 
+                {/* Craftsmanship Notes */}
+                {product.craftNotes && (
+                  <div>
+                    <button
+                      onClick={() => toggleSection('craft')}
+                      className="w-full py-3.5 flex items-center justify-between text-left text-xs uppercase tracking-wider font-medium text-[#111111]"
+                    >
+                      <span>Artisanal Construction & Provenance</span>
+                      {openSection === 'craft' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                    </button>
+                    {openSection === 'craft' && (
+                      <div className="pb-4 text-xs text-[#767676] font-sans leading-relaxed">
+                        {product.craftNotes}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Care Details */}
+                {product.careDetails && (
+                  <div>
+                    <button
+                      onClick={() => toggleSection('care')}
+                      className="w-full py-3.5 flex items-center justify-between text-left text-xs uppercase tracking-wider font-medium text-[#111111]"
+                    >
+                      <span>Preservation & Care</span>
+                      {openSection === 'care' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                    </button>
+                    {openSection === 'care' && (
+                      <div className="pb-4 text-xs text-[#767676] font-sans leading-relaxed">
+                        {product.careDetails}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Courier & Guarantee */}
+                <div>
                   <button
-                    onClick={() => addToCart(product, selectedColor, quantity, selectedSize)}
-                    className="flex-1 btn-luxury-primary h-12 tracking-[0.25em] flex items-center justify-center gap-2"
+                    onClick={() => toggleSection('delivery')}
+                    className="w-full py-3.5 flex items-center justify-between text-left text-xs uppercase tracking-wider font-medium text-[#111111]"
                   >
-                    <ShoppingBag className="w-4 h-4" />
-                    <span>Add to Bag</span>
+                    <span>Delivery & Atelier Warranty</span>
+                    {openSection === 'delivery' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                   </button>
+                  {openSection === 'delivery' && (
+                    <div className="pb-4 text-xs text-[#767676] font-sans leading-relaxed space-y-2">
+                      <p>
+                        Each piece is inspected by our master artisan, packed in protective breathable cloth garment bags, and dispatched with insured express courier tracking.
+                      </p>
+                      <p>
+                        Backed by ACEMEN lifetime structural stitching warranty.
+                      </p>
+                    </div>
+                  )}
                 </div>
-              )}
-
-              {/* B2B Manufacturing Promise */}
-              <div className="pt-2 flex items-center gap-2 text-[11px] text-neutral-500 font-heading tracking-wider uppercase">
-                <ShieldCheck className="w-4 h-4 text-leather-cognac shrink-0" />
-                <span>OEM / ODM development, private-label branding & worldwide insured freight</span>
-              </div>
-            </div>
-
-            {/* ── Product Specification Accordions ── */}
-            <div className="border-t border-neutral-200 divide-y divide-neutral-200 pt-4">
-              {/* Accordion 1: Story & Details */}
-              <div className="py-4">
-                <button
-                  onClick={() =>
-                    setActiveAccordion(activeAccordion === "details" ? "" : "details")
-                  }
-                  className="w-full flex items-center justify-between font-heading text-xs tracking-[0.2em] uppercase font-bold text-noir-950 text-left"
-                >
-                  <span>Design Narrative & Construction</span>
-                  <span className="text-base font-light">
-                    {activeAccordion === "details" ? "−" : "+"}
-                  </span>
-                </button>
-                {activeAccordion === "details" && (
-                  <div className="pt-3 text-xs text-neutral-600 space-y-3 font-light leading-relaxed">
-                    <p>{product.story}</p>
-                    <ul className="list-disc list-inside space-y-1.5 pt-1">
-                      {product.details.map((d, i) => (
-                        <li key={i}>{d}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-
-              {/* Accordion 2: Materials & Provenance */}
-              <div className="py-4">
-                <button
-                  onClick={() =>
-                    setActiveAccordion(activeAccordion === "materials" ? "" : "materials")
-                  }
-                  className="w-full flex items-center justify-between font-heading text-xs tracking-[0.2em] uppercase font-bold text-noir-950 text-left"
-                >
-                  <span>Materials & Leather Provenance</span>
-                  <span className="text-base font-light">
-                    {activeAccordion === "materials" ? "−" : "+"}
-                  </span>
-                </button>
-                {activeAccordion === "materials" && (
-                  <div className="pt-3 text-xs text-neutral-600 space-y-2 font-light">
-                    <ul className="list-disc list-inside space-y-1.5">
-                      {product.materials.map((m, i) => (
-                        <li key={i}>{m}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-
-              {/* Accordion 3: Dimensions & Specifications */}
-              <div className="py-4">
-                <button
-                  onClick={() =>
-                    setActiveAccordion(activeAccordion === "dimensions" ? "" : "dimensions")
-                  }
-                  className="w-full flex items-center justify-between font-heading text-xs tracking-[0.2em] uppercase font-bold text-noir-950 text-left"
-                >
-                  <span>{isFootwear ? "Last & Sole Technical Data" : "Dimensions & Specifications"}</span>
-                  <span className="text-base font-light">
-                    {activeAccordion === "dimensions" ? "−" : "+"}
-                  </span>
-                </button>
-                {activeAccordion === "dimensions" && (
-                  <div className="pt-3 text-xs text-neutral-600 space-y-1.5 font-light">
-                    {product.dimensions.heelHeight && <p>Heel Profile: {product.dimensions.heelHeight}</p>}
-                    {product.dimensions.soleType && <p>Sole Construction: {product.dimensions.soleType}</p>}
-                    {product.dimensions.height && <p>Height: {product.dimensions.height}</p>}
-                    {product.dimensions.width && <p>Width: {product.dimensions.width}</p>}
-                    {product.dimensions.depth && <p>Depth: {product.dimensions.depth}</p>}
-                    {product.dimensions.strapDrop && <p>Strap Drop: {product.dimensions.strapDrop}</p>}
-                  </div>
-                )}
-              </div>
-
-              {/* Accordion 4: Wholesale Dispatch & Sampling Terms */}
-              <div className="py-4">
-                <button
-                  onClick={() =>
-                    setActiveAccordion(activeAccordion === "shipping" ? "" : "shipping")
-                  }
-                  className="w-full flex items-center justify-between font-heading text-xs tracking-[0.2em] uppercase font-bold text-noir-950 text-left"
-                >
-                  <span>Wholesale Logistics & Sampling</span>
-                  <span className="text-base font-light">
-                    {activeAccordion === "shipping" ? "−" : "+"}
-                  </span>
-                </button>
-                {activeAccordion === "shipping" && (
-                  <div className="pt-3 text-xs text-neutral-600 space-y-2 font-light leading-relaxed">
-                    <p>
-                      <strong>Sample Prototyping:</strong> Initial physical sample pairs are produced and dispatched via express international air freight following tech pack sign-off.
-                    </p>
-                    <p>
-                      <strong>Volume Freight:</strong> Full commercial shipments are handled via air or sea freight with custom export documentation, full transit insurance, and port clearance support.
-                    </p>
-                  </div>
-                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* ── Related Creations ── */}
+        {/* RELATED PRODUCTS */}
         {relatedProducts.length > 0 && (
-          <div className="pt-24 sm:pt-32 border-t border-neutral-200 mt-20">
-            <div className="text-center mb-12">
-              <span className="text-[10px] font-heading font-bold tracking-[0.3em] uppercase text-leather-cognac block mb-2">
-                COLLECTION PIECES
+          <div className="mt-24 pt-16 border-t border-[#E5E5E5]">
+            <div className="mb-10 text-center">
+              <span className="text-[10px] tracking-[0.25em] uppercase font-mono text-[#767676] block mb-1">
+                Atelier Complement
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-medium text-noir-950">
-                RELATED CREATIONS & SILHOUETTES
+              <h2 className="font-serif text-2xl sm:text-3xl font-light uppercase tracking-wide">
+                Related Creations
               </h2>
             </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
               {relatedProducts.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
@@ -533,11 +656,54 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         )}
       </div>
 
-      {/* Inquiry & Quote Modal */}
-      <InquiryQuoteModal
-        isOpen={isQuoteModalOpen}
-        onClose={() => setIsQuoteModalOpen(false)}
-        product={product}
+      {/* Sticky Mobile Add-to-Bag Bar */}
+      <div
+        className={`lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-[#E5E5E5] transition-transform duration-300 safe-area-inset-bottom ${
+          showStickyBar ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className="px-4 py-3 flex items-center justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="font-serif text-sm font-light text-[#111111] truncate">{product.title}</p>
+            <p className="text-[10px] font-mono text-[#767676] uppercase tracking-widest truncate">
+              {selectedVariant
+                ? isFootwear
+                  ? `Size: ${getShoeDisplay(selectedVariant.size, shoeScale).primary} (${getShoeDisplay(selectedVariant.size, shoeScale).secondary})`
+                  : isJacket
+                  ? `Size: ${getJacketDisplay(selectedVariant.size, jacketScale).primary}`
+                  : `Size: ${selectedVariant.size}`
+                : 'Select size'}
+              {selectedVariant && ` · ${formatPricePence(selectedVariant.priceOverrideInPence ?? product.priceInPence)}`}
+            </p>
+          </div>
+          <button
+            onClick={handleAdd}
+            disabled={!selectedVariant || selectedVariant.stockQuantity <= 0}
+            className="flex-shrink-0 min-h-[44px] px-5 py-2.5 bg-[#111111] hover:bg-black text-white text-[10px] uppercase tracking-[0.2em] font-medium transition-colors flex items-center space-x-2 disabled:bg-neutral-300 disabled:cursor-not-allowed"
+          >
+            {addedAnimation ? (
+              <>
+                <Check size={12} />
+                <span>Added</span>
+              </>
+            ) : (
+              <>
+                <ShoppingBag size={12} />
+                <span>Add to Bag</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Waitlist & Bespoke Allocation Modal */}
+      <WaitlistModal
+        isOpen={waitlistModalOpen}
+        onClose={() => setWaitlistModalOpen(false)}
+        productTitle={product.title}
+        productId={product.id}
+        category={product.category?.name || 'Waitlist'}
+        initialSize={selectedVariant?.size}
       />
     </div>
   );

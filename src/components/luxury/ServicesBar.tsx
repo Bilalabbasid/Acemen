@@ -1,57 +1,49 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Tag, Sparkles, Globe, Headphones, Factory, ShieldCheck } from "lucide-react";
+import React from 'react';
+import { ShieldCheck, Truck, Clock, Sparkles } from 'lucide-react';
 
-const b2bServices = [
+const services = [
   {
-    icon: <Tag className="w-6 h-6 text-leather-cognac stroke-[1.2]" />,
-    tag: "OEM / ODM",
-    title: "Private-Label Branding",
-    description: "Custom insole debossing, hardware engraving, laser sole markings, and bespoke client packaging.",
+    icon: <ShieldCheck className="w-5 h-5 text-[#8C5835] stroke-[1.4]" />,
+    title: 'Goodyear-Welted Longevity',
+    description: 'Lifetime resoling and repair support from our master British cobblers.',
   },
   {
-    icon: <Sparkles className="w-6 h-6 text-leather-cognac stroke-[1.2]" />,
-    tag: "Material Sourcing",
-    title: "Premier European Leathers",
-    description: "Certified full-grain box calf, Tuscan vegetable-tanned hides, Bavarian cowhide, and waterproof suede.",
+    icon: <Sparkles className="w-5 h-5 text-[#8C5835] stroke-[1.4]" />,
+    title: 'Full-Grain Provenance',
+    description: 'Sourced from certified heritage tanneries in Tuscany and Alsace.',
   },
   {
-    icon: <Globe className="w-6 h-6 text-leather-cognac stroke-[1.2]" />,
-    tag: "Worldwide Cargo",
-    title: "Global Freight & Logistics",
-    description: "Fully insured air and maritime commercial cargo delivery with customs clearance documentation to over 40 countries.",
+    icon: <Truck className="w-5 h-5 text-[#8C5835] stroke-[1.4]" />,
+    title: 'Complimentary Courier',
+    description: 'Insured worldwide door-to-door courier dispatch on all allocations.',
   },
   {
-    icon: <Headphones className="w-6 h-6 text-leather-cognac stroke-[1.2]" />,
-    tag: "London Desk",
-    title: "Dedicated Partnership Desk",
-    description: "Direct consultation with our senior footwear development director for tech pack analysis and sampling.",
+    icon: <Clock className="w-5 h-5 text-[#8C5835] stroke-[1.4]" />,
+    title: 'Private Atelier Concierge',
+    description: 'Bespoke commissions and size consultation available 7 days a week.',
   },
 ];
 
 export default function ServicesBar() {
   return (
-    <section className="bg-white border-b border-neutral-200 py-12 sm:py-16">
-      <div className="container-page">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
-          {b2bServices.map((service) => (
-            <div
-              key={service.title}
-              className="flex flex-col items-center text-center space-y-3 p-4"
-            >
-              <div className="w-12 h-12 rounded-full bg-ivory-100 flex items-center justify-center mb-1">
-                {service.icon}
+    <section className="py-12 bg-white border-y border-[#E5E5E5]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((s) => (
+            <div key={s.title} className="flex items-start space-x-4">
+              <div className="w-10 h-10 rounded-full bg-[#FAF8F5] border border-[#E5E5E5] flex items-center justify-center shrink-0">
+                {s.icon}
               </div>
-              <span className="text-[9px] font-heading font-bold tracking-[0.25em] uppercase text-leather-cognac">
-                {service.tag}
-              </span>
-              <h4 className="font-display text-lg font-semibold text-noir-950">
-                {service.title}
-              </h4>
-              <p className="text-xs text-neutral-500 font-light leading-relaxed max-w-xs">
-                {service.description}
-              </p>
+              <div className="space-y-1">
+                <h4 className="font-serif text-sm font-semibold uppercase tracking-wider text-[#111111]">
+                  {s.title}
+                </h4>
+                <p className="text-xs text-neutral-500 font-sans leading-relaxed">
+                  {s.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>

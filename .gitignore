@@ -1,36 +1,53 @@
-# dependencies
-node_modules/
-.pnp
+# Dependencies
+/node_modules
+/.pnp
 .pnp.js
+.yarn/install-state.gz
 
-# testing
-coverage/
+# Testing
+/coverage
 
-# next.js
-.next/
-out/
+# Next.js build output
+/.next/
+/out/
 
-# production
-build/
+# Production
+/build
+/dist
 
-# misc
+# Misc
 .DS_Store
 *.pem
+Thumbs.db
 
-# debug
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# local env files
+# Database
+*.db
+*.db-journal
+*.sqlite
+
+# Local environment files (NEVER commit secrets to GitHub)
+.env
 .env*.local
+.env.development
+.env.production
+.env.test
+!.env.example
 
-# vercel
+# Reference backup folder
+/acemen/
+
+# Vercel
 .vercel
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
 
-# Claude Code local tooling
-.claude/
+.vercel
+.env*
